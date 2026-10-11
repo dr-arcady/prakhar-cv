@@ -28,10 +28,11 @@ jobs:
         env:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
-          # Generate SHA-256 hash of the secret password provided in GitHub Actions
-          HASHED_PW=$(echo -n "$ADMIN_PASSWORD" | sha256sum | awk '{print $1}')
+          # Compute clean SHA-256 hash without newline artifacts
+          HASHED_PW=$(echo -n "$ADMIN_PASSWORD" | tr -d '\r\n' | sha256sum | awk '{print $1}')
+          echo "Generated Hash Length: ${#HASHED_PW}"
           
-          # Replace the placeholder in index.html with the actual generated hash
+          # Replace placeholder in index.html
           sed -i "s/<!-- __ADMIN_PASSWORD_HASH__ -->/$HASHED_PW/g" index.html
 
       - name: Setup Pages
