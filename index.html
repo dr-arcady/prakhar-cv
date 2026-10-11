@@ -120,7 +120,7 @@
                 </div>
             </div>
 
-            <!-- Two Showcase Cards Grid with Expanded Bulleted Summaries -->
+            <!-- Two Showcase Cards Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
                 <!-- Academics Card -->
                 <div onclick="switchView('academic')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
@@ -184,7 +184,6 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
                 <div class="lg:col-span-8 space-y-10">
-                    <!-- Publications Section -->
                     <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-xs">
                         <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
                             <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 flex items-center">
@@ -195,7 +194,6 @@
                         <div id="list-publications" class="space-y-6"></div>
                     </div>
 
-                    <!-- Presentations Section -->
                     <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-xs">
                         <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
                             <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 flex items-center">
@@ -206,7 +204,6 @@
                         <div id="list-presentations" class="space-y-6"></div>
                     </div>
 
-                    <!-- Seminars, Courses Section -->
                     <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-xs">
                         <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
                             <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 flex items-center">
@@ -218,7 +215,6 @@
                     </div>
                 </div>
 
-                <!-- Sidebar Metadata -->
                 <div class="lg:col-span-4 space-y-8">
                     <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
                         <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
@@ -332,6 +328,10 @@
                 <div class="flex items-center space-x-3">
                     <button onclick="openEntryModal()" class="inline-flex items-center px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-600 text-stone-950 font-semibold text-xs transition-all shadow-md">
                         <i class="fa-solid fa-plus mr-1.5"></i> New Entry
+                    </button>
+                    <!-- LOGOUT BUTTON -->
+                    <button onclick="handleLogout()" class="inline-flex items-center px-3 py-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-300 font-semibold text-xs transition-all border border-stone-700">
+                        <i class="fa-solid fa-right-from-bracket mr-1.5 text-red-400"></i> Logout
                     </button>
                     <button onclick="closeModal('modal-dashboard')" class="text-stone-400 hover:text-white p-2">
                         <i class="fa-solid fa-xmark text-lg"></i>
@@ -608,7 +608,6 @@
         }
 
         function ensureOrders() {
-            // Assign sequential orders if missing
             const categories = ['academic', 'creative'];
             categories.forEach(cat => {
                 const items = portfolioData.filter(i => i.category === cat);
@@ -790,6 +789,12 @@
             }
         }
 
+        function handleLogout() {
+            sessionStorage.removeItem('prakhar_admin_auth');
+            closeModal('modal-dashboard');
+            alert('Successfully logged out from admin dashboard.');
+        }
+
         function openDashboard() {
             renderDashboardEntries();
             openModal('modal-dashboard');
@@ -845,7 +850,6 @@
             const item = portfolioData.find(i => i.id === id);
             if (!item) return;
 
-            // Get all items in the exact same category and listType, sorted by order
             const sameList = portfolioData.filter(i => i.category === item.category && i.listType === item.listType);
             sameList.sort((a, b) => (a.order || 0) - (b.order || 0));
 
@@ -853,12 +857,10 @@
             const targetIndex = currentIndex + direction;
 
             if (targetIndex >= 0 && targetIndex < sameList.length) {
-                // Swap orders
                 const tempOrder = sameList[currentIndex].order;
                 sameList[currentIndex].order = sameList[targetIndex].order;
                 sameList[targetIndex].order = tempOrder;
 
-                // Re-normalize all orders in this list to be clean 1, 2, 3...
                 sameList.sort((a, b) => (a.order || 0) - (b.order || 0));
                 sameList.forEach((el, idx) => {
                     el.order = idx + 1;
