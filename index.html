@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Prakhar Srivastava | Academic CV & Creative Portfolio</title>
+    <title>Prakhar Srivastava | Academic CV & Creative Portfolio</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,10 +29,11 @@
                         serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
-                        crimson: {
-                            600: '#991b1b',
-                            700: '#7f1d1d',
-                            800: '#651c1c',
+                        navy: {
+                            600: '#1e3a8a',
+                            700: '#1e293b',
+                            800: '#0f172a',
+                            900: '#090d16',
                         },
                         gold: {
                             500: '#d97706',
@@ -77,21 +78,20 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-crimson-700 selection:text-white">
+<body class="min-h-screen flex flex-col selection:bg-navy-800 selection:text-white">
 
     <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('home')">
-                <div class="w-10 h-10 rounded-full bg-crimson-800 text-gold-500 flex items-center justify-center font-serif font-bold text-lg border border-gold-500/40">
+                <div class="w-10 h-10 rounded-full bg-navy-900 text-gold-500 flex items-center justify-center font-serif font-bold text-lg border border-gold-500/40">
                     PS
                 </div>
                 <div>
-                    <span class="font-serif font-bold text-lg text-stone-900 tracking-tight block">Dr. Prakhar Srivastava</span>
+                    <span class="font-serif font-bold text-lg text-stone-900 tracking-tight block">Prakhar Srivastava</span>
                     <span class="text-xs text-stone-500 tracking-wider uppercase font-medium">Academic & Creative Portfolio</span>
                 </div>
             </div>
 
-            <!-- Header navigation links removed as requested; brand logo acts as home switcher -->
             <div class="flex items-center space-x-3">
                 <button onclick="switchView('home')" class="text-xs font-semibold text-stone-600 hover:text-stone-900 transition-colors">
                     <i class="fa-solid fa-house mr-1"></i> Home
@@ -105,14 +105,14 @@
         <!-- 1. HOME VIEW -->
         <div id="view-home" class="view-section fade-in max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
             <!-- Hero Header Section -->
-            <div class="bg-gradient-to-br from-stone-900 via-stone-800 to-crimson-900 rounded-3xl p-8 sm:p-12 lg:p-16 text-white shadow-xl relative overflow-hidden mb-12 border border-stone-700/50">
+            <div class="bg-gradient-to-br from-navy-900 via-stone-900 to-navy-800 rounded-3xl p-8 sm:p-12 lg:p-16 text-white shadow-xl relative overflow-hidden mb-12 border border-stone-700/50">
                 <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
                 <div class="max-w-3xl relative z-10">
                     <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-500/40 text-gold-400 text-xs font-semibold tracking-wider uppercase mb-6">
                         <i class="fa-solid fa-star text-[10px]"></i> Scholar & Creative Writer
                     </div>
                     <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-tight">
-                        Dr. Prakhar Srivastava
+                        Prakhar Srivastava
                     </h1>
                     <p class="text-stone-300 text-lg sm:text-xl font-light leading-relaxed mb-4">
                         Bridging rigorous academic research, scholarly publications, and creative expression. Exploring intersections of literature, technology, and human inquiry.
@@ -120,23 +120,26 @@
                 </div>
             </div>
 
-            <!-- Two Showcase Cards Grid -->
+            <!-- Two Showcase Cards Grid with Expanded Bulleted Summaries -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
                 <!-- Academics Card -->
                 <div onclick="switchView('academic')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-crimson-600/5 rounded-bl-full group-hover:scale-110 transition-transform"></div>
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-navy-900/5 rounded-bl-full group-hover:scale-110 transition-transform"></div>
                     <div>
-                        <div class="w-14 h-14 rounded-2xl bg-crimson-800 text-white flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-crimson-700 transition-colors">
+                        <div class="w-14 h-14 rounded-2xl bg-navy-900 text-white flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-navy-800 transition-colors">
                             <i class="fa-solid fa-graduation-cap"></i>
                         </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-crimson-800 transition-colors">
+                        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-navy-900 transition-colors">
                             Academics & Research
                         </h2>
-                        <p class="text-stone-600 text-base leading-relaxed mb-6">
-                            Comprehensive record of peer-reviewed publications, academic conference presentations, professional seminars, courses taught, background education, and credentials.
-                        </p>
+                        <ul class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed">
+                            <li>Peer-reviewed publications in literary criticism and digital humanities.</li>
+                            <li>Conference papers and keynote presentations at leading academic institutions.</li>
+                            <li>Advanced seminars, corpus linguistics, and computational textual analysis.</li>
+                            <li>Comprehensive credentials including background education, skills, and references.</li>
+                        </ul>
                     </div>
-                    <div class="flex items-center font-semibold text-sm text-crimson-800 group-hover:translate-x-1 transition-transform">
+                    <div class="flex items-center font-semibold text-sm text-navy-900 group-hover:translate-x-1 transition-transform">
                         View Academic Record <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
                     </div>
                 </div>
@@ -151,9 +154,12 @@
                         <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-gold-600 transition-colors">
                             Creative Portfolio
                         </h2>
-                        <p class="text-stone-600 text-base leading-relaxed mb-6">
-                            A curated collection of creative writing, essays, poetry, prose, artistic projects, and multimedia explorations showcasing imaginative literary endeavors.
-                        </p>
+                        <ul class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed">
+                            <li>Curated collections of short stories exploring psychological irony and architecture.</li>
+                            <li>Poetry sequences meditating on geographic dislocation and acoustic ecology.</li>
+                            <li>Imaginative narrative adaptations and multimedia literary explorations.</li>
+                            <li>Independent editorial projects and artistic text designs.</li>
+                        </ul>
                     </div>
                     <div class="flex items-center font-semibold text-sm text-gold-600 group-hover:translate-x-1 transition-transform">
                         Explore Creative Works <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
@@ -164,10 +170,9 @@
 
         <!-- 2. ACADEMIC & RESEARCH VIEW -->
         <div id="view-academic" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <!-- Academic Header -->
             <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-stone-200 pb-8 mb-10 gap-4">
                 <div>
-                    <span class="text-xs uppercase tracking-widest text-crimson-800 font-bold block mb-1">Scholarship & Credentials</span>
+                    <span class="text-xs uppercase tracking-widest text-navy-900 font-bold block mb-1">Scholarship & Credentials</span>
                     <h1 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900">Academic & Research CV</h1>
                 </div>
                 <div class="flex items-center space-x-3">
@@ -177,16 +182,13 @@
                 </div>
             </div>
 
-            <!-- Two Column Layout: Main Content & Sidebar -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-                
-                <!-- Main Content Timelines (8 Cols) -->
                 <div class="lg:col-span-8 space-y-10">
                     <!-- Publications Section -->
                     <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-xs">
                         <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
                             <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 flex items-center">
-                                <i class="fa-solid fa-book-open text-crimson-800 mr-3 text-lg"></i> Publications
+                                <i class="fa-solid fa-book-open text-navy-900 mr-3 text-lg"></i> Publications
                             </h2>
                             <span id="count-publications" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
                         </div>
@@ -197,7 +199,7 @@
                     <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-xs">
                         <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
                             <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 flex items-center">
-                                <i class="fa-solid fa-chalkboard-user text-crimson-800 mr-3 text-lg"></i> Presentations & Conferences
+                                <i class="fa-solid fa-chalkboard-user text-navy-900 mr-3 text-lg"></i> Presentations & Conferences
                             </h2>
                             <span id="count-presentations" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
                         </div>
@@ -208,7 +210,7 @@
                     <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-xs">
                         <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
                             <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 flex items-center">
-                                <i class="fa-solid fa-graduation-cap text-crimson-800 mr-3 text-lg"></i> Seminars, Courses & More
+                                <i class="fa-solid fa-graduation-cap text-navy-900 mr-3 text-lg"></i> Seminars, Courses & More
                             </h2>
                             <span id="count-seminars" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
                         </div>
@@ -216,39 +218,39 @@
                     </div>
                 </div>
 
-                <!-- Sidebar Metadata (4 Cols) -->
+                <!-- Sidebar Metadata -->
                 <div class="lg:col-span-4 space-y-8">
                     <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
                         <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
-                            <i class="fa-solid fa-user-graduate text-crimson-800 mr-2.5 text-sm"></i> Background & Education
+                            <i class="fa-solid fa-user-graduate text-navy-900 mr-2.5 text-sm"></i> Background & Education
                         </h3>
                         <div id="list-background" class="space-y-4"></div>
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
                         <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
-                            <i class="fa-solid fa-brain text-crimson-800 mr-2.5 text-sm"></i> Skills & Expertise
+                            <i class="fa-solid fa-brain text-navy-900 mr-2.5 text-sm"></i> Skills & Expertise
                         </h3>
                         <div id="list-skills" class="space-y-4"></div>
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
                         <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
-                            <i class="fa-solid fa-people-group text-crimson-800 mr-2.5 text-sm"></i> Extracurriculars
+                            <i class="fa-solid fa-people-group text-navy-900 mr-2.5 text-sm"></i> Extracurriculars
                         </h3>
                         <div id="list-extracurriculars" class="space-y-4"></div>
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
                         <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
-                            <i class="fa-solid fa-share-nodes text-crimson-800 mr-2.5 text-sm"></i> Socials & Links
+                            <i class="fa-solid fa-share-nodes text-navy-900 mr-2.5 text-sm"></i> Socials & Links
                         </h3>
                         <div id="list-socials" class="space-y-3"></div>
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
                         <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
-                            <i class="fa-solid fa-id-card-clip text-crimson-800 mr-2.5 text-sm"></i> References
+                            <i class="fa-solid fa-id-card-clip text-navy-900 mr-2.5 text-sm"></i> References
                         </h3>
                         <div id="list-references" class="space-y-4"></div>
                     </div>
@@ -270,10 +272,10 @@
     <footer class="bg-stone-900 text-stone-400 py-12 mt-20 border-t border-stone-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 rounded-full bg-crimson-800 text-gold-500 flex items-center justify-center font-serif font-bold text-sm">
+                <div class="w-8 h-8 rounded-full bg-navy-900 text-gold-500 flex items-center justify-center font-serif font-bold text-sm">
                     PS
                 </div>
-                <span class="text-stone-300 font-medium text-sm">Dr. Prakhar Srivastava &copy; 2026. All rights reserved.</span>
+                <span class="text-stone-300 font-medium text-sm">Prakhar Srivastava &copy; 2026. All rights reserved.</span>
             </div>
             <div class="flex items-center space-x-6 text-sm">
                 <button onclick="switchView('home')" class="hover:text-white transition-colors">Home</button>
@@ -287,7 +289,7 @@
         <div class="bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl border border-stone-200 fade-in">
             <div class="flex items-center justify-between mb-6">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-crimson-800/10 text-crimson-800 flex items-center justify-center font-bold">
+                    <div class="w-10 h-10 rounded-xl bg-navy-900/10 text-navy-900 flex items-center justify-center font-bold">
                         <i class="fa-solid fa-shield-halved"></i>
                     </div>
                     <div>
@@ -302,12 +304,12 @@
             <form onsubmit="handleAuthSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">Admin Password</label>
-                    <input type="password" id="auth-password" required placeholder="Enter secure password" class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm">
+                    <input type="password" id="auth-password" required placeholder="Enter secure password" class="w-full px-4 py-3 rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 text-sm">
                 </div>
-                <div id="auth-error" class="hidden text-xs text-crimson-800 font-medium bg-crimson-50 p-3 rounded-xl border border-crimson-100">
+                <div id="auth-error" class="hidden text-xs text-red-600 font-medium bg-red-50 p-3 rounded-xl border border-red-100">
                     Incorrect password. Please try again.
                 </div>
-                <button type="submit" class="w-full py-3 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white font-semibold text-sm transition-colors shadow-md">
+                <button type="submit" class="w-full py-3 rounded-xl bg-navy-900 hover:bg-navy-800 text-white font-semibold text-sm transition-colors shadow-md">
                     Access Dashboard
                 </button>
             </form>
@@ -370,47 +372,47 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Category</label>
-                        <select id="form-category" onchange="updateListDropdownOptions()" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm bg-white">
+                        <select id="form-category" onchange="updateListDropdownOptions()" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 text-sm bg-white">
                             <option value="academic">Academic Section</option>
                             <option value="creative">Creative Portfolio</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Target List / Section</label>
-                        <select id="form-list-type" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm bg-white"></select>
+                        <select id="form-list-type" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 text-sm bg-white"></select>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div class="sm:col-span-1">
                         <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Year / Date</label>
-                        <input type="text" id="form-year" placeholder="e.g. 2026" class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm">
+                        <input type="text" id="form-year" placeholder="e.g. 2026" class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 text-sm">
                     </div>
                     <div class="sm:col-span-2">
                         <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Title / Name *</label>
-                        <input type="text" id="form-title" required placeholder="Entry title..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm">
+                        <input type="text" id="form-title" required placeholder="Entry title..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 text-sm">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Author(s) / Subtitle / Role</label>
-                    <input type="text" id="form-authors" placeholder="e.g. Srivastava, P." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm">
+                    <input type="text" id="form-authors" placeholder="e.g. Srivastava, P." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 text-sm">
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Description (Markdown Supported)</label>
-                    <textarea id="form-description" rows="4" placeholder="Detailed description..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm font-mono"></textarea>
+                    <textarea id="form-description" rows="4" placeholder="Detailed description..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 text-sm font-mono"></textarea>
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">External Link / URL</label>
-                    <input type="url" id="form-link" placeholder="https://example.com" class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm">
+                    <input type="url" id="form-link" placeholder="https://example.com" class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-navy-900/20 focus:border-navy-900 text-sm">
                 </div>
 
                 <div class="border-t border-stone-200 pt-4">
                     <div class="flex items-center justify-between mb-3">
                         <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider">Custom Key-Value Fields</label>
-                        <button type="button" onclick="addCustomFieldRow()" class="text-xs font-semibold text-crimson-800 hover:text-crimson-700 flex items-center">
+                        <button type="button" onclick="addCustomFieldRow()" class="text-xs font-semibold text-navy-900 hover:text-navy-700 flex items-center">
                             <i class="fa-solid fa-plus mr-1"></i> Add Field
                         </button>
                     </div>
@@ -419,7 +421,7 @@
 
                 <div class="pt-4 border-t border-stone-200 flex items-center justify-end space-x-3">
                     <button type="button" onclick="closeModal('modal-entry-form')" class="px-5 py-2.5 rounded-xl border border-stone-300 text-stone-700 text-xs font-semibold hover:bg-stone-50">Cancel</button>
-                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-crimson-800 hover:bg-crimson-700 text-white text-xs font-semibold shadow-md">Save Entry</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-semibold shadow-md">Save Entry</button>
                 </div>
             </form>
         </div>
@@ -601,11 +603,29 @@
                 portfolioData = DEFAULT_PORTFOLIO_DATA;
                 saveData();
             }
+            ensureOrders();
             pruneEmptyFields();
+        }
+
+        function ensureOrders() {
+            // Assign sequential orders if missing
+            const categories = ['academic', 'creative'];
+            categories.forEach(cat => {
+                const items = portfolioData.filter(i => i.category === cat);
+                const listTypes = [...new Set(items.map(i => i.listType))];
+                listTypes.forEach(lt => {
+                    const sub = portfolioData.filter(i => i.category === cat && i.listType === lt);
+                    sub.sort((a, b) => (a.order || 0) - (b.order || 0));
+                    sub.forEach((el, idx) => {
+                        el.order = idx + 1;
+                    });
+                });
+            });
         }
 
         function saveData() {
             pruneEmptyFields();
+            ensureOrders();
             localStorage.setItem('prakhar_portfolio_data', JSON.stringify(portfolioData));
             renderViews();
         }
@@ -682,7 +702,7 @@
             container.innerHTML = items.length === 0 ? '<p class="text-stone-400 text-xs italic">None listed.</p>' : items.map(item => `
                 <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold text-stone-800">${escapeHtml(item.title)}</span>
-                    ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="text-xs text-crimson-800 hover:underline font-medium"><i class="fa-solid fa-link mr-1"></i>Visit</a>` : ''}
+                    ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="text-xs text-navy-900 hover:underline font-medium"><i class="fa-solid fa-link mr-1"></i>Visit</a>` : ''}
                 </div>
             `).join('');
         }
@@ -692,13 +712,13 @@
             const customHTML = item.customFields && item.customFields.length > 0 
                 ? `<div class="flex flex-wrap gap-2 mt-3">${item.customFields.map(cf => `<span class="inline-flex items-center px-2.5 py-1 rounded-md bg-stone-100 text-stone-700 text-xs font-medium"><strong class="mr-1 text-stone-900">${cf.key}:</strong>${cf.value}</span>`).join('')}</div>`
                 : '';
-            const linkHTML = item.link ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-crimson-800 hover:text-crimson-700 mt-3"><i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> External Link / DOI</a>` : '';
+            const linkHTML = item.link ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-navy-900 hover:text-navy-700 mt-3"><i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> External Link / DOI</a>` : '';
 
             return `
                 <div class="relative pl-6 border-l-2 border-stone-200 group">
-                    <div class="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-crimson-800 border-2 border-white"></div>
+                    <div class="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-navy-900 border-2 border-white"></div>
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
-                        <h3 class="font-serif font-bold text-lg text-stone-900 group-hover:text-crimson-800 transition-colors">${escapeHtml(item.title)}</h3>
+                        <h3 class="font-serif font-bold text-lg text-stone-900 group-hover:text-navy-900 transition-colors">${escapeHtml(item.title)}</h3>
                         <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-stone-100 text-stone-600 w-fit mt-1 sm:mt-0">${escapeHtml(item.year || '')}</span>
                     </div>
                     ${item.authors ? `<p class="text-xs text-stone-500 font-medium mb-2">${escapeHtml(item.authors)}</p>` : ''}
@@ -801,8 +821,8 @@
                 <div class="bg-white rounded-2xl p-4 border border-stone-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs hover:border-stone-300 transition-all">
                     <div class="flex items-center space-x-3">
                         <div class="flex flex-col space-y-1">
-                            <button onclick="moveItemOrder('${item.id}', -1)" title="Move Up" class="text-stone-400 hover:text-stone-700 text-xs"><i class="fa-solid fa-chevron-up"></i></button>
-                            <button onclick="moveItemOrder('${item.id}', 1)" title="Move Down" class="text-stone-400 hover:text-stone-700 text-xs"><i class="fa-solid fa-chevron-down"></i></button>
+                            <button onclick="moveItemOrder('${item.id}', -1)" title="Move Up" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100 hover:bg-stone-200"><i class="fa-solid fa-chevron-up"></i></button>
+                            <button onclick="moveItemOrder('${item.id}', 1)" title="Move Down" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100 hover:bg-stone-200"><i class="fa-solid fa-chevron-down"></i></button>
                         </div>
                         <div>
                             <div class="flex items-center space-x-2">
@@ -815,7 +835,7 @@
                     </div>
                     <div class="flex items-center space-x-2 self-end sm:self-center">
                         <button onclick="openEditEntryModal('${item.id}')" class="px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold transition-colors"><i class="fa-solid fa-pen mr-1"></i> Edit</button>
-                        <button onclick="deleteEntry('${item.id}')" class="px-3 py-1.5 rounded-lg bg-crimson-50 hover:bg-crimson-100 text-crimson-800 text-xs font-semibold transition-colors"><i class="fa-solid fa-trash mr-1"></i> Delete</button>
+                        <button onclick="deleteEntry('${item.id}')" class="px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold transition-colors"><i class="fa-solid fa-trash mr-1"></i> Delete</button>
                     </div>
                 </div>
             `).join('');
@@ -824,15 +844,26 @@
         function moveItemOrder(id, direction) {
             const item = portfolioData.find(i => i.id === id);
             if (!item) return;
-            const sameList = portfolioData.filter(i => i.category === item.category && i.listType === item.listType).sort((a,b) => (a.order||0) - (b.order||0));
+
+            // Get all items in the exact same category and listType, sorted by order
+            const sameList = portfolioData.filter(i => i.category === item.category && i.listType === item.listType);
+            sameList.sort((a, b) => (a.order || 0) - (b.order || 0));
+
             const currentIndex = sameList.findIndex(i => i.id === id);
             const targetIndex = currentIndex + direction;
+
             if (targetIndex >= 0 && targetIndex < sameList.length) {
-                const temp = sameList[currentIndex].order;
+                // Swap orders
+                const tempOrder = sameList[currentIndex].order;
                 sameList[currentIndex].order = sameList[targetIndex].order;
-                sameList[targetIndex].order = temp;
-                
-                sameList.forEach((el, idx) => el.order = idx + 1);
+                sameList[targetIndex].order = tempOrder;
+
+                // Re-normalize all orders in this list to be clean 1, 2, 3...
+                sameList.sort((a, b) => (a.order || 0) - (b.order || 0));
+                sameList.forEach((el, idx) => {
+                    el.order = idx + 1;
+                });
+
                 saveData();
                 renderDashboardEntries();
             }
@@ -916,9 +947,9 @@
             const div = document.createElement('div');
             div.className = "flex items-center space-x-2 custom-field-row";
             div.innerHTML = `
-                <input type="text" placeholder="Key (e.g. DOI)" value="${escapeHtml(key)}" class="cf-key w-1/2 px-3 py-2 rounded-xl border border-stone-300 text-xs focus:ring-1 focus:ring-crimson-800">
-                <input type="text" placeholder="Value (e.g. 10.1000/xyz)" value="${escapeHtml(value)}" class="cf-val w-1/2 px-3 py-2 rounded-xl border border-stone-300 text-xs focus:ring-1 focus:ring-crimson-800">
-                <button type="button" onclick="this.parentElement.remove()" class="text-stone-400 hover:text-crimson-800 p-2"><i class="fa-solid xmark fa-trash text-xs"></i></button>
+                <input type="text" placeholder="Key (e.g. DOI)" value="${escapeHtml(key)}" class="cf-key w-1/2 px-3 py-2 rounded-xl border border-stone-300 text-xs focus:ring-1 focus:ring-navy-900">
+                <input type="text" placeholder="Value (e.g. 10.1000/xyz)" value="${escapeHtml(value)}" class="cf-val w-1/2 px-3 py-2 rounded-xl border border-stone-300 text-xs focus:ring-1 focus:ring-navy-900">
+                <button type="button" onclick="this.parentElement.remove()" class="text-stone-400 hover:text-red-700 p-2"><i class="fa-solid xmark fa-trash text-xs"></i></button>
             `;
             container.appendChild(div);
         }
@@ -956,6 +987,7 @@
                     item.customFields = customFields;
                 }
             } else {
+                const existingCount = portfolioData.filter(i => i.category === category && i.listType === listType).length;
                 const newItem = {
                     id: 'item-' + Date.now(),
                     category,
@@ -966,7 +998,7 @@
                     description,
                     link,
                     customFields,
-                    order: portfolioData.filter(i => i.category === category && i.listType === listType).length + 1
+                    order: existingCount + 1
                 };
                 portfolioData.push(newItem);
             }
