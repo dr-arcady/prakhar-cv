@@ -87,41 +87,16 @@
                 </div>
                 <div>
                     <span class="font-serif font-bold text-lg text-stone-900 tracking-tight block">Dr. Prakhar Srivastava</span>
-                    <span class="text-xs text-stone-500 tracking-wider uppercase font-medium">CV & Portfolio</span>
+                    <span class="text-xs text-stone-500 tracking-wider uppercase font-medium">Academic & Creative Portfolio</span>
                 </div>
             </div>
 
-            <!-- Navigation Links -->
-            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                <button onclick="switchView('home')" id="nav-home" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors text-stone-700 hover:bg-stone-100">
-                    <i class="fa-solid fa-house mr-1.5 text-stone-400"></i> Home
-                </button>
-                <button onclick="switchView('academic')" id="nav-academic" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors text-stone-700 hover:bg-stone-100">
-                    <i class="fa-solid fa-graduation-cap mr-1.5 text-stone-400"></i> Academics & Research
-                </button>
-                <button onclick="switchView('creative')" id="nav-creative" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors text-stone-700 hover:bg-stone-100">
-                    <i class="fa-solid fa-palette mr-1.5 text-stone-400"></i> Creative Portfolio
-                </button>
-            </nav>
-
-            <!-- Admin Action Button -->
+            <!-- Header navigation links removed as requested; brand logo acts as home switcher -->
             <div class="flex items-center space-x-3">
-                <button onclick="openAdminAuth()" class="inline-flex items-center px-3.5 py-2 border border-stone-300 text-xs font-semibold rounded-lg text-stone-700 bg-white hover:bg-stone-50 hover:border-stone-400 transition-all shadow-xs">
-                    <i class="fa-solid fa-lock text-crimson-800 mr-1.5"></i> Admin Dashboard
-                </button>
-                
-                <!-- Mobile Menu Button -->
-                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-stone-600 hover:bg-stone-100">
-                    <i class="fa-solid fa-bars text-lg"></i>
+                <button onclick="switchView('home')" class="text-xs font-semibold text-stone-600 hover:text-stone-900 transition-colors">
+                    <i class="fa-solid fa-house mr-1"></i> Home
                 </button>
             </div>
-        </div>
-
-        <!-- Mobile Nav Menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-stone-200 bg-white px-4 py-3 space-y-1">
-            <button onclick="switchView('home'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-100">Home</button>
-            <button onclick="switchView('academic'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-100">Academics & Research</button>
-            <button onclick="switchView('creative'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-100">Creative Portfolio</button>
         </div>
     </header>
 
@@ -139,17 +114,9 @@
                     <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-tight">
                         Dr. Prakhar Srivastava
                     </h1>
-                    <p class="text-stone-300 text-lg sm:text-xl font-light leading-relaxed mb-8">
+                    <p class="text-stone-300 text-lg sm:text-xl font-light leading-relaxed mb-4">
                         Bridging rigorous academic research, scholarly publications, and creative expression. Exploring intersections of literature, technology, and human inquiry.
                     </p>
-                    <div class="flex flex-wrap gap-4">
-                        <button onclick="switchView('academic')" class="inline-flex items-center px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-stone-950 font-semibold text-sm transition-all shadow-lg hover:shadow-gold-500/20">
-                            Explore Academic CV <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
-                        </button>
-                        <button onclick="switchView('creative')" class="inline-flex items-center px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm backdrop-blur-sm border border-white/20 transition-all">
-                            View Creative Portfolio <i class="fa-solid fa-palette ml-2 text-xs"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
 
@@ -169,7 +136,7 @@
                             Comprehensive record of peer-reviewed publications, academic conference presentations, professional seminars, courses taught, background education, and credentials.
                         </p>
                     </div>
-                    <div class="flex items-center text-crimsno-800 font-semibold text-sm text-crimson-800 group-hover:translate-x-1 transition-transform">
+                    <div class="flex items-center font-semibold text-sm text-crimson-800 group-hover:translate-x-1 transition-transform">
                         View Academic Record <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
                     </div>
                 </div>
@@ -215,7 +182,6 @@
                 
                 <!-- Main Content Timelines (8 Cols) -->
                 <div class="lg:col-span-8 space-y-10">
-                    
                     <!-- Publications Section -->
                     <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-xs">
                         <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
@@ -224,9 +190,7 @@
                             </h2>
                             <span id="count-publications" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
                         </div>
-                        <div id="list-publications" class="space-y-6">
-                            <!-- Dynamic items injected here -->
-                        </div>
+                        <div id="list-publications" class="space-y-6"></div>
                     </div>
 
                     <!-- Presentations Section -->
@@ -237,12 +201,10 @@
                             </h2>
                             <span id="count-presentations" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
                         </div>
-                        <div id="list-presentations" class="space-y-6">
-                            <!-- Dynamic items injected here -->
-                        </div>
+                        <div id="list-presentations" class="space-y-6"></div>
                     </div>
 
-                    <!-- Seminars, Courses & More Collapsible Timeline -->
+                    <!-- Seminars, Courses Section -->
                     <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-xs">
                         <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
                             <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 flex items-center">
@@ -250,86 +212,59 @@
                             </h2>
                             <span id="count-seminars" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
                         </div>
-                        <div id="list-seminars" class="space-y-6">
-                            <!-- Dynamic items injected here -->
-                        </div>
+                        <div id="list-seminars" class="space-y-6"></div>
                     </div>
-
                 </div>
 
                 <!-- Sidebar Metadata (4 Cols) -->
                 <div class="lg:col-span-4 space-y-8">
-                    
-                    <!-- Background / Education Sidebar -->
                     <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
                         <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
                             <i class="fa-solid fa-user-graduate text-crimson-800 mr-2.5 text-sm"></i> Background & Education
                         </h3>
-                        <div id="list-background" class="space-y-4">
-                            <!-- Dynamic background items -->
-                        </div>
+                        <div id="list-background" class="space-y-4"></div>
                     </div>
 
-                    <!-- Skills & Expertise Sidebar -->
                     <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
                         <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
                             <i class="fa-solid fa-brain text-crimson-800 mr-2.5 text-sm"></i> Skills & Expertise
                         </h3>
-                        <div id="list-skills" class="space-y-4">
-                            <!-- Dynamic skills items -->
-                        </div>
+                        <div id="list-skills" class="space-y-4"></div>
                     </div>
 
-                    <!-- Extracurriculars Sidebar -->
                     <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
                         <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
                             <i class="fa-solid fa-people-group text-crimson-800 mr-2.5 text-sm"></i> Extracurriculars
                         </h3>
-                        <div id="list-extracurriculars" class="space-y-4">
-                            <!-- Dynamic extracurricular items -->
-                        </div>
+                        <div id="list-extracurriculars" class="space-y-4"></div>
                     </div>
 
-                    <!-- Socials & Profiles Sidebar -->
                     <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
                         <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
                             <i class="fa-solid fa-share-nodes text-crimson-800 mr-2.5 text-sm"></i> Socials & Links
                         </h3>
-                        <div id="list-socials" class="space-y-3">
-                            <!-- Dynamic social items -->
-                        </div>
+                        <div id="list-socials" class="space-y-3"></div>
                     </div>
 
-                    <!-- References Sidebar -->
                     <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-xs">
                         <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
                             <i class="fa-solid fa-id-card-clip text-crimson-800 mr-2.5 text-sm"></i> References
                         </h3>
-                        <div id="list-references" class="space-y-4">
-                            <!-- Dynamic references items -->
-                        </div>
+                        <div id="list-references" class="space-y-4"></div>
                     </div>
-
                 </div>
-
             </div>
         </div>
 
         <!-- 3. CREATIVE PORTFOLIO VIEW -->
         <div id="view-creative" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <!-- Creative Header -->
             <div class="border-b border-stone-200 pb-8 mb-10">
                 <span class="text-xs uppercase tracking-widest text-gold-600 font-bold block mb-1">Literary & Artistic Works</span>
                 <h1 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900">Creative Portfolio</h1>
                 <p class="text-stone-600 mt-2 max-w-2xl">Essays, poetry, prose, and imaginative creations exploring artistic horizons.</p>
             </div>
-
-            <!-- Creative Portfolio Grid -->
-            <div id="grid-creative" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Dynamic creative items -->
-            </div>
+            <div id="grid-creative" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </div>
-
     </main>
 
     <footer class="bg-stone-900 text-stone-400 py-12 mt-20 border-t border-stone-800">
@@ -342,15 +277,11 @@
             </div>
             <div class="flex items-center space-x-6 text-sm">
                 <button onclick="switchView('home')" class="hover:text-white transition-colors">Home</button>
-                <button onclick="switchView('academic')" class="hover:text-white transition-colors">Academic CV</button>
-                <button onclick="switchView('creative')" class="hover:text-white transition-colors">Creative Portfolio</button>
                 <button onclick="openAdminAuth()" class="hover:text-gold-500 transition-colors"><i class="fa-solid fa-lock text-xs mr-1"></i> Admin</button>
             </div>
         </div>
     </footer>
 
-
-    
     <!-- AUTHENTICATION MODAL -->
     <div id="modal-auth" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/60 backdrop-blur-xs hidden">
         <div class="bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl border border-stone-200 fade-in">
@@ -383,11 +314,9 @@
         </div>
     </div>
 
-
     <!-- ADMIN DASHBOARD & ENTRY MODAL -->
     <div id="modal-dashboard" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/70 backdrop-blur-xs hidden">
         <div class="bg-white rounded-3xl max-w-4xl w-full mx-4 max-h-[90vh] flex flex-col shadow-2xl border border-stone-200 fade-in overflow-hidden">
-            <!-- Dashboard Header -->
             <div class="px-8 py-6 bg-stone-900 text-white flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 rounded-xl bg-gold-500 text-stone-950 flex items-center justify-center font-bold">
@@ -408,7 +337,6 @@
                 </div>
             </div>
 
-            <!-- Dashboard Content Tabs & Search -->
             <div class="p-6 bg-stone-50 border-b border-stone-200 flex flex-wrap items-center justify-between gap-4">
                 <div class="flex flex-wrap gap-2">
                     <button onclick="filterDashboardTab('all')" id="dtab-all" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-900 text-white shadow-xs">All Items</button>
@@ -422,13 +350,9 @@
                 </div>
             </div>
 
-            <!-- Entries List Table / Cards with Drag & Drop Simulation -->
-            <div class="flex-grow overflow-y-auto p-6 space-y-3" id="dashboard-entries-list">
-                <!-- Populated dynamically -->
-            </div>
+            <div class="flex-grow overflow-y-auto p-6 space-y-3" id="dashboard-entries-list"></div>
         </div>
     </div>
-
 
     <!-- NEW / EDIT ENTRY FORM MODAL -->
     <div id="modal-entry-form" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/70 backdrop-blur-xs hidden">
@@ -453,16 +377,14 @@
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Target List / Section</label>
-                        <select id="form-list-type" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm bg-white">
-                            <!-- Populated dynamically -->
-                        </select>
+                        <select id="form-list-type" required class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm bg-white"></select>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div class="sm:col-span-1">
                         <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Year / Date</label>
-                        <input type="text" id="form-year" placeholder="e.g. 2026 or 2024-Present" class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm">
+                        <input type="text" id="form-year" placeholder="e.g. 2026" class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm">
                     </div>
                     <div class="sm:col-span-2">
                         <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Title / Name *</label>
@@ -472,15 +394,12 @@
 
                 <div>
                     <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Author(s) / Subtitle / Role</label>
-                    <input type="text" id="form-authors" placeholder="e.g. Srivastava, P. & Collaborators" class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm">
+                    <input type="text" id="form-authors" placeholder="e.g. Srivastava, P." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm">
                 </div>
 
                 <div>
-                    <div class="flex items-center justify-between mb-1">
-                        <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider">Description (Markdown Supported)</label>
-                        <span class="text-[11px] text-stone-400"><i class="fa-brands fa-markdown mr-1"></i> Markdown enabled</span>
-                    </div>
-                    <textarea id="form-description" rows="4" placeholder="Detailed description or abstract..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm font-mono"></textarea>
+                    <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Description (Markdown Supported)</label>
+                    <textarea id="form-description" rows="4" placeholder="Detailed description..." class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm font-mono"></textarea>
                 </div>
 
                 <div>
@@ -488,7 +407,6 @@
                     <input type="url" id="form-link" placeholder="https://example.com" class="w-full px-3 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-crimson-800/20 focus:border-crimson-800 text-sm">
                 </div>
 
-                <!-- Custom Fields Dynamic Section -->
                 <div class="border-t border-stone-200 pt-4">
                     <div class="flex items-center justify-between mb-3">
                         <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider">Custom Key-Value Fields</label>
@@ -496,9 +414,7 @@
                             <i class="fa-solid fa-plus mr-1"></i> Add Field
                         </button>
                     </div>
-                    <div id="custom-fields-container" class="space-y-2">
-                        <!-- Custom rows injected here -->
-                    </div>
+                    <div id="custom-fields-container" class="space-y-2"></div>
                 </div>
 
                 <div class="pt-4 border-t border-stone-200 flex items-center justify-end space-x-3">
@@ -509,15 +425,10 @@
         </div>
     </div>
 
-
     <script>
-        
-        // Target Injected Hash Placeholder:
-        const INJECTED_ADMIN_HASH = "<!-- __ADMIN_PASSWORD_HASH__ -->";
-        // Fallback default password hash for 'admin2026' if placeholder wasn't replaced by GitHub Actions
-        const DEFAULT_FALLBACK_HASH = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"; // sha256 of 'admin'
+        const INJECTED_ADMIN_PASSWORD = "<!-- __ADMIN_PASSWORD_HASH__ -->";
+        const DEFAULT_FALLBACK_PASSWORD = "admin";
 
-        // Default Initial Data Store
         const DEFAULT_PORTFOLIO_DATA = [
             {
                 id: "item-1",
@@ -656,7 +567,6 @@
         let portfolioData = [];
         let currentDashboardFilter = 'all';
 
-        // Safe Markdown Parser helper function to prevent runtime reference errors
         function safeParseMarkdown(text) {
             if (!text) return '';
             try {
@@ -670,7 +580,6 @@
             } catch (e) {
                 console.warn('Markdown parsing fallback triggered:', e);
             }
-            // Fallback plain text renderer with basic line break conversion
             return escapeHtml(text).replace(/\n/g, '<br>');
         }
 
@@ -680,7 +589,6 @@
             switchView('home');
         };
 
-        // Load from localStorage or default
         function loadData() {
             const saved = localStorage.getItem('prakhar_portfolio_data');
             if (saved) {
@@ -702,7 +610,6 @@
             renderViews();
         }
 
-        // Automatic pruning of empty fields
         function pruneEmptyFields() {
             portfolioData.forEach(item => {
                 if (item.customFields) {
@@ -718,23 +625,6 @@
                 target.classList.remove('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-
-            // Update Nav active styling
-            ['home', 'academic', 'creative'].forEach(v => {
-                const btn = document.getElementById('nav-' + v);
-                if (btn) {
-                    if (v === viewName) {
-                        btn.classList.add('bg-stone-100', 'text-stone-900');
-                    } else {
-                        btn.classList.remove('bg-stone-100', 'text-stone-900');
-                    }
-                }
-            });
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
         }
 
         function renderViews() {
@@ -746,29 +636,24 @@
         }
 
         function renderAcademicView() {
-            // Helper to sort by order
             const getSorted = (listType) => {
                 return portfolioData
                     .filter(item => item.listType === listType)
                     .sort((a, b) => (a.order || 0) - (b.order || 0));
             };
 
-            // 1. Publications
             const pubs = getSorted('publications');
             document.getElementById('count-publications').innerText = pubs.length + ' items';
             document.getElementById('list-publications').innerHTML = pubs.length === 0 ? '<p class="text-stone-400 text-sm italic">No publications recorded yet.</p>' : pubs.map(item => createTimelineItemHTML(item)).join('');
 
-            // 2. Presentations
             const pres = getSorted('presentations');
             document.getElementById('count-presentations').innerText = pres.length + ' items';
             document.getElementById('list-presentations').innerHTML = pres.length === 0 ? '<p class="text-stone-400 text-sm italic">No presentations recorded yet.</p>' : pres.map(item => createTimelineItemHTML(item)).join('');
 
-            // 3. Seminars
             const sems = getSorted('seminars');
             document.getElementById('count-seminars').innerText = sems.length + ' items';
             document.getElementById('list-seminars').innerHTML = sems.length === 0 ? '<p class="text-stone-400 text-sm italic">No seminars or courses recorded yet.</p>' : sems.map(item => createTimelineItemHTML(item)).join('');
 
-            // Sidebars
             renderSidebarList('background', getSorted('background'));
             renderSidebarList('skills', getSorted('skills'));
             renderSidebarList('extracurriculars', getSorted('extracurriculars'));
@@ -776,10 +661,36 @@
             renderSidebarList('references', getSorted('references'));
         }
 
+        function renderSidebarList(listType, items) {
+            const container = document.getElementById('list-' + listType);
+            if (!container) return;
+            container.innerHTML = items.length === 0 ? '<p class="text-stone-400 text-xs italic">None listed.</p>' : items.map(item => `
+                <div class="space-y-1">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-semibold text-sm text-stone-900">${escapeHtml(item.title)}</h4>
+                        <span class="text-[11px] text-stone-500 bg-stone-100 px-2 py-0.5 rounded-full">${escapeHtml(item.year || '')}</span>
+                    </div>
+                    ${item.authors ? `<p class="text-xs text-stone-600 font-medium">${escapeHtml(item.authors)}</p>` : ''}
+                    ${item.description ? `<div class="text-xs text-stone-500">${safeParseMarkdown(item.description)}</div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function renderSocialsList(items) {
+            const container = document.getElementById('list-socials');
+            if (!container) return;
+            container.innerHTML = items.length === 0 ? '<p class="text-stone-400 text-xs italic">None listed.</p>' : items.map(item => `
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-semibold text-stone-800">${escapeHtml(item.title)}</span>
+                    ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="text-xs text-crimson-800 hover:underline font-medium"><i class="fa-solid fa-link mr-1"></i>Visit</a>` : ''}
+                </div>
+            `).join('');
+        }
+
         function createTimelineItemHTML(item) {
             const mdDesc = item.description ? safeParseMarkdown(item.description) : '';
             const customHTML = item.customFields && item.customFields.length > 0 
-                ? `<div class="flex flex-wrap gap-2 mt-3">${item.customFields.map(cf => `<span class="inline-flex items-center px-2.5 py-1 rounded-md bg-stone-100 text-stone-700 text-xs font-medium"><strong class="mr-1 text-stone-900">${cf.key}:</strong> ${cf.value}</span>`).join('')}</div>`
+                ? `<div class="flex flex-wrap gap-2 mt-3">${item.customFields.map(cf => `<span class="inline-flex items-center px-2.5 py-1 rounded-md bg-stone-100 text-stone-700 text-xs font-medium"><strong class="mr-1 text-stone-900">${cf.key}:</strong>${cf.value}</span>`).join('')}</div>`
                 : '';
             const linkHTML = item.link ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-crimson-800 hover:text-crimson-700 mt-3"><i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> External Link / DOI</a>` : '';
 
@@ -797,7 +708,7 @@
                 </div>
             `;
         }
-<!-- ... existing code ... baseline for creative view -->
+
         function renderCreativeView() {
             const creativeItems = portfolioData.filter(item => item.category === 'creative');
             const container = document.getElementById('grid-creative');
@@ -805,7 +716,7 @@
             container.innerHTML = creativeItems.length === 0 ? '<div class="col-span-full py-12 text-center text-stone-400 italic">No creative works added yet.</div>' : creativeItems.map(item => {
                 const mdDesc = item.description ? safeParseMarkdown(item.description) : '';
                 const customHTML = item.customFields && item.customFields.length > 0
-                    ? `<div class="flex flex-wrap gap-2 mt-4 pt-3 border-t border-stone-100">${item.customFields.map(cf => `<span class="inline-flex items-center px-2 py-0.5 rounded bg-gold-500/10 text-gold-700 text-[11px] font-semibold"><strong>${cf.key}:</strong> ${cf.value}</span>`).join('')}</div>`
+                    ? `<div class="flex flex-wrap gap-2 mt-4 pt-3 border-t border-stone-100">${item.customFields.map(cf => `<span class="inline-flex items-center px-2 py-0.5 rounded bg-gold-500/10 text-gold-700 text-[11px] font-semibold"><strong>${cf.key}:</strong>${cf.value}</span>`).join('')}</div>`
                     : '';
                 const linkHTML = item.link ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-gold-600 hover:text-gold-700 mt-4"><i class="fa-solid fa-book-open-reader mr-1.5"></i> Read / View Work</a>` : '';
 
@@ -832,7 +743,6 @@
         }
 
         function openAdminAuth() {
-            // Check if already authenticated in session
             if (sessionStorage.getItem('prakhar_admin_auth') === 'true') {
                 openDashboard();
             } else {
@@ -846,10 +756,9 @@
             event.preventDefault();
             const pw = document.getElementById('auth-password').value;
             
-            // Expected password from GitHub Secret injection or fallback
-            let targetPassword = "<!-- __ADMIN_PASSWORD_HASH__ -->";
+            let targetPassword = INJECTED_ADMIN_PASSWORD;
             if (!targetPassword || targetPassword.includes('__ADMIN_PASSWORD_HASH__')) {
-                targetPassword = "admin"; // Default fallback password if secret isn't configured yet
+                targetPassword = DEFAULT_FALLBACK_PASSWORD;
             }
 
             if (pw.trim() === targetPassword.trim()) {
@@ -923,7 +832,6 @@
                 sameList[currentIndex].order = sameList[targetIndex].order;
                 sameList[targetIndex].order = temp;
                 
-                // Fallback ensure distinct orders
                 sameList.forEach((el, idx) => el.order = idx + 1);
                 saveData();
                 renderDashboardEntries();
@@ -1026,7 +934,6 @@
             const description = document.getElementById('form-description').value;
             const link = document.getElementById('form-link').value;
 
-            // Gather custom fields
             const customFields = [];
             document.querySelectorAll('.custom-field-row').forEach(row => {
                 const k = row.querySelector('.cf-key').value.trim();
@@ -1037,7 +944,6 @@
             });
 
             if (id) {
-                // Update
                 const item = portfolioData.find(i => i.id === id);
                 if (item) {
                     item.category = category;
@@ -1050,7 +956,6 @@
                     item.customFields = customFields;
                 }
             } else {
-                // Create new
                 const newItem = {
                     id: 'item-' + Date.now(),
                     category,
@@ -1107,7 +1012,7 @@
                         renderDashboardEntries();
                         alert('Portfolio data successfully imported!');
                     } else {
-                        alert('Invalid JSON structure. Expected an array of portfolio entries.');
+                        alert('Invalid JSON structure. Expected an array.');
                     }
                 } catch (err) {
                     alert('Error parsing JSON file.');
