@@ -842,25 +842,17 @@
             }
         }
 
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        async function handleAuthSubmit(event) {
+        function handleAuthSubmit(event) {
             event.preventDefault();
             const pw = document.getElementById('auth-password').value;
-            const hashedInput = await sha256(pw);
-
-            // Determine active target hash
-            let targetHash = INJECTED_ADMIN_HASH;
-            if (!targetHash || targetHash.includes('__ADMIN_PASSWORD_HASH__')) {
-                targetHash = DEFAULT_FALLBACK_HASH;
+            
+            // Expected password from GitHub Secret injection or fallback
+            let targetPassword = "<!-- __ADMIN_PASSWORD_HASH__ -->";
+            if (!targetPassword || targetPassword.includes('__ADMIN_PASSWORD_HASH__')) {
+                targetPassword = "admin"; // Default fallback password if secret isn't configured yet
             }
 
-            if (hashedInput === targetHash) {
+            if (pw.trim() === targetPassword.trim()) {
                 sessionStorage.setItem('prakhar_admin_auth', 'true');
                 closeModal('modal-auth');
                 openDashboard();
