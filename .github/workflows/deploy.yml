@@ -24,13 +24,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         
-      - name: Inject Password Hash
+      - name: Inject Password
         env:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
-          # Compute clean SHA-256 hash without newline artifacts
-          HASHED_PW=$(echo -n "$ADMIN_PASSWORD" | tr -d '\r\n' | sha256sum | awk '{print $1}')
-          echo "Generated Hash Length: ${#HASHED_PW}"
+          # Cleanly inject the password string into index.html
+          CLEAN_PW=$(echo -n "$ADMIN_PASSWORD" | tr -d '\r\n')
+          sed -i "s/<!-- __ADMIN_PASSWORD_HASH__ -->/$CLEAN_PW/g" index.html
           
           # Replace placeholder in index.html
           sed -i "s/<!-- __ADMIN_PASSWORD_HASH__ -->/$HASHED_PW/g" index.html
