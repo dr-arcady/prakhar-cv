@@ -368,6 +368,16 @@
                 </div>
             </div>
 
+            <!-- GitHub Sync Settings Bar -->
+            <div class="px-6 py-3 bg-stone-100 border-b border-stone-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div class="flex items-center space-x-2">
+                    <span class="font-semibold text-stone-700"><i class="fa-brands fa-github mr-1"></i> GitHub Sync:</span>
+                    <input type="text" id="gh-repo" placeholder="username/repo-name" class="px-2.5 py-1 rounded border border-stone-300 bg-white w-40">
+                    <input type="password" id="gh-token" placeholder="Personal Access Token" class="px-2.5 py-1 rounded border border-stone-300 bg-white w-48">
+                </div>
+                <button onclick="saveGitHubSettings()" class="px-3 py-1 rounded bg-stone-800 text-white font-semibold hover:bg-stone-900">Save Credentials</button>
+            </div>
+
             <div class="p-6 bg-stone-50 border-b border-stone-200 flex flex-wrap items-center justify-between gap-4">
                 <div class="flex flex-wrap gap-2">
                     <button onclick="filterDashboardTab('all')" id="dtab-all" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-900 text-white shadow-xs">All Items</button>
@@ -634,6 +644,21 @@
             renderViews();
         }
 
+        function saveGitHubSettings() {
+            const repo = document.getElementById('gh-repo').value.trim();
+            const token = document.getElementById('gh-token').value.trim();
+            localStorage.setItem('prakhar_gh_repo', repo);
+            localStorage.setItem('prakhar_gh_token', token);
+            alert('GitHub settings saved securely to this browser!');
+        }
+
+        function loadGitHubSettings() {
+            const repo = localStorage.getItem('prakhar_gh_repo') || '';
+            const token = localStorage.getItem('prakhar_gh_token') || '';
+            if (document.getElementById('gh-repo')) document.getElementById('gh-repo').value = repo;
+            if (document.getElementById('gh-token')) document.getElementById('gh-token').value = token;
+        }
+
         function ensureOrders() {
             const categories = ['academic', 'creative'];
             categories.forEach(cat => {
@@ -649,11 +674,70 @@
             });
         }
 
-        function saveData() {
+        async function saveData() {
             pruneEmptyFields();
             ensureOrders();
-            localStorage.setItem('prakhar_portfolio_data', JSON.stringify(portfolioData));
             renderViews();
+
+            const repo = localStorage.getItem('prakhar_gh_repo');
+            const token = localStorage.getItem('prakhar_gh_token');
+
+            if (!repo || !token) {
+                alert('Changes saved locally! (Tip: Enter your GitHub Repo and Token in the admin bar above to sync live globally).');
+                return;
+            }
+
+            // Show syncing notification
+            const indicator = document.createElement('div');
+            indicator.id = 'sync-indicator';
+            indicator.className = 'fixed bottom-4 right-4 bg-stone-900 text-white px-4 py-2 rounded-xl text-xs shadow-lg z-50 flex items-center space-x-2';
+            indicator.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-gold-500"></i><span>Syncing with GitHub...</span>`;
+            document.body.appendChild(indicator);
+
+            try {
+                const path = 'portfolio-data.json';
+                const url = `https://api.github.com/repos/${repo}/contents/${path}`;
+
+                // 1. Get current file SHA (Required by GitHub API to update an existing file)
+                const getRes = await fetch(url, {
+                    headers: { 'Authorization': `token ${token}` }
+                });
+                
+                let sha = '';
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                }
+
+                // 2. Encode JSON content to Base64
+                const updatedContent = JSON.stringify(portfolioData, null, 2);
+                const encodedContent = btoa(unescape(encodeURIComponent(updatedContent)));
+
+                // 3. Send PUT request to GitHub API
+                const putRes = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: 'Update portfolio data via admin dashboard',
+                        content: encodedContent,
+                        sha: sha
+                    })
+                });
+
+                if (putRes.ok) {
+                    indicator.innerHTML = `<i class="fa-solid fa-check text-green-400"></i><span>Successfully synced & deployed!</span>`;
+                    setTimeout(() => indicator.remove(), 3000);
+                } else {
+                    throw new Error('Failed to commit to GitHub API.');
+                }
+            } catch (err) {
+                console.error(err);
+                indicator.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-400"></i><span>Sync failed. Check console & token.</span>`;
+                setTimeout(() => indicator.remove(), 4000);
+            }
         }
 
         function pruneEmptyFields() {
@@ -844,6 +928,7 @@
         }
 
         function openDashboard() {
+            loadGitHubSettings();
             renderDashboardEntries();
             openModal('modal-dashboard');
         }
