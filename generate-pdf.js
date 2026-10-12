@@ -40,31 +40,36 @@ async function generatePDF() {
             ` : ''}
             ${item.link ? `
                 <div style="margin-top: 4px;">
-                    <a href="${item.link}" style="font-size: 10px; color: #1e3a8a; text-decoration: none; font-weight: bold;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit</a>
+                    <a href="${item.link}" style="font-size: 10px; color: #1e3a8a; text-decoration: none; font-weight: bold;"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Publication / Link</a>
                 </div>
             ` : ''}
         </div>
     `).join('');
 
-    const renderSidebarItems = (items) => items.map(item => `
-        <div style="margin-bottom: 12px; font-size: 11px; page-break-inside: avoid;">
-            <div style="font-weight: bold; color: #1c1917;">
-                ${parseMarkdown(item.title || '')} <span style="float: right; font-weight: normal; color: #78716c;">${item.year || ''}</span>
+    const renderSidebarItems = (items) => items.map(item => {
+        const titleHtml = item.link && item.listType === 'background'
+            ? `<a href="${item.link}" style="color: #1e3a8a; text-decoration: none;">${parseMarkdown(item.title || '')}</a>`
+            : parseMarkdown(item.title || '');
+
+        const authorsHtml = item.link && item.listType === 'extracurriculars'
+            ? `<a href="${item.link}" style="color: #1e3a8a; text-decoration: none;">${parseMarkdown(item.authors || '')}</a>`
+            : parseMarkdown(item.authors || '');
+
+        return `
+            <div style="margin-bottom: 12px; font-size: 11px; page-break-inside: avoid;">
+                <div style="font-weight: bold; color: #1c1917;">
+                    ${titleHtml} <span style="float: right; font-weight: normal; color: #78716c;">${item.year || ''}</span>
+                </div>
+                ${item.authors ? `<div style="color: #44403c; margin-top: 1px;">${authorsHtml}</div>` : ''}
+                ${item.description ? `<div style="color: #57534e; margin-top: 1px; line-height: 1.3;">${parseMarkdown(item.description)}</div>` : ''}
+                ${item.customFields && item.customFields.length > 0 ? `
+                    <div style="font-size: 10px; color: #57534e; margin-top: 2px;">
+                        ${item.customFields.map(cf => `<span><strong>${cf.key}:</strong> ${cf.value}</span>`).join(' | ')}
+                    </div>
+                ` : ''}
             </div>
-            ${item.authors ? `<div style="color: #44403c; margin-top: 1px;">${parseMarkdown(item.authors)}</div>` : ''}
-            ${item.description ? `<div style="color: #57534e; margin-top: 1px; line-height: 1.3;">${parseMarkdown(item.description)}</div>` : ''}
-            ${item.customFields && item.customFields.length > 0 ? `
-                <div style="font-size: 10px; color: #57534e; margin-top: 2px;">
-                    ${item.customFields.map(cf => `<span><strong>${cf.key}:</strong> ${cf.value}</span>`).join(' | ')}
-                </div>
-            ` : ''}
-            ${item.link ? `
-                <div style="margin-top: 2px;">
-                    <a href="${item.link}" style="color: #1e3a8a; text-decoration: none; font-size: 10px; font-weight: bold;">${item.description || item.authors || item.link}</a>
-                </div>
-            ` : ''}
-        </div>
-    `).join('');
+        `;
+    }).join('');
 
     const renderSocialsItems = (items) => items.map(item => {
         let href = item.link || '#';
