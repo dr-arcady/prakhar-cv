@@ -179,81 +179,106 @@
 
         <!-- 2. ACADEMIC & RESEARCH VIEW -->
         <div id="view-academic" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-stone-200 pb-8 mb-10 gap-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-stone-200 pb-8 mb-8 gap-4">
                 <div>
                     <span class="text-xs uppercase tracking-widest text-navy-900 font-bold block mb-1">Scholarship & Credentials</span>
                     <h1 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900">Academics & Research</h1>
                 </div>
+                
+                <!-- TAB SWITCHING BUTTONS -->
+                <div class="flex items-center space-x-2 bg-stone-200/70 p-1.5 rounded-2xl w-fit">
+                    <button onclick="switchAcademicTab('research')" id="atab-research" class="px-5 py-2 rounded-xl text-xs font-semibold transition-all bg-stone-900 text-white shadow-sm">
+                        <i class="fa-solid fa-book-open mr-1.5"></i> Research History
+                    </button>
+                    <button onclick="switchAcademicTab('credentials')" id="atab-credentials" class="px-5 py-2 rounded-xl text-xs font-semibold transition-all text-stone-600 hover:text-stone-900">
+                        <i class="fa-solid fa-user-graduate mr-1.5"></i> Background and Links
+                    </button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-                <div class="lg:col-span-8 space-y-10">
-                    <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-xs">
-                        <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
-                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 flex items-center">
-                                <i class="fa-solid fa-book-open text-navy-900 mr-3 text-lg"></i> Publications
-                            </h2>
+            <!-- TAB 1: RESEARCH HISTORY (ACCORDIONS) -->
+            <div id="academic-tab-research" class="space-y-6 fade-in">
+                <!-- Publications Accordion -->
+                <div class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden">
+                    <button onclick="toggleAccordion('acc-publications')" class="w-full flex items-center justify-between p-6 sm:p-8 text-left hover:bg-stone-50/50 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-book-open text-navy-900 text-lg"></i>
+                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900">Publications</h2>
                             <span id="count-publications" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
                         </div>
+                        <i id="icon-acc-publications" class="fa-solid fa-chevron-down text-stone-400 transition-transform duration-300 transform rotate-180"></i>
+                    </button>
+                    <div id="acc-publications" class="px-6 sm:px-8 pb-8 pt-2 border-t border-stone-100 space-y-6">
                         <div id="list-publications" class="space-y-6"></div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-xs">
-                        <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
-                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 flex items-center">
-                                <i class="fa-solid fa-chalkboard-user text-navy-900 mr-3 text-lg"></i> Presentations & Conferences
-                            </h2>
-                            <span id="count-presentations" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
-                        </div>
-                        <div id="list-presentations" class="space-y-6"></div>
-                    </div>
-
-                    <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-xs">
-                        <div class="flex items-center justify-between mb-6 pb-4 border-b border-stone-100">
-                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900 flex items-center">
-                                <i class="fa-solid fa-graduation-cap text-navy-900 mr-3 text-lg"></i> Seminars, Courses & More
-                            </h2>
-                            <span id="count-seminars" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
-                        </div>
-                        <div id="list-seminars" class="space-y-6"></div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-4 space-y-8 lg:sticky lg:top-24 lg:self-start">
-                    <div class="bg-stone-50/80 rounded-2xl p-6 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
-                        <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
-                            <i class="fa-solid fa-user-graduate text-navy-900 mr-2.5 text-sm"></i> Background & Education
-                        </h3>
-                        <div id="list-background" class="space-y-4"></div>
+                <!-- Presentations Accordion -->
+                <div class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden">
+                    <button onclick="toggleAccordion('acc-presentations')" class="w-full flex items-center justify-between p-6 sm:p-8 text-left hover:bg-stone-50/50 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-chalkboard-user text-navy-900 text-lg"></i>
+                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900">Presentations & Conferences</h2>
+                            <span id="count-presentations" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
+                        </div>
+                        <i id="icon-acc-presentations" class="fa-solid fa-chevron-down text-stone-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="acc-presentations" class="px-6 sm:px-8 pb-8 pt-2 border-t border-stone-100 space-y-6 hidden">
+                        <div id="list-presentations" class="space-y-6"></div>
                     </div>
+                </div>
 
-                    <div class="bg-stone-50/80 rounded-2xl p-6 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
-                        <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
-                            <i class="fa-solid fa-brain text-navy-900 mr-2.5 text-sm"></i> Skills & Expertise
-                        </h3>
-                        <div id="list-skills" class="space-y-4"></div>
+                <!-- Seminars Accordion -->
+                <div class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden">
+                    <button onclick="toggleAccordion('acc-seminars')" class="w-full flex items-center justify-between p-6 sm:p-8 text-left hover:bg-stone-50/50 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-graduation-cap text-navy-900 text-lg"></i>
+                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900">Seminars, Courses & More</h2>
+                            <span id="count-seminars" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
+                        </div>
+                        <i id="icon-acc-seminars" class="fa-solid fa-chevron-down text-stone-400 transition-transform duration-300"></i>
+                    </button>
+                    <div id="acc-seminars" class="px-6 sm:px-8 pb-8 pt-2 border-t border-stone-100 space-y-6 hidden">
+                        <div id="list-seminars" class="space-y-6"></div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="bg-stone-50/80 rounded-2xl p-6 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
-                        <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
-                            <i class="fa-solid fa-people-group text-navy-900 mr-2.5 text-sm"></i> Extracurriculars
-                        </h3>
-                        <div id="list-extracurriculars" class="space-y-4"></div>
-                    </div>
+            <!-- TAB 2: BACKGROUND & LINKS -->
+            <div id="academic-tab-credentials" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8 fade-in">
+                <div class="bg-stone-50/80 rounded-2xl p-6 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
+                    <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-200 flex items-center">
+                        <i class="fa-solid fa-user-graduate text-navy-900 mr-2.5 text-sm"></i> Background & Education
+                    </h3>
+                    <div id="list-background" class="space-y-4"></div>
+                </div>
 
-                    <div class="bg-stone-50/80 rounded-2xl p-6 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
-                        <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
-                            <i class="fa-solid fa-share-nodes text-navy-900 mr-2.5 text-sm"></i> Socials & Links
-                        </h3>
-                        <div id="list-socials" class="space-y-3"></div>
-                    </div>
+                <div class="bg-stone-50/80 rounded-2xl p-6 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
+                    <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-200 flex items-center">
+                        <i class="fa-solid fa-brain text-navy-900 mr-2.5 text-sm"></i> Skills & Expertise
+                    </h3>
+                    <div id="list-skills" class="space-y-4"></div>
+                </div>
 
-                    <div class="bg-stone-50/80 rounded-2xl p-6 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
-                        <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-100 flex items-center">
-                            <i class="fa-solid fa-id-card-clip text-navy-900 mr-2.5 text-sm"></i> References
-                        </h3>
-                        <div id="list-references" class="space-y-4"></div>
-                    </div>
+                <div class="bg-stone-50/80 rounded-2xl p-6 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
+                    <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-200 flex items-center">
+                        <i class="fa-solid fa-people-group text-navy-900 mr-2.5 text-sm"></i> Extracurriculars
+                    </h3>
+                    <div id="list-extracurriculars" class="space-y-4"></div>
+                </div>
+
+                <div class="bg-stone-50/80 rounded-2xl p-6 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
+                    <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-200 flex items-center">
+                        <i class="fa-solid fa-share-nodes text-navy-900 mr-2.5 text-sm"></i> Socials & Links
+                    </h3>
+                    <div id="list-socials" class="space-y-3"></div>
+                </div>
+
+                <div class="md:col-span-2 bg-stone-50/80 rounded-2xl p-6 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
+                    <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-200 flex items-center">
+                        <i class="fa-solid fa-id-card-clip text-navy-900 mr-2.5 text-sm"></i> References
+                    </h3>
+                    <div id="list-references" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
                 </div>
             </div>
         </div>
@@ -1088,6 +1113,38 @@
         function escapeHtml(str) {
             if (!str) return '';
             return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        function switchAcademicTab(tabName) {
+            const researchTab = document.getElementById('academic-tab-research');
+            const credsTab = document.getElementById('academic-tab-credentials');
+            const btnResearch = document.getElementById('atab-research');
+            const btnCreds = document.getElementById('atab-credentials');
+
+            if (tabName === 'research') {
+                researchTab.classList.remove('hidden');
+                credsTab.classList.add('hidden');
+                btnResearch.className = "px-5 py-2 rounded-xl text-xs font-semibold transition-all bg-stone-900 text-white shadow-sm";
+                btnCreds.className = "px-5 py-2 rounded-xl text-xs font-semibold transition-all text-stone-600 hover:text-stone-900";
+            } else {
+                researchTab.classList.add('hidden');
+                credsTab.classList.remove('hidden');
+                btnCreds.className = "px-5 py-2 rounded-xl text-xs font-semibold transition-all bg-stone-900 text-white shadow-sm";
+                btnResearch.className = "px-5 py-2 rounded-xl text-xs font-semibold transition-all text-stone-600 hover:text-stone-900";
+            }
+        }
+
+        function toggleAccordion(contentId) {
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById('icon-' + contentId);
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
         }
     </script>
 </body>
