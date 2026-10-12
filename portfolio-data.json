@@ -109,16 +109,11 @@
     "category": "academic",
     "listType": "skills",
     "year": "Proficient",
-    "title": "Computational & Research Methodologies",
-    "authors": "Python, R, LaTeX, Git, Markdown, Statistical Modeling",
-    "description": "Advanced competency in research tooling, data visualization, and reproducible scholarly writing.",
+    "title": " Pedagogy for Higher Education",
+    "authors": "Using 'flipped classroom' and other novel methods",
+    "description": "Experience of teaching MA courses like Film Studies, Environmental Humanities, and others.",
     "link": "",
-    "customFields": [
-      {
-        "key": "Experience",
-        "value": "One Year"
-      }
-    ],
+    "customFields": [],
     "order": 1
   },
   {
