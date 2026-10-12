@@ -143,7 +143,7 @@
     "description": "",
     "link": "https://www.linkedin.com/in/dr-prakhar-s612/",
     "customFields": [],
-    "order": 1
+    "order": 2
   },
   {
     "id": "item-9",
@@ -501,7 +501,7 @@
     "description": "",
     "link": "",
     "customFields": [],
-    "order": 2
+    "order": 3
   },
   {
     "id": "item-1791821395366",
@@ -525,6 +525,6 @@
     "description": "",
     "link": "https://orcid.org/0009-0003-1060-2339",
     "customFields": [],
-    "order": 3
+    "order": 1
   }
 ]
