@@ -513,7 +513,7 @@
     "description": "",
     "link": "",
     "customFields": [],
-    "order": 3
+    "order": 4
   },
   {
     "id": "item-1791821699817",
@@ -525,6 +525,6 @@
     "description": "",
     "link": "https://orcid.org/0009-0003-1060-2339",
     "customFields": [],
-    "order": 4
+    "order": 3
   }
 ]
