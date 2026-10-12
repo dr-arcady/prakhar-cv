@@ -617,20 +617,21 @@
             switchView('home');
         };
 
-        function loadData() {
-            const saved = localStorage.getItem('prakhar_portfolio_data');
-            if (saved) {
-                try {
-                    portfolioData = JSON.parse(saved);
-                } catch (e) {
+        async function loadData() {
+            try {
+                const response = await fetch('portfolio-data.json?t=' + Date.now()); // Prevent caching
+                if (response.ok) {
+                    portfolioData = await response.json();
+                } else {
                     portfolioData = DEFAULT_PORTFOLIO_DATA;
                 }
-            } else {
+            } catch (e) {
+                console.warn('Could not fetch remote portfolio-data.json, using defaults.');
                 portfolioData = DEFAULT_PORTFOLIO_DATA;
-                saveData();
             }
             ensureOrders();
             pruneEmptyFields();
+            renderViews();
         }
 
         function ensureOrders() {
