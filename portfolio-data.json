@@ -521,5 +521,17 @@
     "link": "https://orcid.org/0009-0003-1060-2339",
     "customFields": [],
     "order": 1
+  },
+  {
+    "id": "item-1791824222461",
+    "category": "academic",
+    "listType": "skills",
+    "title": "Digital Tools",
+    "authors": "Web design, data management, visual art, digital audio workstations",
+    "year": "Beginner",
+    "description": "Rudimentary understanding of a variety of tools supported by public resources on the internet.",
+    "link": "",
+    "customFields": [],
+    "order": 2
   }
 ]
