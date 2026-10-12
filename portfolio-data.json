@@ -113,7 +113,12 @@
     "authors": "Python, R, LaTeX, Git, Markdown, Statistical Modeling",
     "description": "Advanced competency in research tooling, data visualization, and reproducible scholarly writing.",
     "link": "",
-    "customFields": [],
+    "customFields": [
+      {
+        "key": "Experience",
+        "value": "One Year"
+      }
+    ],
     "order": 1
   },
   {
