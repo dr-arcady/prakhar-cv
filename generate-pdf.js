@@ -40,7 +40,7 @@ async function generatePDF() {
             ` : ''}
             ${item.link ? `
                 <div style="margin-top: 4px;">
-                    <a href="${item.link}" style="font-size: 10px; color: #1e3a8a; text-decoration: none; font-weight: bold;"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Publication / Link</a>
+                    <a href="${item.link}" style="font-size: 10px; color: #1e3a8a; text-decoration: none; font-weight: bold;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit</a>
                 </div>
             ` : ''}
         </div>
