@@ -478,5 +478,22 @@
       }
     ],
     "order": 5
+  },
+  {
+    "id": "item-1791820535797",
+    "category": "academic",
+    "listType": "publications",
+    "title": "Dr. Ved Prakash",
+    "authors": "Assistant Professor, Central University of Rajasthan",
+    "year": "",
+    "description": "vedprakash@curaj.ac.in | +91 7426026320",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Relation",
+        "value": "Ph.D. Supervisor"
+      }
+    ],
+    "order": 9
   }
 ]
