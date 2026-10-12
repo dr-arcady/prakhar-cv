@@ -91,15 +91,15 @@
     "id": "item-5",
     "category": "academic",
     "listType": "background",
-    "year": "2022-Present",
-    "title": "Ph.D. in Comparative Literature & Digital Media",
-    "authors": "Prestigious University",
-    "description": "Dissertation focusing on algorithmic poetics and modern textual networks.",
+    "year": "2021-2026",
+    "title": "Ph.D. in English",
+    "authors": "Central University of Rajasthan",
+    "description": "An interdisciplinary study of formalist narratology, game studies, and cybertext. ",
     "link": "",
     "customFields": [
       {
-        "key": "Advisor",
-        "value": "Dr. Eleanor Vance"
+        "key": "Supervisor",
+        "value": "Dr. Ved Prakash"
       }
     ],
     "order": 1
