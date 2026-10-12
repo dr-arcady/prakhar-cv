@@ -442,7 +442,7 @@
     "link": "",
     "customFields": [
       {
-        "key": "Score1",
+        "key": "Score",
         "value": "8.80 GPA"
       }
     ],
@@ -568,7 +568,7 @@
     "title": "Whatsapp",
     "authors": "",
     "year": "",
-    "description": "+91 77427 66925",
+    "description": "Contact",
     "link": "https://wa.me/917742766925",
     "customFields": [],
     "order": 5
