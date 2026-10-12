@@ -40,7 +40,7 @@ async function generatePDF() {
             ` : ''}
             ${item.link ? `
                 <div style="margin-top: 4px;">
-                    <a href="${item.link}" style="font-size: 10px; color: #1e3a8a; text-decoration: none; font-weight: bold;"><i class="fa-solid fa-arrow-up-right-from-square"></i> See document / Link</a>
+                    <a href="${item.link}" style="font-size: 10px; color: #1e3a8a; text-decoration: none; font-weight: bold;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit</a>
                 </div>
             ` : ''}
         </div>
@@ -53,9 +53,35 @@ async function generatePDF() {
             </div>
             ${item.authors ? `<div style="color: #44403c; margin-top: 1px;">${parseMarkdown(item.authors)}</div>` : ''}
             ${item.description ? `<div style="color: #57534e; margin-top: 1px; line-height: 1.3;">${parseMarkdown(item.description)}</div>` : ''}
-            ${item.link ? `<div style="margin-top: 2px;"><a href="${item.link}" style="color: #1e3a8a; text-decoration: none; font-size: 10px;">${item.description ? item.link : 'Visit Link'}</a></div>` : ''}
+            ${item.customFields && item.customFields.length > 0 ? `
+                <div style="font-size: 10px; color: #57534e; margin-top: 2px;">
+                    ${item.customFields.map(cf => `<span><strong>${cf.key}:</strong> ${cf.value}</span>`).join(' | ')}
+                </div>
+            ` : ''}
+            ${item.link ? `
+                <div style="margin-top: 2px;">
+                    <a href="${item.link}" style="color: #1e3a8a; text-decoration: none; font-size: 10px; font-weight: bold;">${item.description || item.authors || item.link}</a>
+                </div>
+            ` : ''}
         </div>
     `).join('');
+
+    const renderSocialsItems = (items) => items.map(item => {
+        let href = item.link || '#';
+        if (item.title.toLowerCase() === 'email' && !href.startsWith('mailto:')) href = 'mailto:' + item.description;
+        if (item.title.toLowerCase() === 'phone' && !href.startsWith('tel:')) href = 'tel:' + item.description;
+
+        const displayText = item.description || item.link || '';
+
+        return `
+            <div style="margin-bottom: 10px; font-size: 11px; page-break-inside: avoid;">
+                <div style="font-weight: bold; color: #1c1917;">${parseMarkdown(item.title)}</div>
+                ${item.link ? `
+                    <div><a href="${href}" style="color: #1e3a8a; text-decoration: none;">${displayText}</a></div>
+                ` : `<div style="color: #57534e;">${displayText}</div>`}
+            </div>
+        `;
+    }).join('');
 
     const htmlTemplate = `
     <!DOCTYPE html>
@@ -105,7 +131,7 @@ async function generatePDF() {
                     </div>
                     <div style="background: #f9f8f6; padding: 12px; border-radius: 6px; border: 1px solid #e7e5e4; margin-bottom: 15px;">
                         <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #d6d3d1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px;">Socials & Links</h3>
-                        ${renderSidebarItems(socialsList)}
+                        ${renderSocialsItems(socialsList)}
                     </div>
                     <div style="background: #f9f8f6; padding: 12px; border-radius: 6px; border: 1px solid #e7e5e4;">
                         <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #d6d3d1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px;">References</h3>
