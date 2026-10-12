@@ -560,5 +560,17 @@
     "link": "https://medium.com/@themindalcove",
     "customFields": [],
     "order": 1
+  },
+  {
+    "id": "item-1791827520866",
+    "category": "academic",
+    "listType": "socials",
+    "title": "Whatsapp",
+    "authors": "",
+    "year": "",
+    "description": "Contact",
+    "link": "https://wa.me/917742766925",
+    "customFields": [],
+    "order": 5
   }
 ]
