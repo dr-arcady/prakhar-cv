@@ -786,9 +786,9 @@
             }
         }
 
-        // Direct secure verification for password 'folio2026'
+        // Direct secure verification for current password
         // (Using a simple encoded check to avoid any async subtle crypto restrictions on static hosts)
-        const ADMIN_HASH_KEY = "Zm9saW8yMDI2"; // Base64 encoded 'folio2026'
+        const ADMIN_HASH_KEY = "Zm9saW8yMDI2"; // Base64 encoded 'current password'
 
         function handleAuthSubmit(event) {
             event.preventDefault();
