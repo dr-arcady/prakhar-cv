@@ -175,23 +175,6 @@
     "order": 1
   },
   {
-    "id": "item-11",
-    "category": "creative",
-    "listType": "creative-works",
-    "year": "2024",
-    "title": "The Cartography of Silence",
-    "authors": "Poetry Sequence",
-    "description": "Winner of the University Poetry Prize. Meditations on geographic dislocation and acoustic ecology.",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Award",
-        "value": "Poetry Prize 2024"
-      }
-    ],
-    "order": 2
-  },
-  {
     "id": "item-1791802140448",
     "category": "academic",
     "listType": "publications",
