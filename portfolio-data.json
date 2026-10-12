@@ -569,5 +569,17 @@
     "link": "",
     "customFields": [],
     "order": 1
+  },
+  {
+    "id": "item-1791825377915",
+    "category": "academic",
+    "listType": "extracurriculars",
+    "title": "Blog on films and popular culture",
+    "authors": "'The Mind Alcove'",
+    "year": "",
+    "description": "Thoughts on films and works of popular culture across various mediums through a lens of personal experience.",
+    "link": "https://medium.com/@themindalcove",
+    "customFields": [],
+    "order": 4
   }
 ]
