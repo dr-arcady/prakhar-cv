@@ -126,7 +126,7 @@
     "description": "Directing stage plays, developing scripts and stories, and managing production.",
     "link": "",
     "customFields": [],
-    "order": 2
+    "order": 3
   },
   {
     "id": "item-8",
@@ -556,7 +556,7 @@
     "description": "Writing a script within stipulated time based on a prompt.",
     "link": "",
     "customFields": [],
-    "order": 1
+    "order": 2
   },
   {
     "id": "item-1791824975268",
@@ -568,6 +568,6 @@
     "description": "Organized and performed in inaugural literary event “Aaghaz: 2K20”. Performed recitation and original musical composition.",
     "link": "",
     "customFields": [],
-    "order": 3
+    "order": 1
   }
 ]
