@@ -7,6 +7,13 @@ async function generatePDF() {
     const dataPath = path.resolve(__dirname, 'portfolio-data.json');
     const portfolioData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 
+    const socialsList = portfolioData.filter(i => i.listType === 'socials');
+    const emailItem = socialsList.find(i => i.title.toLowerCase() === 'email');
+    const phoneItem = socialsList.find(i => i.title.toLowerCase() === 'phone');
+    const contactEmail = emailItem ? (emailItem.description || emailItem.link || '') : '';
+    const contactPhone = phoneItem ? (phoneItem.description || phoneItem.link || '') : '';
+    // --------------------------------------------------------
+
     const filterList = (type) => portfolioData.filter(i => i.listType === type).sort((a, b) => (a.order || 0) - (b.order || 0));
 
     const renderItems = (items) => items.map(item => `
@@ -48,9 +55,8 @@ htmlTemplate = `
             <p style="font-size: 10px; text-transform: uppercase; color: #57534e; letter-spacing: 1px; margin-top: 4px;">Ph.D. English | Scholar & Creative Writer</p>
         </div>
         <div style="text-align: right; font-size: 10px; color: #57534e; line-height: 1.4;">
-            <div>prakharsrivastava6@gmail.com</div>
-            <div>+91 77427 66925</div>
-            <div>writewithfolio.vercel.app</div>
+            ${contactEmail ? `<div>${contactEmail}</div>` : ''}
+            ${contactPhone ? `<div>${contactPhone}</div>` : ''}
         </div>
     </div>
 
