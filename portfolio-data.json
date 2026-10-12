@@ -114,16 +114,16 @@
     "description": "Experience of teaching MA courses like Film Studies, Environmental Humanities, and others.",
     "link": "",
     "customFields": [],
-    "order": 1
+    "order": 2
   },
   {
     "id": "item-7",
     "category": "academic",
     "listType": "extracurriculars",
-    "year": "2023-Present",
-    "title": "Editor-in-Chief, Graduate Scholarly Review",
-    "authors": "University Literary Society",
-    "description": "Directing review boards, editing peer submissions, and managing editorial schedules.",
+    "year": "2016-2017",
+    "title": "President, Adakari: Dramatics Club",
+    "authors": "Writer, Director, Actor",
+    "description": "Directing stage plays, developing scripts and stories, and managing production.",
     "link": "",
     "customFields": [],
     "order": 1
@@ -544,6 +544,6 @@
     "description": "Use of digital and AI tools for ethical qualitative research; writing as per MLA guidelines and more.",
     "link": "",
     "customFields": [],
-    "order": 2
+    "order": 1
   }
 ]
