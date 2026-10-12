@@ -500,12 +500,7 @@
     "year": "",
     "description": "",
     "link": "",
-    "customFields": [
-      {
-        "key": "Email",
-        "value": "prakharsrivastava6@gmail.com"
-      }
-    ],
+    "customFields": [],
     "order": 2
   }
 ]
