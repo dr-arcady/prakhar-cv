@@ -514,5 +514,17 @@
     "link": "",
     "customFields": [],
     "order": 3
+  },
+  {
+    "id": "item-1791821699817",
+    "category": "academic",
+    "listType": "publications",
+    "title": "ORCID",
+    "authors": "",
+    "year": "",
+    "description": "",
+    "link": "https://orcid.org/0009-0003-1060-2339",
+    "customFields": [],
+    "order": 9
   }
 ]
