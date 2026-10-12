@@ -470,10 +470,10 @@
     "category": "academic",
     "listType": "socials",
     "title": "Email",
-    "authors": "prakharsrivastava6@gmail.com",
+    "authors": "",
     "year": "",
-    "description": "",
-    "link": "",
+    "description": "prakharsrivastava6@gmail.com",
+    "link": "mailto:prakharsrivastava6@gmail.com",
     "customFields": [],
     "order": 3
   },
