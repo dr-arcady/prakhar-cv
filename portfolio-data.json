@@ -456,5 +456,22 @@
       }
     ],
     "order": 4
+  },
+  {
+    "id": "item-1791817547009",
+    "category": "academic",
+    "listType": "background",
+    "title": "10th",
+    "authors": " Central Board of Secondary Education",
+    "year": "2013",
+    "description": "",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Score1",
+        "value": "8.80 GPA"
+      }
+    ],
+    "order": 5
   }
 ]
