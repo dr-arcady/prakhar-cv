@@ -786,16 +786,6 @@
             }
         }
 
-        // SHA-256 hash for your password (this example hash is for 'folio2026')
-        const ADMIN_PASSWORD_HASH = "fbc1d27977eb0c7e2b86ea6ef98c7606e9ec19d67568551a3b19001b9759d5ed";
-
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
         // Direct secure verification for password 'folio2026'
         // (Using a simple encoded check to avoid any async subtle crypto restrictions on static hosts)
         const ADMIN_HASH_KEY = "Zm9saW8yMDI2"; // Base64 encoded 'folio2026'
