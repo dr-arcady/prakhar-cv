@@ -155,14 +155,14 @@
     "category": "academic",
     "listType": "references",
     "year": "Available",
-    "title": "Dr. Eleanor Vance",
-    "authors": "Professor of Comparative Literature",
-    "description": "Department Chair, Prestigious University. Email: e.vance@university.edu",
+    "title": "Prof. Sanjay Arora",
+    "authors": "Professor, Central University of Rajasthan",
+    "description": "sanjayarora@curaj.ac.in | +91 9829345035",
     "link": "",
     "customFields": [
       {
         "key": "Relation",
-        "value": "Dissertation Advisor"
+        "value": "Teacher"
       }
     ],
     "order": 1
