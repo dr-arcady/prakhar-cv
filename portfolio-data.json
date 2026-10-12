@@ -59,13 +59,17 @@
     "listType": "presentations",
     "year": "2017",
     "title": "Representation of Nature in Gulzar’s Poetry",
-    "authors": "5th Rajasthan Science Congress (RSC), 2017",
+    "authors": "Srivastava, P.",
     "description": "Presented an eco-critical analysis of the aesthetic and cultural aspects of select poems of Gulzar through their English translations.",
     "link": "",
     "customFields": [
       {
-        "key": "Location",
-        "value": "Amity University Rajasthan, Jaipur"
+        "key": "Conference",
+        "value": "5th Rajasthan Science Congress (RSC) 2017"
+      },
+      {
+        "key": "University",
+        "value": "Amity University Rajasthan"
       }
     ],
     "order": 5
@@ -568,7 +572,7 @@
     "title": "Whatsapp",
     "authors": "",
     "year": "",
-    "description": "+91 77427 66925",
+    "description": "Contact",
     "link": "https://wa.me/917742766925",
     "customFields": [],
     "order": 5
