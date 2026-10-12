@@ -428,7 +428,7 @@
     </div>
 
     <script>
-        const INJECTED_ADMIN_PASSWORD = "<!-- __ADMIN_PASSWORD_HASH__ -->";
+        const ADMIN_PASSWORD = "<!-- __ADMIN_PASSWORD_HASH__ -->";
         const DEFAULT_FALLBACK_PASSWORD = "admin";
 
         const DEFAULT_PORTFOLIO_DATA = [
@@ -775,7 +775,7 @@
             event.preventDefault();
             const pw = document.getElementById('auth-password').value;
             
-            let targetPassword = INJECTED_ADMIN_PASSWORD;
+            let targetPassword = ADMIN_PASSWORD;
             if (!targetPassword || targetPassword.includes('__ADMIN_PASSWORD_HASH__')) {
                 targetPassword = DEFAULT_FALLBACK_PASSWORD;
             }
