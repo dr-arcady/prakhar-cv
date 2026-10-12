@@ -533,5 +533,17 @@
     "link": "",
     "customFields": [],
     "order": 2
+  },
+  {
+    "id": "item-1791824492476",
+    "category": "academic",
+    "listType": "skills",
+    "title": "Multidisciplinary Research and Writing",
+    "authors": "Across varied disciplines within humanities and literature",
+    "year": "",
+    "description": "Use of digital and AI tools for ethical qualitative research; writing as per MLA guidelines and more.",
+    "link": "",
+    "customFields": [],
+    "order": 3
   }
 ]
