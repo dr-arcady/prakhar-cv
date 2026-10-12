@@ -545,5 +545,17 @@
     "link": "",
     "customFields": [],
     "order": 1
+  },
+  {
+    "id": "item-1791824876920",
+    "category": "academic",
+    "listType": "publications",
+    "title": "Winner of Scriptwriting Competition",
+    "authors": "Amity Leadership Fest",
+    "year": "2017",
+    "description": "Writing a script within stipulated time based on a prompt.",
+    "link": "",
+    "customFields": [],
+    "order": 9
   }
 ]
