@@ -439,5 +439,22 @@
       }
     ],
     "order": 3
+  },
+  {
+    "id": "item-1791817515200",
+    "category": "academic",
+    "listType": "background",
+    "title": "12th",
+    "authors": " Central Board of Secondary Education",
+    "year": "2015",
+    "description": "",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Score",
+        "value": "66.6%"
+      }
+    ],
+    "order": 4
   }
 ]
