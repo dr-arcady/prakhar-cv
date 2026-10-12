@@ -772,16 +772,23 @@
         function renderSidebarList(listType, items) {
             const container = document.getElementById('list-' + listType);
             if (!container) return;
-            container.innerHTML = items.length === 0 ? '<p class="text-stone-400 text-xs italic">None listed.</p>' : items.map(item => `
-                <div class="space-y-1">
-                    <div class="flex items-center justify-between">
-                        <h4 class="font-semibold text-sm text-stone-900">${escapeHtml(item.title)}</h4>
-                        <span class="text-[11px] text-stone-500 bg-stone-100 px-2 py-0.5 rounded-full">${escapeHtml(item.year || '')}</span>
+            container.innerHTML = items.length === 0 ? '<p class="text-stone-400 text-xs italic">None listed.</p>' : items.map(item => {
+                const customHTML = item.customFields && item.customFields.length > 0 
+                    ? `<div class="flex flex-wrap gap-1.5 mt-2">${item.customFields.map(cf => `<span class="inline-flex items-center px-2 py-0.5 rounded bg-stone-100 text-stone-700 text-[11px] font-medium"><strong class="mr-1 text-stone-900">${escapeHtml(cf.key)}:</strong>${escapeHtml(cf.value)}</span>`).join('')}</div>`
+                    : '';
+                
+                return `
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-semibold text-sm text-stone-900">${escapeHtml(item.title)}</h4>
+                            <span class="text-[11px] text-stone-500 bg-stone-100 px-2 py-0.5 rounded-full">${escapeHtml(item.year || '')}</span>
+                        </div>
+                        ${item.authors ? `<p class="text-xs text-stone-600 font-medium">${escapeHtml(item.authors)}</p>` : ''}
+                        ${item.description ? `<div class="text-xs text-stone-500">${safeParseMarkdown(item.description)}</div>` : ''}
+                        ${customHTML}
                     </div>
-                    ${item.authors ? `<p class="text-xs text-stone-600 font-medium">${escapeHtml(item.authors)}</p>` : ''}
-                    ${item.description ? `<div class="text-xs text-stone-500">${safeParseMarkdown(item.description)}</div>` : ''}
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function renderSocialsList(items) {
