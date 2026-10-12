@@ -496,11 +496,16 @@
     "category": "academic",
     "listType": "socials",
     "title": "Email",
-    "authors": "prakharsrivastava6@gmail.com",
+    "authors": "",
     "year": "",
     "description": "",
     "link": "",
-    "customFields": [],
+    "customFields": [
+      {
+        "key": "Email",
+        "value": "prakharsrivastava6@gmail.com"
+      }
+    ],
     "order": 2
   }
 ]
