@@ -405,5 +405,17 @@
       }
     ],
     "order": 1
+  },
+  {
+    "id": "item-1791817342809",
+    "category": "academic",
+    "listType": "background",
+    "title": "M.A. English",
+    "authors": "Central University of Rajasthan",
+    "year": "2018-2020",
+    "description": "",
+    "link": "",
+    "customFields": [],
+    "order": 2
   }
 ]
