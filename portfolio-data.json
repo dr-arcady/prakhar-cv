@@ -77,7 +77,7 @@
     "year": "2025",
     "title": "Artificial Intelligence in Multidisciplinary Research",
     "authors": "Xavier Institute for Research and Development",
-    "description": "Faculty development program on the frontiers of artificial intelligence and its ethical application in and challenges concerning multidisciplinary research",
+    "description": "**Faculty development program** on the frontiers of artificial intelligence and its ethical application in and challenges concerning multidisciplinary research",
     "link": "",
     "customFields": [
       {
@@ -556,7 +556,7 @@
     "description": "Writing a script within stipulated time based on a prompt.",
     "link": "",
     "customFields": [],
-    "order": 2
+    "order": 3
   },
   {
     "id": "item-1791824975268",
@@ -568,7 +568,7 @@
     "description": "Organized and performed in inaugural literary event “Aaghaz: 2K20”. Performed recitation and original musical composition.",
     "link": "",
     "customFields": [],
-    "order": 1
+    "order": 2
   },
   {
     "id": "item-1791825377915",
@@ -580,6 +580,6 @@
     "description": "Thoughts on films and works of popular culture across various mediums through a lens of personal experience.",
     "link": "https://medium.com/@themindalcove",
     "customFields": [],
-    "order": 3
+    "order": 1
   }
 ]
