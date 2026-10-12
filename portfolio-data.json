@@ -138,16 +138,11 @@
     "category": "academic",
     "listType": "socials",
     "year": "Active",
-    "title": "Google Scholar Profile",
-    "authors": "Citations & Metrics",
-    "description": "Track peer citations and scholarly impact.",
-    "link": "https://scholar.google.com",
-    "customFields": [
-      {
-        "key": "Platform",
-        "value": "Google Scholar"
-      }
-    ],
+    "title": "LinkedIn",
+    "authors": "Social Network",
+    "description": "",
+    "link": "https://www.linkedin.com/in/dr-prakhar-s612/",
+    "customFields": [],
     "order": 1
   },
   {
