@@ -1,0 +1,409 @@
+[
+  {
+    "id": "item-1",
+    "category": "academic",
+    "listType": "publications",
+    "year": "2024",
+    "title": "Artificial Intelligence and the Crisis of Human Civilization through Black Mirror",
+    "authors": "Srivastava, P., & Prakash, V.",
+    "description": "A study of contemporaneous realism of the hazards of AI as depicted in dystopian futures as depicted in *Black Mirror*.",
+    "link": "https://mzuhssjournal.in/images/resources/v10n1/prakhar.pdf",
+    "customFields": [
+      {
+        "key": "Journal",
+        "value": "Mizoram University Journal of Humanities and Social Sciences"
+      },
+      {
+        "key": "Issue",
+        "value": "Vol. X, Issue 1"
+      },
+      {
+        "key": "ISSN (Print)",
+        "value": "2395-7352"
+      },
+      {
+        "key": "ISSN (Online)",
+        "value": "2581-6780"
+      }
+    ],
+    "order": 4
+  },
+  {
+    "id": "item-2",
+    "category": "academic",
+    "listType": "publications",
+    "year": "2024",
+    "title": "A Man Alone in a City: Reading Vikramaditya Motwane’s ‘Trapped’ as an Allegory on Isolation and Masculinity",
+    "authors": "Srivastava, P.",
+    "description": "A study of the socio-economic representations of gender roles as depicted in the Hindi language film *'Trapped'*.",
+    "link": "https://drive.google.com/file/d/1PCOpltWzJmr2M0OK5S_7xZ1xPxAhl0rW/view?usp=sharing",
+    "customFields": [
+      {
+        "key": "Type",
+        "value": "Chapter in Book"
+      },
+      {
+        "key": "Publisher",
+        "value": "Yking Books, Jaipur"
+      },
+      {
+        "key": "ISBN",
+        "value": "8196924321"
+      }
+    ],
+    "order": 5
+  },
+  {
+    "id": "item-3",
+    "category": "academic",
+    "listType": "presentations",
+    "year": "2017",
+    "title": "Representation of Nature in Gulzar’s Poetry",
+    "authors": "5th Rajasthan Science Congress (RSC), 2017",
+    "description": "Presented an eco-critical analysis of the aesthetic and cultural aspects of select poems of Gulzar through their English translations.",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Location",
+        "value": "Amity University Rajasthan, Jaipur"
+      }
+    ],
+    "order": 5
+  },
+  {
+    "id": "item-4",
+    "category": "academic",
+    "listType": "seminars",
+    "year": "2025",
+    "title": "Artificial Intelligence in Multidisciplinary Research",
+    "authors": "Xavier Institute for Research and Development",
+    "description": "Faculty development program on the frontiers of artificial intelligence and its ethical application in and challenges concerning multidisciplinary research",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Duration",
+        "value": "December 15-21, 2025"
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": "item-5",
+    "category": "academic",
+    "listType": "background",
+    "year": "2022-Present",
+    "title": "Ph.D. in Comparative Literature & Digital Media",
+    "authors": "Prestigious University",
+    "description": "Dissertation focusing on algorithmic poetics and modern textual networks.",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Advisor",
+        "value": "Dr. Eleanor Vance"
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": "item-6",
+    "category": "academic",
+    "listType": "skills",
+    "year": "Proficient",
+    "title": "Computational & Research Methodologies",
+    "authors": "Python, R, LaTeX, Git, Markdown, Statistical Modeling",
+    "description": "Advanced competency in research tooling, data visualization, and reproducible scholarly writing.",
+    "link": "",
+    "customFields": [],
+    "order": 1
+  },
+  {
+    "id": "item-7",
+    "category": "academic",
+    "listType": "extracurriculars",
+    "year": "2023-Present",
+    "title": "Editor-in-Chief, Graduate Scholarly Review",
+    "authors": "University Literary Society",
+    "description": "Directing review boards, editing peer submissions, and managing editorial schedules.",
+    "link": "",
+    "customFields": [],
+    "order": 1
+  },
+  {
+    "id": "item-8",
+    "category": "academic",
+    "listType": "socials",
+    "year": "Active",
+    "title": "Google Scholar Profile",
+    "authors": "Citations & Metrics",
+    "description": "Track peer citations and scholarly impact.",
+    "link": "https://scholar.google.com",
+    "customFields": [
+      {
+        "key": "Platform",
+        "value": "Google Scholar"
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": "item-9",
+    "category": "academic",
+    "listType": "references",
+    "year": "Available",
+    "title": "Dr. Eleanor Vance",
+    "authors": "Professor of Comparative Literature",
+    "description": "Department Chair, Prestigious University. Email: e.vance@university.edu",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Relation",
+        "value": "Dissertation Advisor"
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": "item-10",
+    "category": "creative",
+    "listType": "creative-works",
+    "year": "2025",
+    "title": "Echoes in the Marble Corridor",
+    "authors": "Short Story Collection",
+    "description": "A narrative exploration of memory, architecture, and solitude across ancient and futuristic metropolises.",
+    "link": "https://example.com/echoes",
+    "customFields": [
+      {
+        "key": "Genre",
+        "value": "Speculative Fiction"
+      },
+      {
+        "key": "Word Count",
+        "value": "8,500"
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": "item-11",
+    "category": "creative",
+    "listType": "creative-works",
+    "year": "2024",
+    "title": "The Cartography of Silence",
+    "authors": "Poetry Sequence",
+    "description": "Winner of the University Poetry Prize. Meditations on geographic dislocation and acoustic ecology.",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Award",
+        "value": "Poetry Prize 2024"
+      }
+    ],
+    "order": 2
+  },
+  {
+    "id": "item-1791802140448",
+    "category": "academic",
+    "listType": "publications",
+    "title": "Dystopia and the Quest for Survival: Reading ‘The Platform’ in the post-Pandemic World",
+    "authors": "Prakash, V., & Srivastava, P.",
+    "year": "2023",
+    "description": "A look into the depiction of scarcity and hierarchy as seen in the film *'The Platform'*, through the lens of economic disparity during the COVID-19 pandemic. ",
+    "link": "http://literaryvoice.in/wp content/uploads/2025/03/LV-SEPT-2023.pdf",
+    "customFields": [
+      {
+        "key": "Journal",
+        "value": "Literary Voice [Web of Science]"
+      },
+      {
+        "key": "Issue",
+        "value": "Number 21, Volume 1"
+      },
+      {
+        "key": "ISSN (Print)",
+        "value": "2277-4521"
+      },
+      {
+        "key": "ISSN (Online)",
+        "value": "2583-8199"
+      }
+    ],
+    "order": 6
+  },
+  {
+    "id": "item-1791802629498",
+    "category": "academic",
+    "listType": "publications",
+    "title": "The Body and Beyond: The Posthuman Horrors of ‘Soma’",
+    "authors": "Srivastava, P.",
+    "year": "2021",
+    "description": "A study of the philosophical storytelling of the survival horror video game through the lens of posthumanism.",
+    "link": "https://drive.google.com/file/d/1g8mSDS9IT4JFTpH21nZ3l4keJDl73dUe/view?usp=sharing",
+    "customFields": [
+      {
+        "key": "Journal",
+        "value": "Indraprasth"
+      },
+      {
+        "key": "Issue",
+        "value": "Volume IX & X"
+      },
+      {
+        "key": "ISSN",
+        "value": "2278-7208"
+      }
+    ],
+    "order": 7
+  },
+  {
+    "id": "item-1791803503134",
+    "category": "academic",
+    "listType": "publications",
+    "title": "The Study of Complexity in Film Narratives",
+    "authors": "Srivastava, P.",
+    "year": "2020",
+    "description": "Master's program dissertation; a critique of narrative structures in select Hollywood films and their relationship with the nature of the medium.",
+    "link": "",
+    "customFields": [
+      {
+        "key": "University",
+        "value": "Central University of Rajasthan"
+      }
+    ],
+    "order": 8
+  },
+  {
+    "id": "item-1791803698593",
+    "category": "academic",
+    "listType": "publications",
+    "title": "The Art of Engagement: A Cross-textual Study of Interactive Narratives in the 21st Century Storytelling",
+    "authors": "Srivastava, P.",
+    "year": "2026",
+    "description": "An interdisciplinary study of narratology, ludology, and ergodic literature, theorizing novel paradigms of user agency in interactive stories.",
+    "link": "https://shodhganga.inflibnet.ac.in/handle/10603/704078",
+    "customFields": [
+      {
+        "key": "University",
+        "value": "Central University of Rajasthan"
+      }
+    ],
+    "order": 3
+  },
+  {
+    "id": "item-1791803845057",
+    "category": "academic",
+    "listType": "presentations",
+    "title": "The Body and Beyond: The Posthuman Horrors of ‘Soma’",
+    "authors": "Srivastava, P.",
+    "year": "2022",
+    "description": "A study of the philosophical storytelling of the survival horror video game through the lens of posthumanism.",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Conference",
+        "value": "International Conference on Contemporary Perspectives in English Language and Literature and Cultural Studies, 2022"
+      },
+      {
+        "key": "University",
+        "value": "Chandigarh University, Punjab"
+      }
+    ],
+    "order": 4
+  },
+  {
+    "id": "item-1791803957007",
+    "category": "academic",
+    "listType": "presentations",
+    "title": "A Man Alone in a City: Reading Vikramaditya Motwane’s ‘Trapped’ as an Allegory on Isolation and Masculinity",
+    "authors": "Srivastava, P.",
+    "year": "2023",
+    "description": "",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Conference",
+        "value": "International Conference ‘Drawing Meaning Through Visual Narratives', 2-3 August 2023"
+      },
+      {
+        "key": "University",
+        "value": "Presidency University, Bengaluru"
+      }
+    ],
+    "order": 3
+  },
+  {
+    "id": "item-1791804149786",
+    "category": "academic",
+    "listType": "presentations",
+    "title": "Story, Game, and the Lived Experience: The Crisis of Defining New Media Forms Between Popular Culture and Academia",
+    "authors": "Srivastava, P.",
+    "year": "2023",
+    "description": "An interdisciplinary study of the shifting vocabulary around newly emerging forms of media in the digital era of creation and publication.",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Conference",
+        "value": "4th International E-conference ‘Exploring Crisis in Literary and Cultural Studies’, 19-20 October 2023, organized by ‘New Literara: An International Journal of Interdisciplinary Studies in Humanities'"
+      },
+      {
+        "key": "University",
+        "value": "Central University of Rajasthan"
+      }
+    ],
+    "order": 2
+  },
+  {
+    "id": "item-1791804305002",
+    "category": "academic",
+    "listType": "presentations",
+    "title": "A Portrait of Two Monsters: Investigating Postcolonial Enunciation through Ram V’s ‘These Savage Shores’",
+    "authors": "Srivastava, P.",
+    "year": "2025",
+    "description": "A study of the intersection of the gothic visual form with the postcolonial themes in Ram V.'s graphic novel.",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Conference",
+        "value": "SRM International Literary Conference: Indian Literature and Culture, 2025"
+      },
+      {
+        "key": "University",
+        "value": "SRM University Delhi-NCR, Sonepat"
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": "item-1791807867246",
+    "category": "academic",
+    "listType": "publications",
+    "title": "[UPCOMING] On Walking: Mobility, Leisure, and Protest in Ray Bradbury's 'The Pedestrian'",
+    "authors": "Srivastava, P., & Prakash, V.",
+    "year": "2026",
+    "description": "A look at the prescient depiction of surveillance and consumerism in Ray Bradbury's dystopian short story. Selected for publication.",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Journal",
+        "value": "IIS University Journal of Arts"
+      }
+    ],
+    "order": 2
+  },
+  {
+    "id": "item-1791807976147",
+    "category": "academic",
+    "listType": "publications",
+    "title": "[UPCOMING] Godhood for the Modern World: The Epistemology of Belief and Testimony in ‘The Man from Earth’",
+    "authors": "Srivastava, P.",
+    "year": "2027",
+    "description": "A study of the varied manners of constructing and critiquing beliefs as depicted in Jerome Bixby's script of the film. Selected for publication. ",
+    "link": "",
+    "customFields": [
+      {
+        "key": "Journal",
+        "value": "Literary Voice"
+      }
+    ],
+    "order": 1
+  }
+]
