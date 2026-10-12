@@ -532,7 +532,7 @@
     "description": "Rudimentary understanding of a variety of tools supported by public resources on the internet.",
     "link": "",
     "customFields": [],
-    "order": 2
+    "order": 3
   },
   {
     "id": "item-1791824492476",
@@ -544,6 +544,6 @@
     "description": "Use of digital and AI tools for ethical qualitative research; writing as per MLA guidelines and more.",
     "link": "",
     "customFields": [],
-    "order": 3
+    "order": 2
   }
 ]
