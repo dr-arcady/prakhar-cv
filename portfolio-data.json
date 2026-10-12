@@ -482,10 +482,10 @@
     "category": "academic",
     "listType": "socials",
     "title": "Phone",
-    "authors": "+91 77427 66925",
+    "authors": "",
     "year": "",
-    "description": "",
-    "link": "",
+    "description": "+91 77427 66925",
+    "link": "tel:+917742766925",
     "customFields": [],
     "order": 4
   },
