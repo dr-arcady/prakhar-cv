@@ -43,11 +43,11 @@ async function generatePDF() {
             ${item.description ? `<div style="font-size: 11px; color: #475569; line-height: 1.45; margin-bottom: 4px;">${parseMarkdown(item.description)}</div>` : ''}
             ${item.customFields && item.customFields.length > 0 ? `
                 <div style="font-size: 10px; color: #475569; margin-top: 4px;">
-                    item.customFields.map(cf => {
+                    ${item.customFields.map(cf => {
                         const keyTrim = cf.key ? cf.key.trim() : '';
-                        const valTrim = cf.value;
+                        const valTrim = cf.value || '';
                         return `<span>${keyTrim ? `<strong>${keyTrim}:</strong> ` : ''}${valTrim}</span>`;
-                    }).join('')
+                    }).join(' | ')}
                 </div>
             ` : ''}
             ${item.link ? `
@@ -76,7 +76,11 @@ async function generatePDF() {
                 ${item.description ? `<div style="color: #64748b; margin-top: 2px; line-height: 1.35;">${parseMarkdown(item.description)}</div>` : ''}
                 ${item.customFields && item.customFields.length > 0 ? `
                     <div style="font-size: 10px; color: #475569; margin-top: 3px; border-top: 1px dashed #cbd5e1; padding-top: 3px;">
-                        ${item.customFields.map(cf => `<span><strong>${cf.key}:</strong> ${cf.value}</span>`).join(' | ')}
+                        ${item.customFields.map(cf => {
+                            const keyTrim = cf.key ? cf.key.trim() : '';
+                            const valTrim = cf.value || '';
+                            return `<span>${keyTrim ? `<strong>${keyTrim}:</strong> ` : ''}${valTrim}</span>`;
+                        }).join(' | ')}
                     </div>
                 ` : ''}
             </div>
