@@ -1,0 +1,15 @@
+{
+  "name": "prakhar-cv",
+  "version": "1.0.0",
+  "description": "Dr. Prakhar Srivastava - Academic CV and Creative Portfolio",
+  "main": "generate-pdf.js",
+  "scripts": {
+    "build-pdf": "node generate-pdf.js"
+  },
+  "dependencies": {
+    "puppeteer": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
