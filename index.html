@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr. Prakhar Srivastava | CV & Portfolio</title>
+
+    <script src="config.js"></script>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -882,16 +884,34 @@
             const pw = document.getElementById('auth-password').value;
             const errorDiv = document.getElementById('auth-error');
             errorDiv.classList.add('hidden');
-
+        
+            // Check if running on GitHub Pages
+            if (window.location.hostname.includes('github.io') && window.AUTH_CONFIG) {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(window.AUTH_CONFIG.salt + pw);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const computedHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        
+                if (computedHash === window.AUTH_CONFIG.hash) {
+                    sessionStorage.setItem('prakhar_admin_auth', 'true');
+                    closeModal('modal-auth');
+                    openDashboard();
+                } else {
+                    errorDiv.innerText = 'Incorrect password.';
+                    errorDiv.classList.remove('hidden');
+                }
+                return;
+            }
+        
+            // Vercel API fallback
             try {
                 const response = await fetch('/api/verify-login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ password: pw })
                 });
-
                 const result = await response.json();
-
                 if (response.ok && result.success) {
                     sessionStorage.setItem('prakhar_admin_auth', 'true');
                     closeModal('modal-auth');
