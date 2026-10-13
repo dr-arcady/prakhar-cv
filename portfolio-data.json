@@ -153,12 +153,7 @@
     "authors": "Professor, Central University of Rajasthan",
     "description": "sanjayarora@curaj.ac.in | +91 9829345035",
     "link": "",
-    "customFields": [
-      {
-        "key": "Relation",
-        "value": "Teacher"
-      }
-    ],
+    "customFields": [],
     "order": 1
   },
   {
