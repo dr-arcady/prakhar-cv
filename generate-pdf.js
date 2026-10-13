@@ -43,7 +43,11 @@ async function generatePDF() {
             ${item.description ? `<div style="font-size: 11px; color: #475569; line-height: 1.45; margin-bottom: 4px;">${parseMarkdown(item.description)}</div>` : ''}
             ${item.customFields && item.customFields.length > 0 ? `
                 <div style="font-size: 10px; color: #475569; margin-top: 4px;">
-                    ${item.customFields.map(cf => `<span style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 2px 6px; border-radius: 3px; margin-right: 6px; display: inline-block; margin-bottom: 3px;"><strong>${cf.key}:</strong> ${cf.value}</span>`).join('')}
+                    item.customFields.map(cf => {
+                        const keyTrim = cf.key ? cf.key.trim() : '';
+                        const valTrim = cf.value;
+                        return `<span>${keyTrim ? `<strong>${keyTrim}:</strong> ` : ''}${valTrim}</span>`;
+                    }).join('')
                 </div>
             ` : ''}
             ${item.link ? `
