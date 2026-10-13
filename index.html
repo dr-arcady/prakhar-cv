@@ -194,6 +194,21 @@
 
             <!-- TAB 1: RESEARCH HISTORY (ACCORDIONS) -->
             <div id="academic-tab-research" class="space-y-6 fade-in">
+                <!-- Work Experience Accordion -->
+                <div class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden" id="card-work">
+                    <button onclick="toggleAccordion('acc-work')" class="w-full flex items-center justify-between p-6 sm:p-8 text-left hover:bg-stone-50/50 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-briefcase text-navy-900 text-lg"></i>
+                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900">Work Experience</h2>
+                            <span id="count-work" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
+                        </div>
+                        <i id="icon-acc-work" class="fa-solid fa-chevron-down text-stone-400 transition-transform duration-300 transform rotate-180"></i>
+                    </button>
+                    <div id="acc-work" class="px-6 sm:px-8 pb-8 pt-2 border-t border-stone-100 space-y-6">
+                        <div id="list-work" class="space-y-6"></div>
+                    </div>
+                </div>
+                
                 <!-- Publications Accordion -->
                 <div class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden">
                     <button onclick="toggleAccordion('acc-publications')" class="w-full flex items-center justify-between p-6 sm:p-8 text-left hover:bg-stone-50/50 transition-colors">
@@ -746,17 +761,49 @@
                     .sort((a, b) => (a.order || 0) - (b.order || 0));
             };
 
+            // Work Experience
+            const work = getSorted('work');
+            const cardWork = document.getElementById('card-work');
+            if (work.length === 0) {
+                cardWork.classList.add('hidden');
+            } else {
+                cardWork.classList.remove('hidden');
+                document.getElementById('count-work').innerText = work.length + ' items';
+                document.getElementById('list-work').innerHTML = work.map(item => createTimelineItemHTML(item)).join('');
+            }
+
+            // Publications
             const pubs = getSorted('publications');
-            document.getElementById('count-publications').innerText = pubs.length + ' items';
-            document.getElementById('list-publications').innerHTML = pubs.length === 0 ? '<p class="text-stone-400 text-sm italic">No publications recorded yet.</p>' : pubs.map(item => createTimelineItemHTML(item)).join('');
+            const cardPubs = document.getElementById('card-publications');
+            if (pubs.length === 0) {
+                cardPubs.classList.add('hidden');
+            } else {
+                cardPubs.classList.remove('hidden');
+                document.getElementById('count-publications').innerText = pubs.length + ' items';
+                document.getElementById('list-publications').innerHTML = pubs.map(item => createTimelineItemHTML(item)).join('');
+            }
 
+            // Presentations
             const pres = getSorted('presentations');
-            document.getElementById('count-presentations').innerText = pres.length + ' items';
-            document.getElementById('list-presentations').innerHTML = pres.length === 0 ? '<p class="text-stone-400 text-sm italic">No presentations recorded yet.</p>' : pres.map(item => createTimelineItemHTML(item)).join('');
+            const cardPres = document.getElementById('card-presentations');
+            if (pres.length === 0) {
+                cardPres.classList.add('hidden');
+            } else {
+                cardPres.classList.remove('hidden');
+                document.getElementById('count-presentations').innerText = pres.length + ' items';
+                document.getElementById('list-presentations').innerHTML = pres.map(item => createTimelineItemHTML(item)).join('');
+            }
 
+            // Seminars
             const sems = getSorted('seminars');
-            document.getElementById('count-seminars').innerText = sems.length + ' items';
-            document.getElementById('list-seminars').innerHTML = sems.length === 0 ? '<p class="text-stone-400 text-sm italic">No seminars or courses recorded yet.</p>' : sems.map(item => createTimelineItemHTML(item)).join('');
+            const cardSems = document.getElementById('card-seminars');
+            if (sems.length === 0) {
+                cardSems.classList.add('hidden');
+            } else {
+                cardSems.classList.remove('hidden');
+                document.getElementById('count-seminars').innerText = sems.length + ' items';
+                document.getElementById('list-seminars').innerHTML = sems.map(item => createTimelineItemHTML(item)).join('');
+            }
 
             renderSidebarList('background', getSorted('background'));
             renderSidebarList('skills', getSorted('skills'));
@@ -1067,6 +1114,7 @@
             let options = [];
             if (cat === 'academic') {
                 options = [
+                    { val: 'work', label: 'Work Experience' },
                     { val: 'publications', label: 'Publications' },
                     { val: 'presentations', label: 'Presentations & Conferences' },
                     { val: 'seminars', label: 'Seminars, Courses & More' },
