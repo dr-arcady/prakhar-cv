@@ -1,4 +1,4 @@
-name: Deploy static content to Pages
+name: Build PDF and Deploy to Pages
 
 on:
   push:
@@ -12,87 +12,46 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  deploy:
+  build-and-deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install NPM Dependencies
+        run: npm ci || npm install
 
-      - name: Generate updated PDF CV
+      - name: Generate PDF CV via Puppeteer
         run: node generate-pdf.js
 
-      - name: Install Dependencies
-        run: npm install puppeteer
-
-      - name: Generate PDF CV
-        run: node generate-pdf.js
+      - name: Commit Updated PDF back to repository
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add "Prakhar Srivastava - CV.pdf"
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-generate PDF CV [skip ci]" && git push)
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
-      - name: Inject Auth & GitHub Config into index.html
-        env:
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          GH_PAT: ${{ secrets.GH_PAT }}
-          GH_REPO: ${{ github.repository }}
-        run: |
-          node -e '
-            const crypto = require("crypto");
-            const fs = require("fs");
-            const password = process.env.ADMIN_PASSWORD || "";
-            const salt = crypto.randomBytes(16).toString("hex");
-            const hash = crypto.createHash("sha256").update(salt + password).digest("hex");
-            const pat = process.env.GH_PAT || "";
-            const repo = process.env.GH_REPO || "";
-            
-            let html = fs.readFileSync("index.html", "utf8");
-
-            // Strip out any previous configuration blocks so they do not duplicate
-            html = html.replace(/<script>window\.AUTH_CONFIG[\s\S]*?<\/script>/g, "");
-            html = html.replace(/<script>window\.GH_CONFIG[\s\S]*?<\/script>/g, "");
-
-            const injectedScript = `<script>window.AUTH_CONFIG={salt:"${salt}",hash:"${hash}"};window.GH_CONFIG={repo:"${repo}",token:"${pat}"};</script>`;
-
-            if (html.includes("</head>")) {
-              html = html.replace("</head>", injectedScript + "\n</head>");
-              fs.writeFileSync("index.html", html, "utf8");
-              console.log("Successfully injected clean AUTH_CONFIG and GH_CONFIG!");
-            } else {
-              console.error("Error: </head> tag not found in index.html");
-              process.exit(1);
-            }
-          '
-      - name: Commit Generated PDF and Injected Config
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add "Prakhar Srivastava - CV.pdf" "index.html"
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-generate PDF and update auth config [skip ci]" && git push)
-          
-      - name: Upload artifact
+      - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
-          
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
