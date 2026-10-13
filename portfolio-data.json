@@ -586,7 +586,12 @@
     "year": "2021",
     "description": "",
     "link": "",
-    "customFields": [],
+    "customFields": [
+      {
+        "key": "Duration",
+        "value": "September 27-October 8, 2021"
+      }
+    ],
     "order": 2
   }
 ]
