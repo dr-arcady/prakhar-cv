@@ -18,7 +18,7 @@ async function generatePDF() {
 
     // Load and convert QR code image to base64 for reliable rendering in Puppeteer
     let qrCodeBase64 = '';
-    const qrImagePath = path.resolve(__dirname, 'CV Github QR hovercode.png');
+    const qrImagePath = path.resolve(__dirname, 'CV Vercel QR hovercode.png');
     if (fs.existsSync(qrImagePath)) {
         const qrImageBuffer = fs.readFileSync(qrImagePath);
         qrCodeBase64 = `data:image/png;base64,${qrImageBuffer.toString('base64')}`;
@@ -256,8 +256,8 @@ async function generatePDF() {
                                     <p style="font-size: 11px; color: #334155; margin: 0 0 2px 0; font-weight: 500;">
                                         Kindly visit here to see the latest version of this CV and to access weblinks of resources:
                                     </p>
-                                    <a href="https://dr-arcady.github.io/prakhar-cv/" style="font-size: 11px; color: #1e3a8a; text-decoration: none; font-weight: bold;">
-                                        https://dr-arcady.github.io/prakhar-cv/
+                                    <a href="dr-prakhar-cv.vercel.app" style="font-size: 11px; color: #1e3a8a; text-decoration: none; font-weight: bold;">
+                                        https://dr-prakhar-cv.vercel.app/
                                     </a>
                                 </td>
                                 <td style="text-align: right; vertical-align: middle; width: 60px;">
