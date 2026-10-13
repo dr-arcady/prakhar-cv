@@ -885,8 +885,14 @@
             const errorDiv = document.getElementById('auth-error');
             errorDiv.classList.add('hidden');
         
-            // Check if running on GitHub Pages
-            if (window.location.hostname.includes('github.io') && window.AUTH_CONFIG) {
+            // On GitHub Pages static environment
+            if (window.location.hostname.includes('github.io')) {
+                if (!window.AUTH_CONFIG) {
+                    errorDiv.innerText = 'Authentication config missing. Please re-run GitHub deployment.';
+                    errorDiv.classList.remove('hidden');
+                    return;
+                }
+        
                 const encoder = new TextEncoder();
                 const data = encoder.encode(window.AUTH_CONFIG.salt + pw);
                 const hashBuffer = await crypto.subtle.digest('SHA-256', data);
@@ -904,14 +910,16 @@
                 return;
             }
         
-            // Vercel API fallback
+            // Vercel serverless function fallback
             try {
                 const response = await fetch('/api/verify-login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ password: pw })
                 });
+        
                 const result = await response.json();
+        
                 if (response.ok && result.success) {
                     sessionStorage.setItem('prakhar_admin_auth', 'true');
                     closeModal('modal-auth');
