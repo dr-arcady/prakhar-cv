@@ -144,99 +144,117 @@ async function generatePDF() {
                 page-break-after: avoid;
                 break-after: avoid;
             }
+            /* Pin footer to the bottom of the PDF page using Puppeteer header/footer template model or absolute positioning */
+            .cv-footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                border-top: 1px solid #cbd5e1;
+                padding-top: 10px;
+                background: #ffffff;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            .content-wrapper {
+                margin-bottom: 75px; /* Leave space so content doesn't overlap the fixed footer */
+            }
         </style>
     </head>
     <body style="padding: 20px;">
-        <!-- Header -->
-        <div style="border-bottom: 1px solid #cbd5e1; padding-bottom: 12px; margin-bottom: 18px;">
-            <table style="width: 100%;">
+        <div class="content-wrapper">
+            <!-- Header -->
+            <div style="border-bottom: 1px solid #cbd5e1; padding-bottom: 12px; margin-bottom: 18px;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 24px; font-weight: bold; color: #0f172a;">Dr. Prakhar Srivastava</h1>
+                            <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">Ph.D. English &nbsp;|&nbsp; Scholar & Creative Writer</p>
+                        </td>
+                        <td style="text-align: right; font-size: 10px; color: #475569; line-height: 1.4;">
+                            ${contactEmail ? `<div style="font-weight: 500;">${contactEmail}</div>` : ''}
+                            ${contactPhone ? `<div>${contactPhone}</div>` : ''}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Layout Table -->
+            <table>
                 <tr>
-                    <td>
-                        <h1 style="font-size: 24px; font-weight: bold; color: #0f172a;">Dr. Prakhar Srivastava</h1>
-                        <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">Ph.D. English &nbsp;|&nbsp; Scholar & Creative Writer</p>
+                    <!-- Left Sidebar -->
+                    <td style="width: 30%; padding-right: 20px;">
+                        <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                            <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Education & Background</div>
+                            <div style="padding: 10px;">
+                                ${renderSidebarItems(filterList('background'))}
+                            </div>
+                        </div>
+                        <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                            <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Skills & Expertise</div>
+                            <div style="padding: 10px;">
+                                ${renderSidebarItems(filterList('skills'))}
+                            </div>
+                        </div>
+                        <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                            <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Extracurriculars</div>
+                            <div style="padding: 10px;">
+                                ${renderSidebarItems(filterList('extracurriculars'))}
+                            </div>
+                        </div>
+                        <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                            <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Socials & Links</div>
+                            <div style="padding: 10px;">
+                                ${renderSocialsItems(socialsList)}
+                            </div>
+                        </div>
+                        <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                            <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">References</div>
+                            <div style="padding: 10px;">
+                                ${renderSidebarItems(filterList('references'))}
+                            </div>
+                        </div>
                     </td>
-                    <td style="text-align: right; font-size: 10px; color: #475569; line-height: 1.4;">
-                        ${contactEmail ? `<div style="font-weight: 500;">${contactEmail}</div>` : ''}
-                        ${contactPhone ? `<div>${contactPhone}</div>` : ''}
+
+                    <!-- Right Main Column -->
+                    <td style="width: 70%;">
+                        ${workSectionHTML}
+                        <div class="section-group">
+                            <div class="section-heading">Publications</div>
+                            ${renderItems(filterList('publications'))}
+                        </div>
+                        <div class="section-group">
+                            <div class="section-heading">Presentations & Conferences</div>
+                            ${renderItems(filterList('presentations'))}
+                        </div>
+                        <div class="section-group">
+                            <div class="section-heading">Seminars & Courses</div>
+                            ${renderItems(filterList('seminars'))}
+                        </div>
+                        <div class="section-group">
+                            <div class="section-heading">Creative Portfolio</div>
+                            ${renderItems(filterList('creative-works'))}
+                        </div>
                     </td>
                 </tr>
             </table>
         </div>
 
-        <!-- Layout Table -->
-        <table>
-            <tr>
-                <!-- Left Sidebar -->
-                <td style="width: 30%; padding-right: 20px;">
-                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
-                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Education & Background</div>
-                        <div style="padding: 10px;">
-                            ${renderSidebarItems(filterList('background'))}
-                        </div>
-                    </div>
-                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
-                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Skills & Expertise</div>
-                        <div style="padding: 10px;">
-                            ${renderSidebarItems(filterList('skills'))}
-                        </div>
-                    </div>
-                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
-                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Extracurriculars</div>
-                        <div style="padding: 10px;">
-                            ${renderSidebarItems(filterList('extracurriculars'))}
-                        </div>
-                    </div>
-                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
-                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Socials & Links</div>
-                        <div style="padding: 10px;">
-                            ${renderSocialsItems(socialsList)}
-                        </div>
-                    </div>
-                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
-                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">References</div>
-                        <div style="padding: 10px;">
-                            ${renderSidebarItems(filterList('references'))}
-                        </div>
-                    </div>
-                </td>
-
-                <!-- Right Main Column -->
-                <td style="width: 70%;">
-                    ${workSectionHTML}
-                    <div class="section-group">
-                        <div class="section-heading">Publications</div>
-                        ${renderItems(filterList('publications'))}
-                    </div>
-                    <div class="section-group">
-                        <div class="section-heading">Presentations & Conferences</div>
-                        ${renderItems(filterList('presentations'))}
-                    </div>
-                    <div class="section-group">
-                        <div class="section-heading">Seminars & Courses</div>
-                        ${renderItems(filterList('seminars'))}
-                    </div>
-                    <div class="section-group">
-                        <div class="section-heading">Creative Portfolio</div>
-                        ${renderItems(filterList('creative-works'))}
-                    </div>
-                </td>
-            </tr>
-        </table>
-
-        <!-- CV Footer with QR Code & Live Site Link -->
-        <div style="margin-top: 25px; border-top: 1px solid #cbd5e1; padding-top: 12px; page-break-inside: avoid; break-inside: avoid;">
+        <!-- CV Footer with QR Code & Live Site Link (Pinned to bottom) -->
+        <div class="cv-footer">
             <table style="width: 100%;">
                 <tr>
                     <td style="vertical-align: middle;">
-                        <p style="font-size: 11px; color: #334155; margin: 0 0 4px 0; font-weight: 500;">
+                        <p style="font-size: 11px; color: #334155; margin: 0 0 2px 0; font-weight: 500;">
                             Kindly visit here to see the latest version of this CV:
                         </p>
                         <a href="https://dr-arcady.github.io/prakhar-cv/" style="font-size: 11px; color: #1e3a8a; text-decoration: none; font-weight: bold;">
                             https://dr-arcady.github.io/prakhar-cv/
                         </a>
                     </td>
-                    <td style="text-align: right; vertical-align: middle; width: 70px;">
-                        ${qrCodeBase64 ? `<img src="${qrCodeBase64}" alt="CV QR Code" style="width: 60px; height: 60px; display: inline-block;" />` : ''}
+                    <td style="text-align: right; vertical-align: middle; width: 60px;">
+                        ${qrCodeBase64 ? `<img src="${qrCodeBase64}" alt="CV QR Code" style="width: 50px; height: 50px; display: inline-block;" />` : ''}
                     </td>
                 </tr>
             </table>
@@ -261,7 +279,7 @@ async function generatePDF() {
         path: pdfPath,
         format: 'A4',
         printBackground: true,
-        margin: { top: '12mm', bottom: '12mm', left: '12mm', right: '12mm' }
+        margin: { top: '12mm', bottom: '15mm', left: '12mm', right: '12mm' }
     });
 
     await browser.close();
