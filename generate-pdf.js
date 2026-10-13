@@ -120,6 +120,9 @@ async function generatePDF() {
                 margin-top: 28px;
                 margin-bottom: 24px;
             }
+            .section-group:first-of-type {
+                margin-top: 0;
+            }
             .section-heading {
                 font-family: 'Playfair Display', Georgia, serif;
                 font-size: 12px;
