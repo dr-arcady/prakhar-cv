@@ -54,12 +54,17 @@ jobs:
             const repo = process.env.GH_REPO || "";
             
             let html = fs.readFileSync("index.html", "utf8");
+
+            // Strip out any previous configuration blocks so they do not duplicate
+            html = html.replace(/<script>window\.AUTH_CONFIG[\s\S]*?<\/script>/g, "");
+            html = html.replace(/<script>window\.GH_CONFIG[\s\S]*?<\/script>/g, "");
+
             const injectedScript = `<script>window.AUTH_CONFIG={salt:"${salt}",hash:"${hash}"};window.GH_CONFIG={repo:"${repo}",token:"${pat}"};</script>`;
 
             if (html.includes("</head>")) {
               html = html.replace("</head>", injectedScript + "\n</head>");
               fs.writeFileSync("index.html", html, "utf8");
-              console.log("Successfully injected AUTH_CONFIG and GH_CONFIG!");
+              console.log("Successfully injected clean AUTH_CONFIG and GH_CONFIG!");
             } else {
               console.error("Error: </head> tag not found in index.html");
               process.exit(1);
