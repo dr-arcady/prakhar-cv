@@ -68,7 +68,7 @@ async function generatePDF() {
             : parseMarkdown(item.authors || '');
 
         return `
-            <div style="margin-bottom: 12px; font-size: 11px; page-break-inside: avoid; break-inside: avoid;">
+            <div style="margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid;">
                 <div style="font-weight: bold; color: #0f172a;">
                     ${titleHtml} <span style="float: right; font-weight: normal; color: #64748b; font-size: 10px;">${item.year || ''}</span>
                 </div>
@@ -95,7 +95,7 @@ async function generatePDF() {
         const displayText = item.description || item.link || '';
 
         return `
-            <div style="margin-bottom: 10px; font-size: 11px; page-break-inside: avoid; break-inside: avoid;">
+            <div style="margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid;">
                 <div style="font-weight: 600; color: #0f172a; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px;">${parseMarkdown(item.title)}</div>
                 ${item.link ? `
                     <div><a href="${href}" style="color: #1e3a8a; text-decoration: none;">${displayText}</a></div>
@@ -144,12 +144,26 @@ async function generatePDF() {
                 page-break-after: avoid;
                 break-after: avoid;
             }
-            .sidebar-card {
+            .sidebar-section {
                 background: #ffffff;
                 border-radius: 6px;
                 border: 1px solid #e2e8f0;
                 margin-bottom: 16px;
                 overflow: hidden;
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+            .sidebar-heading {
+                background: #0f172a; 
+                color: #ffffff; 
+                font-size: 10px; 
+                text-transform: uppercase; 
+                padding: 6px 10px; 
+                font-weight: bold; 
+                letter-spacing: 0.5px; 
+                font-family: 'Playfair Display', Georgia, serif;
+                page-break-after: avoid;
+                break-after: avoid;
             }
             .cv-footer {
                 margin-top: 30px;
@@ -182,33 +196,33 @@ async function generatePDF() {
             <tr>
                 <!-- Left Sidebar -->
                 <td style="width: 30%; padding-right: 20px;">
-                    <div class="sidebar-card">
-                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Education & Background</div>
-                        <div style="padding: 10px;">
+                    <div class="sidebar-section">
+                        <div class="sidebar-heading">Education & Background</div>
+                        <div style="padding: 10px; font-size: 11px;">
                             ${renderSidebarItems(filterList('background'))}
                         </div>
                     </div>
-                    <div class="sidebar-card">
-                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Skills & Expertise</div>
-                        <div style="padding: 10px;">
+                    <div class="sidebar-section">
+                        <div class="sidebar-heading">Skills & Expertise</div>
+                        <div style="padding: 10px; font-size: 11px;">
                             ${renderSidebarItems(filterList('skills'))}
                         </div>
                     </div>
-                    <div class="sidebar-card">
-                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Extracurriculars</div>
-                        <div style="padding: 10px;">
+                    <div class="sidebar-section">
+                        <div class="sidebar-heading">Extracurriculars</div>
+                        <div style="padding: 10px; font-size: 11px;">
                             ${renderSidebarItems(filterList('extracurriculars'))}
                         </div>
                     </div>
-                    <div class="sidebar-card">
-                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Socials & Links</div>
-                        <div style="padding: 10px;">
+                    <div class="sidebar-section">
+                        <div class="sidebar-heading">Socials & Links</div>
+                        <div style="padding: 10px; font-size: 11px;">
                             ${renderSocialsItems(socialsList)}
                         </div>
                     </div>
-                    <div class="sidebar-card">
-                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">References</div>
-                        <div style="padding: 10px;">
+                    <div class="sidebar-section">
+                        <div class="sidebar-heading">References</div>
+                        <div style="padding: 10px; font-size: 11px;">
                             ${renderSidebarItems(filterList('references'))}
                         </div>
                     </div>
