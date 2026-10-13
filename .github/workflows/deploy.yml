@@ -38,7 +38,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Generate Secure Auth Config
+      - name: Inject Auth Config into index.html
         env:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
@@ -48,8 +48,11 @@ jobs:
             const password = process.env.ADMIN_PASSWORD || "";
             const salt = crypto.randomBytes(16).toString("hex");
             const hash = crypto.createHash("sha256").update(salt + password).digest("hex");
-            const configCode = `window.AUTH_CONFIG = { salt: "${salt}", hash: "${hash}" };`;
-            fs.writeFileSync("config.js", configCode);
+            
+            let html = fs.readFileSync("index.html", "utf8");
+            const authScript = `<script>window.AUTH_CONFIG = { salt: "${salt}", hash: "${hash}" };</script>\n</head>`;
+            html = html.replace("</head>", authScript);
+            fs.writeFileSync("index.html", html, "utf8");
           '
 
       - name: Commit Generated PDF
@@ -58,7 +61,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add "Prakhar Srivastava - CV.pdf"
           git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-generate latest PDF CV [skip ci]" && git push)
-
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
