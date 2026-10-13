@@ -117,17 +117,17 @@ async function generatePDF() {
             table { width: 100%; border-collapse: collapse; }
             td { vertical-align: top; }
             .section-group {
-                margin-top: 22px;
-                margin-bottom: 20px;
+                margin-top: 28px;
+                margin-bottom: 24px;
             }
             .section-heading {
                 font-family: 'Playfair Display', Georgia, serif;
-                font-size: 13px;
+                font-size: 12px;
                 font-weight: bold;
-                color: #0f172a;
-                border-bottom: 1px solid #cbd5e1;
-                padding-bottom: 5px;
-                margin-bottom: 12px;
+                color: #ffffff;
+                background-color: #0f172a;
+                padding: 6px 10px;
+                margin-bottom: 14px;
                 text-transform: uppercase;
                 letter-spacing: 0.8px;
                 page-break-after: avoid;
@@ -157,25 +157,35 @@ async function generatePDF() {
             <tr>
                 <!-- Left Sidebar -->
                 <td style="width: 30%; padding-right: 20px;">
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 14px; page-break-inside: avoid;">
-                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px; color: #0f172a;">Education & Background</h3>
-                        ${renderSidebarItems(filterList('background'))}
+                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Education & Background</div>
+                        <div style="padding: 10px;">
+                            ${renderSidebarItems(filterList('background'))}
+                        </div>
                     </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 14px; page-break-inside: avoid;">
-                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px; color: #0f172a;">Skills & Expertise</h3>
-                        ${renderSidebarItems(filterList('skills'))}
+                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Skills & Expertise</div>
+                        <div style="padding: 10px;">
+                            ${renderSidebarItems(filterList('skills'))}
+                        </div>
                     </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 14px; page-break-inside: avoid;">
-                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px; color: #0f172a;">Extracurriculars</h3>
-                        ${renderSidebarItems(filterList('extracurriculars'))}
+                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Extracurriculars</div>
+                        <div style="padding: 10px;">
+                            ${renderSidebarItems(filterList('extracurriculars'))}
+                        </div>
                     </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 14px; page-break-inside: avoid;">
-                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px; color: #0f172a;">Socials & Links</h3>
-                        ${renderSocialsItems(socialsList)}
+                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Socials & Links</div>
+                        <div style="padding: 10px;">
+                            ${renderSocialsItems(socialsList)}
+                        </div>
                     </div>
-                    <div style="background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0; page-break-inside: avoid;">
-                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px; color: #0f172a;">References</h3>
-                        ${renderSidebarItems(filterList('references'))}
+                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">References</div>
+                        <div style="padding: 10px;">
+                            ${renderSidebarItems(filterList('references'))}
+                        </div>
                     </div>
                 </td>
 
