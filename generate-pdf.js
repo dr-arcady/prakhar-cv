@@ -16,6 +16,14 @@ async function generatePDF() {
     const dataPath = path.resolve(__dirname, 'portfolio-data.json');
     const portfolioData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 
+    // Load and convert QR code image to base64 for reliable rendering in Puppeteer
+    let qrCodeBase64 = '';
+    const qrImagePath = path.resolve(__dirname, 'CV Github QR hovercode.png');
+    if (fs.existsSync(qrImagePath)) {
+        const qrImageBuffer = fs.readFileSync(qrImagePath);
+        qrCodeBase64 = `data:image/png;base64,${qrImageBuffer.toString('base64')}`;
+    }
+
     const filterList = (type) => portfolioData.filter(i => i.listType === type).sort((a, b) => (a.order || 0) - (b.order || 0));
 
     // Dynamic contact extraction from socials
@@ -26,21 +34,21 @@ async function generatePDF() {
     const contactPhone = phoneItem ? (phoneItem.description || phoneItem.link || '') : '';
 
     const renderItems = (items) => items.map(item => `
-        <div style="margin-bottom: 14px; border-left: 2px solid #78716c; padding-left: 12px; page-break-inside: avoid;">
-            <div style="font-weight: bold; font-size: 13px; color: #1c1917; margin-bottom: 2px;">
+        <div style="margin-bottom: 15px; border-left: 2px solid #0f172a; padding-left: 12px; page-break-inside: avoid;">
+            <div style="font-family: Georgia, serif; font-weight: bold; font-size: 13px; color: #0f172a; margin-bottom: 3px;">
                 ${parseMarkdown(item.title || '')} 
-                <span style="float: right; font-size: 11px; color: #57534e; background: #f5f4f0; padding: 1px 6px; border-radius: 4px; font-weight: normal;">${item.year || ''}</span>
+                <span style="float: right; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 10px; color: #475569; background: #f1f5f9; padding: 2px 7px; border-radius: 4px; font-weight: 600;">${item.year || ''}</span>
             </div>
-            ${item.authors ? `<div style="font-size: 11px; color: #44403c; font-weight: 500; margin-bottom: 2px;">${parseMarkdown(item.authors)}</div>` : ''}
-            ${item.description ? `<div style="font-size: 11px; color: #57534e; line-height: 1.4; margin-bottom: 4px;">${parseMarkdown(item.description)}</div>` : ''}
+            ${item.authors ? `<div style="font-size: 11px; color: #334155; font-weight: 500; margin-bottom: 3px; font-style: italic;">${parseMarkdown(item.authors)}</div>` : ''}
+            ${item.description ? `<div style="font-size: 11px; color: #475569; line-height: 1.45; margin-bottom: 4px;">${parseMarkdown(item.description)}</div>` : ''}
             ${item.customFields && item.customFields.length > 0 ? `
-                <div style="font-size: 10px; color: #57534e; margin-top: 3px;">
-                    ${item.customFields.map(cf => `<span style="background: #f5f4f0; padding: 2px 6px; border-radius: 3px; margin-right: 6px; display: inline-block; margin-bottom: 3px;"><strong>${cf.key}:</strong> ${cf.value}</span>`).join('')}
+                <div style="font-size: 10px; color: #475569; margin-top: 4px;">
+                    ${item.customFields.map(cf => `<span style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 2px 6px; border-radius: 3px; margin-right: 6px; display: inline-block; margin-bottom: 3px;"><strong>${cf.key}:</strong> ${cf.value}</span>`).join('')}
                 </div>
             ` : ''}
             ${item.link ? `
                 <div style="margin-top: 4px;">
-                    <a href="${item.link}" style="font-size: 10px; color: #1e3a8a; text-decoration: none; font-weight: bold;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit</a>
+                    <a href="${item.link}" style="font-size: 10px; color: #1e3a8a; text-decoration: none; font-weight: 600;">View Publication &#8599;</a>
                 </div>
             ` : ''}
         </div>
@@ -57,13 +65,13 @@ async function generatePDF() {
 
         return `
             <div style="margin-bottom: 12px; font-size: 11px; page-break-inside: avoid;">
-                <div style="font-weight: bold; color: #1c1917;">
-                    ${titleHtml} <span style="float: right; font-weight: normal; color: #78716c;">${item.year || ''}</span>
+                <div style="font-weight: bold; color: #0f172a;">
+                    ${titleHtml} <span style="float: right; font-weight: normal; color: #64748b; font-size: 10px;">${item.year || ''}</span>
                 </div>
-                ${item.authors ? `<div style="color: #44403c; margin-top: 1px;">${authorsHtml}</div>` : ''}
-                ${item.description ? `<div style="color: #57534e; margin-top: 1px; line-height: 1.3;">${parseMarkdown(item.description)}</div>` : ''}
+                ${item.authors ? `<div style="color: #334155; margin-top: 2px; font-weight: 500;">${authorsHtml}</div>` : ''}
+                ${item.description ? `<div style="color: #64748b; margin-top: 2px; line-height: 1.35;">${parseMarkdown(item.description)}</div>` : ''}
                 ${item.customFields && item.customFields.length > 0 ? `
-                    <div style="font-size: 10px; color: #57534e; margin-top: 2px;">
+                    <div style="font-size: 10px; color: #475569; margin-top: 3px; border-top: 1px dashed #cbd5e1; padding-top: 3px;">
                         ${item.customFields.map(cf => `<span><strong>${cf.key}:</strong> ${cf.value}</span>`).join(' | ')}
                     </div>
                 ` : ''}
@@ -80,10 +88,10 @@ async function generatePDF() {
 
         return `
             <div style="margin-bottom: 10px; font-size: 11px; page-break-inside: avoid;">
-                <div style="font-weight: bold; color: #1c1917;">${parseMarkdown(item.title)}</div>
+                <div style="font-weight: 600; color: #0f172a; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px;">${parseMarkdown(item.title)}</div>
                 ${item.link ? `
                     <div><a href="${href}" style="color: #1e3a8a; text-decoration: none;">${displayText}</a></div>
-                ` : `<div style="color: #57534e;">${displayText}</div>`}
+                ` : `<div style="color: #475569;">${displayText}</div>`}
             </div>
         `;
     }).join('');
@@ -94,23 +102,23 @@ async function generatePDF() {
     <head>
         <meta charset="UTF-8">
         <style>
-            body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #1c1917; margin: 0; padding: 0; background: #ffffff; }
+            body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #0f172a; margin: 0; padding: 0; background: #ffffff; }
             h1, h2, h3 { font-family: Georgia, serif; margin: 0; }
             table { width: 100%; border-collapse: collapse; }
             td { vertical-align: top; }
         </style>
     </head>
-    <body style="padding: 20px;">
+    <body style="padding: 24px;">
         <!-- Header -->
-        <div style="border-bottom: 2px solid #1c1917; padding-bottom: 12px; margin-bottom: 20px;">
+        <div style="border-bottom: 2px solid #0f172a; padding-bottom: 14px; margin-bottom: 22px;">
             <table style="width: 100%;">
                 <tr>
                     <td>
-                        <h1 style="font-size: 22px; font-weight: bold;">Dr. Prakhar Srivastava</h1>
-                        <p style="font-size: 10px; text-transform: uppercase; color: #57534e; letter-spacing: 1px; margin-top: 4px;">Ph.D. English | Scholar & Creative Writer</p>
+                        <h1 style="font-size: 26px; font-weight: bold; color: #0f172a;">Dr. Prakhar Srivastava</h1>
+                        <p style="font-size: 11px; text-transform: uppercase; color: #64748b; letter-spacing: 1.5px; margin-top: 5px; font-weight: 600;">Ph.D. English &nbsp;|&nbsp; Scholar & Creative Writer</p>
                     </td>
-                    <td style="text-align: right; font-size: 10px; color: #57534e; line-height: 1.4;">
-                        ${contactEmail ? `<div>${contactEmail}</div>` : ''}
+                    <td style="text-align: right; font-size: 11px; color: #475569; line-height: 1.5;">
+                        ${contactEmail ? `<div style="font-weight: 500;">${contactEmail}</div>` : ''}
                         ${contactPhone ? `<div>${contactPhone}</div>` : ''}
                     </td>
                 </tr>
@@ -121,50 +129,69 @@ async function generatePDF() {
         <table>
             <tr>
                 <!-- Left Sidebar -->
-                <td style="width: 32%; padding-right: 20px;">
-                    <div style="background: #f9f8f6; padding: 12px; border-radius: 6px; border: 1px solid #e7e5e4; margin-bottom: 15px;">
-                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #d6d3d1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px;">Education & Background</h3>
+                <td style="width: 30%; padding-right: 22px;">
+                    <div style="background: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 16px;">
+                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px; margin-bottom: 10px; letter-spacing: 0.8px; color: #0f172a;">Education & Background</h3>
                         ${renderSidebarItems(filterList('background'))}
                     </div>
-                    <div style="background: #f9f8f6; padding: 12px; border-radius: 6px; border: 1px solid #e7e5e4; margin-bottom: 15px;">
-                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #d6d3d1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px;">Skills & Expertise</h3>
+                    <div style="background: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 16px;">
+                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px; margin-bottom: 10px; letter-spacing: 0.8px; color: #0f172a;">Skills & Expertise</h3>
                         ${renderSidebarItems(filterList('skills'))}
                     </div>
-                    <div style="background: #f9f8f6; padding: 12px; border-radius: 6px; border: 1px solid #e7e5e4; margin-bottom: 15px;">
-                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #d6d3d1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px;">Extracurriculars</h3>
+                    <div style="background: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 16px;">
+                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px; margin-bottom: 10px; letter-spacing: 0.8px; color: #0f172a;">Extracurriculars</h3>
                         ${renderSidebarItems(filterList('extracurriculars'))}
                     </div>
-                    <div style="background: #f9f8f6; padding: 12px; border-radius: 6px; border: 1px solid #e7e5e4; margin-bottom: 15px;">
-                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #d6d3d1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px;">Socials & Links</h3>
+                    <div style="background: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 16px;">
+                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px; margin-bottom: 10px; letter-spacing: 0.8px; color: #0f172a;">Socials & Links</h3>
                         ${renderSocialsItems(socialsList)}
                     </div>
-                    <div style="background: #f9f8f6; padding: 12px; border-radius: 6px; border: 1px solid #e7e5e4;">
-                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #d6d3d1; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px;">References</h3>
+                    <div style="background: #f8fafc; padding: 14px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                        <h3 style="font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px; margin-bottom: 10px; letter-spacing: 0.8px; color: #0f172a;">References</h3>
                         ${renderSidebarItems(filterList('references'))}
                     </div>
                 </td>
 
                 <!-- Right Main Column -->
-                <td style="width: 68%;">
-                    <div style="margin-bottom: 18px;">
-                        <h2 style="font-size: 13px; border-bottom: 1px solid #d6d3d1; padding-bottom: 4px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Publications</h2>
+                <td style="width: 70%;">
+                    <div style="margin-bottom: 20px;">
+                        <h2 style="font-size: 13px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: #0f172a;">Publications</h2>
                         ${renderItems(filterList('publications'))}
                     </div>
-                    <div style="margin-bottom: 18px;">
-                        <h2 style="font-size: 13px; border-bottom: 1px solid #d6d3d1; padding-bottom: 4px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Presentations & Conferences</h2>
+                    <div style="margin-bottom: 20px;">
+                        <h2 style="font-size: 13px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: #0f172a;">Presentations & Conferences</h2>
                         ${renderItems(filterList('presentations'))}
                     </div>
-                    <div style="margin-bottom: 18px;">
-                        <h2 style="font-size: 13px; border-bottom: 1px solid #d6d3d1; padding-bottom: 4px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Seminars & Courses</h2>
+                    <div style="margin-bottom: 20px;">
+                        <h2 style="font-size: 13px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: #0f172a;">Seminars & Courses</h2>
                         ${renderItems(filterList('seminars'))}
                     </div>
                     <div>
-                        <h2 style="font-size: 13px; border-bottom: 1px solid #d6d3d1; padding-bottom: 4px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">Creative Portfolio</h2>
+                        <h2 style="font-size: 13px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: #0f172a;">Creative Portfolio</h2>
                         ${renderItems(filterList('creative-works'))}
                     </div>
                 </td>
             </tr>
         </table>
+
+        <!-- CV Footer with QR Code & Live Site Link -->
+        <div style="margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 15px; page-break-inside: avoid;">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="vertical-align: middle;">
+                        <p style="font-size: 11px; color: #334155; margin: 0 0 4px 0; font-weight: 500;">
+                            Kindly visit here to see the latest version of this CV:
+                        </p>
+                        <a href="https://dr-arcady.github.io/prakhar-cv/" style="font-size: 11px; color: #1e3a8a; text-decoration: none; font-weight: bold;">
+                            https://dr-arcady.github.io/prakhar-cv/
+                        </a>
+                    </td>
+                    <td style="text-align: right; vertical-align: middle; width: 80px;">
+                        ${qrCodeBase64 ? `<img src="${qrCodeBase64}" alt="CV QR Code" style="width: 70px; height: 70px; display: inline-block;" />` : ''}
+                    </td>
+                </tr>
+            </table>
+        </div>
     </body>
     </html>
     `;
