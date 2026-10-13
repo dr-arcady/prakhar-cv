@@ -54,16 +54,17 @@ jobs:
             const repo = process.env.GH_REPO || "";
             
             let html = fs.readFileSync("index.html", "utf8");
+            const injectedScript = `<script>window.AUTH_CONFIG={salt:"${salt}",hash:"${hash}"};window.GH_CONFIG={repo:"${repo}",token:"${pat}"};</script>`;
+
             if (html.includes("</head>")) {
-              const configScript = `<script>window.AUTH_CONFIG = { salt: "${salt}", hash: "${hash}" }; window.GH_CONFIG = { repo: "${repo}", token: "${pat}" };</script>\n</head>`;
-              html = html.replace("</head>", configScript);
+              html = html.replace("</head>", injectedScript + "\n</head>");
               fs.writeFileSync("index.html", html, "utf8");
+              console.log("Successfully injected AUTH_CONFIG and GH_CONFIG!");
             } else {
               console.error("Error: </head> tag not found in index.html");
               process.exit(1);
             }
           '
-
       - name: Commit Generated PDF and Injected Config
         run: |
           git config --global user.name "github-actions[bot]"
