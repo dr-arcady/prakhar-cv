@@ -144,6 +144,14 @@ async function generatePDF() {
                 page-break-after: avoid;
                 break-after: avoid;
             }
+            /* Allow sections to break across pages, but prevent individual items/cards from breaking */
+            .sidebar-card {
+                background: #ffffff;
+                border-radius: 6px;
+                border: 1px solid #e2e8f0;
+                margin-bottom: 16px;
+                overflow: hidden;
+            }
             .cv-footer {
                 margin-top: 30px;
                 border-top: 1px solid #cbd5e1;
@@ -175,32 +183,32 @@ async function generatePDF() {
             <tr>
                 <!-- Left Sidebar -->
                 <td style="width: 30%; padding-right: 20px;">
-                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                    <div class="sidebar-card">
                         <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Education & Background</div>
                         <div style="padding: 10px;">
                             ${renderSidebarItems(filterList('background'))}
                         </div>
                     </div>
-                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                    <div class="sidebar-card">
                         <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Skills & Expertise</div>
                         <div style="padding: 10px;">
                             ${renderSidebarItems(filterList('skills'))}
                         </div>
                     </div>
-                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                    <div class="sidebar-card">
                         <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Extracurriculars</div>
                         <div style="padding: 10px;">
                             ${renderSidebarItems(filterList('extracurriculars'))}
                         </div>
                     </div>
-                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
+                    <div class="sidebar-card">
                         <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">Socials & Links</div>
                         <div style="padding: 10px;">
                             ${renderSocialsItems(socialsList)}
                         </div>
                     </div>
-                    <div style="background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; page-break-inside: avoid; overflow: hidden;">
-                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">References</div>
+                    <div class="sidebar-card">
+                        <div style="background: #ffffff; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">References</div>
                         <div style="padding: 10px;">
                             ${renderSidebarItems(filterList('references'))}
                         </div>
@@ -223,11 +231,11 @@ async function generatePDF() {
                         ${renderItems(filterList('seminars'))}
                     </div>
                     <div class="section-group">
-                        <div class="section-heading">Creative Portfolio</div>
+                        <div class="heading-group">Creative Portfolio</div>
                         ${renderItems(filterList('creative-works'))}
                     </div>
 
-                    <!-- CV Footer placed naturally at the end of the content stream -->
+                    <!-- CV Footer -->
                     <div class="cv-footer">
                         <table style="width: 100%;">
                             <tr>
@@ -275,7 +283,4 @@ async function generatePDF() {
     console.log('PDF generated successfully!');
 }
 
-generatePDF().catch(err => {
-    console.error('Error generating PDF:', err);
-    process.exit(1);
-});
+generatePDF().catch(err =>.console.error('Error generating PDF:', err));
