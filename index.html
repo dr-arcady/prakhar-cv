@@ -1012,33 +1012,83 @@
 
         function renderDashboardEntries() {
             const container = document.getElementById('dashboard-entries-list');
-            let filtered = portfolioData;
+            let itemsToDisplay = portfolioData;
+
             if (currentDashboardFilter !== 'all') {
-                filtered = portfolioData.filter(i => i.category === currentDashboardFilter);
+                itemsToDisplay = portfolioData.filter(i => i.category === currentDashboardFilter);
             }
 
-            container.innerHTML = filtered.length === 0 ? '<p class="text-stone-400 text-center py-8 text-sm italic">No entries found.</p>' : filtered.map((item, index) => `
-                <div class="bg-white rounded-2xl p-4 border border-stone-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs hover:border-stone-300 transition-all">
-                    <div class="flex items-center space-x-3">
-                        <div class="flex flex-col space-y-1">
-                            <button onclick="moveItemOrder('${item.id}', -1)" title="Move Up" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100 hover:bg-stone-200"><i class="fa-solid fa-chevron-up"></i></button>
-                            <button onclick="moveItemOrder('${item.id}', 1)" title="Move Down" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100 hover:bg-stone-200"><i class="fa-solid fa-chevron-down"></i></button>
+            if (itemsToDisplay.length === 0) {
+                container.innerHTML = '<p class="text-stone-400 text-center py-8 text-sm italic">No entries found.</p>';
+                return;
+            }
+
+            // Define ordered grouping structure matching the frontend sections
+            const groups = [
+                { key: 'work', label: 'Work Experience', category: 'academic' },
+                { key: 'publications', label: 'Publications', category: 'academic' },
+                { key: 'presentations', label: 'Presentations & Conferences', category: 'academic' },
+                { key: 'seminars', label: 'Seminars, Courses & More', category: 'academic' },
+                { key: 'background', label: 'Background & Education', category: 'academic' },
+                { key: 'skills', label: 'Skills & Expertise', category: 'academic' },
+                { key: 'extracurriculars', label: 'Extracurriculars', category: 'academic' },
+                { key: 'socials', label: 'Socials & Links', category: 'academic' },
+                { key: 'references', label: 'References', category: 'academic' },
+                { key: 'creative-works', label: 'Creative Portfolio Works', category: 'creative' }
+            ];
+
+            let htmlOutput = '';
+
+            groups.forEach(group => {
+                if (currentDashboardFilter !== 'all' && group.category !== currentDashboardFilter) {
+                    return;
+                }
+
+                const groupItems = itemsToDisplay
+                    .filter(i => i.listType === group.key)
+                    .sort((a, b) => (a.order || 0) - (b.order || 0));
+
+                if (groupItems.length === 0) return;
+
+                htmlOutput += `
+                    <div class="mb-6 bg-stone-100/70 rounded-2xl p-4 border border-stone-200">
+                        <div class="flex items-center justify-between mb-3 pb-2 border-b border-stone-200">
+                            <h4 class="font-serif font-bold text-sm text-stone-900 tracking-wide uppercase flex items-center">
+                                <span class="w-2 h-2 rounded-full bg-navy-900 mr-2"></span>${group.label}
+                            </h4>
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-stone-200 text-stone-600">${groupItems.length} items</span>
                         </div>
-                        <div>
-                            <div class="flex items-center space-x-2">
-                                <span class="px-2 py-0.5 rounded bg-stone-100 text-stone-700 text-[10px] font-bold uppercase tracking-wider">${item.category} / ${item.listType}</span>
-                                <span class="text-xs text-stone-400">${escapeHtml(item.year || '')}</span>
+                        <div class="space-y-3">
+                `;
+
+                groupItems.forEach((item) => {
+                    htmlOutput += `
+                        <div class="bg-white rounded-xl p-3.5 border border-stone-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs hover:border-stone-300 transition-all">
+                            <div class="flex items-center space-x-3 min-w-0">
+                                <div class="flex flex-col space-y-1 flex-shrink-0">
+                                    <button onclick="moveItemOrder('${item.id}', -1)" title="Move Up" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100 hover:bg-stone-200"><i class="fa-solid fa-chevron-up"></i></button>
+                                    <button onclick="moveItemOrder('${item.id}', 1)" title="Move Down" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100 hover:bg-stone-200"><i class="fa-solid fa-chevron-down"></i></button>
+                                </div>
+                                <div class="min-w-0">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-xs text-stone-400 bg-stone-100 px-2 py-0.5 rounded-full">${escapeHtml(item.year || '')}</span>
+                                    </div>
+                                    <h5 class="font-serif font-bold text-sm text-stone-900 mt-0.5 truncate">${escapeHtml(item.title)}</h5>
+                                    ${item.authors ? `<p class="text-xs text-stone-500 truncate">${escapeHtml(item.authors)}</p>` : ''}
+                                </div>
                             </div>
-                            <h4 class="font-serif font-bold text-base text-stone-900 mt-1">${escapeHtml(item.title)}</h4>
-                            ${item.authors ? `<p class="text-xs text-stone-500">${escapeHtml(item.authors)}</p>` : ''}
+                            <div class="flex items-center space-x-2 self-end sm:self-center flex-shrink-0">
+                                <button onclick="openEditEntryModal('${item.id}')" class="px-2.5 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold transition-colors"><i class="fa-solid fa-pen mr-1"></i> Edit</button>
+                                <button onclick="deleteEntry('${item.id}')" class="px-2.5 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold transition-colors"><i class="fa-solid fa-trash mr-1"></i> Delete</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex items-center space-x-2 self-end sm:self-center">
-                        <button onclick="openEditEntryModal('${item.id}')" class="px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold transition-colors"><i class="fa-solid fa-pen mr-1"></i> Edit</button>
-                        <button onclick="deleteEntry('${item.id}')" class="px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold transition-colors"><i class="fa-solid fa-trash mr-1"></i> Delete</button>
-                    </div>
-                </div>
-            `).join('');
+                    `;
+                });
+
+                htmlOutput += `</div></div>`;
+            });
+
+            container.innerHTML = htmlOutput;
         }
 
         function moveItemOrder(id, direction) {
