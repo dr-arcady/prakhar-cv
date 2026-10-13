@@ -96,6 +96,15 @@ async function generatePDF() {
         `;
     }).join('');
 
+    // Pre-evaluate work items to conditionally render section
+    const workItems = filterList('work');
+    const workSectionHTML = workItems.length > 0 ? `
+        <div class="section-group">
+            <div class="section-heading">Work Experience</div>
+            ${renderItems(workItems)}
+        </div>
+    ` : '';
+
     const htmlTemplate = `
     <!DOCTYPE html>
     <html lang="en">
@@ -172,6 +181,7 @@ async function generatePDF() {
 
                 <!-- Right Main Column -->
                 <td style="width: 70%;">
+                    ${workSectionHTML}
                     <div class="section-group">
                         <div class="section-heading">Publications</div>
                         ${renderItems(filterList('publications'))}
