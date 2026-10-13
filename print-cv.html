@@ -123,7 +123,7 @@
                         <span class="text-stone-500 font-normal">${escapeHtml(item.year || '')}</span>
                     </div>
                     ${item.authors ? `<div class="text-stone-600 font-medium">${escapeHtml(item.authors)}</div>` : ''}
-                    ${item.description ? `<div class="text-stone-500">${escapeHtml(item.description)}</div>` : ''}
+                    ${item.description ? `<div class="text-stone-500">${parseMarkdown(item.description)}</div>` : ''}
                 </div>
             `).join('');
         }
@@ -154,11 +154,11 @@
         }
 
         function parseMarkdown(text) {
-        if (!text) return '';
-        return text
-            .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>');
+            if (!text) return '';
+            return text
+                .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>');
         }
 
         window.onload = loadPrintData;
