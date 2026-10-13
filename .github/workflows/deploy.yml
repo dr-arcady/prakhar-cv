@@ -35,13 +35,6 @@ jobs:
       - name: Generate PDF CV
         run: node generate-pdf.js
 
-      - name: Commit Generated PDF
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add "Prakhar Srivastava - CV.pdf"
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-generate latest PDF CV [skip ci]" && git push)
-
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
@@ -58,7 +51,14 @@ jobs:
             const configCode = `window.AUTH_CONFIG = { salt: "${salt}", hash: "${hash}" };`;
             fs.writeFileSync("config.js", configCode);
           '
-        
+
+      - name: Commit Generated PDF
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add "Prakhar Srivastava - CV.pdf"
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-generate latest PDF CV [skip ci]" && git push)
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
