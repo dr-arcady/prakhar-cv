@@ -34,7 +34,7 @@ export default async function handler(req, res) {
         const putRes = await fetch(url, {
             method: 'PUT',
             headers: {
-                'Authorization': `token ${token}`,
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
                 'User-Agent': 'Portfolio-CMS'
             },
