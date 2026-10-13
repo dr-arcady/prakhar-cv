@@ -38,9 +38,11 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Inject Auth Config into index.html
+      - name: Inject Auth & GitHub Config into index.html
         env:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          GH_REPO: ${{ github.repository }}
         run: |
           node -e '
             const crypto = require("crypto");
@@ -48,11 +50,13 @@ jobs:
             const password = process.env.ADMIN_PASSWORD || "";
             const salt = crypto.randomBytes(16).toString("hex");
             const hash = crypto.createHash("sha256").update(salt + password).digest("hex");
+            const pat = process.env.GH_PAT || "";
+            const repo = process.env.GH_REPO || "";
             
             let html = fs.readFileSync("index.html", "utf8");
             if (html.includes("</head>")) {
-              const authScript = `<script>window.AUTH_CONFIG = { salt: "${salt}", hash: "${hash}" };</script>\n</head>`;
-              html = html.replace("</head>", authScript);
+              const configScript = `<script>window.AUTH_CONFIG = { salt: "${salt}", hash: "${hash}" }; window.GH_CONFIG = { repo: "${repo}", token: "${pat}" };</script>\n</head>`;
+              html = html.replace("</head>", configScript);
               fs.writeFileSync("index.html", html, "utf8");
             } else {
               console.error("Error: </head> tag not found in index.html");
