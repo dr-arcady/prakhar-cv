@@ -687,28 +687,69 @@
             ensureOrders();
             renderViews();
 
-            // Show syncing notification
             const indicator = document.createElement('div');
             indicator.id = 'sync-indicator';
             indicator.className = 'fixed bottom-4 right-4 bg-stone-900 text-white px-4 py-2 rounded-xl text-xs shadow-lg z-50 flex items-center space-x-2';
-            
-            // If on GitHub Pages (static host), prompt for JSON export backup instead of failing API call
+            indicator.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-gold-500"></i><span>Syncing globally...</span>`;
+            document.body.appendChild(indicator);
+
+            // 1. If running on GitHub Pages, use the securely injected workflow token & repo
             if (window.location.hostname.includes('github.io')) {
-                indicator.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-yellow-400"></i><span>GitHub Pages is static. Changes updated locally. Export JSON to commit updates.</span>`;
-                document.body.appendChild(indicator);
-                setTimeout(() => indicator.remove(), 5000);
+                const repo = window.GH_CONFIG?.repo;
+                const token = window.GH_CONFIG?.token;
+
+                if (!repo || !token) {
+                    indicator.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-400"></i><span>GitHub configuration missing in workflow. Check GH_PAT secret.</span>`;
+                    setTimeout(() => indicator.remove(), 5000);
+                    return;
+                }
+
+                try {
+                    const filePath = 'portfolio-data.json';
+                    const apiUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+                    
+                    const getRes = await fetch(apiUrl, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    
+                    if (!getRes.ok) throw new Error('Failed to fetch file SHA from GitHub repository.');
+                    const fileData = await getRes.json();
+                    const fileSha = fileData.sha;
+
+                    const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(portfolioData, null, 2))));
+                    const putRes = await fetch(apiUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            message: 'Update portfolio data via admin dashboard [skip ci]',
+                            content: contentEncoded,
+                            sha: fileSha
+                        })
+                    });
+
+                    if (putRes.ok) {
+                        indicator.innerHTML = `<i class="fa-solid fa-check text-green-400"></i><span>Synced & building PDF on GitHub!</span>`;
+                        setTimeout(() => indicator.remove(), 3500);
+                    } else {
+                        const errJson = await putRes.json();
+                        throw new Error(errJson.message || 'GitHub API commit failed.');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    indicator.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-400"></i><span>Sync failed: ${err.message}</span>`;
+                    setTimeout(() => indicator.remove(), 5000);
+                }
                 return;
             }
 
-            indicator.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-gold-500"></i><span>Syncing with GitHub globally...</span>`;
-            document.body.appendChild(indicator);
-
+            // 2. Vercel serverless backend fallback
             try {
                 const response = await fetch('/api/save-portfolio', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(portfolioData)
                 });
 
