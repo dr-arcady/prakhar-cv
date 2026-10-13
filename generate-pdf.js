@@ -144,7 +144,6 @@ async function generatePDF() {
                 page-break-after: avoid;
                 break-after: avoid;
             }
-            /* Allow sections to break across pages, but prevent individual items/cards from breaking */
             .sidebar-card {
                 background: #ffffff;
                 border-radius: 6px;
@@ -208,7 +207,7 @@ async function generatePDF() {
                         </div>
                     </div>
                     <div class="sidebar-card">
-                        <div style="background: #ffffff; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">References</div>
+                        <div style="background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif;">References</div>
                         <div style="padding: 10px;">
                             ${renderSidebarItems(filterList('references'))}
                         </div>
@@ -231,7 +230,7 @@ async function generatePDF() {
                         ${renderItems(filterList('seminars'))}
                     </div>
                     <div class="section-group">
-                        <div class="heading-group">Creative Portfolio</div>
+                        <div class="section-heading">Creative Portfolio</div>
                         ${renderItems(filterList('creative-works'))}
                     </div>
 
@@ -283,4 +282,4 @@ async function generatePDF() {
     console.log('PDF generated successfully!');
 }
 
-generatePDF().catch(err =>.console.error('Error generating PDF:', err));
+generatePDF().catch(err => console.error('Error generating PDF:', err));
