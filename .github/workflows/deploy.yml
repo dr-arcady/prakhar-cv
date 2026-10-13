@@ -29,6 +29,17 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate updated PDF CV
+        run: node generate-pdf.js
+
       - name: Install Dependencies
         run: npm install puppeteer
 
