@@ -44,6 +44,20 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
+      - name: Generate Secure Auth Config
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        run: |
+          node -e '
+            const crypto = require("crypto");
+            const fs = require("fs");
+            const password = process.env.ADMIN_PASSWORD || "";
+            const salt = crypto.randomBytes(16).toString("hex");
+            const hash = crypto.createHash("sha256").update(salt + password).digest("hex");
+            const configCode = `window.AUTH_CONFIG = { salt: "${salt}", hash: "${hash}" };`;
+            fs.writeFileSync("config.js", configCode);
+          '
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
