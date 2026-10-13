@@ -254,7 +254,7 @@ async function generatePDF() {
                             <tr>
                                 <td style="vertical-align: middle;">
                                     <p style="font-size: 11px; color: #334155; margin: 0 0 2px 0; font-weight: 500;">
-                                        Kindly visit here to see the latest version of this CV:
+                                        Kindly visit here to see the latest version of this CV and to access weblinks of resources:
                                     </p>
                                     <a href="https://dr-arcady.github.io/prakhar-cv/" style="font-size: 11px; color: #1e3a8a; text-decoration: none; font-weight: bold;">
                                         https://dr-arcady.github.io/prakhar-cv/
