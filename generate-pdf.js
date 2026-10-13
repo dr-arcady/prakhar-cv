@@ -144,6 +144,13 @@ async function generatePDF() {
                 page-break-after: avoid;
                 break-after: avoid;
             }
+            .cv-footer {
+                margin-top: 30px;
+                border-top: 1px solid #cbd5e1;
+                padding-top: 10px;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
         </style>
     </head>
     <body style="padding: 20px;">
@@ -219,38 +226,30 @@ async function generatePDF() {
                         <div class="section-heading">Creative Portfolio</div>
                         ${renderItems(filterList('creative-works'))}
                     </div>
+
+                    <!-- CV Footer placed naturally at the end of the content stream -->
+                    <div class="cv-footer">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="vertical-align: middle;">
+                                    <p style="font-size: 11px; color: #334155; margin: 0 0 2px 0; font-weight: 500;">
+                                        Kindly visit here to see the latest version of this CV:
+                                    </p>
+                                    <a href="https://dr-arcady.github.io/prakhar-cv/" style="font-size: 11px; color: #1e3a8a; text-decoration: none; font-weight: bold;">
+                                        https://dr-arcady.github.io/prakhar-cv/
+                                    </a>
+                                </td>
+                                <td style="text-align: right; vertical-align: middle; width: 60px;">
+                                    ${qrCodeBase64 ? `<img src="${qrCodeBase64}" alt="CV QR Code" style="width: 50px; height: 50px; display: inline-block;" />` : ''}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </td>
             </tr>
         </table>
     </body>
     </html>
-    `;
-
-    // Native Puppeteer footer template that only displays when pageNumber === totalPages
-    const footerTemplate = `
-    <div style="font-family: 'Inter', sans-serif; font-size: 9px; width: 100%; padding: 0 12mm; box-sizing: border-box;">
-        <div class="last-page-footer" style="display: none; border-top: 1px solid #cbd5e1; padding-top: 6px; width: 100%;">
-            <table style="width: 100%; border-collapse: collapse;">
-                <tr>
-                    <td style="vertical-align: middle; text-align: left;">
-                        <span style="color: #334155; font-weight: 500;">Kindly visit here to see the latest version of this CV:</span><br/>
-                        <a href="https://dr-arcady.github.io/prakhar-cv/" style="color: #1e3a8a; text-decoration: none; font-weight: bold;">https://dr-arcady.github.io/prakhar-cv/</a>
-                    </td>
-                    <td style="text-align: right; vertical-align: middle; width: 50px;">
-                        ${qrCodeBase64 ? `<img src="${qrCodeBase64}" style="width: 38px; height: 38px; display: inline-block;" />` : ''}
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <script>
-        // Puppeteer injects .pageNumber and .totalPages dynamically into footer templates
-        const pageNum = document.querySelector('.pageNumber');
-        const totalPages = document.querySelector('.totalPages');
-        if (pageNum && totalPages && pageNum.innerText === totalPages.innerText) {
-            document.querySelector('.last-page-footer').style.display = 'block';
-        }
-    </script>
     `;
 
     console.log('Launching headless browser...');
@@ -269,10 +268,7 @@ async function generatePDF() {
         path: pdfPath,
         format: 'A4',
         printBackground: true,
-        displayHeaderFooter: true,
-        headerTemplate: '<div></div>',
-        footerTemplate: footerTemplate,
-        margin: { top: '12mm', bottom: '20mm', left: '12mm', right: '12mm' }
+        margin: { top: '12mm', bottom: '12mm', left: '12mm', right: '12mm' }
     });
 
     await browser.close();
