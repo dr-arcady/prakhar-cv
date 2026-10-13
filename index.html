@@ -337,25 +337,25 @@
     </div>
 
     <!-- ADMIN DASHBOARD & ENTRY MODAL -->
-    <div id="modal-dashboard" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/70 backdrop-blur-xs hidden">
-        <div class="bg-white rounded-3xl max-w-4xl w-full mx-4 max-h-[90vh] flex flex-col shadow-2xl border border-stone-200 fade-in overflow-hidden">
-            <div class="px-8 py-6 bg-stone-900 text-white flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-gold-500 text-stone-950 flex items-center justify-center font-bold">
+    <div id="modal-dashboard" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/70 backdrop-blur-xs hidden p-2 sm:p-4">
+        <div class="bg-white rounded-3xl w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl border border-stone-200 fade-in overflow-hidden my-auto">
+            <div class="px-4 sm:px-8 py-5 bg-stone-900 text-white flex items-center justify-between gap-2">
+                <div class="flex items-center space-x-3 min-w-0">
+                    <div class="w-10 h-10 rounded-xl bg-gold-500 text-stone-950 flex items-center justify-center font-bold flex-shrink-0">
                         <i class="fa-solid fa-gauge-high"></i>
                     </div>
-                    <div>
-                        <h3 class="font-serif font-bold text-xl">Admin Management Dashboard</h3>
-                        <p class="text-xs text-stone-400">Add, edit, sort, and manage portfolio items</p>
+                    <div class="min-w-0">
+                        <h3 class="font-serif font-bold text-lg sm:text-xl truncate">Admin Management Dashboard</h3>
+                        <p class="text-xs text-stone-400 truncate">Add, edit, sort, and manage portfolio items</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <button onclick="openEntryModal()" class="inline-flex items-center px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-600 text-stone-950 font-semibold text-xs transition-all shadow-md">
-                        <i class="fa-solid fa-plus mr-1.5"></i> New Entry
+                <div class="flex items-center space-x-2 flex-shrink-0">
+                    <button onclick="openEntryModal()" class="inline-flex items-center px-3 sm:px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-600 text-stone-950 font-semibold text-xs transition-all shadow-md">
+                        <i class="fa-solid fa-plus sm:mr-1.5"></i> <span class="hidden sm:inline">New Entry</span>
                     </button>
                     <!-- LOGOUT BUTTON -->
-                    <button onclick="handleLogout()" class="inline-flex items-center px-3 py-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-300 font-semibold text-xs transition-all border border-stone-700">
-                        <i class="fa-solid fa-right-from-bracket mr-1.5 text-red-400"></i> Logout
+                    <button onclick="handleLogout()" class="inline-flex items-center px-2.5 sm:px-3 py-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-300 font-semibold text-xs transition-all border border-stone-700" title="Logout">
+                        <i class="fa-solid fa-right-from-bracket text-red-400 sm:mr-1.5"></i> <span class="hidden sm:inline">Logout</span>
                     </button>
                     <button onclick="closeModal('modal-dashboard')" class="text-stone-400 hover:text-white p-2">
                         <i class="fa-solid fa-xmark text-lg"></i>
