@@ -688,11 +688,19 @@
             const indicator = document.createElement('div');
             indicator.id = 'sync-indicator';
             indicator.className = 'fixed bottom-4 right-4 bg-stone-900 text-white px-4 py-2 rounded-xl text-xs shadow-lg z-50 flex items-center space-x-2';
+            
+            // If on GitHub Pages (static host), prompt for JSON export backup instead of failing API call
+            if (window.location.hostname.includes('github.io')) {
+                indicator.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-yellow-400"></i><span>GitHub Pages is static. Changes updated locally. Export JSON to commit updates.</span>`;
+                document.body.appendChild(indicator);
+                setTimeout(() => indicator.remove(), 5000);
+                return;
+            }
+
             indicator.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-gold-500"></i><span>Syncing with GitHub globally...</span>`;
             document.body.appendChild(indicator);
 
             try {
-                // Call our serverless API endpoint
                 const response = await fetch('/api/save-portfolio', {
                     method: 'POST',
                     headers: {
