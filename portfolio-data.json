@@ -576,5 +576,17 @@
     "link": "https://wa.me/917742766925",
     "customFields": [],
     "order": 5
+  },
+  {
+    "id": "item-1791903746986",
+    "category": "academic",
+    "listType": "seminars",
+    "title": "Short-term Course on 'Trajectories of Popular Culture and Globalization'",
+    "authors": "P. G. D. A. V. College (University of Delhi)",
+    "year": "2021",
+    "description": "",
+    "link": "",
+    "customFields": [],
+    "order": 2
   }
 ]
