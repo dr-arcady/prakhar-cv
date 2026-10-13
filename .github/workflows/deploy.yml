@@ -23,26 +23,11 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GH_PAT }}
-
-      - name: Inject GitHub Config into index.html
-        run: |
-          if [ -f index.html ]; then
-            sed -i 's|<head>|<head><script>window.GH_CONFIG = { repo: "${{ github.repository }}", token: "${{ secrets.GH_PAT }}" };</script>|g' index.html
-          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
-      - name: Install System Dependencies for Puppeteer
-        run: |
-          sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-            libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 \
-            libxcomposite1 libxdamage1 libxrandr2 libgbm1 libasound2
 
       - name: Install NPM Dependencies
         run: npm install
@@ -55,7 +40,10 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add "Prakhar Srivastava - CV.pdf"
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-generate PDF CV [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "Auto-generate PDF CV [skip ci]"
+            git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git HEAD:main
+          )
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
