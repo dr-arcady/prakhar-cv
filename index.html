@@ -821,21 +821,45 @@ async function saveData() {
                 method: 'PUT',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    message: 'Update profile and portfolio data via admin panel',
+                    message: 'Update profile and portfolio data via admin panel [skip ci]',
                     content: contentEncoded,
                     sha: fileData.sha
                 })
             });
 
             if (putRes.ok) {
-                indicator.innerHTML = `<i class="fa-solid fa-check text-green-400"></i><span>Synced successfully!</span>`;
+                // Automatically dispatch the workflow so GitHub Pages builds the new changes instantly
+                await fetch(`https://api.github.com/repos/${repo}/actions/workflows/deploy.yml/dispatches`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ref: 'main' })
+                });
+
+                indicator.innerHTML = `<i class="fa-solid fa-check text-green-400"></i><span>Synced & rebuilding Pages!</span>`;
                 setTimeout(() => indicator.remove(), 3500);
             }
         } catch (err) {
             console.error(err);
+            indicator.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-400"></i><span>Sync error. Check console.</span>`;
+            setTimeout(() => indicator.remove(), 4000);
         }
         return;
     }
+
+    try {
+        const response = await fetch('/api/save-portfolio', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        if (response.ok) {
+            indicator.innerHTML = `<i class="fa-solid fa-check text-green-400"></i><span>Synced & deployed!</span>`;
+            setTimeout(() => indicator.remove(), 3000);
+        }
+    } catch (err) {
+        console.error(err);
+    }
+}
 
     try {
         const response = await fetch('/api/save-portfolio', {
