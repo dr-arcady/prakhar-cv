@@ -2,7 +2,6 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 
-// Simple Markdown parser helper for bold (**text**) and italic (*text*)
 function parseMarkdown(text) {
     if (!text) return '';
     return text
@@ -16,7 +15,24 @@ async function generatePDF() {
     const dataPath = path.resolve(__dirname, 'portfolio-data.json');
     const portfolioData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 
-    // Load and convert QR code image to base64 for reliable rendering in Puppeteer
+    // Default configuration matching index.html
+    const defaultListsConfig = {
+        academic: [
+            { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
+            { key: 'publications', title: 'Publications', region: 'main', order: 2 },
+            { key: 'presentations', title: 'Presentations & Conferences', region: 'main', order: 3 },
+            { key: 'seminars', title: 'Seminars, Courses & More', region: 'main', order: 4 },
+            { key: 'background', title: 'Education & Background', region: 'sidebar', order: 1 },
+            { key: 'skills', title: 'Skills & Expertise', region: 'sidebar', order: 2 },
+            { key: 'extracurriculars', title: 'Extracurriculars', region: 'sidebar', order: 3 },
+            { key: 'socials', title: 'Socials & Links', region: 'sidebar', order: 4 },
+            { key: 'references', title: 'References', region: 'sidebar', order: 5 }
+        ],
+        creative: [
+            { key: 'creative-works', title: 'Creative Portfolio', region: 'main', order: 1 }
+        ]
+    };
+
     let qrCodeBase64 = '';
     const qrImagePath = path.resolve(__dirname, 'CV Vercel QR hovercode.png');
     if (fs.existsSync(qrImagePath)) {
@@ -24,16 +40,16 @@ async function generatePDF() {
         qrCodeBase64 = `data:image/png;base64,${qrImageBuffer.toString('base64')}`;
     }
 
-    const filterList = (type) => portfolioData.filter(i => i.listType === type).sort((a, b) => (a.order || 0) - (b.order || 0));
+    const filterList = (listType) => portfolioData.filter(i => i.listType === listType).sort((a, b) => (a.order || 0) - (b.order || 0));
 
-    // Dynamic contact extraction from socials
     const socialsList = filterList('socials');
     const emailItem = socialsList.find(i => i.title.toLowerCase() === 'email');
     const phoneItem = socialsList.find(i => i.title.toLowerCase() === 'phone');
     const contactEmail = emailItem ? (emailItem.description || emailItem.link || '') : '';
     const contactPhone = phoneItem ? (phoneItem.description || phoneItem.link || '') : '';
 
-    const renderItems = (items) => items.map(item => `
+    // Render items for Main Area
+    const renderMainItems = (items) => items.map(item => `
         <div style="margin-bottom: 15px; border-left: 2px solid #334155; padding-left: 12px; page-break-inside: avoid; break-inside: avoid;">
             <div style="font-family: 'Playfair Display', Georgia, serif; font-weight: bold; font-size: 13px; color: #0f172a; margin-bottom: 3px;">
                 ${parseMarkdown(item.title || '')} 
@@ -58,60 +74,78 @@ async function generatePDF() {
         </div>
     `).join('');
 
-    const renderSidebarItems = (items) => items.map(item => {
-        const titleHtml = item.link && item.listType === 'background'
-            ? `<a href="${item.link}" style="color: #1e3a8a; text-decoration: none;">${parseMarkdown(item.title || '')}</a>`
-            : parseMarkdown(item.title || '');
+    // Render items for Sidebar
+    const renderSidebarSection = (listConfig) => {
+        const items = filterList(listConfig.key);
+        if (items.length === 0 && listConfig.key !== 'socials') return '';
 
-        const authorsHtml = item.link && item.listType === 'extracurriculars'
-            ? `<a href="${item.link}" style="color: #1e3a8a; text-decoration: none;">${parseMarkdown(item.authors || '')}</a>`
-            : parseMarkdown(item.authors || '');
-
-        return `
-            <div style="margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid;">
-                <div style="font-weight: bold; color: #0f172a;">
-                    ${titleHtml} <span style="float: right; font-weight: normal; color: #64748b; font-size: 10px;">${item.year || ''}</span>
-                </div>
-                ${item.authors ? `<div style="color: #334155; margin-top: 2px; font-weight: 500;">${authorsHtml}</div>` : ''}
-                ${item.description ? `<div style="color: #64748b; margin-top: 2px; line-height: 1.35;">${parseMarkdown(item.description)}</div>` : ''}
-                ${item.customFields && item.customFields.length > 0 ? `
-                    <div style="font-size: 10px; color: #475569; margin-top: 3px; border-top: 1px dashed #cbd5e1; padding-top: 3px;">
-                        ${item.customFields.map(cf => {
-                            const keyTrim = cf.key ? cf.key.trim() : '';
-                            const valTrim = cf.value || '';
-                            return `<span>${keyTrim ? `<strong>${keyTrim}:</strong> ` : ''}${valTrim}</span>`;
-                        }).join(' | ')}
+        if (listConfig.key === 'socials') {
+            return `
+                <div class="sidebar-section">
+                    <div class="sidebar-heading">${listConfig.title}</div>
+                    <div style="padding: 10px; font-size: 11px;">
+                        ${socialsList.map(item => {
+                            let href = item.link || '#';
+                            if (item.title.toLowerCase() === 'email' && !href.startsWith('mailto:')) href = 'mailto:' + item.description;
+                            if (item.title.toLowerCase() === 'phone' && !href.startsWith('tel:')) href = 'tel:' + item.description;
+                            const displayText = item.description || item.link || '';
+                            return `
+                                <div style="margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid;">
+                                    <div style="font-weight: 600; color: #0f172a; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px;">${parseMarkdown(item.title)}</div>${item.link ? `<div><a href="${href}" style="color: #1e3a8a; text-decoration: none;">${displayText}</a></div>` : `<div style="color: #475569;">${displayText}</div>`}
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
-                ` : ''}
-            </div>
-        `;
-    }).join('');
-
-    const renderSocialsItems = (items) => items.map(item => {
-        let href = item.link || '#';
-        if (item.title.toLowerCase() === 'email' && !href.startsWith('mailto:')) href = 'mailto:' + item.description;
-        if (item.title.toLowerCase() === 'phone' && !href.startsWith('tel:')) href = 'tel:' + item.description;
-
-        const displayText = item.description || item.link || '';
+                </div>
+            `;
+        }
 
         return `
-            <div style="margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid;">
-                <div style="font-weight: 600; color: #0f172a; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px;">${parseMarkdown(item.title)}</div>
-                ${item.link ? `
-                    <div><a href="${href}" style="color: #1e3a8a; text-decoration: none;">${displayText}</a></div>
-                ` : `<div style="color: #475569;">${displayText}</div>`}
+            <div class="sidebar-section">
+                <div class="sidebar-heading">${listConfig.title}</div>
+                <div style="padding: 10px; font-size: 11px;">
+                    ${items.map(item => `
+                        <div style="margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid;">
+                            <div style="font-weight: bold; color: #0f172a;">
+                                ${parseMarkdown(item.title || '')} <span style="float: right; font-weight: normal; color: #64748b; font-size: 10px;">${item.year || ''}</span>
+                            </div>
+                            ${item.authors ? `<div style="color: #334155; margin-top: 2px; font-weight: 500;">${parseMarkdown(item.authors)}</div>` : ''}
+                            ${item.description ? `<div style="color: #64748b; margin-top: 2px; line-height: 1.35;">${parseMarkdown(item.description)}</div>` : ''}
+                            ${item.customFields && item.customFields.length > 0 ? `
+                                <div style="font-size: 10px; color: #475569; margin-top: 3px; border-top: 1px dashed #cbd5e1; padding-top: 3px;">
+                                    ${item.customFields.map(cf => {
+                                        const keyTrim = cf.key ? cf.key.trim() : '';
+                                        const valTrim = cf.value || '';
+                                        return `<span>${keyTrim ? `<strong>${keyTrim}:</strong> ` : ''}${valTrim}</span>`;
+                                    }).join(' | ')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    };
+
+    // Build academic & creative lists dynamically
+    const allLists = [...defaultListsConfig.academic, ...defaultListsConfig.creative];
+    allLists.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+    const mainLists = allLists.filter(l => l.region !== 'sidebar');
+    const sidebarLists = allLists.filter(l => l.region === 'sidebar');
+
+    const mainHTML = mainLists.map(l => {
+        const items = filterList(l.key);
+        if (items.length === 0) return '';
+        return `
+            <div class="section-group">
+                <div class="section-heading">${l.title}</div>
+                ${renderMainItems(items)}
             </div>
         `;
     }).join('');
 
-    // Pre-evaluate work items to conditionally render section
-    const workItems = filterList('work');
-    const workSectionHTML = workItems.length > 0 ? `
-        <div class="section-group">
-            <div class="section-heading">Work Experience</div>
-            ${renderItems(workItems)}
-        </div>
-    ` : '';
+    const sidebarHTML = sidebarLists.map(l => renderSidebarSection(l)).join('');
 
     const htmlTemplate = `
     <!DOCTYPE html>
@@ -124,58 +158,19 @@ async function generatePDF() {
             h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; margin: 0; }
             table { width: 100%; border-collapse: collapse; }
             td { vertical-align: top; }
-            .section-group {
-                margin-top: 28px;
-                margin-bottom: 24px;
-            }
-            .section-group:first-of-type {
-                margin-top: 0;
-            }
+            .section-group { margin-top: 28px; margin-bottom: 24px; }
+            .section-group:first-of-type { margin-top: 0; }
             .section-heading {
                 font-family: 'Playfair Display', Georgia, serif;
-                font-size: 12px;
-                font-weight: bold;
-                color: #ffffff;
-                background-color: #0f172a;
-                padding: 6px 10px;
-                margin-bottom: 14px;
-                text-transform: uppercase;
-                letter-spacing: 0.8px;
-                page-break-after: avoid;
-                break-after: avoid;
+                font-size: 12px; font-weight: bold; color: #ffffff; background-color: #0f172a;
+                padding: 6px 10px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.8px;
             }
-            .sidebar-section {
-                background: #ffffff;
-                border-radius: 6px;
-                border: 1px solid #e2e8f0;
-                margin-bottom: 16px;
-                overflow: hidden;
-                page-break-inside: auto;
-                break-inside: auto;
-            }
-            .sidebar-heading {
-                background: #0f172a; 
-                color: #ffffff; 
-                font-size: 10px; 
-                text-transform: uppercase; 
-                padding: 6px 10px; 
-                font-weight: bold; 
-                letter-spacing: 0.5px; 
-                font-family: 'Playfair Display', Georgia, serif;
-                page-break-after: avoid;
-                break-after: avoid;
-            }
-            .cv-footer {
-                margin-top: 30px;
-                border-top: 1px solid #cbd5e1;
-                padding-top: 10px;
-                page-break-inside: avoid;
-                break-inside: avoid;
-            }
+            .sidebar-section { background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; overflow: hidden; }
+            .sidebar-heading { background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif; }
+            .cv-footer { margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 10px; page-break-inside: avoid; }
         </style>
     </head>
     <body style="padding: 20px;">
-        <!-- Header -->
         <div style="border-bottom: 1px solid #cbd5e1; padding-bottom: 12px; margin-bottom: 18px;">
             <table style="width: 100%;">
                 <tr>
@@ -191,64 +186,13 @@ async function generatePDF() {
             </table>
         </div>
 
-        <!-- Layout Table -->
         <table>
             <tr>
-                <!-- Left Sidebar -->
                 <td style="width: 30%; padding-right: 20px;">
-                    <div class="sidebar-section">
-                        <div class="sidebar-heading">Education & Background</div>
-                        <div style="padding: 10px; font-size: 11px;">
-                            ${renderSidebarItems(filterList('background'))}
-                        </div>
-                    </div>
-                    <div class="sidebar-section">
-                        <div class="sidebar-heading">Skills & Expertise</div>
-                        <div style="padding: 10px; font-size: 11px;">
-                            ${renderSidebarItems(filterList('skills'))}
-                        </div>
-                    </div>
-                    <div class="sidebar-section">
-                        <div class="sidebar-heading">Extracurriculars</div>
-                        <div style="padding: 10px; font-size: 11px;">
-                            ${renderSidebarItems(filterList('extracurriculars'))}
-                        </div>
-                    </div>
-                    <div class="sidebar-section">
-                        <div class="sidebar-heading">Socials & Links</div>
-                        <div style="padding: 10px; font-size: 11px;">
-                            ${renderSocialsItems(socialsList)}
-                        </div>
-                    </div>
-                    <div class="sidebar-section">
-                        <div class="sidebar-heading">References</div>
-                        <div style="padding: 10px; font-size: 11px;">
-                            ${renderSidebarItems(filterList('references'))}
-                        </div>
-                    </div>
+                    ${sidebarHTML}
                 </td>
-
-                <!-- Right Main Column -->
                 <td style="width: 70%;">
-                    ${workSectionHTML}
-                    <div class="section-group">
-                        <div class="section-heading">Publications</div>
-                        ${renderItems(filterList('publications'))}
-                    </div>
-                    <div class="section-group">
-                        <div class="section-heading">Presentations & Conferences</div>
-                        ${renderItems(filterList('presentations'))}
-                    </div>
-                    <div class="section-group">
-                        <div class="section-heading">Seminars & Courses</div>
-                        ${renderItems(filterList('seminars'))}
-                    </div>
-                    <div class="section-group">
-                        <div class="section-heading">Creative Portfolio</div>
-                        ${renderItems(filterList('creative-works'))}
-                    </div>
-
-                    <!-- CV Footer -->
+                    ${mainHTML}
                     <div class="cv-footer">
                         <table style="width: 100%;">
                             <tr>
@@ -256,8 +200,8 @@ async function generatePDF() {
                                     <p style="font-size: 11px; color: #334155; margin: 0 0 2px 0; font-weight: 500;">
                                         Kindly visit here to see the latest version of this CV and to access weblinks of resources:
                                     </p>
-                                    <a href="https://dr-prakhar-cv.vercel.app" style="font-size: 11px; color: #1e3a8a; text-decoration: none; font-weight: bold;">
-                                        dr-prakhar-cv.vercel.app/
+                                    <a href="https://dr-prakhar-cv.vercel.app/" style="font-size: 11px; color: #1e3a8a; text-decoration: none; font-weight: bold;">
+                                        https://dr-prakhar-cv.vercel.app/
                                     </a>
                                 </td>
                                 <td style="text-align: right; vertical-align: middle; width: 60px;">
@@ -274,23 +218,13 @@ async function generatePDF() {
     `;
 
     console.log('Launching headless browser...');
-    const browser = await puppeteer.launch({
-        headless: 'new',
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
+    const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     const page = await browser.newPage();
-
     await page.setContent(htmlTemplate, { waitUntil: 'domcontentloaded' });
 
     const pdfPath = path.resolve(__dirname, 'Prakhar Srivastava - CV.pdf');
     console.log(`Generating PDF to ${pdfPath}...`);
-
-    await page.pdf({
-        path: pdfPath,
-        format: 'A4',
-        printBackground: true,
-        margin: { top: '12mm', bottom: '12mm', left: '12mm', right: '12mm' }
-    });
+    await page.pdf({ path: pdfPath, format: 'A4', printBackground: true, margin: { top: '12mm', bottom: '12mm', left: '12mm', right: '12mm' } });
 
     await browser.close();
     console.log('PDF generated successfully!');
