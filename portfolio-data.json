@@ -1,614 +1,634 @@
-[
-  {
-    "id": "item-1",
-    "category": "academic",
-    "listType": "publications",
-    "year": "2024",
-    "title": "Artificial Intelligence and the Crisis of Human Civilization through Black Mirror",
-    "authors": "Srivastava, P., & Prakash, V.",
-    "description": "A study of contemporaneous realism of the hazards of AI as depicted in dystopian futures as depicted in *Black Mirror*.",
-    "link": "https://mzuhssjournal.in/images/resources/v10n1/prakhar.pdf",
-    "customFields": [
-      {
-        "key": "Journal",
-        "value": "Mizoram University Journal of Humanities and Social Sciences"
-      },
-      {
-        "key": "Issue",
-        "value": "Vol. X, Issue 1"
-      },
-      {
-        "key": "ISSN (Print)",
-        "value": "2395-7352"
-      },
-      {
-        "key": "ISSN (Online)",
-        "value": "2581-6780"
-      }
-    ],
-    "order": 4
+{
+  "profile": {
+    "name": "Dr. Prakhar Srivastava",
+    "subtitle": "Scholar & Creative Writer",
+    "degree": "Ph.D., English",
+    "bio": "Bridging rigorous interdisciplinary research, academic publications, and modern pedagogy for higher education.\n\nExploring intersections of literature, culture, film studies, and digital humanities.\n\nPushing the frontiers of creative exercises across mediums.",
+    "card1": {
+      "title": "Academics & Research",
+      "icon": "fa-graduation-cap",
+      "bullet": "Peer-reviewed publications, conference presentations, specialization in digital tools, and credentials including background education, skills, and references.",
+      "linkText": "View Academic Record"
+    },
+    "card2": {
+      "title": "Creative Portfolio",
+      "icon": "fa-feather-pointed",
+      "bullet": "Curated demonstrations of extracurricular interests, spanning public-facing writing, web-development, and more.",
+      "linkText": "Explore Creative Works"
+    }
   },
-  {
-    "id": "item-2",
-    "category": "academic",
-    "listType": "publications",
-    "year": "2024",
-    "title": "A Man Alone in a City: Reading Vikramaditya Motwane’s ‘Trapped’ as an Allegory on Isolation and Masculinity",
-    "authors": "Srivastava, P.",
-    "description": "A study of the socio-economic representations of gender roles as depicted in the Hindi language film *'Trapped'*.",
-    "link": "https://drive.google.com/file/d/1PCOpltWzJmr2M0OK5S_7xZ1xPxAhl0rW/view?usp=sharing",
-    "customFields": [
-      {
-        "key": "Type",
-        "value": "Chapter in Book"
-      },
-      {
-        "key": "Publisher",
-        "value": "Yking Books, Jaipur"
-      },
-      {
-        "key": "ISBN",
-        "value": "8196924321"
-      }
-    ],
-    "order": 5
-  },
-  {
-    "id": "item-3",
-    "category": "academic",
-    "listType": "presentations",
-    "year": "2017",
-    "title": "Representation of Nature in Gulzar’s Poetry",
-    "authors": "Srivastava, P.",
-    "description": "Presented an eco-critical analysis of the aesthetic and cultural aspects of select poems of Gulzar through their English translations.",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Conference",
-        "value": "5th Rajasthan Science Congress (RSC)"
-      },
-      {
-        "key": "University",
-        "value": "Amity University Rajasthan"
-      }
-    ],
-    "order": 5
-  },
-  {
-    "id": "item-4",
-    "category": "academic",
-    "listType": "seminars",
-    "year": "2025",
-    "title": "[Faculty Development Program] Artificial Intelligence in Multidisciplinary Research",
-    "authors": "Xavier Institute for Research and Development",
-    "description": "",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Duration",
-        "value": "December 15-21, 2025"
-      }
-    ],
-    "order": 1
-  },
-  {
-    "id": "item-5",
-    "category": "academic",
-    "listType": "background",
-    "year": "2021-2026",
-    "title": "Ph.D. in English",
-    "authors": "Central University of Rajasthan",
-    "description": "An interdisciplinary study of formalist narratology, game studies, and cybertext. Including certification in Pedagogy for Higher Education with Practice Based Teaching Assessment.",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Supervisor",
-        "value": "Dr. Ved Prakash"
-      }
-    ],
-    "order": 1
-  },
-  {
-    "id": "item-6",
-    "category": "academic",
-    "listType": "skills",
-    "year": "Proficient",
-    "title": " Pedagogy for Higher Education",
-    "authors": "Using 'flipped classroom' and other novel methods",
-    "description": "Experience of teaching MA courses like Film Studies, Environmental Humanities, and others.",
-    "link": "",
-    "customFields": [],
-    "order": 2
-  },
-  {
-    "id": "item-7",
-    "category": "academic",
-    "listType": "extracurriculars",
-    "year": "2016-2017",
-    "title": "President, Adakari: Dramatics Club",
-    "authors": " Amity University Rajasthan",
-    "description": "Directing stage plays, developing scripts and stories, performing, and managing production.",
-    "link": "",
-    "customFields": [],
-    "order": 3
-  },
-  {
-    "id": "item-8",
-    "category": "academic",
-    "listType": "socials",
-    "year": "",
-    "title": "LinkedIn",
-    "authors": "",
-    "description": "linkedin.com/in/dr-prakhar-s612/",
-    "link": "https://www.linkedin.com/in/dr-prakhar-s612/",
-    "customFields": [],
-    "order": 2
-  },
-  {
-    "id": "item-9",
-    "category": "academic",
-    "listType": "references",
-    "year": "",
-    "title": "Prof. Sanjay Arora",
-    "authors": "Professor, Central University of Rajasthan",
-    "description": "sanjayarora@curaj.ac.in | +91 9829345035",
-    "link": "",
-    "customFields": [
-      {
-        "key": "",
-        "value": "Teacher"
-      }
-    ],
-    "order": 1
-  },
-  {
-    "id": "item-10",
-    "category": "creative",
-    "listType": "creative-works",
-    "year": "Since 2025",
-    "title": "WreckRoom",
-    "authors": "Game Platform",
-    "description": "A collection of minimalist word and trivia games; a window to learning about various subjects through single player and multiplayer modes of play. ",
-    "link": "https://wreckroom.vercel.app/",
-    "customFields": [
-      {
-        "key": "Category",
-        "value": "Web Application"
-      }
-    ],
-    "order": 1
-  },
-  {
-    "id": "item-1791802140448",
-    "category": "academic",
-    "listType": "publications",
-    "title": "Dystopia and the Quest for Survival: Reading ‘The Platform’ in the post-Pandemic World",
-    "authors": "Prakash, V., & Srivastava, P.",
-    "year": "2023",
-    "description": "A look into the depiction of scarcity and hierarchy as seen in the film *'The Platform'*, through the lens of economic disparity during the COVID-19 pandemic. ",
-    "link": "http://literaryvoice.in/wp content/uploads/2025/03/LV-SEPT-2023.pdf",
-    "customFields": [
-      {
-        "key": "Journal",
-        "value": "Literary Voice [Web of Science]"
-      },
-      {
-        "key": "Issue",
-        "value": "Number 21, Volume 1"
-      },
-      {
-        "key": "ISSN (Print)",
-        "value": "2277-4521"
-      },
-      {
-        "key": "ISSN (Online)",
-        "value": "2583-8199"
-      }
-    ],
-    "order": 6
-  },
-  {
-    "id": "item-1791802629498",
-    "category": "academic",
-    "listType": "publications",
-    "title": "The Body and Beyond: The Posthuman Horrors of ‘Soma’",
-    "authors": "Srivastava, P.",
-    "year": "2021",
-    "description": "A study of the philosophical storytelling of the survival horror video game through the lens of posthumanism.",
-    "link": "https://drive.google.com/file/d/1g8mSDS9IT4JFTpH21nZ3l4keJDl73dUe/view?usp=sharing",
-    "customFields": [
-      {
-        "key": "Journal",
-        "value": "Indraprasth"
-      },
-      {
-        "key": "Issue",
-        "value": "Volume IX & X"
-      },
-      {
-        "key": "ISSN",
-        "value": "2278-7208"
-      }
-    ],
-    "order": 7
-  },
-  {
-    "id": "item-1791803503134",
-    "category": "academic",
-    "listType": "publications",
-    "title": "The Study of Complexity in Film Narratives",
-    "authors": "Srivastava, P.",
-    "year": "2020",
-    "description": "Master's program dissertation; a critique of narrative structures in select Hollywood films and their relationship with the nature of the medium.",
-    "link": "",
-    "customFields": [
-      {
-        "key": "",
-        "value": "Dissertation"
-      },
-      {
-        "key": "University",
-        "value": "Central University of Rajasthan"
-      }
-    ],
-    "order": 8
-  },
-  {
-    "id": "item-1791803698593",
-    "category": "academic",
-    "listType": "publications",
-    "title": "The Art of Engagement: A Cross-textual Study of Interactive Narratives in the 21st Century Storytelling",
-    "authors": "Srivastava, P.",
-    "year": "2026",
-    "description": "An interdisciplinary study of narratology, ludology, and ergodic literature, theorizing novel paradigms of user agency in interactive stories.",
-    "link": "https://shodhganga.inflibnet.ac.in/handle/10603/704078",
-    "customFields": [
-      {
-        "key": "",
-        "value": "PhD thesis"
-      },
-      {
-        "key": "University",
-        "value": "Central University of Rajasthan"
-      }
-    ],
-    "order": 3
-  },
-  {
-    "id": "item-1791803845057",
-    "category": "academic",
-    "listType": "presentations",
-    "title": "The Body and Beyond: The Posthuman Horrors of ‘Soma’",
-    "authors": "Srivastava, P.",
-    "year": "2022",
-    "description": "A study of the philosophical storytelling of the survival horror video game through the lens of posthumanism.",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Conference",
-        "value": "International Conference on Contemporary Perspectives in English Language and Literature and Cultural Studies"
-      },
-      {
-        "key": "University",
-        "value": "Chandigarh University, Punjab"
-      }
-    ],
-    "order": 4
-  },
-  {
-    "id": "item-1791803957007",
-    "category": "academic",
-    "listType": "presentations",
-    "title": "A Man Alone in a City: Reading Vikramaditya Motwane’s ‘Trapped’ as an Allegory on Isolation and Masculinity",
-    "authors": "Srivastava, P.",
-    "year": "2023",
-    "description": "",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Conference",
-        "value": "International Conference: Drawing Meaning Through Visual Narratives"
-      },
-      {
-        "key": "University",
-        "value": "Presidency University, Bengaluru"
-      }
-    ],
-    "order": 3
-  },
-  {
-    "id": "item-1791804149786",
-    "category": "academic",
-    "listType": "presentations",
-    "title": "Story, Game, and the Lived Experience: The Crisis of Defining New Media Forms Between Popular Culture and Academia",
-    "authors": "Srivastava, P.",
-    "year": "2023",
-    "description": "An interdisciplinary study of the shifting vocabulary around newly emerging forms of media in the digital era of creation and publication.",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Conference",
-        "value": "4th International E-conference: Exploring Crisis in Literary and Cultural Studies"
-      },
-      {
-        "key": "University",
-        "value": "Central University of Rajasthan"
-      }
-    ],
-    "order": 2
-  },
-  {
-    "id": "item-1791804305002",
-    "category": "academic",
-    "listType": "presentations",
-    "title": "A Portrait of Two Monsters: Investigating Postcolonial Enunciation through Ram V’s ‘These Savage Shores’",
-    "authors": "Srivastava, P.",
-    "year": "2025",
-    "description": "A study of the intersection of the gothic visual form with the postcolonial themes in Ram V.'s graphic novel.",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Conference",
-        "value": "SRM International Literary Conference: Indian Literature and Culture"
-      },
-      {
-        "key": "University",
-        "value": "SRM University Delhi-NCR, Sonepat"
-      }
-    ],
-    "order": 1
-  },
-  {
-    "id": "item-1791807867246",
-    "category": "academic",
-    "listType": "publications",
-    "title": "[UPCOMING] On Walking: Mobility, Leisure, and Protest in Ray Bradbury's 'The Pedestrian'",
-    "authors": "Prakash, V., & Srivastava, P. ",
-    "year": "2026",
-    "description": "A look at the prescient depiction of surveillance and consumerism in Ray Bradbury's dystopian short story. Selected for publication. ",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Journal",
-        "value": "IIS University Journal of Arts"
-      }
-    ],
-    "order": 2,
-    "linkTarget": "custom",
-    "linkText": ""
-  },
-  {
-    "id": "item-1791807976147",
-    "category": "academic",
-    "listType": "publications",
-    "title": "[UPCOMING] Godhood for the Modern World: The Epistemology of Belief and Testimony in ‘The Man from Earth’",
-    "authors": "Srivastava, P.",
-    "year": "2027",
-    "description": "A study of the varied manners of constructing and critiquing beliefs as depicted in Jerome Bixby's script of the film. Selected for publication.  ",
-    "link": "https://drive.google.com/file/d/1bgoHXJkEFQwqHpiuiftpAAVgPXETHimf/view?usp=sharing",
-    "customFields": [
-      {
-        "key": "Journal",
-        "value": "Literary Voice [Web of Science]"
-      }
-    ],
-    "order": 1,
-    "linkTarget": "custom",
-    "linkText": ""
-  },
-  {
-    "id": "item-1791817342809",
-    "category": "academic",
-    "listType": "background",
-    "title": "M.A. English",
-    "authors": "Central University of Rajasthan",
-    "year": "2018-2020",
-    "description": "",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Score",
-        "value": "7.75 GPA | 77.5%"
-      }
-    ],
-    "order": 2
-  },
-  {
-    "id": "item-1791817449942",
-    "category": "academic",
-    "listType": "background",
-    "title": "B.A. (Hons.) English",
-    "authors": "Amity University Rajasthan",
-    "year": "2015-2018",
-    "description": "Including a minor track in Human Psychology",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Score",
-        "value": "8.55 GPA | 81.23%"
-      }
-    ],
-    "order": 3
-  },
-  {
-    "id": "item-1791817515200",
-    "category": "academic",
-    "listType": "background",
-    "title": "12th",
-    "authors": " Central Board of Secondary Education",
-    "year": "2015",
-    "description": "",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Score",
-        "value": "66.6%"
-      }
-    ],
-    "order": 4
-  },
-  {
-    "id": "item-1791817547009",
-    "category": "academic",
-    "listType": "background",
-    "title": "10th",
-    "authors": " Central Board of Secondary Education",
-    "year": "2013",
-    "description": "",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Score",
-        "value": "8.80 GPA"
-      }
-    ],
-    "order": 5
-  },
-  {
-    "id": "item-1791820535797",
-    "category": "academic",
-    "listType": "references",
-    "title": "Dr. Ved Prakash",
-    "authors": "Assistant Professor, Central University of Rajasthan",
-    "year": "",
-    "description": "vedprakash@curaj.ac.in | +91 7426026320",
-    "link": "",
-    "customFields": [
-      {
-        "key": "",
-        "value": "Ph.D. Supervisor"
-      }
-    ],
-    "order": 2
-  },
-  {
-    "id": "item-1791820715917",
-    "category": "academic",
-    "listType": "socials",
-    "title": "Email",
-    "authors": "",
-    "year": "",
-    "description": "prakharsrivastava6@gmail.com",
-    "link": "mailto:prakharsrivastava6@gmail.com",
-    "customFields": [],
-    "order": 3
-  },
-  {
-    "id": "item-1791821395366",
-    "category": "academic",
-    "listType": "socials",
-    "title": "Phone",
-    "authors": "",
-    "year": "",
-    "description": "+91 77427 66925",
-    "link": "tel:+917742766925",
-    "customFields": [],
-    "order": 4
-  },
-  {
-    "id": "item-1791821699817",
-    "category": "academic",
-    "listType": "socials",
-    "title": "ORCID",
-    "authors": "",
-    "year": "",
-    "description": "0009-0003-1060-2339",
-    "link": "https://orcid.org/0009-0003-1060-2339",
-    "customFields": [],
-    "order": 1
-  },
-  {
-    "id": "item-1791824222461",
-    "category": "academic",
-    "listType": "skills",
-    "title": "Digital Tools",
-    "authors": "Web design, data management, visual art, digital audio workstations",
-    "year": "Beginner",
-    "description": "Rudimentary understanding of a variety of tools supported by public resources on the internet.",
-    "link": "",
-    "customFields": [],
-    "order": 3
-  },
-  {
-    "id": "item-1791824492476",
-    "category": "academic",
-    "listType": "skills",
-    "title": "Multidisciplinary Research and Writing",
-    "authors": "Across varied disciplines within humanities and literature",
-    "year": "Proficient",
-    "description": "Use of digital and AI tools for ethical qualitative research; writing as per MLA guidelines and more.",
-    "link": "",
-    "customFields": [],
-    "order": 1
-  },
-  {
-    "id": "item-1791824876920",
-    "category": "academic",
-    "listType": "extracurriculars",
-    "title": "Winner of Scriptwriting Competition",
-    "authors": "Amity Leadership Fest",
-    "year": "2017",
-    "description": "Writing a script within stipulated time based on a prompt.",
-    "link": "",
-    "customFields": [],
-    "order": 2
-  },
-  {
-    "id": "item-1791824975268",
-    "category": "academic",
-    "listType": "extracurriculars",
-    "title": "Co-ordinator, Abhivyakti: Literary Club",
-    "authors": "Central University of Rajasthan",
-    "year": "2020",
-    "description": "Organized and performed in inaugural literary event “Aaghaz: 2K20”. Performed recitation and original musical composition.",
-    "link": "",
-    "customFields": [],
-    "order": 1
-  },
-  {
-    "id": "item-1791827520866",
-    "category": "academic",
-    "listType": "socials",
-    "title": "Whatsapp",
-    "authors": "",
-    "year": "",
-    "description": "+91 77427 66925",
-    "link": "https://wa.me/917742766925",
-    "customFields": [],
-    "order": 5
-  },
-  {
-    "id": "item-1791903746986",
-    "category": "academic",
-    "listType": "seminars",
-    "title": "[Short-term Course] Trajectories of Popular Culture and Globalization",
-    "authors": "P. G. D. A. V. College (University of Delhi)",
-    "year": "2021",
-    "description": "",
-    "link": "",
-    "customFields": [
-      {
-        "key": "Duration",
-        "value": "September 27-October 8, 2021"
-      }
-    ],
-    "order": 2
-  },
-  {
-    "id": "item-1791955830942",
-    "category": "creative",
-    "listType": "creative-works",
-    "title": "The Mind Alcove",
-    "authors": "Writings on films and popular culture ",
-    "year": "Since 2025",
-    "description": "Thoughts on films and works of popular culture across various mediums through a lens of personal experience.",
-    "link": "https://medium.com/@themindalcove",
-    "customFields": [
-      {
-        "key": "Category",
-        "value": "Blog"
-      }
-    ],
-    "order": 2
-  }
-]
+  "items": [
+    {
+      "id": "item-1",
+      "category": "academic",
+      "listType": "publications",
+      "year": "2024",
+      "title": "Artificial Intelligence and the Crisis of Human Civilization through Black Mirror",
+      "authors": "Srivastava, P., & Prakash, V.",
+      "description": "A study of contemporaneous realism of the hazards of AI as depicted in dystopian futures as depicted in *Black Mirror*.",
+      "link": "https://mzuhssjournal.in/images/resources/v10n1/prakhar.pdf",
+      "customFields": [
+        {
+          "key": "Journal",
+          "value": "Mizoram University Journal of Humanities and Social Sciences"
+        },
+        {
+          "key": "Issue",
+          "value": "Vol. X, Issue 1"
+        },
+        {
+          "key": "ISSN (Print)",
+          "value": "2395-7352"
+        },
+        {
+          "key": "ISSN (Online)",
+          "value": "2581-6780"
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "item-2",
+      "category": "academic",
+      "listType": "publications",
+      "year": "2024",
+      "title": "A Man Alone in a City: Reading Vikramaditya Motwane’s ‘Trapped’ as an Allegory on Isolation and Masculinity",
+      "authors": "Srivastava, P.",
+      "description": "A study of the socio-economic representations of gender roles as depicted in the Hindi language film *'Trapped'*.",
+      "link": "https://drive.google.com/file/d/1PCOpltWzJmr2M0OK5S_7xZ1xPxAhl0rW/view?usp=sharing",
+      "customFields": [
+        {
+          "key": "Type",
+          "value": "Chapter in Book"
+        },
+        {
+          "key": "Publisher",
+          "value": "Yking Books, Jaipur"
+        },
+        {
+          "key": "ISBN",
+          "value": "8196924321"
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "item-3",
+      "category": "academic",
+      "listType": "presentations",
+      "year": "2017",
+      "title": "Representation of Nature in Gulzar’s Poetry",
+      "authors": "Srivastava, P.",
+      "description": "Presented an eco-critical analysis of the aesthetic and cultural aspects of select poems of Gulzar through their English translations.",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Conference",
+          "value": "5th Rajasthan Science Congress (RSC)"
+        },
+        {
+          "key": "University",
+          "value": "Amity University Rajasthan"
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "item-4",
+      "category": "academic",
+      "listType": "seminars",
+      "year": "2025",
+      "title": "[Faculty Development Program] Artificial Intelligence in Multidisciplinary Research",
+      "authors": "Xavier Institute for Research and Development",
+      "description": "",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Duration",
+          "value": "December 15-21, 2025"
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "item-5",
+      "category": "academic",
+      "listType": "background",
+      "year": "2021-2026",
+      "title": "Ph.D. in English",
+      "authors": "Central University of Rajasthan",
+      "description": "An interdisciplinary study of formalist narratology, game studies, and cybertext. Including certification in Pedagogy for Higher Education with Practice Based Teaching Assessment.",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Supervisor",
+          "value": "Dr. Ved Prakash"
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "item-6",
+      "category": "academic",
+      "listType": "skills",
+      "year": "Proficient",
+      "title": " Pedagogy for Higher Education",
+      "authors": "Using 'flipped classroom' and other novel methods",
+      "description": "Experience of teaching MA courses like Film Studies, Environmental Humanities, and others.",
+      "link": "",
+      "customFields": [],
+      "order": 2
+    },
+    {
+      "id": "item-7",
+      "category": "academic",
+      "listType": "extracurriculars",
+      "year": "2016-2017",
+      "title": "President, Adakari: Dramatics Club",
+      "authors": " Amity University Rajasthan",
+      "description": "Directing stage plays, developing scripts and stories, performing, and managing production.",
+      "link": "",
+      "customFields": [],
+      "order": 3
+    },
+    {
+      "id": "item-8",
+      "category": "academic",
+      "listType": "socials",
+      "year": "",
+      "title": "LinkedIn",
+      "authors": "",
+      "description": "linkedin.com/in/dr-prakhar-s612/",
+      "link": "https://www.linkedin.com/in/dr-prakhar-s612/",
+      "customFields": [],
+      "order": 2
+    },
+    {
+      "id": "item-9",
+      "category": "academic",
+      "listType": "references",
+      "year": "",
+      "title": "Prof. Sanjay Arora",
+      "authors": "Professor, Central University of Rajasthan",
+      "description": "sanjayarora@curaj.ac.in | +91 9829345035",
+      "link": "",
+      "customFields": [
+        {
+          "key": "",
+          "value": "Teacher"
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "item-10",
+      "category": "creative",
+      "listType": "creative-works",
+      "year": "Since 2025",
+      "title": "WreckRoom",
+      "authors": "Game Platform",
+      "description": "A collection of minimalist word and trivia games; a window to learning about various subjects through single player and multiplayer modes of play. ",
+      "link": "https://wreckroom.vercel.app/",
+      "customFields": [
+        {
+          "key": "Category",
+          "value": "Web Application"
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "item-1791802140448",
+      "category": "academic",
+      "listType": "publications",
+      "title": "Dystopia and the Quest for Survival: Reading ‘The Platform’ in the post-Pandemic World",
+      "authors": "Prakash, V., & Srivastava, P.",
+      "year": "2023",
+      "description": "A look into the depiction of scarcity and hierarchy as seen in the film *'The Platform'*, through the lens of economic disparity during the COVID-19 pandemic. ",
+      "link": "http://literaryvoice.in/wp content/uploads/2025/03/LV-SEPT-2023.pdf",
+      "customFields": [
+        {
+          "key": "Journal",
+          "value": "Literary Voice [Web of Science]"
+        },
+        {
+          "key": "Issue",
+          "value": "Number 21, Volume 1"
+        },
+        {
+          "key": "ISSN (Print)",
+          "value": "2277-4521"
+        },
+        {
+          "key": "ISSN (Online)",
+          "value": "2583-8199"
+        }
+      ],
+      "order": 6
+    },
+    {
+      "id": "item-1791802629498",
+      "category": "academic",
+      "listType": "publications",
+      "title": "The Body and Beyond: The Posthuman Horrors of ‘Soma’",
+      "authors": "Srivastava, P.",
+      "year": "2021",
+      "description": "A study of the philosophical storytelling of the survival horror video game through the lens of posthumanism.",
+      "link": "https://drive.google.com/file/d/1g8mSDS9IT4JFTpH21nZ3l4keJDl73dUe/view?usp=sharing",
+      "customFields": [
+        {
+          "key": "Journal",
+          "value": "Indraprasth"
+        },
+        {
+          "key": "Issue",
+          "value": "Volume IX & X"
+        },
+        {
+          "key": "ISSN",
+          "value": "2278-7208"
+        }
+      ],
+      "order": 7
+    },
+    {
+      "id": "item-1791803503134",
+      "category": "academic",
+      "listType": "publications",
+      "title": "The Study of Complexity in Film Narratives",
+      "authors": "Srivastava, P.",
+      "year": "2020",
+      "description": "Master's program dissertation; a critique of narrative structures in select Hollywood films and their relationship with the nature of the medium.",
+      "link": "",
+      "customFields": [
+        {
+          "key": "",
+          "value": "Dissertation"
+        },
+        {
+          "key": "University",
+          "value": "Central University of Rajasthan"
+        }
+      ],
+      "order": 8
+    },
+    {
+      "id": "item-1791803698593",
+      "category": "academic",
+      "listType": "publications",
+      "title": "The Art of Engagement: A Cross-textual Study of Interactive Narratives in the 21st Century Storytelling",
+      "authors": "Srivastava, P.",
+      "year": "2026",
+      "description": "An interdisciplinary study of narratology, ludology, and ergodic literature, theorizing novel paradigms of user agency in interactive stories.",
+      "link": "https://shodhganga.inflibnet.ac.in/handle/10603/704078",
+      "customFields": [
+        {
+          "key": "",
+          "value": "PhD thesis"
+        },
+        {
+          "key": "University",
+          "value": "Central University of Rajasthan"
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "item-1791803845057",
+      "category": "academic",
+      "listType": "presentations",
+      "title": "The Body and Beyond: The Posthuman Horrors of ‘Soma’",
+      "authors": "Srivastava, P.",
+      "year": "2022",
+      "description": "A study of the philosophical storytelling of the survival horror video game through the lens of posthumanism.",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Conference",
+          "value": "International Conference on Contemporary Perspectives in English Language and Literature and Cultural Studies"
+        },
+        {
+          "key": "University",
+          "value": "Chandigarh University, Punjab"
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "item-1791803957007",
+      "category": "academic",
+      "listType": "presentations",
+      "title": "A Man Alone in a City: Reading Vikramaditya Motwane’s ‘Trapped’ as an Allegory on Isolation and Masculinity",
+      "authors": "Srivastava, P.",
+      "year": "2023",
+      "description": "",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Conference",
+          "value": "International Conference: Drawing Meaning Through Visual Narratives"
+        },
+        {
+          "key": "University",
+          "value": "Presidency University, Bengaluru"
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "item-1791804149786",
+      "category": "academic",
+      "listType": "presentations",
+      "title": "Story, Game, and the Lived Experience: The Crisis of Defining New Media Forms Between Popular Culture and Academia",
+      "authors": "Srivastava, P.",
+      "year": "2023",
+      "description": "An interdisciplinary study of the shifting vocabulary around newly emerging forms of media in the digital era of creation and publication.",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Conference",
+          "value": "4th International E-conference: Exploring Crisis in Literary and Cultural Studies"
+        },
+        {
+          "key": "University",
+          "value": "Central University of Rajasthan"
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "item-1791804305002",
+      "category": "academic",
+      "listType": "presentations",
+      "title": "A Portrait of Two Monsters: Investigating Postcolonial Enunciation through Ram V’s ‘These Savage Shores’",
+      "authors": "Srivastava, P.",
+      "year": "2025",
+      "description": "A study of the intersection of the gothic visual form with the postcolonial themes in Ram V.'s graphic novel.",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Conference",
+          "value": "SRM International Literary Conference: Indian Literature and Culture"
+        },
+        {
+          "key": "University",
+          "value": "SRM University Delhi-NCR, Sonepat"
+        }
+      ],
+      "order": 1
+    },
+    {
+      "id": "item-1791807867246",
+      "category": "academic",
+      "listType": "publications",
+      "title": "[UPCOMING] On Walking: Mobility, Leisure, and Protest in Ray Bradbury's 'The Pedestrian'",
+      "authors": "Prakash, V., & Srivastava, P. ",
+      "year": "2026",
+      "description": "A look at the prescient depiction of surveillance and consumerism in Ray Bradbury's dystopian short story. Selected for publication. ",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Journal",
+          "value": "IIS University Journal of Arts"
+        }
+      ],
+      "order": 2,
+      "linkTarget": "custom",
+      "linkText": ""
+    },
+    {
+      "id": "item-1791807976147",
+      "category": "academic",
+      "listType": "publications",
+      "title": "[UPCOMING] Godhood for the Modern World: The Epistemology of Belief and Testimony in ‘The Man from Earth’",
+      "authors": "Srivastava, P.",
+      "year": "2027",
+      "description": "A study of the varied manners of constructing and critiquing beliefs as depicted in Jerome Bixby's script of the film. Selected for publication.  ",
+      "link": "https://drive.google.com/file/d/1bgoHXJkEFQwqHpiuiftpAAVgPXETHimf/view?usp=sharing",
+      "customFields": [
+        {
+          "key": "Journal",
+          "value": "Literary Voice [Web of Science]"
+        }
+      ],
+      "order": 1,
+      "linkTarget": "custom",
+      "linkText": ""
+    },
+    {
+      "id": "item-1791817342809",
+      "category": "academic",
+      "listType": "background",
+      "title": "M.A. English",
+      "authors": "Central University of Rajasthan",
+      "year": "2018-2020",
+      "description": "",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Score",
+          "value": "7.75 GPA | 77.5%"
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "item-1791817449942",
+      "category": "academic",
+      "listType": "background",
+      "title": "B.A. (Hons.) English",
+      "authors": "Amity University Rajasthan",
+      "year": "2015-2018",
+      "description": "Including a minor track in Human Psychology",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Score",
+          "value": "8.55 GPA | 81.23%"
+        }
+      ],
+      "order": 3
+    },
+    {
+      "id": "item-1791817515200",
+      "category": "academic",
+      "listType": "background",
+      "title": "12th",
+      "authors": " Central Board of Secondary Education",
+      "year": "2015",
+      "description": "",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Score",
+          "value": "66.6%"
+        }
+      ],
+      "order": 4
+    },
+    {
+      "id": "item-1791817547009",
+      "category": "academic",
+      "listType": "background",
+      "title": "10th",
+      "authors": " Central Board of Secondary Education",
+      "year": "2013",
+      "description": "",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Score",
+          "value": "8.80 GPA"
+        }
+      ],
+      "order": 5
+    },
+    {
+      "id": "item-1791820535797",
+      "category": "academic",
+      "listType": "references",
+      "title": "Dr. Ved Prakash",
+      "authors": "Assistant Professor, Central University of Rajasthan",
+      "year": "",
+      "description": "vedprakash@curaj.ac.in | +91 7426026320",
+      "link": "",
+      "customFields": [
+        {
+          "key": "",
+          "value": "Ph.D. Supervisor"
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "item-1791820715917",
+      "category": "academic",
+      "listType": "socials",
+      "title": "Email",
+      "authors": "",
+      "year": "",
+      "description": "prakharsrivastava6@gmail.com",
+      "link": "mailto:prakharsrivastava6@gmail.com",
+      "customFields": [],
+      "order": 3
+    },
+    {
+      "id": "item-1791821395366",
+      "category": "academic",
+      "listType": "socials",
+      "title": "Phone",
+      "authors": "",
+      "year": "",
+      "description": "+91 77427 66925",
+      "link": "tel:+917742766925",
+      "customFields": [],
+      "order": 4
+    },
+    {
+      "id": "item-1791821699817",
+      "category": "academic",
+      "listType": "socials",
+      "title": "ORCID",
+      "authors": "",
+      "year": "",
+      "description": "0009-0003-1060-2339",
+      "link": "https://orcid.org/0009-0003-1060-2339",
+      "customFields": [],
+      "order": 1
+    },
+    {
+      "id": "item-1791824222461",
+      "category": "academic",
+      "listType": "skills",
+      "title": "Digital Tools",
+      "authors": "Web design, data management, visual art, digital audio workstations",
+      "year": "Beginner",
+      "description": "Rudimentary understanding of a variety of tools supported by public resources on the internet.",
+      "link": "",
+      "customFields": [],
+      "order": 3
+    },
+    {
+      "id": "item-1791824492476",
+      "category": "academic",
+      "listType": "skills",
+      "title": "Multidisciplinary Research and Writing",
+      "authors": "Across varied disciplines within humanities and literature",
+      "year": "Proficient",
+      "description": "Use of digital and AI tools for ethical qualitative research; writing as per MLA guidelines and more.",
+      "link": "",
+      "customFields": [],
+      "order": 1
+    },
+    {
+      "id": "item-1791824876920",
+      "category": "academic",
+      "listType": "extracurriculars",
+      "title": "Winner of Scriptwriting Competition",
+      "authors": "Amity Leadership Fest",
+      "year": "2017",
+      "description": "Writing a script within stipulated time based on a prompt.",
+      "link": "",
+      "customFields": [],
+      "order": 2
+    },
+    {
+      "id": "item-1791824975268",
+      "category": "academic",
+      "listType": "extracurriculars",
+      "title": "Co-ordinator, Abhivyakti: Literary Club",
+      "authors": "Central University of Rajasthan",
+      "year": "2020",
+      "description": "Organized and performed in inaugural literary event “Aaghaz: 2K20”. Performed recitation and original musical composition.",
+      "link": "",
+      "customFields": [],
+      "order": 1
+    },
+    {
+      "id": "item-1791827520866",
+      "category": "academic",
+      "listType": "socials",
+      "title": "Whatsapp",
+      "authors": "",
+      "year": "",
+      "description": "+91 77427 66925",
+      "link": "https://wa.me/917742766925",
+      "customFields": [],
+      "order": 5
+    },
+    {
+      "id": "item-1791903746986",
+      "category": "academic",
+      "listType": "seminars",
+      "title": "[Short-term Course] Trajectories of Popular Culture and Globalization",
+      "authors": "P. G. D. A. V. College (University of Delhi)",
+      "year": "2021",
+      "description": "",
+      "link": "",
+      "customFields": [
+        {
+          "key": "Duration",
+          "value": "September 27-October 8, 2021"
+        }
+      ],
+      "order": 2
+    },
+    {
+      "id": "item-1791955830942",
+      "category": "creative",
+      "listType": "creative-works",
+      "title": "The Mind Alcove",
+      "authors": "Writings on films and popular culture ",
+      "year": "Since 2025",
+      "description": "Thoughts on films and works of popular culture across various mediums through a lens of personal experience.",
+      "link": "https://medium.com/@themindalcove",
+      "customFields": [
+        {
+          "key": "Category",
+          "value": "Blog"
+        }
+      ],
+      "order": 2
+    }
+  ]
+}
