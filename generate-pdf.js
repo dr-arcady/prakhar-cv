@@ -199,7 +199,7 @@ async function generatePDF() {
                 <tr>
                     <td>
                         <h1 style="font-size: 24px; font-weight: bold; color: #0f172a;">${parseMarkdown(profile.name)}</h1>
-                        <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;\vert{}&nbsp; ${parseMarkdown(profile.subtitle)}</p>
+                        <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;|&nbsp; ${parseMarkdown(profile.subtitle)}</p>
                     </td>
                     <td style="text-align: right; font-size: 10px; color: #475569; line-height: 1.4;">
                         ${contactEmail ? `<div style="font-weight: 500;">${contactEmail}</div>` : ''}
