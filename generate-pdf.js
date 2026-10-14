@@ -204,7 +204,6 @@ async function generatePDF() {
                     const total = items.length;
                     if (total === 0) return '';
                     
-                    // Explicitly split items into balanced rows (e.g., 3 on top, remainder on bottom)
                     let rows = [];
                     if (total <= 3) {
                         rows = [items];
@@ -219,7 +218,6 @@ async function generatePDF() {
 
                     return rows.map((rowItems, rowIndex) => {
                         const isFirstRow = rowIndex === 0;
-                        // First row spans full width via space-between; subsequent rows are centered with equal gap
                         const rowStyle = isFirstRow 
                             ? 'display: flex; justify-content: space-between; align-items: center; width: 100%;'
                             : 'display: flex; justify-content: center; align-items: center; gap: 40px; width: 100%; margin-top: 5px;';
