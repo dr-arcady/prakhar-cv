@@ -264,12 +264,12 @@
     "link": "https://shodhganga.inflibnet.ac.in/handle/10603/704078",
     "customFields": [
       {
-        "key": "University",
-        "value": "Central University of Rajasthan"
-      },
-      {
         "key": "",
         "value": "PhD thesis"
+      },
+      {
+        "key": "University",
+        "value": "Central University of Rajasthan"
       }
     ],
     "order": 3
