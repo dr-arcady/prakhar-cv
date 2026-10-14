@@ -54,7 +54,7 @@ export default async function handler(req, res) {
             throw new Error(errData.message || 'Failed to commit to GitHub API');
         }
     } catch (err) {
-        console.error(err);
+        console.error("Vercel GitHub Sync Error:", err);
         return res.status(500).json({ error: err.message });
     }
 }
