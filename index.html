@@ -607,8 +607,6 @@
 
         window.onload = function() {
             loadData();
-            renderViews();
-            switchView('home');
         };
 
         // Default profile fallback state
@@ -654,8 +652,9 @@ async function loadData() {
     pruneEmptyFields();
     renderProfileUI();
     renderViews();
+    switchView('home');
 }
-
+        
 // Render dynamic profile elements across the site
 function renderProfileUI() {
     // 1. Header Name
@@ -1087,40 +1086,38 @@ async function saveData() {
             const container = document.getElementById('grid-creative');
             
             if (!container) return;
-        
-            container.innerHTML = creativeItems.length === 0 
-                ? '<div class="col-span-full py-12 text-center text-stone-400 italic">No creative works added yet.</div>' 
-                : creativeItems.map(item => {
-                    const mdDesc = item.description ? safeParseMarkdown(item.description) : '';
-                    const customHTML = item.customFields && item.customFields.length > 0
-                        ? `<div class="flex flex-wrap gap-2 mt-4 pt-3 border-t border-stone-100">${item.customFields.map(cf => {
-                            const keyTrim = cf.key ? cf.key.trim() : '';
-                            const valTrim = escapeHtml(cf.value);
-                            return `<span class="inline-flex items-center px-2 py-0.5 rounded bg-gold-500/10 text-gold-700 text-[11px] font-semibold">${keyTrim ? `<strong class="mr-1">${escapeHtml(keyTrim)}:</strong>` : ''}${valTrim}</span>`;
-                          }).join('')}</div>`
-                        : '';
-                    const linkHTML = item.link ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-gold-600 hover:text-gold-700 mt-4"><i class="fa-solid fa-book-open-reader mr-1.5"></i>View Work</a>` : '';
-        
-                    return `
-                        <div class="bg-white rounded-3xl p-6 border border-stone-200 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
-                            <div>
-                                <div class="flex items-center justify-between mb-4">
-                                    <span class="px-3 py-1 rounded-full bg-gold-500/20 text-gold-600 text-xs font-bold tracking-wider uppercase">${escapeHtml(item.year || 'Creative')}</span>
-                                    <div class="w-8 h-8 rounded-full bg-stone-100 text-stone-600 flex items-center justify-center text-xs group-hover:bg-gold-500 group-hover:text-stone-950 transition-colors">
-                                        <i class="fa-solid fa-feather-pointed"></i>
-                                    </div>
+
+            container.innerHTML = creativeItems.length === 0 ? '<div class="col-span-full py-12 text-center text-stone-400 italic">No creative works added yet.</div>' : creativeItems.map(item => {
+                const mdDesc = item.description ? safeParseMarkdown(item.description) : '';
+                const customHTML = item.customFields && item.customFields.length > 0
+                    ? `<div class="flex flex-wrap gap-2 mt-4 pt-3 border-t border-stone-100">${item.customFields.map(cf => {
+                        const keyTrim = cf.key ? cf.key.trim() : '';
+                        const valTrim = escapeHtml(cf.value);
+                        return `<span class="inline-flex items-center px-2 py-0.5 rounded bg-gold-500/10 text-gold-700 text-[11px] font-semibold">${keyTrim ? `<strong class="mr-1">${escapeHtml(keyTrim)}:</strong>` : ''}${valTrim}</span>`;
+                      }).join('')}</div>`
+                    : '';
+                const linkHTML = item.link ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-gold-600 hover:text-gold-700 mt-4"><i class="fa-solid fa-book-open-reader mr-1.5"></i>View Work</a>` : '';
+
+                return `
+                    <div class="bg-white rounded-3xl p-6 border border-stone-200 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full bg-gold-500/20 text-gold-600 text-xs font-bold tracking-wider uppercase">${escapeHtml(item.year || 'Creative')}</span>
+                                <div class="w-8 h-8 rounded-full bg-stone-100 text-stone-600 flex items-center justify-center text-xs group-hover:bg-gold-500 group-hover:text-stone-950 transition-colors">
+                                    <i class="fa-solid fa-feather-pointed"></i>
                                 </div>
-                                <h3 class="font-serif text-xl font-bold text-stone-900 mb-2 group-hover:text-gold-600 transition-colors">${escapeHtml(item.title)}</h3>
-                                ${item.authors ? `<p class="text-xs font-semibold text-stone-500 mb-3">${escapeHtml(item.authors)}</p>` : ''}
-                                ${mdDesc ? `<div class="text-sm text-stone-600 prose prose-sm max-w-none line-clamp-4">${mdDesc}</div>` : ''}
                             </div>
-                            <div>
-                                ${customHTML}
-                                ${linkHTML}
-                            </div>
+                            <h3 class="font-serif text-xl font-bold text-stone-900 mb-2 group-hover:text-gold-600 transition-colors">${escapeHtml(item.title)}</h3>
+                            ${item.authors ? `<p class="text-xs font-semibold text-stone-500 mb-3">${escapeHtml(item.authors)}</p>` : ''}
+                            ${mdDesc ? `<div class="text-sm text-stone-600 prose prose-sm max-w-none line-clamp-4">${mdDesc}</div>` : ''}
                         </div>
-                    `;
-                }).join('');
+                        <div>
+                            ${customHTML}
+                            ${linkHTML}
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         function openAdminAuth() {
