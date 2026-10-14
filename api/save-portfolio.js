@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     }
 
     const token = process.env.GITHUB_PAT;
-    const repo = "dr-arcady/prakhar-cv"; // Replace with your actual username/repo name if different
+    const repo = "dr-arcady/prakhar-cv"; // Replace with your actual repo if different
     const path = 'portfolio-data.json';
 
     if (!token) {
@@ -39,13 +39,15 @@ export default async function handler(req, res) {
                 'User-Agent': 'Portfolio-CMS'
             },
             body: JSON.stringify({
-                message: 'Update portfolio data via serverless admin CMS',
+                message: 'Update portfolio data via serverless admin CMS [skip ci]',
                 content: encodedContent,
                 sha: sha
             })
         });
 
         if (putRes.ok) {
+            // Force Vercel CDN not to cache this write response
+            res.setHeader('Cache-Control', 'no-store, max-age=0');
             return res.status(200).json({ success: true, message: 'Successfully synced & deployed!' });
         } else {
             const errData = await putRes.json();
