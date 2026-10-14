@@ -642,6 +642,7 @@ async function loadData() {
             } else if (raw && raw.items) {
                 portfolioData = raw.items;
                 if (raw.profile) profileData = { ...profileData, ...raw.profile };
+                if (raw.lists) portfolioListsConfig = raw.lists;
             }
         } else {
             portfolioData = DEFAULT_PORTFOLIO_DATA;
@@ -796,6 +797,7 @@ async function saveData() {
 
     const payload = {
         profile: profileData,
+        lists: portfolioListsConfig,
         items: portfolioData
     };
 
