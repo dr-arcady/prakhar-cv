@@ -617,6 +617,20 @@
         }
       ],
       "order": 2
+    },
+    {
+      "id": "item-1791981219625",
+      "category": "academic",
+      "listType": "socials",
+      "title": "Phone",
+      "authors": "",
+      "year": "",
+      "description": "+91 77427 66925",
+      "link": "tel:+917742766925",
+      "linkTarget": "custom",
+      "linkText": "View Work / Document",
+      "customFields": [],
+      "order": 5
     }
   ]
 }
