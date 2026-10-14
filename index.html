@@ -700,7 +700,7 @@ function renderProfileUI() {
             return `
                 <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-stone-800/80 hover:bg-stone-700 text-stone-200 text-xs font-semibold border border-stone-700 transition-colors shadow-xs">
                     <i class="${iconClass} text-gold-500 text-sm"></i>
-                    <span>${escapeHtml(label)}</span>
+                    <span>${escapeHtml(item.title)}</span>
                 </a>
             `;
         }).join('');
