@@ -256,8 +256,8 @@ async function generatePDF() {
                                     <p style="font-size: 11px; color: #334155; margin: 0 0 2px 0; font-weight: 500;">
                                         Kindly visit here to see the latest version of this CV and to access weblinks of resources:
                                     </p>
-                                    <a href="dr-prakhar-cv.vercel.app" style="font-size: 11px; color: #1e3a8a; text-decoration: none; font-weight: bold;">
-                                        https://dr-prakhar-cv.vercel.app/
+                                    <a href="https://dr-prakhar-cv.vercel.app" style="font-size: 11px; color: #1e3a8a; text-decoration: none; font-weight: bold;">
+                                        dr-prakhar-cv.vercel.app/
                                     </a>
                                 </td>
                                 <td style="text-align: right; vertical-align: middle; width: 60px;">
