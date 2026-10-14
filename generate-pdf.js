@@ -49,30 +49,48 @@ async function generatePDF() {
     const contactPhone = phoneItem ? (phoneItem.description || phoneItem.link || '') : '';
 
     // Render items for Main Area
-    const renderMainItems = (items) => items.map(item => `
-        <div style="margin-bottom: 15px; border-left: 2px solid #334155; padding-left: 12px; page-break-inside: avoid; break-inside: avoid;">
-            <div style="font-family: 'Playfair Display', Georgia, serif; font-weight: bold; font-size: 13px; color: #0f172a; margin-bottom: 3px;">
-                ${parseMarkdown(item.title || '')} 
-                <span style="float: right; font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; font-size: 10px; color: #475569; background: #f1f5f9; padding: 2px 6px; border-radius: 3px; font-weight: 500;">${item.year || ''}</span>
+    const renderMainItems = (items) => items.map(item => {
+        let titleHtml = parseMarkdown(item.title || '');
+        let authorsHtml = item.authors ? parseMarkdown(item.authors) : '';
+        let customLinkHtml = '';
+
+        if (item.link) {
+            const target = item.linkTarget || 'custom';
+            const labelText = item.linkText || 'View Work';
+            if (target === 'title') {
+                titleHtml = `<a href="${item.link}" style="color: #0f172a; text-decoration: underline;">${parseMarkdown(item.title || '')} &#8599;</a>`;
+            } else if (target === 'authors' && item.authors) {
+                authorsHtml = `<a href="${item.link}" style="color: #1e3a8a; text-decoration: underline; font-weight: 600;">${parseMarkdown(item.authors)} &#8599;</a>`;
+            } else {
+                customLinkHtml = `
+                    <div style="margin-top: 4px;">
+                        <a href="${item.link}" style="font-size: 10px; color: #1e3a8a; text-decoration: none; font-weight: 600;">${parseMarkdown(labelText)} &#8599;</a>
+                    </div>
+                `;
+            }
+        }
+
+        return `
+            <div style="margin-bottom: 15px; border-left: 2px solid #334155; padding-left: 12px; page-break-inside: avoid; break-inside: avoid;">
+                <div style="font-family: 'Playfair Display', Georgia, serif; font-weight: bold; font-size: 13px; color: #0f172a; margin-bottom: 3px;">
+                    ${titleHtml} 
+                    <span style="float: right; font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; font-size: 10px; color: #475569; background: #f1f5f9; padding: 2px 6px; border-radius: 3px; font-weight: 500;">${item.year || ''}</span>
+                </div>
+                ${authorsHtml ? `<div style="font-size: 11px; color: #334155; font-weight: 500; margin-bottom: 3px; font-style: italic;">${authorsHtml}</div>` : ''}
+                ${item.description ? `<div style="font-size: 11px; color: #475569; line-height: 1.45; margin-bottom: 4px;">${parseMarkdown(item.description)}</div>` : ''}
+                ${item.customFields && item.customFields.length > 0 ? `
+                    <div style="font-size: 10px; color: #475569; margin-top: 4px;">
+                        ${item.customFields.map(cf => {
+                            const keyTrim = cf.key ? cf.key.trim() : '';
+                            const valTrim = cf.value || '';
+                            return `<span>${keyTrim ? `<strong>${keyTrim}:</strong> ` : ''}${valTrim}</span>`;
+                        }).join(' | ')}
+                    </div>
+                ` : ''}
+                ${customLinkHtml}
             </div>
-            ${item.authors ? `<div style="font-size: 11px; color: #334155; font-weight: 500; margin-bottom: 3px; font-style: italic;">${parseMarkdown(item.authors)}</div>` : ''}
-            ${item.description ? `<div style="font-size: 11px; color: #475569; line-height: 1.45; margin-bottom: 4px;">${parseMarkdown(item.description)}</div>` : ''}
-            ${item.customFields && item.customFields.length > 0 ? `
-                <div style="font-size: 10px; color: #475569; margin-top: 4px;">
-                    ${item.customFields.map(cf => {
-                        const keyTrim = cf.key ? cf.key.trim() : '';
-                        const valTrim = cf.value || '';
-                        return `<span>${keyTrim ? `<strong>${keyTrim}:</strong> ` : ''}${valTrim}</span>`;
-                    }).join(' | ')}
-                </div>
-            ` : ''}
-            ${item.link ? `
-                <div style="margin-top: 4px;">
-                    <a href="${item.link}" style="font-size: 10px; color: #1e3a8a; text-decoration: none; font-weight: 600;">View Publication &#8599;</a>
-                </div>
-            ` : ''}
-        </div>
-    `).join('');
+        `;
+    }).join('');
 
     // Render items for Sidebar
     const renderSidebarSection = (listConfig) => {
