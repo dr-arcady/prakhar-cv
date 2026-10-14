@@ -13,7 +13,8 @@ function parseMarkdown(text) {
 async function generatePDF() {
     console.log('Reading portfolio data...');
     const dataPath = path.resolve(__dirname, 'portfolio-data.json');
-    const portfolioData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+    const rawData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+    const portfolioData = Array.isArray(rawData) ? rawData : (rawData.items || []);
 
     // Unified configuration matching index.html layout & custom list ordering
     const allListsConfig = [
