@@ -788,97 +788,91 @@ async function handleSaveProfile(event) {
     closeModal('modal-profile');
 }
 
-// Update saveData() payload to write full payload object
-async function saveData() {
-    pruneEmptyFields();
-    ensureOrders();
-    renderProfileUI();
-    renderViews();
-
-    const payload = {
-        profile: profileData,
-        lists: portfolioListsConfig,
-        items: portfolioData
-    };
-
-    const indicator = document.createElement('div');
-    indicator.id = 'sync-indicator';
-    indicator.className = 'fixed bottom-4 right-4 bg-stone-900 text-white px-4 py-2 rounded-xl text-xs shadow-lg z-50 flex items-center space-x-2';
-    indicator.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-gold-500"></i><span>Syncing globally...</span>`;
-    document.body.appendChild(indicator);
-
-    // Sync to GitHub Pages / Vercel API
-    if (window.location.hostname.includes('github.io')) {
-        const repo = window.GH_CONFIG?.repo;
-        const token = window.GH_CONFIG?.token;
-        if (!repo || !token) return;
-
-        try {
-            const filePath = 'portfolio-data.json';
-            const apiUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
-            const getRes = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}` } });
-            const fileData = await getRes.json();
-            const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
-
-            const putRes = await fetch(apiUrl, {
-                method: 'PUT',
-                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    message: 'Update profile and portfolio data via admin panel [skip ci]',
-                    content: contentEncoded,
-                    sha: fileData.sha
-                })
-            });
-
-            if (putRes.ok) {
-                // Automatically dispatch the workflow so GitHub Pages builds the new changes instantly
-                await fetch(`https://api.github.com/repos/${repo}/actions/workflows/deploy.yml/dispatches`, {
-                    method: 'POST',
+    // Update saveData() payload to write full payload object
+    async function saveData() {
+        pruneEmptyFields();
+        ensureOrders();
+        renderProfileUI();
+        renderViews();
+    
+        const payload = {
+            profile: profileData,
+            lists: portfolioListsConfig,
+            items: portfolioData
+        };
+    
+        const indicator = document.createElement('div');
+        indicator.id = 'sync-indicator';
+        indicator.className = 'fixed bottom-4 right-4 bg-stone-900 text-white px-4 py-2 rounded-xl text-xs shadow-lg z-50 flex items-center space-x-2';
+        indicator.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-gold-500"></i><span>Syncing portfolio data...</span>`;
+        document.body.appendChild(indicator);
+    
+        // If running on GitHub Pages, use injected GH_CONFIG automatically without prompting user
+        if (window.location.hostname.includes('github.io')) {
+            const repo = window.GH_CONFIG?.repo;
+            const token = window.GH_CONFIG?.token;
+            
+            if (!repo || !token) {
+                indicator.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-amber-400"></i><span>GitHub token missing in workflow.</span>`;
+                setTimeout(() => indicator.remove(), 4000);
+                return;
+            }
+    
+            try {
+                const filePath = 'portfolio-data.json';
+                const apiUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+                const getRes = await fetch(apiUrl, { headers: { 'Authorization': `Bearer ${token}` } });
+                const fileData = await getRes.json();
+                const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload, null, 2))));
+    
+                const putRes = await fetch(apiUrl, {
+                    method: 'PUT',
                     headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ ref: 'main' })
+                    body: JSON.stringify({
+                        message: 'Update profile and portfolio data via admin panel [skip ci]',
+                        content: contentEncoded,
+                        sha: fileData.sha
+                    })
                 });
-
-                indicator.innerHTML = `<i class="fa-solid fa-check text-green-400"></i><span>Synced & rebuilding Pages!</span>`;
-                setTimeout(() => indicator.remove(), 3500);
+    
+                if (putRes.ok) {
+                    await fetch(`https://api.github.com/repos/${repo}/actions/workflows/deploy.yml/dispatches`, {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ ref: 'main' })
+                    });
+    
+                    indicator.innerHTML = `<i class="fa-solid fa-check text-green-400"></i><span>Synced & rebuilding GitHub Pages!</span>`;
+                    setTimeout(() => indicator.remove(), 3500);
+                }
+            } catch (err) {
+                console.error(err);
+                indicator.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-400"></i><span>Sync error. Check console.</span>`;
+                setTimeout(() => indicator.remove(), 4000);
+            }
+            return;
+        }
+    
+        // Default Vercel Serverless Endpoint path
+        try {
+            const response = await fetch('/api/save-portfolio', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (response.ok) {
+                indicator.innerHTML = `<i class="fa-solid fa-check text-green-400"></i><span>Synced & deployed on Vercel!</span>`;
+                setTimeout(() => indicator.remove(), 3000);
+            } else {
+                throw new Error('Server sync failed');
             }
         } catch (err) {
             console.error(err);
             indicator.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-400"></i><span>Sync error. Check console.</span>`;
             setTimeout(() => indicator.remove(), 4000);
         }
-        return;
     }
-
-    try {
-        const response = await fetch('/api/save-portfolio', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-        if (response.ok) {
-            indicator.innerHTML = `<i class="fa-solid fa-check text-green-400"></i><span>Synced & deployed!</span>`;
-            setTimeout(() => indicator.remove(), 3000);
-        }
-    } catch (err) {
-        console.error(err);
-    }
-}
-
-        function saveGitHubSettings() {
-            const repo = document.getElementById('gh-repo').value.trim();
-            const token = document.getElementById('gh-token').value.trim();
-            localStorage.setItem('prakhar_gh_repo', repo);
-            localStorage.setItem('prakhar_gh_token', token);
-            alert('GitHub settings saved securely to this browser!');
-        }
-
-        function loadGitHubSettings() {
-            const repo = localStorage.getItem('prakhar_gh_repo') || '';
-            const token = localStorage.getItem('prakhar_gh_token') || '';
-            if (document.getElementById('gh-repo')) document.getElementById('gh-repo').value = repo;
-            if (document.getElementById('gh-token')) document.getElementById('gh-token').value = token;
-        }
-
+        
         function ensureOrders() {
             const categories = ['academic', 'creative'];
             categories.forEach(cat => {
@@ -1223,7 +1217,6 @@ async function saveData() {
         }
 
         function openDashboard() {
-            loadGitHubSettings();
             renderDashboardEntries();
             openModal('modal-dashboard');
         }
