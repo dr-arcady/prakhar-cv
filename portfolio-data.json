@@ -458,7 +458,7 @@
     "listType": "references",
     "title": "Dr. Ved Prakash",
     "authors": "Assistant Professor, Central University of Rajasthan",
-    "year": "",
+    "year": "9AM-5PM, Mon-Fri",
     "description": "vedprakash@curaj.ac.in | +91 7426026320",
     "link": "",
     "customFields": [
@@ -592,6 +592,18 @@
         "value": "September 27-October 8, 2021"
       }
     ],
+    "order": 2
+  },
+  {
+    "id": "item-1791955830942",
+    "category": "creative",
+    "listType": "creative-works",
+    "title": "The Mind Alcove",
+    "authors": "",
+    "year": "",
+    "description": "Thoughts on films and works of popular culture across various mediums through a lens of personal experience.",
+    "link": "",
+    "customFields": [],
     "order": 2
   }
 ]
