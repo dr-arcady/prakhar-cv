@@ -384,7 +384,7 @@
     "title": "[UPCOMING] Godhood for the Modern World: The Epistemology of Belief and Testimony in ‘The Man from Earth’",
     "authors": "Srivastava, P.",
     "year": "2027",
-    "description": "A study of the varied manners of constructing and critiquing beliefs as depicted in Jerome Bixby's script of the film. Selected for publication. ",
+    "description": "A study of the varied manners of constructing and critiquing beliefs as depicted in Jerome Bixby's script of the film. Selected for publication.  ",
     "link": "https://drive.google.com/file/d/1bgoHXJkEFQwqHpiuiftpAAVgPXETHimf/view?usp=sharing",
     "customFields": [
       {
@@ -392,7 +392,9 @@
         "value": "Literary Voice [Web of Science]"
       }
     ],
-    "order": 1
+    "order": 1,
+    "linkTarget": "custom",
+    "linkText": ""
   },
   {
     "id": "item-1791817342809",
