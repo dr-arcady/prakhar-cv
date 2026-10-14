@@ -659,28 +659,40 @@ function renderProfileUI() {
     const headerName = document.querySelector('header .font-serif');
     if (headerName) headerName.innerText = profileData.name;
 
-    // 2. Hero Section
-    const heroTitle = document.querySelector('#view-home h1');
-    if (heroTitle) heroTitle.innerText = profileData.name;
-
-    const heroSubtitle = document.querySelector('#view-home p:nth-of-type(1)');
-    if (heroSubtitle) heroSubtitle.innerText = profileData.subtitle;
-
-    const heroDegree = document.querySelector('#view-home p:nth-of-type(2)');
-    if (heroDegree) heroDegree.innerText = profileData.degree;
-
+    // 2. Hero Section & Contact Strip
     const heroBioContainer = document.querySelector('#view-home .max-w-3xl');
     if (heroBioContainer) {
-        // Find existing bio paragraphs or replace them
         const bioParas = profileData.bio.split('\n\n').map(p => 
             `<p class="text-stone-300 text-lg sm:text-xl font-light leading-relaxed mb-3">${safeParseMarkdown(p)}</p>`
         ).join('');
         
+        const socials = portfolioData.filter(i => i.listType === 'socials');
+        const socialsHTML = socials.map(item => {
+            let iconClass = 'fa-solid fa-link';
+            const titleLower = item.title.toLowerCase();
+            if (titleLower.includes('email')) iconClass = 'fa-solid fa-envelope';
+            else if (titleLower.includes('phone') || titleLower.includes('whatsapp')) iconClass = 'fa-solid fa-phone';
+            else if (titleLower.includes('linkedin')) iconClass = 'fa-brands fa-linkedin';
+            else if (titleLower.includes('orcid')) iconClass = 'fa-brands fa-orcid';
+
+            const href = item.link || '#';
+            const displayVal = item.description || item.link || '';
+            return `
+                <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-stone-800/80 hover:bg-stone-700 text-stone-200 text-xs font-medium border border-stone-700 transition-colors shadow-xs">
+                    <i class="${iconClass} text-gold-500"></i>
+                    <span><strong>${escapeHtml(item.title)}:</strong> ${escapeHtml(displayVal)}</span>
+                </a>
+            `;
+        }).join('');
+
         heroBioContainer.innerHTML = `
             <p class="text-stone-400 text-xs font-semibold tracking-widest uppercase mb-3">${escapeHtml(profileData.subtitle)}</p>
             <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-3 leading-tight">${escapeHtml(profileData.name)}</h1>
             <p class="text-stone-400 text-xs font-semibold tracking-widest uppercase mb-6">${escapeHtml(profileData.degree)}</p>
             ${bioParas}
+            <div class="flex flex-wrap gap-2.5 mt-6 pt-6 border-t border-stone-700/60">
+                ${socialsHTML}
+            </div>
         `;
     }
 
@@ -702,7 +714,7 @@ function renderProfileUI() {
         card2Container.querySelector('.w-14.h-14 i').className = `fa-solid ${profileData.card2.icon}`;
     }
 }
-
+        
 // Open and populate profile modal
 function openProfileModal() {
     document.getElementById('prof-name').value = profileData.name || '';
@@ -1491,8 +1503,7 @@ async function saveData() {
                 { key: 'background', title: 'Education & Background', region: 'sidebar', order: 1 },
                 { key: 'skills', title: 'Skills & Expertise', region: 'sidebar', order: 2 },
                 { key: 'extracurriculars', title: 'Extracurriculars', region: 'sidebar', order: 3 },
-                { key: 'socials', title: 'Socials & Links', region: 'sidebar', order: 4 },
-                { key: 'references', title: 'References', region: 'sidebar', order: 5 }
+                { key: 'references', title: 'References', region: 'sidebar', order: 4 }
             ],
             creative: [
                 { key: 'creative-works', title: 'Creative Portfolio Works', region: 'main', order: 1 }
