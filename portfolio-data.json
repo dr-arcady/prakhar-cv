@@ -587,11 +587,16 @@
     "category": "creative",
     "listType": "creative-works",
     "title": "The Mind Alcove",
-    "authors": "Blog on films and popular culture ",
+    "authors": "Writings on films and popular culture ",
     "year": "Since 2025",
     "description": "Thoughts on films and works of popular culture across various mediums through a lens of personal experience.",
     "link": "https://medium.com/@themindalcove",
-    "customFields": [],
+    "customFields": [
+      {
+        "key": "Category",
+        "value": "Blog"
+      }
+    ],
     "order": 2
   }
 ]
