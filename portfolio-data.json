@@ -130,7 +130,7 @@
     "description": "Directing stage plays, developing scripts and stories, performing, and managing production.",
     "link": "",
     "customFields": [],
-    "order": 4
+    "order": 3
   },
   {
     "id": "item-8",
@@ -539,7 +539,7 @@
     "description": "Writing a script within stipulated time based on a prompt.",
     "link": "",
     "customFields": [],
-    "order": 3
+    "order": 2
   },
   {
     "id": "item-1791824975268",
@@ -550,18 +550,6 @@
     "year": "2020",
     "description": "Organized and performed in inaugural literary event “Aaghaz: 2K20”. Performed recitation and original musical composition.",
     "link": "",
-    "customFields": [],
-    "order": 2
-  },
-  {
-    "id": "item-1791825377915",
-    "category": "academic",
-    "listType": "extracurriculars",
-    "title": "Blog on films and popular culture",
-    "authors": "@themindalcove",
-    "year": "Since 2025",
-    "description": "Thoughts on films and works of popular culture across various mediums through a lens of personal experience.",
-    "link": "https://medium.com/@themindalcove",
     "customFields": [],
     "order": 1
   },
