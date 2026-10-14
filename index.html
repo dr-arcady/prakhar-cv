@@ -668,19 +668,39 @@ function renderProfileUI() {
         
         const socials = portfolioData.filter(i => i.listType === 'socials');
         const socialsHTML = socials.map(item => {
-            let iconClass = 'fa-solid fa-link';
             const titleLower = item.title.toLowerCase();
-            if (titleLower.includes('email')) iconClass = 'fa-solid fa-envelope';
-            else if (titleLower.includes('phone') || titleLower.includes('whatsapp')) iconClass = 'fa-solid fa-phone';
-            else if (titleLower.includes('linkedin')) iconClass = 'fa-brands fa-linkedin';
-            else if (titleLower.includes('orcid')) iconClass = 'fa-brands fa-orcid';
+            const linkLower = (item.link || '').toLowerCase();
+            const descLower = (item.description || '').toLowerCase();
+            
+            // Auto-detect FontAwesome icon and clean label
+            let iconClass = 'fa-solid fa-link';
+            let label = item.title;
+
+            if (titleLower.includes('email') || linkLower.includes('mailto:') || descLower.includes('@')) {
+                iconClass = 'fa-solid fa-envelope';
+            } else if (titleLower.includes('phone') || titleLower.includes('whatsapp') || linkLower.includes('wa.me') || linkLower.includes('tel:')) {
+                if (titleLower.includes('whatsapp') || linkLower.includes('wa.me')) {
+                    iconClass = 'fa-brands fa-whatsapp';
+                } else {
+                    iconClass = 'fa-solid fa-phone';
+                }
+            } else if (titleLower.includes('linkedin') || linkLower.includes('linkedin.com')) {
+                iconClass = 'fa-brands fa-linkedin';
+            } else if (titleLower.includes('orcid') || linkLower.includes('orcid.org')) {
+                iconClass = 'fa-brands fa-orcid';
+            } else if (titleLower.includes('github') || linkLower.includes('github.com')) {
+                iconClass = 'fa-brands fa-github';
+            } else if (titleLower.includes('scholar') || linkLower.includes('scholar.google')) {
+                iconClass = 'fa-solid fa-graduation-cap';
+            } else if (titleLower.includes('twitter') || titleLower.includes('x.com') || linkLower.includes('twitter.com')) {
+                iconClass = 'fa-brands fa-x-twitter';
+            }
 
             const href = item.link || '#';
-            const displayVal = item.description || item.link || '';
             return `
-                <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-stone-800/80 hover:bg-stone-700 text-stone-200 text-xs font-medium border border-stone-700 transition-colors shadow-xs">
-                    <i class="${iconClass} text-gold-500"></i>
-                    <span><strong>${escapeHtml(item.title)}:</strong> ${escapeHtml(displayVal)}</span>
+                <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-stone-800/80 hover:bg-stone-700 text-stone-200 text-xs font-semibold border border-stone-700 transition-colors shadow-xs">
+                    <i class="${iconClass} text-gold-500 text-sm"></i>
+                    <span>${escapeHtml(label)}</span>
                 </a>
             `;
         }).join('');
