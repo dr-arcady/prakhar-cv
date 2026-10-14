@@ -193,20 +193,20 @@ async function generatePDF() {
         </style>
     </head>
     <body style="padding: 20px;">
-        <div style="margin-bottom: 18px;">
-            <div style="margin-bottom: 10px;">
+        <div style="margin-bottom: 20px;">
+            <div style="margin-bottom: 12px;">
                 <h1 style="font-size: 24px; font-weight: bold; color: #0f172a; line-height: 1.2;">${parseMarkdown(profile.name)}</h1>
                 <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;\vert{}&nbsp; ${parseMarkdown(profile.subtitle)}</p>
             </div>
-            <div style="background-color: #334155; color: #ffffff; padding: 7px 12px; border-radius: 4px; font-size: 9.5px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="border-top: 2px solid #334155; border-bottom: 2px solid #334155; padding: 6px 4px; font-size: 9.5px; color: #334155; display: flex; justify-content: space-between; align-items: center;">
                 ${socialsList.map(item => {
                     const val = item.description || item.link || '';
                     const href = item.link || '#';
-                    return `<span style="white-space: nowrap;"><strong style="color: #cbd5e1;">${parseMarkdown(item.title)}:</strong> <a href="${href}" style="color: #ffffff; text-decoration: none;">${val}</a></span>`;
-                }).join('<span style="color: #64748b; margin: 0 6px;">|</span>')}
+                    return `<span style="white-space: nowrap;"><strong style="color: #0f172a;">${parseMarkdown(item.title)}:</strong> <a href="${href}" style="color: #1e3a8a; text-decoration: none;">${val}</a></span>`;
+                }).join('<span style="color: #94a3b8; margin: 0 8px;">|</span>')}
             </div>
         </div>
-
+        
         <table>
             <tr>
                 <td style="width: 30%; padding-right: 20px; height: 1px;">
