@@ -278,4 +278,11 @@ async function generatePDF() {
     console.log('PDF generated successfully!');
 }
 
-generatePDF().catch(err => console.error('Error generating PDF:', err));
+module.exports = { generatePDF };
+
+if (require.main === module) {
+    generatePDF().catch(err => {
+        console.error('Error generating PDF:', err);
+        process.exit(1);
+    });
+}
