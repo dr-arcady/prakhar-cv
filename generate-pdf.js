@@ -198,20 +198,41 @@ async function generatePDF() {
                 <h1 style="font-size: 24px; font-weight: bold; color: #0f172a; line-height: 1.2;">${parseMarkdown(profile.name)}</h1>
                 <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;|&nbsp; ${parseMarkdown(profile.subtitle)}</p>
             </div>
-            <div style="background-color: #ffffff; border-top: 2px solid #334155; border-bottom: 2px solid #334155; padding: 8px 4px; font-size: 9.5px; color: #334155; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px;">
-                ${socialsList.map((item, index, arr) => {
-                    const val = item.description || item.link || '';
-                    const href = item.link || '#';
-                    // If total items is odd, make the first row have one more item than the second row
-                    const total = arr.length;
-                    const isTwoLines = total > 3; // split into two lines if more than 3 items
-                    const basisStyle = isTwoLines ? `flex: 0 0 calc(${Math.ceil(total / 2) === total / 2 && index >= total / 2 ? '50%' : (total % 2 !== 0 && index === Math.ceil(total / 2) - 1 ? '100%' : 'calc(50% - 10px)')};` : 'flex: 1; text-align: center;';
+            <div style="background-color: #ffffff; border-top: 2px solid #334155; border-bottom: 2px solid #334155; padding: 8px 12px; font-size: 9.5px; color: #334155;">
+                ${(() => {
+                    const items = socialsList;
+                    const total = items.length;
+                    if (total === 0) return '';
                     
-                    return `<div style="${isTwoLines ? `flex: 0 0 calc(33% - 10px);` : 'flex: 1; text-align: center;'} white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        <strong style="color: #0f172a;">${parseMarkdown(item.title)}:</strong> 
-                        <a href="${href}" style="color: #1e3a8a; text-decoration: none;">${val}</a>
-                    </div>`;
-                }).join('')}
+                    // Explicitly split items into balanced rows (e.g., 3 on top, remainder on bottom)
+                    let rows = [];
+                    if (total <= 3) {
+                        rows = [items];
+                    } else if (total === 4) {
+                        rows = [items.slice(0, 2), items.slice(2)];
+                    } else if (total === 5) {
+                        rows = [items.slice(0, 3), items.slice(3)];
+                    } else {
+                        const mid = Math.ceil(total / 2);
+                        rows = [items.slice(0, mid), items.slice(mid)];
+                    }
+
+                    return rows.map((rowItems, rowIndex) => {
+                        const isFirstRow = rowIndex === 0;
+                        // First row spans full width via space-between; subsequent rows are centered with equal gap
+                        const rowStyle = isFirstRow 
+                            ? 'display: flex; justify-content: space-between; align-items: center; width: 100%;'
+                            : 'display: flex; justify-content: center; align-items: center; gap: 40px; width: 100%; margin-top: 5px;';
+                        
+                        const itemsHtml = rowItems.map(item => {
+                            const val = item.description || item.link || '';
+                            const href = item.link || '#';
+                            return `<span style="white-space: nowrap;"><strong style="color: #0f172a;">${parseMarkdown(item.title)}:</strong> <a href="${href}" style="color: #1e3a8a; text-decoration: none;">${val}</a></span>`;
+                        }).join('');
+
+                        return `<div style="${rowStyle}">${itemsHtml}</div>`;
+                    }).join('');
+                })()}
             </div>
         </div>
         
