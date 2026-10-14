@@ -1520,8 +1520,13 @@ async function saveData() {
             const listSelect = document.getElementById('form-list-type');
             listSelect.innerHTML = '';
 
-            const lists = portfolioListsConfig[cat] || [];
+            const lists = [...(portfolioListsConfig[cat] || [])];
             lists.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+            // Ensure Socials & Links is always available in the target options for Academic
+            if (cat === 'academic' && !lists.some(l => l.key === 'socials')) {
+                lists.push({ key: 'socials', title: 'Socials & Links' });
+            }
 
             lists.forEach(opt => {
                 const el = document.createElement('option');
