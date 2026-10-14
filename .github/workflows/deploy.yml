@@ -30,7 +30,7 @@ jobs:
         run: |
           if [ -f index.html ]; then
             # Inject GH_CONFIG for API data saving
-            sed -i 's|<head>|<head><script>window.GH_CONFIG = { repo: "${{ github.repository }}", token: "${{ secrets.GH_PAT }}" };</script>|g' index.html
+            sed -i 's|<head>|<head><script>window.GH_CONFIG = { repo: "${{ github.repository }}", token: ${{ secrets.GH_PAT }} };</script>|g' index.html
             
             # Inject AUTH_CONFIG for static GitHub Pages login
             if [ -n "$ADMIN_PASSWORD" ]; then
@@ -49,7 +49,17 @@ jobs:
         run: npm install
 
       - name: Generate PDF CV via Puppeteer
-        run: node generate-pdf.js
+        run: node node/generate-pdf.js
+
+      - name: Commit Updated PDF back to repository
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add "Prakhar Srivastava - CV.pdf"
+          git diff --quiet && git diff --staged --quiet || (
+            git commit -m "Auto-generate PDF CV [skip ci]"
+            git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ github.repository }}.git HEAD:main
+          )
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
