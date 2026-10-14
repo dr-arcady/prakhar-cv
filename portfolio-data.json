@@ -243,12 +243,12 @@
     "link": "",
     "customFields": [
       {
-        "key": "University",
-        "value": "Central University of Rajasthan"
-      },
-      {
         "key": "",
         "value": "Dissertation"
+      },
+      {
+        "key": "University",
+        "value": "Central University of Rajasthan"
       }
     ],
     "order": 8
