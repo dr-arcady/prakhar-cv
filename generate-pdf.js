@@ -21,7 +21,7 @@ async function generatePDF() {
         degree: "Ph.D., English"
     };
 
-    // Unified configuration matching index.html layout & custom list ordering
+    // Unified configuration matching index.html layout & custom list ordering (Socials removed from sidebar)
     const allListsConfig = [
         { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
         { key: 'publications', title: 'Publications', region: 'main', order: 2 },
@@ -31,10 +31,9 @@ async function generatePDF() {
         { key: 'background', title: 'Education & Background', region: 'sidebar', order: 1 },
         { key: 'skills', title: 'Skills & Expertise', region: 'sidebar', order: 2 },
         { key: 'extracurriculars', title: 'Extracurriculars', region: 'sidebar', order: 3 },
-        { key: 'socials', title: 'Socials & Links', region: 'sidebar', order: 4 },
-        { key: 'references', title: 'References', region: 'sidebar', order: 5 }
+        { key: 'references', title: 'References', region: 'sidebar', order: 4 }
     ];
-
+    
     let qrCodeBase64 = '';
     const qrImagePath = path.resolve(__dirname, 'CV Vercel QR hovercode.png');
     if (fs.existsSync(qrImagePath)) {
@@ -197,13 +196,16 @@ async function generatePDF() {
         <div style="border-bottom: 1px solid #cbd5e1; padding-bottom: 12px; margin-bottom: 18px;">
             <table style="width: 100%;">
                 <tr>
-                    <td>
+                    <td style="width: 55%;">
                         <h1 style="font-size: 24px; font-weight: bold; color: #0f172a;">${parseMarkdown(profile.name)}</h1>
-                        <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;|&nbsp; ${parseMarkdown(profile.subtitle)}</p>
+                        <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;\vert{}&nbsp; ${parseMarkdown(profile.subtitle)}</p>
                     </td>
-                    <td style="text-align: right; font-size: 10px; color: #475569; line-height: 1.4;">
-                        ${contactEmail ? `<div style="font-weight: 500;">${contactEmail}</div>` : ''}
-                        ${contactPhone ? `<div>${contactPhone}</div>` : ''}
+                    <td style="width: 45%; text-align: right; font-size: 9.5px; color: #475569; line-height: 1.4;">
+                        ${socialsList.map(item => {
+                            const val = item.description || item.link || '';
+                            const href = item.link || '#';
+                            return `<div style="margin-bottom: 2px;"><strong>${parseMarkdown(item.title)}:</strong> <a href="${href}" style="color: #1e3a8a; text-decoration: none;">${val}</a></div>`;
+                        }).join('')}
                     </td>
                 </tr>
             </table>
