@@ -30,7 +30,7 @@ jobs:
         run: |
           if [ -f index.html ]; then
             # Inject GH_CONFIG for API data saving
-            sed -i 's|<head>|<head><script>window.GH_CONFIG = { repo: "${{ github.repository }}", token: ${{ secrets.GH_PAT }} };</script>|g' index.html
+            sed -i 's|<head>|<head><script>window.GH_CONFIG = { repo: "${{ github.repository }}", token: "${{ secrets.GH_PAT }}" };</script>|g' index.html
             
             # Inject AUTH_CONFIG for static GitHub Pages login
             if [ -n "$ADMIN_PASSWORD" ]; then
@@ -49,7 +49,7 @@ jobs:
         run: npm install
 
       - name: Generate PDF CV via Puppeteer
-        run: node node/generate-pdf.js
+        run: node generate-pdf.js
 
       - name: Commit Updated PDF back to repository
         run: |
