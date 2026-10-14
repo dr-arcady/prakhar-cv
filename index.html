@@ -759,7 +759,7 @@ function openProfileModal() {
 }
 
 // Handle saving profile configuration
-function handleSaveProfile(event) {
+async function handleSaveProfile(event) {
     event.preventDefault();
 
     profileData = {
@@ -845,21 +845,6 @@ async function saveData() {
         }
         return;
     }
-
-    try {
-        const response = await fetch('/api/save-portfolio', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-        if (response.ok) {
-            indicator.innerHTML = `<i class="fa-solid fa-check text-green-400"></i><span>Synced & deployed!</span>`;
-            setTimeout(() => indicator.remove(), 3000);
-        }
-    } catch (err) {
-        console.error(err);
-    }
-}
 
     try {
         const response = await fetch('/api/save-portfolio', {
