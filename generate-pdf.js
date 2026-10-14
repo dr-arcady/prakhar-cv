@@ -52,6 +52,7 @@ async function generatePDF() {
     const renderMainItems = (items) => items.map(item => {
         let titleHtml = parseMarkdown(item.title || '');
         let authorsHtml = item.authors ? parseMarkdown(item.authors) : '';
+        let descHtml = item.description ? parseMarkdown(item.description) : '';
         let customLinkHtml = '';
 
         if (item.link) {
@@ -61,6 +62,8 @@ async function generatePDF() {
                 titleHtml = `<a href="${item.link}" style="color: #0f172a; text-decoration: underline;">${parseMarkdown(item.title || '')} &#8599;</a>`;
             } else if (target === 'authors' && item.authors) {
                 authorsHtml = `<a href="${item.link}" style="color: #1e3a8a; text-decoration: underline; font-weight: 600;">${parseMarkdown(item.authors)} &#8599;</a>`;
+            } else if (target === 'description' && item.description) {
+                descHtml = `<a href="${item.link}" style="color: #1e3a8a; text-decoration: underline;">${parseMarkdown(item.description)} &#8599;</a>`;
             } else {
                 customLinkHtml = `
                     <div style="margin-top: 4px;">
@@ -77,7 +80,7 @@ async function generatePDF() {
                     <span style="float: right; font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; font-size: 10px; color: #475569; background: #f1f5f9; padding: 2px 6px; border-radius: 3px; font-weight: 500;">${item.year || ''}</span>
                 </div>
                 ${authorsHtml ? `<div style="font-size: 11px; color: #334155; font-weight: 500; margin-bottom: 3px; font-style: italic;">${authorsHtml}</div>` : ''}
-                ${item.description ? `<div style="font-size: 11px; color: #475569; line-height: 1.45; margin-bottom: 4px;">${parseMarkdown(item.description)}</div>` : ''}
+                ${descHtml ? `<div style="font-size: 11px; color: #475569; line-height: 1.45; margin-bottom: 4px;">${descHtml}</div>` : ''}
                 ${item.customFields && item.customFields.length > 0 ? `
                     <div style="font-size: 10px; color: #475569; margin-top: 4px;">
                         ${item.customFields.map(cf => {
@@ -91,7 +94,7 @@ async function generatePDF() {
             </div>
         `;
     }).join('');
-
+    
     // Render items for Sidebar
     const renderSidebarSection = (listConfig) => {
         const items = filterList(listConfig.key);
