@@ -15,23 +15,19 @@ async function generatePDF() {
     const dataPath = path.resolve(__dirname, 'portfolio-data.json');
     const portfolioData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
 
-    // Default configuration matching index.html
-    const defaultListsConfig = {
-        academic: [
-            { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
-            { key: 'publications', title: 'Publications', region: 'main', order: 2 },
-            { key: 'presentations', title: 'Presentations & Conferences', region: 'main', order: 3 },
-            { key: 'seminars', title: 'Seminars, Courses & More', region: 'main', order: 4 },
-            { key: 'background', title: 'Education & Background', region: 'sidebar', order: 1 },
-            { key: 'skills', title: 'Skills & Expertise', region: 'sidebar', order: 2 },
-            { key: 'extracurriculars', title: 'Extracurriculars', region: 'sidebar', order: 3 },
-            { key: 'socials', title: 'Socials & Links', region: 'sidebar', order: 4 },
-            { key: 'references', title: 'References', region: 'sidebar', order: 5 }
-        ],
-        creative: [
-            { key: 'creative-works', title: 'Creative Portfolio', region: 'main', order: 1 }
-        ]
-    };
+    // Unified configuration matching index.html layout & custom list ordering
+    const allListsConfig = [
+        { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
+        { key: 'publications', title: 'Publications', region: 'main', order: 2 },
+        { key: 'presentations', title: 'Presentations & Conferences', region: 'main', order: 3 },
+        { key: 'seminars', title: 'Seminars, Courses & More', region: 'main', order: 4 },
+        { key: 'creative-works', title: 'Creative Portfolio', region: 'main', order: 5 },
+        { key: 'background', title: 'Education & Background', region: 'sidebar', order: 1 },
+        { key: 'skills', title: 'Skills & Expertise', region: 'sidebar', order: 2 },
+        { key: 'extracurriculars', title: 'Extracurriculars', region: 'sidebar', order: 3 },
+        { key: 'socials', title: 'Socials & Links', region: 'sidebar', order: 4 },
+        { key: 'references', title: 'References', region: 'sidebar', order: 5 }
+    ];
 
     let qrCodeBase64 = '';
     const qrImagePath = path.resolve(__dirname, 'CV Vercel QR hovercode.png');
@@ -148,8 +144,8 @@ async function generatePDF() {
         `;
     };
 
-    // Build academic & creative lists dynamically
-    const allLists = [...defaultListsConfig.academic, ...defaultListsConfig.creative];
+    // Build and sort all lists globally by their order property
+    const allLists = [...allListsConfig];
     allLists.sort((a, b) => (a.order || 0) - (b.order || 0));
 
     const mainLists = allLists.filter(l => l.region !== 'sidebar');
