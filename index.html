@@ -898,6 +898,7 @@
             // Handle flexible link embedding
             let titleDisplay = escapeHtml(item.title);
             let authorsDisplay = item.authors ? escapeHtml(item.authors) : '';
+            let descDisplay = mdDesc;
             let customLinkHTML = '';
 
             if (item.link) {
@@ -907,6 +908,8 @@
                     titleDisplay = `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="hover:underline text-navy-900">${escapeHtml(item.title)} <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-0.5"></i></a>`;
                 } else if (target === 'authors' && item.authors) {
                     authorsDisplay = `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="hover:underline text-navy-900 font-semibold">${escapeHtml(item.authors)} <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-0.5"></i></a>`;
+                } else if (target === 'description' && item.description) {
+                    descDisplay = `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="hover:underline text-navy-900">${mdDesc} <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-0.5"></i></a>`;
                 } else {
                     customLinkHTML = `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-navy-900 hover:text-navy-700 mt-3"><i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> ${escapeHtml(labelText)}</a>`;
                 }
@@ -920,7 +923,7 @@
                         <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-stone-100 text-stone-600 w-fit mt-1 sm:mt-0">${escapeHtml(item.year || '')}</span>
                     </div>
                     ${authorsDisplay ? `<p class="text-xs text-stone-500 font-medium mb-2">${authorsDisplay}</p>` : ''}
-                    ${mdDesc ? `<div class="text-sm text-stone-600 prose prose-sm max-w-none mb-2">${mdDesc}</div>` : ''}
+                    ${descDisplay ? `<div class="text-sm text-stone-600 prose prose-sm max-w-none mb-2">${descDisplay}</div>` : ''}
                     ${customHTML}
                     ${customLinkHTML}
                 </div>
