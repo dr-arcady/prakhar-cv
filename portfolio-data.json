@@ -185,7 +185,7 @@
       "category": "creative",
       "listType": "creative-works",
       "year": "Since 2025",
-      "title": "WreckRoom",
+      "title": "Wreckroom",
       "authors": "Game Platform",
       "description": "A collection of minimalist word and trivia games; a window to learning about various subjects through single player and multiplayer modes of play. ",
       "link": "https://wreckroom.vercel.app/",
@@ -195,7 +195,9 @@
           "value": "Web Application"
         }
       ],
-      "order": 1
+      "order": 1,
+      "linkTarget": "custom",
+      "linkText": ""
     },
     {
       "id": "item-1791802140448",
