@@ -196,16 +196,18 @@ async function generatePDF() {
         <div style="border-bottom: 1px solid #cbd5e1; padding-bottom: 12px; margin-bottom: 18px;">
             <table style="width: 100%;">
                 <tr>
-                    <td style="width: 55%;">
-                        <h1 style="font-size: 24px; font-weight: bold; color: #0f172a;">${parseMarkdown(profile.name)}</h1>
-                        <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;\vert{}&nbsp; ${parseMarkdown(profile.subtitle)}</p>
+                    <td style="width: 50%;">
+                        <h1 style="font-size: 22px; font-weight: bold; color: #0f172a; line-height: 1.2;">${parseMarkdown(profile.name)}</h1>
+                        <p style="font-size: 9.5px; text-transform: uppercase; color: #475569; letter-spacing: 1px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;\vert{}&nbsp; ${parseMarkdown(profile.subtitle)}</p>
                     </td>
-                    <td style="width: 45%; text-align: right; font-size: 9.5px; color: #475569; line-height: 1.4;">
-                        ${socialsList.map(item => {
-                            const val = item.description || item.link || '';
-                            const href = item.link || '#';
-                            return `<div style="margin-bottom: 2px;"><strong>${parseMarkdown(item.title)}:</strong> <a href="${href}" style="color: #1e3a8a; text-decoration: none;">${val}</a></div>`;
-                        }).join('')}
+                    <td style="width: 50%; text-align: right; font-size: 9px; color: #475569; line-height: 1.5;">
+                        <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 10px;">
+                            ${socialsList.map(item => {
+                                const val = item.description || item.link || '';
+                                const href = item.link || '#';
+                                return `<span><strong>${parseMarkdown(item.title)}:</strong> <a href="${href}" style="color: #1e3a8a; text-decoration: none;">${val}</a></span>`;
+                            }).join(' &nbsp;|&nbsp; ')}
+                        </div>
                     </td>
                 </tr>
             </table>
