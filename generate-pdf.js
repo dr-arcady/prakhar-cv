@@ -15,6 +15,11 @@ async function generatePDF() {
     const dataPath = path.resolve(__dirname, 'portfolio-data.json');
     const rawData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
     const portfolioData = Array.isArray(rawData) ? rawData : (rawData.items || []);
+    const profile = rawData.profile || {
+        name: "Dr. Prakhar Srivastava",
+        subtitle: "Scholar & Creative Writer",
+        degree: "Ph.D., English"
+    };
 
     // Unified configuration matching index.html layout & custom list ordering
     const allListsConfig = [
@@ -193,8 +198,8 @@ async function generatePDF() {
             <table style="width: 100%;">
                 <tr>
                     <td>
-                        <h1 style="font-size: 24px; font-weight: bold; color: #0f172a;">Dr. Prakhar Srivastava</h1>
-                        <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">Ph.D. English &nbsp;|&nbsp; Scholar & Creative Writer</p>
+                        <h1 style="font-size: 24px; font-weight: bold; color: #0f172a;">${parseMarkdown(profile.name)}</h1>
+                        <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;\vert{}&nbsp; ${parseMarkdown(profile.subtitle)}</p>
                     </td>
                     <td style="text-align: right; font-size: 10px; color: #475569; line-height: 1.4;">
                         ${contactEmail ? `<div style="font-weight: 500;">${contactEmail}</div>` : ''}
