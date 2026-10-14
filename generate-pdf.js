@@ -193,24 +193,18 @@ async function generatePDF() {
         </style>
     </head>
     <body style="padding: 20px;">
-        <div style="border-bottom: 1px solid #cbd5e1; padding-bottom: 12px; margin-bottom: 18px;">
-            <table style="width: 100%;">
-                <tr>
-                    <td style="width: 50%;">
-                        <h1 style="font-size: 22px; font-weight: bold; color: #0f172a; line-height: 1.2;">${parseMarkdown(profile.name)}</h1>
-                        <p style="font-size: 9.5px; text-transform: uppercase; color: #475569; letter-spacing: 1px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;\vert{}&nbsp; ${parseMarkdown(profile.subtitle)}</p>
-                    </td>
-                    <td style="width: 50%; text-align: right; font-size: 9px; color: #475569; line-height: 1.5;">
-                        <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 10px;">
-                            ${socialsList.map(item => {
-                                const val = item.description || item.link || '';
-                                const href = item.link || '#';
-                                return `<span><strong>${parseMarkdown(item.title)}:</strong> <a href="${href}" style="color: #1e3a8a; text-decoration: none;">${val}</a></span>`;
-                            }).join(' &nbsp;|&nbsp; ')}
-                        </div>
-                    </td>
-                </tr>
-            </table>
+        <div style="margin-bottom: 18px;">
+            <div style="margin-bottom: 10px;">
+                <h1 style="font-size: 24px; font-weight: bold; color: #0f172a; line-height: 1.2;">${parseMarkdown(profile.name)}</h1>
+                <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;\vert{}&nbsp; ${parseMarkdown(profile.subtitle)}</p>
+            </div>
+            <div style="background-color: #334155; color: #ffffff; padding: 7px 12px; border-radius: 4px; font-size: 9.5px; display: flex; justify-content: space-between; align-items: center;">
+                ${socialsList.map(item => {
+                    const val = item.description || item.link || '';
+                    const href = item.link || '#';
+                    return `<span style="white-space: nowrap;"><strong style="color: #cbd5e1;">${parseMarkdown(item.title)}:</strong> <a href="${href}" style="color: #ffffff; text-decoration: none;">${val}</a></span>`;
+                }).join('<span style="color: #64748b; margin: 0 6px;">|</span>')}
+            </div>
         </div>
 
         <table>
