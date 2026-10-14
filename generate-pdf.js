@@ -182,7 +182,7 @@ async function generatePDF() {
                 font-size: 12px; font-weight: bold; color: #ffffff; background-color: #0f172a;
                 padding: 6px 10px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.8px;
             }
-            .sidebar-section { background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; overflow: hidden; }
+            .sidebar-section { background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; overflow: hidden; page-break-inside: avoid; break-inside: avoid; }
             .sidebar-heading { background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif; }
             .cv-footer { margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 10px; page-break-inside: avoid; }
         </style>
@@ -205,10 +205,10 @@ async function generatePDF() {
 
         <table>
             <tr>
-                <td style="width: 30%; padding-right: 20px;">
+                <td style="width: 30%; padding-right: 20px; height: 1px;">
                     ${sidebarHTML}
                 </td>
-                <td style="width: 70%;">
+                <td style="width: 70%; height: 1px;">
                     ${mainHTML}
                     <div class="cv-footer">
                         <table style="width: 100%;">
