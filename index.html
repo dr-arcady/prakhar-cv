@@ -190,108 +190,16 @@
                 </div>
             </div>
 
-            <!-- TAB 1: RESEARCH HISTORY (ACCORDIONS) -->
-            <div id="academic-tab-research" class="space-y-6 fade-in">
-                <!-- Work Experience Accordion -->
-                <div id="card-work" class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden">
-                    <button onclick="toggleAccordion('acc-work')" class="w-full flex items-center justify-between p-6 sm:p-8 text-left hover:bg-stone-50/50 transition-colors">
-                        <div class="flex items-center space-x-3">
-                            <i class="fa-solid fa-briefcase text-navy-900 text-lg"></i>
-                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900">Work Experience</h2>
-                            <span id="count-work" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
-                        </div>
-                        <i id="icon-acc-work" class="fa-solid fa-chevron-down text-stone-400 transition-transform duration-300 transform rotate-180"></i>
-                    </button>
-                    <div id="acc-work" class="px-6 sm:px-8 pb-8 pt-2 border-t border-stone-100 space-y-6">
-                        <div id="list-work" class="space-y-6"></div>
-                    </div>
-                </div>
-            
-                <!-- Publications Accordion -->
-                <div id="card-publications" class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden">
-                    <button onclick="toggleAccordion('acc-publications')" class="w-full flex items-center justify-between p-6 sm:p-8 text-left hover:bg-stone-50/50 transition-colors">
-                        <div class="flex items-center space-x-3">
-                            <i class="fa-solid fa-book-open text-navy-900 text-lg"></i>
-                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900">Publications</h2>
-                            <span id="count-publications" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
-                        </div>
-                        <i id="icon-acc-publications" class="fa-solid fa-chevron-down text-stone-400 transition-transform duration-300"></i>
-                    </button>
-                    <div id="acc-publications" class="px-6 sm:px-8 pb-8 pt-2 border-t border-stone-100 space-y-6 hidden">
-                        <div id="list-publications" class="space-y-6"></div>
-                    </div>
-                </div>
-            
-                <!-- Presentations Accordion -->
-                <div id="card-presentations" class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden">
-                    <button onclick="toggleAccordion('acc-presentations')" class="w-full flex items-center justify-between p-6 sm:p-8 text-left hover:bg-stone-50/50 transition-colors">
-                        <div class="flex items-center space-x-3">
-                            <i class="fa-solid fa-chalkboard-user text-navy-900 text-lg"></i>
-                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900">Presentations & Conferences</h2>
-                            <span id="count-presentations" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
-                        </div>
-                        <i id="icon-acc-presentations" class="fa-solid fa-chevron-down text-stone-400 transition-transform duration-300"></i>
-                    </button>
-                    <div id="acc-presentations" class="px-6 sm:px-8 pb-8 pt-2 border-t border-stone-100 space-y-6 hidden">
-                        <div id="list-presentations" class="space-y-6"></div>
-                    </div>
-                </div>
-            
-                <!-- Seminars Accordion -->
-                <div id="card-seminars" class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden">
-                    <button onclick="toggleAccordion('acc-seminars')" class="w-full flex items-center justify-between p-6 sm:p-8 text-left hover:bg-stone-50/50 transition-colors">
-                        <div class="flex items-center space-x-3">
-                            <i class="fa-solid fa-graduation-cap text-navy-900 text-lg"></i>
-                            <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900">Seminars, Courses & More</h2>
-                            <span id="count-seminars" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">0 items</span>
-                        </div>
-                        <i id="icon-acc-seminars" class="fa-solid fa-chevron-down text-stone-400 transition-transform duration-300"></i>
-                    </button>
-                    <div id="acc-seminars" class="px-6 sm:px-8 pb-8 pt-2 border-t border-stone-100 space-y-6 hidden">
-                        <div id="list-seminars" class="space-y-6"></div>
-                    </div>
-                </div>
+        <!-- TAB 1: RESEARCH HISTORY (ACCORDIONS) -->
+            <div id="academic-tab-research" class="space-y-6 fade-in" id="dynamic-main-academic-lists">
+                <div id="container-academic-main" class="space-y-6"></div>
             </div>
 
-            <!-- TAB 2: BACKGROUND & LINKS -->
+        <!-- TAB 2: BACKGROUND & LINKS -->
             <div id="academic-tab-credentials" class="hidden space-y-6 fade-in">
-                <div class="bg-stone-50/80 rounded-2xl p-6 sm:p-8 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
-                    <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-200 flex items-center">
-                        <i class="fa-solid fa-user-graduate text-navy-900 mr-2.5 text-sm"></i> Background & Education
-                    </h3>
-                    <div id="list-background" class="space-y-4"></div>
-                </div>
-
-                <div class="bg-stone-50/80 rounded-2xl p-6 sm:p-8 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
-                    <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-200 flex items-center">
-                        <i class="fa-solid fa-brain text-navy-900 mr-2.5 text-sm"></i> Skills & Expertise
-                    </h3>
-                    <div id="list-skills" class="space-y-4"></div>
-                </div>
-
-                <div class="bg-stone-50/80 rounded-2xl p-6 sm:p-8 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
-                    <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-200 flex items-center">
-                        <i class="fa-solid fa-people-group text-navy-900 mr-2.5 text-sm"></i> Extracurriculars
-                    </h3>
-                    <div id="list-extracurriculars" class="space-y-4"></div>
-                </div>
-
-                <div class="bg-stone-50/80 rounded-2xl p-6 sm:p-8 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
-                    <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-200 flex items-center">
-                        <i class="fa-solid fa-share-nodes text-navy-900 mr-2.5 text-sm"></i> Socials & Links
-                    </h3>
-                    <div id="list-socials" class="space-y-3"></div>
-                </div>
-
-                <div class="bg-stone-50/80 rounded-2xl p-6 sm:p-8 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
-                    <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-200 flex items-center">
-                        <i class="fa-solid fa-id-card-clip text-navy-900 mr-2.5 text-sm"></i> References
-                    </h3>
-                    <div id="list-references" class="space-y-4"></div>
-                </div>
+                <div id="container-academic-sidebar" class="space-y-6"></div>
             </div>
-        </div>
-
+            
         <!-- 3. CREATIVE PORTFOLIO VIEW -->
         <div id="view-creative" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="border-b border-stone-200 pb-8 mb-10">
@@ -382,6 +290,7 @@
                     <button onclick="filterDashboardTab('all')" id="dtab-all" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-900 text-white shadow-xs">All Items</button>
                     <button onclick="filterDashboardTab('academic')" id="dtab-academic" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white text-stone-700 border border-stone-300 hover:bg-stone-100">Academic Lists</button>
                     <button onclick="filterDashboardTab('creative')" id="dtab-creative" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white text-stone-700 border border-stone-300 hover:bg-stone-100">Creative Portfolio</button>
+                    <button onclick="openManageListsModal()" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-navy-900 text-white hover:bg-navy-800 shadow-xs"><i class="fa-solid fa-list-check mr-1.5"></i> Manage Lists</button>
                 </div>
                 <div class="flex items-center space-x-2">
                     <button onclick="exportJSONData()" class="px-3 py-1.5 rounded-lg bg-white border border-stone-300 text-stone-700 hover:bg-stone-100 text-xs font-semibold"><i class="fa-solid fa-download mr-1"></i> Export JSON</button>
@@ -460,6 +369,63 @@
                 <div class="pt-4 border-t border-stone-200 flex items-center justify-end space-x-3">
                     <button type="button" onclick="closeModal('modal-entry-form')" class="px-5 py-2.5 rounded-xl border border-stone-300 text-stone-700 text-xs font-semibold hover:bg-stone-50">Cancel</button>
                     <button type="submit" class="px-6 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-semibold shadow-md">Save Entry</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MANAGE LISTS MODAL -->
+    <div id="modal-manage-lists" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/70 backdrop-blur-xs hidden p-2 sm:p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-stone-200 fade-in overflow-hidden">
+            <div class="px-6 py-5 bg-stone-900 text-white flex items-center justify-between">
+                <div>
+                    <h3 class="font-serif font-bold text-lg">Manage & Reorder Lists</h3>
+                    <p class="text-xs text-stone-400">Create, rename, re-order lists and assign them to Main Area or Side Panel</p>
+                </div>
+                <button onclick="closeModal('modal-manage-lists')" class="text-stone-400 hover:text-white p-2">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="p-6 bg-stone-50 border-b border-stone-200 flex items-center justify-between gap-4">
+                <div class="flex items-center space-x-2 w-full max-w-xs">
+                    <select id="manage-lists-category" onchange="renderManageListsContainer()" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs bg-white font-semibold">
+                        <option value="academic">Academic Section</option>
+                        <option value="creative">Creative Portfolio</option>
+                    </select>
+                </div>
+                <button onclick="openNewListModal()" class="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-600 text-stone-950 text-xs font-semibold shadow-xs">
+                    <i class="fa-solid fa-plus mr-1"></i> New List
+                </button>
+            </div>
+            <div class="flex-grow overflow-y-auto p-6 space-y-3" id="manage-lists-container"></div>
+        </div>
+    </div>
+
+    <!-- NEW / EDIT LIST CONFIG MODAL -->
+    <div id="modal-list-config" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/70 backdrop-blur-xs hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4 shadow-2xl border border-stone-200 fade-in overflow-hidden">
+            <div class="px-6 py-5 bg-stone-900 text-white flex items-center justify-between">
+                <h3 id="list-config-modal-title" class="font-serif font-bold text-lg">Configure List</h3>
+                <button onclick="closeModal('modal-list-config')" class="text-stone-400 hover:text-white p-2">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <form onsubmit="handleSaveListConfig(event)" class="p-6 space-y-4">
+                <input type="hidden" id="config-list-key">
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">List Title / Name *</label>
+                    <input type="text" id="config-list-title" required placeholder="e.g. Publications" class="w-full px-3 py-2.5 rounded-xl border border-stone-300 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Display Region</label>
+                    <select id="config-list-region" class="w-full px-3 py-2.5 rounded-xl border border-stone-300 text-sm bg-white">
+                        <option value="main">Main Area</option>
+                        <option value="sidebar">Side Panel (Sidebar)</option>
+                    </select>
+                </div>
+                <div class="pt-4 border-t border-stone-200 flex items-center justify-end space-x-3">
+                    <button type="button" onclick="closeModal('modal-list-config')" class="px-4 py-2 rounded-xl border border-stone-300 text-stone-700 text-xs font-semibold">Cancel</button>
+                    <button type="submit" class="px-5 py-2 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-semibold">Save List</button>
                 </div>
             </form>
         </div>
@@ -809,99 +775,74 @@
                     .sort((a, b) => (a.order || 0) - (b.order || 0));
             };
 
-            // Work Experience
-            const work = getSorted('work');
-            const cardWork = document.getElementById('card-work');
-            if (cardWork) {
-                if (work.length === 0) {
-                    cardWork.classList.add('hidden');
-                } else {
-                    cardWork.classList.remove('hidden');
-                    const countWork = document.getElementById('count-work');
-                    const listWork = document.getElementById('list-work');
-                    if (countWork) countWork.innerText = work.length + ' items';
-                    if (listWork) listWork.innerHTML = work.map(item => createTimelineItemHTML(item)).join('');
-                }
-            }
+            const academicLists = portfolioListsConfig['academic'] || [];
+            academicLists.sort((a, b) => (a.order || 0) - (b.order || 0));
 
-            // Publications
-            const pubs = getSorted('publications');
-            const cardPubs = document.getElementById('card-publications');
-            if (cardPubs) {
-                if (pubs.length === 0) {
-                    cardPubs.classList.add('hidden');
-                } else {
-                    cardPubs.classList.remove('hidden');
-                    const countPubs = document.getElementById('count-publications');
-                    const listPubs = document.getElementById('list-publications');
-                    if (countPubs) countPubs.innerText = pubs.length + ' items';
-                    if (listPubs) listPubs.innerHTML = pubs.map(item => createTimelineItemHTML(item)).join('');
-                }
-            }
+            const mainLists = academicLists.filter(l => l.region !== 'sidebar');
+            const sidebarLists = academicLists.filter(l => l.region === 'sidebar');
 
-            // Presentations
-            const pres = getSorted('presentations');
-            const cardPres = document.getElementById('card-presentations');
-            if (cardPres) {
-                if (pres.length === 0) {
-                    cardPres.classList.add('hidden');
-                } else {
-                    cardPres.classList.remove('hidden');
-                    const countPres = document.getElementById('count-presentations');
-                    const listPres = document.getElementById('list-presentations');
-                    if (countPres) countPres.innerText = pres.length + ' items';
-                    if (listPres) listPres.innerHTML = pres.map(item => createTimelineItemHTML(item)).join('');
-                }
-            }
-
-            // Seminars
-            const sems = getSorted('seminars');
-            const cardSems = document.getElementById('card-seminars');
-            if (cardSems) {
-                if (sems.length === 0) {
-                    cardSems.classList.add('hidden');
-                } else {
-                    cardSems.classList.remove('hidden');
-                    const countSems = document.getElementById('count-seminars');
-                    const listSems = document.getElementById('list-seminars');
-                    if (countSems) countSems.innerText = sems.length + ' items';
-                    if (listSems) listSems.innerHTML = sems.map(item => createTimelineItemHTML(item)).join('');
-                }
-            }
-
-            renderSidebarList('background', getSorted('background'));
-            renderSidebarList('skills', getSorted('skills'));
-            renderSidebarList('extracurriculars', getSorted('extracurriculars'));
-            renderSocialsList(getSorted('socials'));
-            renderSidebarList('references', getSorted('references'));
-        }
-
-        function renderSidebarList(listType, items) {
-            const container = document.getElementById('list-' + listType);
-            if (!container) return;
-            container.innerHTML = items.length === 0 ? '<p class="text-stone-400 text-xs italic">None listed.</p>' : items.map(item => {
-                const customHTML = item.customFields && item.customFields.length > 0 
-                    ? `<div class="flex flex-wrap gap-1.5 mt-2">${item.customFields.map(cf => {
-                        const keyTrim = cf.key ? cf.key.trim() : '';
-                        const valTrim = escapeHtml(cf.value);
-                        return `<span class="inline-flex items-center px-2 py-0.5 rounded bg-stone-100 text-stone-700 text-[11px] font-medium">${keyTrim ? `<strong class="mr-1 text-stone-900">${escapeHtml(keyTrim)}:</strong>` : ''}${valTrim}</span>`;
-                      }).join('')}</div>`
-                    : '';
-                
-                return `
-                    <div class="space-y-1 pb-2 border-b border-stone-100 last:border-none">
-                        <div class="flex items-center justify-between">
-                            <h4 class="font-semibold text-sm text-stone-900">${escapeHtml(item.title)}</h4>
-                            <span class="text-[11px] text-stone-500 bg-stone-100 px-2 py-0.5 rounded-full">${escapeHtml(item.year || '')}</span>
+            // Render Main Academic Lists (Accordions)
+            const mainContainer = document.getElementById('container-academic-main');
+            if (mainContainer) {
+                mainContainer.innerHTML = mainLists.map((l, index) => {
+                    const items = getSorted(l.key);
+                    const isFirst = index === 0;
+                    return `
+                        <div id="card-${l.key}" class="bg-white rounded-2xl border border-stone-200 shadow-xs overflow-hidden ${items.length === 0 ? 'hidden' : ''}">
+                            <button onclick="toggleAccordion('acc-${l.key}')" class="w-full flex items-center justify-between p-6 sm:p-8 text-left hover:bg-stone-50/50 transition-colors">
+                                <div class="flex items-center space-x-3">
+                                    <i class="fa-solid fa-folder-open text-navy-900 text-lg"></i>
+                                    <h2 class="font-serif text-xl sm:text-2xl font-bold text-stone-900">${escapeHtml(l.title)}</h2>
+                                    <span id="count-${l.key}" class="px-2.5 py-1 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold">${items.length} items</span>
+                                </div>
+                                <i id="icon-acc-${l.key}" class="fa-solid fa-chevron-down text-stone-400 transition-transform duration-300 ${isFirst ? 'transform rotate-180' : ''}"></i>
+                            </button>
+                            <div id="acc-${l.key}" class="px-6 sm:px-8 pb-8 pt-2 border-t border-stone-100 space-y-6 ${isFirst ? '' : 'hidden'}">
+                                <div id="list-${l.key}" class="space-y-6">${items.map(item => createTimelineItemHTML(item)).join('')}</div>
+                            </div>
                         </div>
-                        ${item.authors ? `<p class="text-xs text-stone-600 font-medium">${escapeHtml(item.authors)}</p>` : ''}
-                        ${item.description ? `<div class="text-xs text-stone-500">${safeParseMarkdown(item.description)}</div>` : ''}
-                        ${customHTML}
-                    </div>
-                `;
-            }).join('');
-        }
+                    `;
+                }).join('');
+            }
 
+            // Render Sidebar Academic Lists
+            const sidebarContainer = document.getElementById('container-academic-sidebar');
+            if (sidebarContainer) {
+                sidebarContainer.innerHTML = sidebarLists.map(l => {
+                    const items = getSorted(l.key);
+                    return `
+                        <div class="bg-stone-50/80 rounded-2xl p-6 sm:p-8 border border-stone-300/80 border-l-4 border-l-slate-800 shadow-xs">
+                            <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-2 border-b border-stone-200 flex items-center">
+                                <i class="fa-solid fa-circle-dot text-navy-900 mr-2.5 text-xs"></i> ${escapeHtml(l.title)}
+                            </h3>
+                            <div id="list-${l.key}" class="space-y-4">
+                                ${items.length === 0 ? '<p class="text-stone-400 text-xs italic">None listed.</p>' : items.map(item => {
+                                    const customHTML = item.customFields && item.customFields.length > 0 
+                                        ? `<div class="flex flex-wrap gap-1.5 mt-2">${item.customFields.map(cf => {
+                                            const keyTrim = cf.key ? cf.key.trim() : '';
+                                            const valTrim = escapeHtml(cf.value);
+                                            return `<span class="inline-flex items-center px-2 py-0.5 rounded bg-stone-100 text-stone-700 text-[11px] font-medium">${keyTrim ? `<strong class="mr-1 text-stone-900">${escapeHtml(keyTrim)}:</strong>` : ''}${valTrim}</span>`;
+                                          }).join('')}</div>`
+                                        : '';
+                                    return `
+                                        <div class="space-y-1 pb-2 border-b border-stone-100 last:border-none">
+                                            <div class="flex items-center justify-between">
+                                                <h4 class="font-semibold text-sm text-stone-900">${escapeHtml(item.title)}</h4>
+                                                <span class="text-[11px] text-stone-500 bg-stone-100 px-2 py-0.5 rounded-full">${escapeHtml(item.year || '')}</span>
+                                            </div>
+                                            ${item.authors ? `<p class="text-xs text-stone-600 font-medium">${escapeHtml(item.authors)}</p>` : ''}
+                                            ${item.description ? `<div class="text-xs text-stone-500">${safeParseMarkdown(item.description)}</div>` : ''}
+                                            ${customHTML}
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+        
         function renderSocialsList(items) {
             const container = document.getElementById('list-socials');
             if (!container) return;
@@ -1388,6 +1329,166 @@
             return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
 
+        // Default list definitions mapping keys to titles, region ('main' or 'sidebar'), and order
+        let portfolioListsConfig = {
+            academic: [
+                { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
+                { key: 'publications', title: 'Publications', region: 'main', order: 2 },
+                { key: 'presentations', title: 'Presentations & Conferences', region: 'main', order: 3 },
+                { key: 'seminars', title: 'Seminars, Courses & More', region: 'main', order: 4 },
+                { key: 'background', title: 'Education & Background', region: 'sidebar', order: 1 },
+                { key: 'skills', title: 'Skills & Expertise', region: 'sidebar', order: 2 },
+                { key: 'extracurriculars', title: 'Extracurriculars', region: 'sidebar', order: 3 },
+                { key: 'socials', title: 'Socials & Links', region: 'sidebar', order: 4 },
+                { key: 'references', title: 'References', region: 'sidebar', order: 5 }
+            ],
+            creative: [
+                { key: 'creative-works', title: 'Creative Portfolio Works', region: 'main', order: 1 }
+            ]
+        };
+
+        function getListConfig(category, listType) {
+            const catLists = portfolioListsConfig[category] || [];
+            return catLists.find(l => l.key === listType) || { key: listType, title: listType, region: 'main', order: 99 };
+        }
+
+        function updateListDropdownOptions() {
+            const cat = document.getElementById('form-category').value;
+            const listSelect = document.getElementById('form-list-type');
+            listSelect.innerHTML = '';
+
+            const lists = portfolioListsConfig[cat] || [];
+            lists.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+            lists.forEach(opt => {
+                const el = document.createElement('option');
+                el.value = opt.key;
+                el.innerText = opt.title;
+                listSelect.appendChild(el);
+            });
+        }
+
+        function openManageListsModal() {
+            document.getElementById('manage-lists-category').value = 'academic';
+            renderManageListsContainer();
+            openModal('modal-manage-lists');
+        }
+
+        function renderManageListsContainer() {
+            const cat = document.getElementById('manage-lists-category').value;
+            const container = document.getElementById('manage-lists-container');
+            const lists = portfolioListsConfig[cat] || [];
+            lists.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+            if (lists.length === 0) {
+                container.innerHTML = '<p class="text-stone-400 text-center py-6 text-xs italic">No lists configured.</p>';
+                return;
+            }
+
+            container.innerHTML = lists.map((l, idx) => `
+                <div class="bg-white rounded-xl p-4 border border-stone-200 flex items-center justify-between gap-3 shadow-2xs">
+                    <div class="flex items-center space-x-3 min-w-0">
+                        <div class="flex flex-col space-y-1 flex-shrink-0">
+                            <button onclick="moveListOrder('${cat}', '${l.key}', -1)" title="Move Up" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100"><i class="fa-solid fa-chevron-up"></i></button>
+                            <button onclick="moveListOrder('${cat}', '${l.key}', 1)" title="Move Down" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100"><i class="fa-solid fa-chevron-down"></i></button>
+                        </div>
+                        <div class="min-w-0">
+                            <h4 class="font-serif font-bold text-sm text-stone-900 truncate">${escapeHtml(l.title)}</h4>
+                            <div class="flex items-center space-x-2 mt-0.5">
+                                <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold ${l.region === 'sidebar' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-slate-100 text-slate-700'}">${l.region === 'sidebar' ? 'Side Panel (Sidebar)' : 'Main Area'}</span>
+                                <span class="text-[10px] text-stone-400">Key: ${escapeHtml(l.key)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 flex-shrink-0">
+                        <button onclick="openEditListModal('${cat}', '${l.key}')" class="px-2.5 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold"><i class="fa-solid fa-pen mr-1"></i> Edit</button>
+                        <button onclick="deleteList('${cat}', '${l.key}')" class="px-2.5 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold"><i class="fa-solid fa-trash mr-1"></i> Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function moveListOrder(cat, key, direction) {
+            const lists = portfolioListsConfig[cat] || [];
+            lists.sort((a, b) => (a.order || 0) - (b.order || 0));
+            const idx = lists.findIndex(l => l.key === key);
+            const targetIdx = idx + direction;
+
+            if (targetIdx >= 0 && targetIdx < lists.length) {
+                const temp = lists[idx].order;
+                lists[idx].order = lists[targetIdx].order;
+                lists[targetIdx].order = temp;
+                lists.sort((a, b) => (a.order || 0) - (b.order || 0));
+                lists.forEach((l, i) => l.order = i + 1);
+                saveData();
+                renderManageListsContainer();
+            }
+        }
+
+        function openNewListModal() {
+            document.getElementById('list-config-modal-title').innerText = 'Create New List';
+            document.getElementById('config-list-key').value = '';
+            document.getElementById('config-list-title').value = '';
+            document.getElementById('config-list-region').value = 'main';
+            openModal('modal-list-config');
+        }
+
+        function openEditListModal(cat, key) {
+            const lists = portfolioListsConfig[cat] || [];
+            const l = lists.find(item => item.key === key);
+            if (!l) return;
+            document.getElementById('list-config-modal-title').innerText = 'Edit List Configuration';
+            document.getElementById('config-list-key').value = l.key;
+            document.getElementById('config-list-title').value = l.title;
+            document.getElementById('config-list-region').value = l.region || 'main';
+            openModal('modal-list-config');
+        }
+
+        function handleSaveListConfig(event) {
+            event.preventDefault();
+            const cat = document.getElementById('manage-lists-category').value;
+            const existingKey = document.getElementById('config-list-key').value;
+            const title = document.getElementById('config-list-title').value.trim();
+            const region = document.getElementById('config-list-region').value;
+
+            if (!portfolioListsConfig[cat]) portfolioListsConfig[cat] = [];
+
+            if (existingKey) {
+                const l = portfolioListsConfig[cat].find(item => item.key === existingKey);
+                if (l) {
+                    l.title = title;
+                    l.region = region;
+                }
+            } else {
+                const newKey = title.toLowerCase().replace(/[^a-z0-9]/g, '-') + '-' + Date.now();
+                const maxOrder = portfolioListsConfig[cat].reduce((max, l) => Math.max(max, l.order || 0), 0);
+                portfolioListsConfig[cat].push({
+                    key: newKey,
+                    title: title,
+                    region: region,
+                    order: maxOrder + 1
+                });
+            }
+
+            saveData();
+            closeModal('modal-list-config');
+            renderManageListsContainer();
+        }
+
+        function deleteList(cat, key) {
+            const lists = portfolioListsConfig[cat] || [];
+            const hasItems = portfolioData.some(i => i.category === cat && i.listType === key);
+            if (hasItems) {
+                alert('Cannot delete this list because it still contains entries. Please delete or move the entries first.');
+                return;
+            }
+            if (confirm('Are you sure you want to delete this list configuration?')) {
+                portfolioListsConfig[cat] = lists.filter(l => l.key !== key);
+                saveData();
+                renderManageListsContainer();
+            }
+        }
+        
         function switchAcademicTab(tabName) {
             const researchTab = document.getElementById('academic-tab-research');
             const credsTab = document.getElementById('academic-tab-credentials');
