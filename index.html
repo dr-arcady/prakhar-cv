@@ -1331,38 +1331,6 @@ async function saveData() {
             openEntryModal(id);
         }
 
-        function updateListDropdownOptions() {
-            const cat = document.getElementById('form-category').value;
-            const listSelect = document.getElementById('form-list-type');
-            listSelect.innerHTML = '';
-
-            let options = [];
-            if (cat === 'academic') {
-                options = [
-                    { val: 'work', label: 'Work Experience' },
-                    { val: 'publications', label: 'Publications' },
-                    { val: 'presentations', label: 'Presentations & Conferences' },
-                    { val: 'seminars', label: 'Seminars, Courses & More' },
-                    { val: 'background', label: 'Background & Education' },
-                    { val: 'skills', label: 'Skills & Expertise' },
-                    { val: 'extracurriculars', label: 'Extracurriculars' },
-                    { val: 'socials', label: 'Socials & Links' },
-                    { val: 'references', label: 'References' }
-                ];
-            } else {
-                options = [
-                    { val: 'creative-works', label: 'Creative Portfolio Works' }
-                ];
-            }
-
-            options.forEach(opt => {
-                const el = document.createElement('option');
-                el.value = opt.val;
-                el.innerText = opt.label;
-                listSelect.appendChild(el);
-            });
-        }
-
         function addCustomFieldRow(key = '', value = '') {
             const container = document.getElementById('custom-fields-container');
             const div = document.createElement('div');
@@ -1520,18 +1488,38 @@ async function saveData() {
             const listSelect = document.getElementById('form-list-type');
             listSelect.innerHTML = '';
 
+            // Pull base lists from config
             const lists = [...(portfolioListsConfig[cat] || [])];
             lists.sort((a, b) => (a.order || 0) - (b.order || 0));
 
-            // Ensure Socials & Links is always available in the target options for Academic
+            // Explicitly ensure 'socials' is added as an academic option if missing
             if (cat === 'academic' && !lists.some(l => l.key === 'socials')) {
                 lists.push({ key: 'socials', title: 'Socials & Links' });
             }
 
+            // Fallback default options if config is empty
+            if (lists.length === 0) {
+                if (cat === 'academic') {
+                    lists.push(
+                        { key: 'work', title: 'Work Experience' },
+                        { key: 'publications', title: 'Publications' },
+                        { key: 'presentations', title: 'Presentations & Conferences' },
+                        { key: 'seminars', title: 'Seminars, Courses & More' },
+                        { key: 'background', title: 'Background & Education' },
+                        { key: 'skills', title: 'Skills & Expertise' },
+                        { key: 'extracurriculars', title: 'Extracurriculars' },
+                        { key: 'socials', title: 'Socials & Links' },
+                        { key: 'references', title: 'References' }
+                    );
+                } else {
+                    lists.push({ key: 'creative-works', title: 'Creative Portfolio Works' });
+                }
+            }
+
             lists.forEach(opt => {
                 const el = document.createElement('option');
-                el.value = opt.key;
-                el.innerText = opt.title;
+                el.value = opt.key || opt.val;
+                el.innerText = opt.title || opt.label;
                 listSelect.appendChild(el);
             });
         }
