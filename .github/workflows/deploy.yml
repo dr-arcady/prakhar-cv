@@ -25,9 +25,19 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Inject GitHub Config into index.html
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
           if [ -f index.html ]; then
+            # Inject GH_CONFIG for API data saving
             sed -i 's|<head>|<head><script>window.GH_CONFIG = { repo: "${{ github.repository }}", token: "${{ secrets.GH_PAT }}" };</script>|g' index.html
+            
+            # Inject AUTH_CONFIG for static GitHub Pages login
+            if [ -n "$ADMIN_PASSWORD" ]; then
+              SALT="prakhar_cv_salt_2026"
+              HASH=$(node -e "const crypto = require('crypto'); console.log(crypto.createHash('sha256').update('$SALT' + process.env.ADMIN_PASSWORD).digest('hex'));")
+              sed -i "s|<head>|<head><script>window.AUTH_CONFIG = { salt: '$SALT', hash: '$HASH' };</script>|g" index.html
+            fi
           fi
 
       - name: Setup Node.js
