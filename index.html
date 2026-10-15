@@ -912,6 +912,9 @@ async function handleSaveProfile(event) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
             
+            // Re-render views to ensure dynamic lists populate when switching tabs
+            renderViews();
+        
             const headerContainer = document.getElementById('header-action-container');
             if (headerContainer) {
                 if (viewName === 'home') {
@@ -1642,18 +1645,24 @@ async function handleSaveProfile(event) {
         }
 
         function moveListOrder(key, direction) {
-            const lists = [...portfolioListsConfig];
-            lists.sort((a, b) => (a.order || 0) - (b.order || 0));
-            const idx = lists.findIndex(l => l.key === key);
+            const targetList = portfolioListsConfig.find(l => l.key === key);
+            if (!targetList) return;
+        
+            // Filter lists belonging to the same region (main vs sidebar)
+            const regionLists = portfolioListsConfig.filter(l => (l.region || 'main') === (targetList.region || 'main'));
+            regionLists.sort((a, b) => (a.order || 0) - (b.order || 0));
+        
+            const idx = regionLists.findIndex(l => l.key === key);
             const targetIdx = idx + direction;
-
-            if (targetIdx >= 0 && targetIdx < lists.length) {
-                const temp = lists[idx].order;
-                lists[idx].order = lists[targetIdx].order;
-                lists[targetIdx].order = temp;
-                lists.sort((a, b) => (a.order || 0) - (b.order || 0));
-                lists.forEach((l, i) => l.order = i + 1);
-                portfolioListsConfig = lists;
+        
+            if (targetIdx >= 0 && targetIdx < regionLists.length) {
+                const tempOrder = regionLists[idx].order;
+                regionLists[idx].order = regionLists[targetIdx].order;
+                regionLists[targetIdx].order = tempOrder;
+        
+                regionLists.sort((a, b) => (a.order || 0) - (b.order || 0));
+                regionLists.forEach((l, i) => l.order = i + 1);
+        
                 saveData();
                 renderManageListsContainer();
             }
