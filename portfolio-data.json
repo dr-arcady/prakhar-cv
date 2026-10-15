@@ -47,38 +47,38 @@
       "order": 4
     },
     {
+      "key": "creative-works",
+      "title": "Creative Portfolio Works",
+      "category": "creative",
+      "region": "main",
+      "order": 5
+    },
+    {
       "key": "extracurriculars",
       "title": "Extracurriculars",
       "category": "academic",
       "region": "sidebar",
-      "order": 5
+      "order": 6
     },
     {
       "key": "presentations",
       "title": "Presentations & Conferences",
       "category": "academic",
       "region": "main",
-      "order": 6
-    },
-    {
-      "key": "seminars",
-      "title": "Seminars, Courses & More",
-      "category": "academic",
-      "region": "main",
       "order": 7
-    },
-    {
-      "key": "creative-works",
-      "title": "Creative Portfolio Works",
-      "category": "creative",
-      "region": "main",
-      "order": 8
     },
     {
       "key": "references",
       "title": "References",
       "category": "academic",
       "region": "sidebar",
+      "order": 8
+    },
+    {
+      "key": "seminars",
+      "title": "Seminars, Courses & More",
+      "category": "academic",
+      "region": "main",
       "order": 9
     }
   ],
