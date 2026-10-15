@@ -150,23 +150,6 @@ async function generatePDF() {
         `;
     };
 
-    // Use allListsConfig directly since it is already sorted by region and order cleanly
-    const mainLists = allListsConfig.filter(l => l.region !== 'sidebar');
-    const sidebarLists = allListsConfig.filter(l => l.region === 'sidebar');
-
-    const mainHTML = mainLists.map(l => {
-        const items = filterList(l.key);
-        if (items.length === 0) return '';
-        return `
-            <div class="section-group">
-                <div class="section-heading">${l.title}</div>
-                ${renderMainItems(items)}
-            </div>
-        `;
-    }).join('');
-
-    const sidebarHTML = sidebarLists.map(l => renderSidebarSection(l)).join('');
-
     const htmlTemplate = `
     <!DOCTYPE html>
     <html lang="en">
