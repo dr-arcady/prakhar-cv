@@ -51,7 +51,7 @@
       "title": "Creative Portfolio Works",
       "category": "creative",
       "region": "main",
-      "order": 5
+      "order": 4
     },
     {
       "key": "extracurriculars",
@@ -79,7 +79,7 @@
       "title": "Seminars, Courses & More",
       "category": "academic",
       "region": "main",
-      "order": 4
+      "order": 5
     }
   ],
   "items": [
