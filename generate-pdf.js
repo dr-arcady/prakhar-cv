@@ -60,24 +60,24 @@ async function generatePDF() {
         { key: 'creative-works', title: 'Creative Portfolio Works', region: 'main', order: 1 }
     ];
 
-    const rawLists = rawData.lists || {};
-    const academicLists = rawLists.academic || defaultAcademicLists;
-    const creativeLists = rawLists.creative || defaultCreativeLists;
+    // Read the unified master lists configuration directly from portfolio-data.json
+    const allListsConfig = rawData.lists || [
+        { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
+        { key: 'publications', title: 'Publications', region: 'main', order: 2 },
+        { key: 'creative-works', title: 'Creative Portfolio Works', region: 'main', order: 3 },
+        { key: 'presentations', title: 'Presentations & Conferences', region: 'main', order: 4 },
+        { key: 'seminars', title: 'Seminars, Courses & More', region: 'main', order: 5 },
+        { key: 'background', title: 'Education & Background', region: 'sidebar', order: 1 },
+        { key: 'skills', title: 'Skills & Expertise', region: 'sidebar', order: 2 },
+        { key: 'extracurriculars', title: 'Extracurriculars', region: 'sidebar', order: 3 },
+        { key: 'references', title: 'References', region: 'sidebar', order: 4 }
+    ];
 
-    // Combine academic and creative lists, sorting strictly by region, then order, 
-    // ensuring academic main sections take precedence over creative sections on ties.
-    const allListsConfig = [...academicLists, ...creativeLists].sort((a, b) => {
-        if (a.region !== b.region) {
-            return a.region === 'main' ? -1 : 1;
-        }
-        if ((a.order || 0) !== (b.order || 0)) {
-            return (a.order || 0) - (b.order || 0);
-        }
-        // Tie-breaker: If order and region match, keep academic items before creative items
-        const isACreative = a.key === 'creative-works';
-        const isBCreative = b.key === 'creative-works';
-        return isACreative === isBCreative ? 0 : (isACreative ? 1 : -1);
-    });
+    // Sort strictly by the master order defined in the configuration
+    allListsConfig.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+    const mainLists = allListsConfig.filter(l => l.region !== 'sidebar');
+    const sidebarLists = allListsConfig.filter(l => l.region === 'sidebar');
   
     let qrCodeBase64 = '';
     const qrImagePath = path.resolve(__dirname, 'CV Vercel QR hovercode.png');
