@@ -90,16 +90,16 @@ async function generatePDF() {
         `;
     }).join('');
     
-    // Render Sidebar Sections matched to main area layout (vertical accent line, section-heading, no outer boxes)
+    // Render Sidebar Sections with internal spacing and flush top alignment
     const renderSidebarSection = (listConfig) => {
         const items = filterList(listConfig.key);
         if (items.length === 0 && listConfig.key !== 'socials') return '';
 
         if (listConfig.key === 'socials') {
             return `
-                <div class="section-group">
+                <div class="section-group" style="padding: 0 8px;">
                     <div class="section-heading">${listConfig.title}</div>
-                    <div style="font-size: 11px;">
+                    <div style="font-size: 11px; margin-bottom: 24px;">
                         ${socialsList.map(item => {
                             let href = item.link || '#';
                             if (item.title.toLowerCase() === 'email' && !href.startsWith('mailto:')) href = 'mailto:' + item.description;
@@ -137,9 +137,9 @@ async function generatePDF() {
         `;
 
         return `
-            <div class="section-group">
+            <div class="section-group" style="padding: 0 8px;">
                 <div class="section-heading">${listConfig.title}</div>
-                <div style="font-size: 11px;">
+                <div style="font-size: 11px; margin-bottom: 24px;">
                     ${items.map(item => renderItemHtml(item)).join('')}
                 </div>
             </div>
@@ -229,7 +229,7 @@ async function generatePDF() {
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
             <tr>
-                <td style="width: 30%; background-color: #f8fafc; padding: 15px 12px; height: 1px;">
+                <td style="width: 30%; background: linear-gradient(to bottom, #ffffff 0%, #ffffff 35px, #f8fafc 75px, #f8fafc calc(100% - 75px), #ffffff calc(100% - 35px), #ffffff 100%); padding-top: 0; height: 1px;">
                     ${sidebarHTML}
                 </td>
                 <td style="width: 70%; padding-left: 20px; height: 1px;">
