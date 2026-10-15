@@ -61,16 +61,16 @@
       "order": 6
     },
     {
-      "key": "creative-works",
-      "title": "Creative Portfolio Works",
-      "category": "creative",
+      "key": "seminars",
+      "title": "Seminars, Courses & More",
+      "category": "academic",
       "region": "main",
       "order": 7
     },
     {
-      "key": "seminars",
-      "title": "Seminars, Courses & More",
-      "category": "academic",
+      "key": "creative-works",
+      "title": "Creative Portfolio Works",
+      "category": "creative",
       "region": "main",
       "order": 8
     },
