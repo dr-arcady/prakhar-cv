@@ -693,7 +693,12 @@
       "link": "",
       "linkTarget": "custom",
       "linkText": "View Work / Document",
-      "customFields": [],
+      "customFields": [
+        {
+          "key": "Score",
+          "value": "60.67%"
+        }
+      ],
       "order": 6
     }
   ]
