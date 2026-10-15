@@ -139,7 +139,7 @@ async function generatePDF() {
         const isFirst = sidebarLists[0] && sidebarLists[0].key === listConfig.key;
 
         return `
-            <div class="section-group" style="margin-top: ${isFirst ? '0' : '28px'};">
+            <div class="section-group" style="margin-top: ${isFirst ? '0' : '28px'}; margin-bottom: 24px;">
                 <div class="section-heading">${listConfig.title}</div>
                 <div style="font-size: 11px;">
                     ${items.map(item => renderItemHtml(item)).join('')}
@@ -232,7 +232,7 @@ async function generatePDF() {
         <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
             <tr>
                 <td style="width: 30%; padding: 0; vertical-align: top;">
-                    <div style="background-color: #f8fafc; padding: 0 12px 15px 12px; height: 100%; box-sizing: border-box;">
+                    <div style="background-color: #f8fafc; padding: 0 12px; display: inline-block; width: 100%; box-sizing: border-box;">
                         ${sidebarHTML}
                     </div>
                 </td>
