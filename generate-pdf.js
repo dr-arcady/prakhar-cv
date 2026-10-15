@@ -201,38 +201,30 @@ async function generatePDF() {
             <div style="background-color: #ffffff; border-top: 2px solid #334155; border-bottom: 2px solid #334155; padding: 8px 12px; font-size: 9.5px; color: #334155;">
                 ${(() => {
                     const items = socialsList;
-                    const total = items.length;
-                    if (total === 0) return '';
-                    
+                    if (items.length === 0) return '';
+
+                    // Group items into rows dynamically by estimating max fit per line (~3 items average),
+                    // or let CSS handle it cleanly by splitting into safe chunks that fill available width.
+                    // For a reliable multi-row layout with justified wrapping:
+                    const maxPerLine = 3; 
                     let rows = [];
-                    if (total <= 3) {
-                        rows = [items];
-                    } else if (total === 4) {
-                        rows = [items.slice(0, 2), items.slice(2)];
-                    } else if (total === 5) {
-                        rows = [items.slice(0, 3), items.slice(3)];
-                    } else {
-                        const mid = Math.ceil(total / 2);
-                        rows = [items.slice(0, mid), items.slice(mid)];
+                    for (let i = 0; i < items.length; i += maxPerLine) {
+                        rows.push(items.slice(i, i + maxPerLine));
                     }
 
                     return rows.map((rowItems, rowIndex) => {
-                        const isFirstRow = rowIndex === 0;
-                        const rowStyle = isFirstRow 
-                            ? 'display: flex; justify-content: space-between; align-items: center; width: 100%;'
-                            : 'display: flex; justify-content: center; align-items: center; gap: 40px; width: 100%; margin-top: 5px;';
+                        const rowStyle = 'display: flex; justify-content: space-between; align-items: center; width: 100%;' + (rowIndex === 0 ? '' : ' margin-top: 5px;');
                         
                         const itemsHtml = rowItems.map(item => {
                             const val = item.description || item.link || '';
                             const href = item.link || '#';
                             return `<span style="white-space: nowrap;"><strong style="color: #0f172a;">${parseMarkdown(item.title)}:</strong> <a href="${href}" style="color: #1e3a8a; text-decoration: none;">${val}</a></span>`;
-                        }).join('');
+                        }).join(' | ');
 
-                        return `<div style="${rowStyle}">${itemsHtml}</div>`;
+                        return `<div style="${rowStyle}"><span>|</span> ${itemsHtml} <span>|</span></div>`;
                     }).join('');
                 })()}
             </div>
-        </div>
         
         <table>
             <tr>
