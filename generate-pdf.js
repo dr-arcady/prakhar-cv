@@ -16,10 +16,28 @@ async function generatePDF() {
     
     // Force Node.js to bypass file system cache and read fresh disk content
     fs.unwatchFile(dataPath);
-    const rawData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+    
+    let rawData;
+    try {
+        const fileContent = fs.readFileSync(dataPath, 'utf8');
+        // Check if the file accidentally contains an HTML error response instead of JSON
+        if (fileContent.trim().startsWith('<') || fileContent.trim().startsWith('A server')) {
+            throw new Error("File content is an HTML error response or invalid text, not JSON.");
+        }
+        rawData = JSON.parse(fileContent);
+    } catch (err) {
+        console.error('Error parsing portfolio-data.json:', err.message);
+        // Fallback default structure so the build doesn't crash with exit code 1
+        rawData = {
+            profile: { name: "Dr. Prakhar Srivastava", subtitle: "Scholar & Creative Writer", degree: "Ph.D., English" },
+            items: [],
+            lists: {}
+        };
+    }
+    
     const portfolioData = Array.isArray(rawData) ? rawData : (rawData.items || []);
     console.log(`Loaded ${portfolioData.length} total items from portfolio-data.json for PDF generation.`);
-
+    
     // Dynamically pull profile info from portfolio-data.json with fallback defaults
     const profile = rawData.profile || {
         name: "Dr. Prakhar Srivastava",
