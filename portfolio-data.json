@@ -37,7 +37,7 @@
       "title": "Writing & Publications",
       "category": "academic",
       "region": "main",
-      "order": 3
+      "order": 2
     },
     {
       "key": "skills",
@@ -51,7 +51,7 @@
       "title": "Creative Portfolio Works",
       "category": "creative",
       "region": "main",
-      "order": 5
+      "order": 4
     },
     {
       "key": "extracurriculars",
@@ -65,7 +65,7 @@
       "title": "Presentations & Conferences",
       "category": "academic",
       "region": "main",
-      "order": 7
+      "order": 3
     },
     {
       "key": "references",
@@ -79,7 +79,7 @@
       "title": "Seminars, Courses & More",
       "category": "academic",
       "region": "main",
-      "order": 9
+      "order": 5
     }
   ],
   "items": [
