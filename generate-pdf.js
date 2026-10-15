@@ -13,8 +13,12 @@ function parseMarkdown(text) {
 async function generatePDF() {
     console.log('Reading portfolio data...');
     const dataPath = path.resolve(__dirname, 'portfolio-data.json');
+    
+    // Force Node.js to bypass file system cache and read fresh disk content
+    fs.unwatchFile(dataPath);
     const rawData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
     const portfolioData = Array.isArray(rawData) ? rawData : (rawData.items || []);
+    console.log(`Loaded ${portfolioData.length} total items from portfolio-data.json for PDF generation.`);
     const profile = rawData.profile || {
         name: "Dr. Prakhar Srivastava",
         subtitle: "Scholar & Creative Writer",
