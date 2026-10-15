@@ -193,7 +193,7 @@ async function generatePDF() {
         </style>
     </head>
     <body style="padding: 20px;">
-        <div style="margin-bottom: 20px;">
+        <div style="margin-bottom: 35px;">
             <div style="margin-bottom: 12px;">
                 <h1 style="font-size: 24px; font-weight: bold; color: #0f172a; line-height: 1.2;">${parseMarkdown(profile.name)}</h1>
                 <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;|&nbsp; ${parseMarkdown(profile.subtitle)}</p>
