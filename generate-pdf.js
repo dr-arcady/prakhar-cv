@@ -188,11 +188,9 @@ async function generatePDF() {
         `;
     };
 
-    const allLists = [...allListsConfig];
-    allLists.sort((a, b) => (a.order || 0) - (b.order || 0));
-
-    const mainLists = allLists.filter(l => l.region !== 'sidebar');
-    const sidebarLists = allLists.filter(l => l.region === 'sidebar');
+    // Use allListsConfig directly since it is already sorted by region and order cleanly
+    const mainLists = allListsConfig.filter(l => l.region !== 'sidebar');
+    const sidebarLists = allListsConfig.filter(l => l.region === 'sidebar');
 
     const mainHTML = mainLists.map(l => {
         const items = filterList(l.key);
