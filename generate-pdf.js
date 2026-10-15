@@ -232,7 +232,7 @@ async function generatePDF() {
                 })()}
             </div>
         
-        <table>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
             <tr>
                 <td style="width: 30%; padding-right: 20px; height: 1px;">
                     ${sidebarHTML}
