@@ -528,7 +528,7 @@
           "value": "66.6%"
         }
       ],
-      "order": 4
+      "order": 5
     },
     {
       "id": "item-1791817547009",
@@ -694,7 +694,7 @@
       "linkTarget": "custom",
       "linkText": "View Work / Document",
       "customFields": [],
-      "order": 5
+      "order": 4
     }
   ]
 }
