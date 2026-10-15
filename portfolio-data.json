@@ -681,6 +681,20 @@
         }
       ],
       "order": 2
+    },
+    {
+      "id": "item-1792056997402",
+      "category": "academic",
+      "listType": "background",
+      "title": "UGC - NET",
+      "authors": "English",
+      "year": "2019",
+      "description": "",
+      "link": "",
+      "linkTarget": "custom",
+      "linkText": "View Work / Document",
+      "customFields": [],
+      "order": 6
     }
   ]
 }
