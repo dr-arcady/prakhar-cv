@@ -191,7 +191,7 @@ async function generatePDF() {
     <body style="padding: 20px;">
         <div style="margin-bottom: 25px;">
             <div style="margin-bottom: 12px;">
-                <h1 style="font-size: 24px; font-weight: bold; color: #0f172a; line-height: 1.2;">${parseMarkdown(profile.name)}</h1>
+                <h1 style="font-size: 32px; font-weight: bold; color: #0f172a; line-height: 1.2;">${parseMarkdown(profile.name)}</h1>
                 <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;|&nbsp; ${parseMarkdown(profile.subtitle)}</p>
             </div>
             <div style="background-color: #ffffff; border-top: 2px solid #334155; border-bottom: 2px solid #334155; padding: 8px 12px; font-size: 9.5px; color: #334155;">
@@ -231,10 +231,8 @@ async function generatePDF() {
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
             <tr>
-                <td style="width: 30%; padding: 0; vertical-align: top;">
-                    <div style="background-color: #f8fafc; padding: 0 12px; display: inline-block; width: 100%; box-sizing: border-box;">
-                        ${sidebarHTML}
-                    </div>
+                <td style="width: 30%; padding-right: 15px; vertical-align: top;">
+                    ${sidebarHTML}
                 </td>
                 <td style="width: 70%; padding-left: 20px; vertical-align: top;">
                     ${mainHTML}
