@@ -945,7 +945,7 @@ async function handleSaveProfile(event) {
                     .sort((a, b) => (a.order || 0) - (b.order || 0));
             };
 
-            const academicLists = portfolioListsConfig['academic'] || [];
+            const academicLists = portfolioListsConfig.filter(l => l.category === 'academic' || !l.category);
             academicLists.sort((a, b) => (a.order || 0) - (b.order || 0));
 
             const mainLists = academicLists.filter(l => l.region !== 'sidebar');
