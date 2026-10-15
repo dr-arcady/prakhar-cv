@@ -27,8 +27,7 @@ async function generatePDF() {
         degree: "Ph.D., English"
     };
 
-    // Dynamically pull custom list configurations (ensuring renamed headers update on PDF)
-    const rawLists = rawData.lists || {};
+    // Use existing list definitions or fall back to defaults dynamically
     const defaultAcademicLists = [
         { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
         { key: 'publications', title: 'Publications', region: 'main', order: 2 },
@@ -43,6 +42,7 @@ async function generatePDF() {
         { key: 'creative-works', title: 'Creative Portfolio Works', region: 'main', order: 1 }
     ];
 
+    const rawLists = rawData.lists || {};
     const allListsConfig = [
         ...(rawLists.academic || defaultAcademicLists),
         ...(rawLists.creative || defaultCreativeLists)
