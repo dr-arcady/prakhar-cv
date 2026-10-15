@@ -408,13 +408,8 @@
                 </button>
             </div>
             <div class="p-6 bg-stone-50 border-b border-stone-200 flex items-center justify-between gap-4">
-                <div class="flex items-center space-x-2 w-full max-w-xs">
-                    <select id="manage-lists-category" onchange="renderManageListsContainer()" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs bg-white font-semibold">
-                        <option value="academic">Academic Section</option>
-                        <option value="creative">Creative Portfolio</option>
-                    </select>
-                </div>
-                <button onclick="openNewListModal()" class="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-600 text-stone-950 text-xs font-semibold shadow-xs">
+                <p class="text-xs text-stone-600 font-medium">Reorder all main sections and sidebar panels globally.</p>
+                <button onclick="openNewListModal()" class="px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-600 text-stone-950 text-xs font-semibold shadow-xs flex-shrink-0">
                     <i class="fa-solid fa-plus mr-1"></i> New List
                 </button>
             </div>
@@ -642,7 +637,18 @@ async function loadData() {
             } else if (raw && raw.items) {
                 portfolioData = raw.items;
                 if (raw.profile) profileData = { ...profileData, ...raw.profile };
-                if (raw.lists) portfolioListsConfig = raw.lists;
+                // Support both legacy object lists and the new unified array lists format
+                if (raw.lists) {
+                    if (Array.isArray(raw.lists)) {
+                        portfolioListsConfig = raw.lists;
+                    } else {
+                        // Convert legacy split object into unified master array
+                        portfolioListsConfig = [
+                            ...(raw.lists.academic || []),
+                            ...(raw.lists.creative || [])
+                        ];
+                    }
+                }
             }
         } else {
             portfolioData = DEFAULT_PORTFOLIO_DATA;
@@ -1520,21 +1526,17 @@ async function handleSaveProfile(event) {
         }
 
         // Default list definitions mapping keys to titles, region ('main' or 'sidebar'), and order
-        let portfolioListsConfig = {
-            academic: [
-                { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
-                { key: 'publications', title: 'Publications', region: 'main', order: 2 },
-                { key: 'presentations', title: 'Presentations & Conferences', region: 'main', order: 3 },
-                { key: 'seminars', title: 'Seminars, Courses & More', region: 'main', order: 4 },
-                { key: 'background', title: 'Education & Background', region: 'sidebar', order: 1 },
-                { key: 'skills', title: 'Skills & Expertise', region: 'sidebar', order: 2 },
-                { key: 'extracurriculars', title: 'Extracurriculars', region: 'sidebar', order: 3 },
-                { key: 'references', title: 'References', region: 'sidebar', order: 4 }
-            ],
-            creative: [
-                { key: 'creative-works', title: 'Creative Portfolio Works', region: 'main', order: 1 }
-            ]
-        };
+        let portfolioListsConfig = [
+            { key: 'work', title: 'Work Experience', category: 'academic', region: 'main', order: 1 },
+            { key: 'publications', title: 'Writing & Publications', category: 'academic', region: 'main', order: 2 },
+            { key: 'creative-works', title: 'Creative Portfolio Works', category: 'creative', region: 'main', order: 3 },
+            { key: 'presentations', title: 'Presentations & Conferences', category: 'academic', region: 'main', order: 4 },
+            { key: 'seminars', title: 'Seminars, Courses & More', category: 'academic', region: 'main', order: 5 },
+            { key: 'background', title: 'Education & Background', category: 'academic', region: 'sidebar', order: 1 },
+            { key: 'skills', title: 'Skills & Expertise', category: 'academic', region: 'sidebar', order: 2 },
+            { key: 'extracurriculars', title: 'Extracurriculars', category: 'academic', region: 'sidebar', order: 3 },
+            { key: 'references', title: 'References', category: 'academic', region: 'sidebar', order: 4 }
+        ];
 
         function getListConfig(category, listType) {
             const catLists = portfolioListsConfig[category] || [];
@@ -1546,9 +1548,14 @@ async function handleSaveProfile(event) {
             const listSelect = document.getElementById('form-list-type');
             listSelect.innerHTML = '';
 
-            // Pull base lists from config
-            const lists = [...(portfolioListsConfig[cat] || [])];
+            // Pull base lists from unified master config matching category
+            const lists = portfolioListsConfig.filter(l => l.category === cat || (!l.category && cat === 'academic'));
             lists.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+            // Explicitly ensure 'socials' is added as an academic option if missing
+            if (cat === 'academic' && !lists.some(l => l.key === 'socials')) {
+                lists.push({ key: 'socials', title: 'Socials & Links' });
+            }
 
             // Explicitly ensure 'socials' is added as an academic option if missing
             if (cat === 'academic' && !lists.some(l => l.key === 'socials')) {
@@ -1583,15 +1590,13 @@ async function handleSaveProfile(event) {
         }
 
         function openManageListsModal() {
-            document.getElementById('manage-lists-category').value = 'academic';
             renderManageListsContainer();
             openModal('modal-manage-lists');
         }
 
         function renderManageListsContainer() {
-            const cat = document.getElementById('manage-lists-category').value;
             const container = document.getElementById('manage-lists-container');
-            const lists = portfolioListsConfig[cat] || [];
+            const lists = [...portfolioListsConfig];
             lists.sort((a, b) => (a.order || 0) - (b.order || 0));
 
             if (lists.length === 0) {
@@ -1606,27 +1611,27 @@ async function handleSaveProfile(event) {
                 <div class="bg-white rounded-xl p-4 border border-stone-200 flex items-center justify-between gap-3 shadow-2xs">
                     <div class="flex items-center space-x-3 min-w-0">
                         <div class="flex flex-col space-y-1 flex-shrink-0">
-                            <button onclick="moveListOrder('${cat}', '${l.key}', -1)" title="Move Up" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100"><i class="fa-solid fa-chevron-up"></i></button>
-                            <button onclick="moveListOrder('${cat}', '${l.key}', 1)" title="Move Down" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100"><i class="fa-solid fa-chevron-down"></i></button>
+                            <button onclick="moveListOrder('${l.key}', -1)" title="Move Up" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100"><i class="fa-solid fa-chevron-up"></i></button>
+                            <button onclick="moveListOrder('${l.key}', 1)" title="Move Down" class="text-stone-400 hover:text-stone-700 text-xs px-1.5 py-0.5 rounded bg-stone-100"><i class="fa-solid fa-chevron-down"></i></button>
                         </div>
                         <div class="min-w-0">
                             <h4 class="font-serif font-bold text-sm text-stone-900 truncate">${escapeHtml(l.title)}</h4>
                             <div class="flex items-center space-x-2 mt-0.5">
                                 <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold ${l.region === 'sidebar' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-slate-100 text-slate-700'}">${l.region === 'sidebar' ? 'Side Panel (Sidebar)' : 'Main Area'}</span>
-                                <span class="text-[10px] text-stone-400">Key: ${escapeHtml(l.key)}</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full bg-gold-500/10 text-gold-700 font-medium capitalize">${escapeHtml(l.category || 'academic')}</span>
                             </div>
                         </div>
                     </div>
                     <div class="flex items-center space-x-2 flex-shrink-0">
-                        <button onclick="openEditListModal('${cat}', '${l.key}')" class="px-2.5 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold"><i class="fa-solid fa-pen mr-1"></i> Edit</button>
-                        <button onclick="deleteList('${cat}', '${l.key}')" class="px-2.5 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold"><i class="fa-solid fa-trash mr-1"></i> Delete</button>
+                        <button onclick="openEditListModal('${l.key}')" class="px-2.5 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold"><i class="fa-solid fa-pen mr-1"></i> Edit</button>
+                        <button onclick="deleteList('${l.key}')" class="px-2.5 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold"><i class="fa-solid fa-trash mr-1"></i> Delete</button>
                     </div>
                 </div>
             `;
 
             container.innerHTML = `
                 <div class="space-y-3">
-                    <h5 class="text-xs font-bold uppercase tracking-wider text-stone-500 mb-2">Main Area Lists</h5>
+                    <h5 class="text-xs font-bold uppercase tracking-wider text-stone-500 mb-2">Main Area Lists (Includes Creative Portfolio)</h5>
                     ${mainLists.length > 0 ? mainLists.map(renderListCard).join('') : '<p class="text-xs text-stone-400 italic">No Main Area lists.</p>'}
                 </div>
                 <div class="space-y-3 mt-6 pt-6 border-t border-stone-200">
@@ -1636,8 +1641,8 @@ async function handleSaveProfile(event) {
             `;
         }
 
-        function moveListOrder(cat, key, direction) {
-            const lists = portfolioListsConfig[cat] || [];
+        function moveListOrder(key, direction) {
+            const lists = [...portfolioListsConfig];
             lists.sort((a, b) => (a.order || 0) - (b.order || 0));
             const idx = lists.findIndex(l => l.key === key);
             const targetIdx = idx + direction;
@@ -1648,6 +1653,7 @@ async function handleSaveProfile(event) {
                 lists[targetIdx].order = temp;
                 lists.sort((a, b) => (a.order || 0) - (b.order || 0));
                 lists.forEach((l, i) => l.order = i + 1);
+                portfolioListsConfig = lists;
                 saveData();
                 renderManageListsContainer();
             }
