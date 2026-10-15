@@ -64,13 +64,19 @@ async function generatePDF() {
     const academicLists = rawLists.academic || defaultAcademicLists;
     const creativeLists = rawLists.creative || defaultCreativeLists;
 
-    // Combine and explicitly sort all sections by their defined 'order' property to prevent misplacement
+    // Combine academic and creative lists, sorting strictly by region, then order, 
+    // ensuring academic main sections take precedence over creative sections on ties.
     const allListsConfig = [...academicLists, ...creativeLists].sort((a, b) => {
-        // Keep sidebar and main cleanly separated or sorted by order
         if (a.region !== b.region) {
             return a.region === 'main' ? -1 : 1;
         }
-        return (a.order || 0) - (b.order || 0);
+        if ((a.order || 0) !== (b.order || 0)) {
+            return (a.order || 0) - (b.order || 0);
+        }
+        // Tie-breaker: If order and region match, keep academic items before creative items
+        const isACreative = a.key === 'creative-works';
+        const isBCreative = b.key === 'creative-works';
+        return isACreative === isBCreative ? 0 : (isACreative ? 1 : -1);
     });
   
     let qrCodeBase64 = '';
