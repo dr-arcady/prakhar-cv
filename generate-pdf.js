@@ -229,10 +229,12 @@ async function generatePDF() {
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
             <tr>
-                <td style="width: 30%; background-color: #f8fafc; padding: 15px 12px; height: 1px;">
-                    ${sidebarHTML}
+                <td style="width: 30%; padding: 0; vertical-align: top;">
+                    <div style="background-color: #f8fafc; padding: 0 12px 15px 12px; height: 100%; box-sizing: border-box;">
+                        ${sidebarHTML}
+                    </div>
                 </td>
-                <td style="width: 70%; padding-left: 20px; height: 1px;">
+                <td style="width: 70%; padding-left: 20px; vertical-align: top;">
                     ${mainHTML}
                     <div class="cv-footer">
                         <table style="width: 100%;">
