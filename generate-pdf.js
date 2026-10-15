@@ -90,23 +90,23 @@ async function generatePDF() {
         `;
     }).join('');
     
-    // Render Sidebar Sections with item-level splitting and [contd.] support
+    // Render Sidebar Sections matched to main area layout (vertical accent line, section-heading, no outer boxes)
     const renderSidebarSection = (listConfig) => {
         const items = filterList(listConfig.key);
         if (items.length === 0 && listConfig.key !== 'socials') return '';
 
         if (listConfig.key === 'socials') {
             return `
-                <div class="sidebar-section">
-                    <div class="sidebar-heading">${listConfig.title}</div>
-                    <div style="padding: 10px; font-size: 11px;">
+                <div class="section-group">
+                    <div class="section-heading">${listConfig.title}</div>
+                    <div style="font-size: 11px;">
                         ${socialsList.map(item => {
                             let href = item.link || '#';
                             if (item.title.toLowerCase() === 'email' && !href.startsWith('mailto:')) href = 'mailto:' + item.description;
                             if (item.title.toLowerCase() === 'phone' && !href.startsWith('tel:')) href = 'tel:' + item.description;
                             const displayText = item.description || item.link || '';
                             return `
-                                <div style="margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid;">
+                                <div style="margin-bottom: 12px; border-left: 2px solid #334155; padding-left: 10px; page-break-inside: avoid; break-inside: avoid;">
                                     <div style="font-weight: 600; color: #0f172a; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px;">${parseMarkdown(item.title)}</div>${item.link ? `<div><a href="${href}" style="color: #1e3a8a; text-decoration: none;">${displayText}</a></div>` : `<div style="color: #475569;">${displayText}</div>`}
                                 </div>
                             `;
@@ -117,12 +117,13 @@ async function generatePDF() {
         }
 
         const renderItemHtml = (item) => `
-            <div style="margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid;">
-                <div style="font-weight: bold; color: #0f172a;">
-                    ${parseMarkdown(item.title || '')} <span style="float: right; font-weight: normal; color: #64748b; font-size: 10px;">${item.year || ''}</span>
+            <div style="margin-bottom: 15px; border-left: 2px solid #334155; padding-left: 10px; page-break-inside: avoid; break-inside: avoid;">
+                <div style="font-family: 'Playfair Display', Georgia, serif; font-weight: bold; font-size: 12px; color: #0f172a; margin-bottom: 3px;">
+                    ${parseMarkdown(item.title || '')} 
+                    ${item.year ? `<span style="display: block; font-family: 'Inter', sans-serif; font-weight: normal; color: #64748b; font-size: 10px; margin-top: 2px;">${item.year}</span>` : ''}
                 </div>
-                ${item.authors ? `<div style="color: #334155; margin-top: 2px; font-weight: 500;">${parseMarkdown(item.authors)}</div>` : ''}
-                ${item.description ? `<div style="color: #64748b; margin-top: 2px; line-height: 1.35;">${parseMarkdown(item.description)}</div>` : ''}
+                ${item.authors ? `<div style="font-size: 11px; color: #334155; margin-top: 2px; font-weight: 500;">${parseMarkdown(item.authors)}</div>` : ''}
+                ${item.description ? `<div style="font-size: 11px; color: #475569; margin-top: 2px; line-height: 1.35;">${parseMarkdown(item.description)}</div>` : ''}
                 ${item.customFields && item.customFields.length > 0 ? `
                     <div style="font-size: 10px; color: #475569; margin-top: 3px; border-top: 1px dashed #cbd5e1; padding-top: 3px;">
                         ${item.customFields.map(cf => {
@@ -136,9 +137,9 @@ async function generatePDF() {
         `;
 
         return `
-            <div class="sidebar-section">
-                <div class="sidebar-heading">${listConfig.title}</div>
-                <div style="padding: 10px; font-size: 11px;">
+            <div class="section-group">
+                <div class="section-heading">${listConfig.title}</div>
+                <div style="font-size: 11px;">
                     ${items.map(item => renderItemHtml(item)).join('')}
                 </div>
             </div>
@@ -182,8 +183,6 @@ async function generatePDF() {
                 font-size: 12px; font-weight: bold; color: #ffffff; background-color: #0f172a;
                 padding: 6px 10px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.8px;
             }
-            .sidebar-section { background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; overflow: hidden; }
-            .sidebar-heading { background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif; }
             .cv-footer { margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 10px; page-break-inside: avoid; }
         </style>
     </head>
@@ -230,10 +229,10 @@ async function generatePDF() {
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
             <tr>
-                <td style="width: 30%; padding-right: 20px; height: 1px;">
+                <td style="width: 30%; background-color: #f8fafc; padding: 15px 12px; height: 1px;">
                     ${sidebarHTML}
                 </td>
-                <td style="width: 70%; height: 1px;">
+                <td style="width: 70%; padding-left: 20px; height: 1px;">
                     ${mainHTML}
                     <div class="cv-footer">
                         <table style="width: 100%;">
