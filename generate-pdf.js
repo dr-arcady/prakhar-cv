@@ -198,29 +198,41 @@ async function generatePDF() {
                 <h1 style="font-size: 24px; font-weight: bold; color: #0f172a; line-height: 1.2;">${parseMarkdown(profile.name)}</h1>
                 <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;|&nbsp; ${parseMarkdown(profile.subtitle)}</p>
             </div>
-            <div style="background-color: #ffffff; border-top: 2px solid #334155; border-bottom: 2px solid #334155; padding: 8px 12px; font-size: 9.5px; color: #334155; text-align: center;">
+            <div style="background-color: #ffffff; border-top: 2px solid #334155; border-bottom: 2px solid #334155; padding: 8px 12px; font-size: 9.5px; color: #334155;">
                 ${(() => {
                     const items = socialsList;
-                    if (items.length === 0) return '';
+                    const total = items.length;
+                    if (total === 0) return '';
 
-                    // Group items into rows if they exceed a comfortable count per line
-                    const maxPerLine = 4; 
+                    // Chunk items into groups of maximum 4 per line
+                    const maxPerLine = 4;
                     let rows = [];
-                    for (let i = 0; i < items.length; i += maxPerLine) {
+                    for (let i = 0; i < total; i += maxPerLine) {
                         rows.push(items.slice(i, i + maxPerLine));
                     }
 
                     return rows.map((rowItems, rowIndex) => {
-                        // Use center alignment and a fixed gap so items stay compact and close together
-                        const rowStyle = 'display: flex; justify-content: center; align-items: center; gap: 20px; width: 100%;' + (rowIndex === 0 ? '' : ' margin-top: 5px;');
+                        const rowCount = rowItems.length;
+                        // Determine the appropriate flex justification based on item count in this specific row:
+                        // 3 or 4 items: space-between (stretches edge-to-edge)
+                        // 2 items: space-between or custom margin to match edge gaps
+                        // 1 item: center
+                        let justifyContent = 'space-between';
+                        if (rowCount === 1) {
+                            justifyContent = 'center';
+                        } else if (rowCount === 2) {
+                            justifyContent = 'space-between'; // or space-around to match edge distance
+                        }
+
+                        const rowStyle = `display: flex; justify-content: ${justifyContent}; align-items: center; width: 100%;` + (rowIndex === 0 ? '' : ' margin-top: 5px;');
                         
                         const itemsHtml = rowItems.map(item => {
                             const val = item.description || item.link || '';
                             const href = item.link || '#';
                             return `<span style="white-space: nowrap;"><strong style="color: #0f172a;">${parseMarkdown(item.title)}:</strong> <a href="${href}" style="color: #1e3a8a; text-decoration: none;">${val}</a></span>`;
-                        }).join(' <span style="color: #64748b; margin: 0 5px;">|</span> ');
+                        }).join('');
 
-                        return `<div style="${rowStyle}"><span style="color: #64748b; margin-right: 5px;">|</span> ${itemsHtml} <span style="color: #64748b; margin-left: 5px;">|</span></div>`;
+                        return `<div style="${rowStyle}">${itemsHtml}</div>`;
                     }).join('');
                 })()}
             </div>
