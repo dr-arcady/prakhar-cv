@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     }
 
     const token = process.env.GITHUB_PAT;
-    const repo = "dr-arcady/prakhar-cv"; // Replace with your actual repo if different
+    const repo = "dr-arcady/prakhar-cv"; // Your repository
     const path = 'portfolio-data.json';
 
     if (!token) {
@@ -45,14 +45,26 @@ export default async function handler(req, res) {
             })
         });
 
-        if (putRes.ok) {
-            // Force Vercel CDN not to cache this write response
-            res.setHeader('Cache-Control', 'no-store, max-age=0');
-            return res.status(200).json({ success: true, message: 'Successfully synced & deployed!' });
-        } else {
+        if (!putRes.ok) {
             const errData = await putRes.json();
             throw new Error(errData.message || 'Failed to commit to GitHub API');
         }
+
+        // 4. Explicitly trigger GitHub Actions Workflow Dispatch so Pages updates immediately
+        await fetch(`https://api.github.com/repos/${repo}/actions/workflows/deploy.yml/dispatches`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                'User-Agent': 'Portfolio-CMS'
+            },
+            body: JSON.stringify({ ref: 'main' })
+        });
+
+        // Force Vercel CDN not to cache this write response
+        res.setHeader('Cache-Control', 'no-store, max-age=0');
+        return res.status(200).json({ success: true, message: 'Successfully synced & triggered build!' });
+
     } catch (err) {
         console.error("Vercel GitHub Sync Error:", err);
         return res.status(500).json({ error: err.message });
