@@ -26,60 +26,60 @@
       "order": 1
     },
     {
-      "key": "publications",
-      "title": "Writing & Publications",
-      "category": "academic",
-      "region": "main",
-      "order": 2
-    },
-    {
-      "key": "creative-works",
-      "title": "Creative Portfolio Works",
-      "category": "creative",
-      "region": "main",
-      "order": 3
-    },
-    {
-      "key": "presentations",
-      "title": "Presentations & Conferences",
-      "category": "academic",
-      "region": "main",
-      "order": 4
-    },
-    {
-      "key": "seminars",
-      "title": "Seminars, Courses & More",
-      "category": "academic",
-      "region": "main",
-      "order": 5
-    },
-    {
       "key": "background",
       "title": "Education & Background",
       "category": "academic",
       "region": "sidebar",
-      "order": 1
+      "order": 2
+    },
+    {
+      "key": "publications",
+      "title": "Writing & Publications",
+      "category": "academic",
+      "region": "main",
+      "order": 3
     },
     {
       "key": "skills",
       "title": "Skills & Expertise",
       "category": "academic",
       "region": "sidebar",
-      "order": 2
+      "order": 4
+    },
+    {
+      "key": "creative-works",
+      "title": "Creative Portfolio Works",
+      "category": "creative",
+      "region": "main",
+      "order": 5
     },
     {
       "key": "extracurriculars",
       "title": "Extracurriculars",
       "category": "academic",
       "region": "sidebar",
-      "order": 3
+      "order": 6
+    },
+    {
+      "key": "presentations",
+      "title": "Presentations & Conferences",
+      "category": "academic",
+      "region": "main",
+      "order": 7
     },
     {
       "key": "references",
       "title": "References",
       "category": "academic",
       "region": "sidebar",
-      "order": 4
+      "order": 8
+    },
+    {
+      "key": "seminars",
+      "title": "Seminars, Courses & More",
+      "category": "academic",
+      "region": "main",
+      "order": 9
     }
   ],
   "items": [
