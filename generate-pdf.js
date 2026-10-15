@@ -25,16 +25,25 @@ async function generatePDF() {
         degree: "Ph.D., English"
     };
 
-    const allListsConfig = [
+    // Read dynamic list configurations from portfolio-data.json, falling back to defaults if missing
+    const rawLists = rawData.lists || {};
+    const defaultAcademicLists = [
         { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
         { key: 'publications', title: 'Publications', region: 'main', order: 2 },
         { key: 'presentations', title: 'Presentations & Conferences', region: 'main', order: 3 },
         { key: 'seminars', title: 'Seminars, Courses & More', region: 'main', order: 4 },
-        { key: 'creative-works', title: 'Creative Portfolio', region: 'main', order: 5 },
         { key: 'background', title: 'Education & Background', region: 'sidebar', order: 1 },
         { key: 'skills', title: 'Skills & Expertise', region: 'sidebar', order: 2 },
         { key: 'extracurriculars', title: 'Extracurriculars', region: 'sidebar', order: 3 },
         { key: 'references', title: 'References', region: 'sidebar', order: 4 }
+    ];
+    const defaultCreativeLists = [
+        { key: 'creative-works', title: 'Creative Portfolio Works', region: 'main', order: 1 }
+    ];
+
+    const allListsConfig = [
+        ...(rawLists.academic || defaultAcademicLists),
+        ...(rawLists.creative || defaultCreativeLists)
     ];
     
     let qrCodeBase64 = '';
