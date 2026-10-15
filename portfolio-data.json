@@ -545,7 +545,7 @@
           "value": "8.80 GPA"
         }
       ],
-      "order": 5
+      "order": 6
     },
     {
       "id": "item-1791820535797",
@@ -694,7 +694,7 @@
       "linkTarget": "custom",
       "linkText": "View Work / Document",
       "customFields": [],
-      "order": 6
+      "order": 5
     }
   ]
 }
