@@ -136,8 +136,10 @@ async function generatePDF() {
             </div>
         `;
 
+        const isFirst = sidebarLists[0] && sidebarLists[0].key === listConfig.key;
+
         return `
-            <div class="section-group">
+            <div class="section-group" style="margin-top: ${isFirst ? '0' : '28px'};">
                 <div class="section-heading">${listConfig.title}</div>
                 <div style="font-size: 11px;">
                     ${items.map(item => renderItemHtml(item)).join('')}
