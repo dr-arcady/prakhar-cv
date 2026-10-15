@@ -218,10 +218,12 @@
       "year": "",
       "title": "LinkedIn",
       "authors": "",
-      "description": "linkedin.com/in/dr-prakhar-s612/",
+      "description": "dr-prakhar-s612",
       "link": "https://www.linkedin.com/in/dr-prakhar-s612/",
       "customFields": [],
-      "order": 2
+      "order": 2,
+      "linkTarget": "custom",
+      "linkText": ""
     },
     {
       "id": "item-9",
