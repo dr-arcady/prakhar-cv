@@ -48,6 +48,9 @@ jobs:
       - name: Install NPM Dependencies
         run: npm install
 
+      - name: Pull Latest Data
+        run: git pull origin main
+
       - name: Generate PDF CV via Puppeteer
         run: node generate-pdf.js
 
