@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Prakhar Srivastava | CV & Portfolio</title>
+    <title id="page-title">CV & Portfolio</title>
  
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -114,45 +114,32 @@
             </div>
         </div>
 
-            <!-- Two Showcase Cards Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-                <!-- Academics Card -->
-                <div onclick="switchView('academic')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-slate-800/5 rounded-bl-full group-hover:scale-110 transition-transform"></div>
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-slate-800 text-white flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-slate-900 transition-colors">
-                            <i class="fa-solid fa-graduation-cap"></i>
-                        </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-slate-800 transition-colors">
-                            Academics & Research
-                        </h2>
-                        <ul class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed">
-                            <li>Peer-reviewed publications, conference presentations, specialization in digital tools, and credentials including background education, skills, and references.</li>
-                        </ul>
+           <!-- Two Showcase Cards Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            <!-- Academics Card -->
+            <div onclick="switchView('academic')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]" id="card-academic-container">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-slate-800/5 rounded-bl-full group-hover:scale-110 transition-transform"></div>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-slate-800 text-white flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-slate-900 transition-colors">
+                        <i id="card-1-icon" class="fa-solid fa-graduation-cap"></i>
                     </div>
-                    <div class="flex items-center font-semibold text-sm text-slate-800 group-hover:translate-x-1 transition-transform">
-                        View Academic Record <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
-                    </div>
+                    <h2 id="card-1-title" class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-slate-800 transition-colors"></h2>
+                    <ul id="card-1-bullet" class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed"></ul>
                 </div>
+                <div id="card-1-link" class="flex items-center font-semibold text-sm text-slate-800 group-hover:translate-x-1 transition-transform"></div>
+            </div>
 
-                <!-- Creative Portfolio Card -->
-                <div onclick="switchView('creative')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-gold-500/10 rounded-bl-full group-hover:scale-110 transition-transform"></div>
-                    <div>
-                        <div class="w-14 h-14 rounded-2xl bg-gold-500 text-stone-950 flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-gold-600 transition-colors">
-                            <i class="fa-solid fa-feather-pointed"></i>
-                        </div>
-                        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-gold-600 transition-colors">
-                            Creative Portfolio
-                        </h2>
-                        <ul class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed">
-                            <li>Curated demonstrations of extracurricular interests, spanning public-facing writing, web-development, and more.</li>
-                        </ul>
+            <!-- Creative Portfolio Card -->
+            <div onclick="switchView('creative')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]" id="card-creative-container">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gold-500/10 rounded-bl-full group-hover:scale-110 transition-transform"></div>
+                <div>
+                    <div class="w-14 h-14 rounded-2xl bg-gold-500 text-stone-950 flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-gold-600 transition-colors">
+                        <i id="card-2-icon" class="fa-solid fa-feather-pointed"></i>
                     </div>
-                    <div class="flex items-center font-semibold text-sm text-gold-600 group-hover:translate-x-1 transition-transform">
-                        Explore Creative Works <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
-                    </div>
+                    <h2 id="card-2-title" class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-gold-600 transition-colors"></h2>
+                    <ul id="card-2-bullet" class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed"></ul>
                 </div>
+                <div id="card-2-link" class="flex items-center font-semibold text-sm text-gold-600 group-hover:translate-x-1 transition-transform"></div>
             </div>
         </div>
 
@@ -204,7 +191,7 @@
                 <div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
                     <img src="profile.jpg" alt="Dr. Prakhar Srivastava" class="w-full h-full object-cover">
                 </div>
-                <span class="text-stone-300 font-medium text-sm">Dr. Prakhar Srivastava &copy; 2026. All rights reserved.</span>
+                <span class="text-stone-300 font-medium text-sm" id="footer-copyright"></span>
             </div>
             <div class="flex items-center space-x-6 text-sm">
                 <button onclick="switchView('home')" class="hover:text-white transition-colors">Home</button>
@@ -433,140 +420,7 @@
     </div>
 
     <script>
-        const DEFAULT_PORTFOLIO_DATA = [
-            {
-                id: "item-1",
-                category: "academic",
-                listType: "publications",
-                year: "2025",
-                title: "Rethinking Narrative Structures in Digital Humanities",
-                authors: "Srivastava, P., & Al-Mansoor, K.",
-                description: "An exhaustive investigation into non-linear digital storytelling frameworks and computational text analysis.",
-                link: "https://doi.org/example/dh2025",
-                customFields: [{ key: "Journal", value: "Journal of Literary Computation" }, { key: "Peer Review", value: "Double-Blind" }],
-                order: 1
-            },
-            {
-                id: "item-2",
-                category: "academic",
-                listType: "publications",
-                year: "2024",
-                title: "Hermeneutics of Algorithms: Epistemological Shifts in Modern Research",
-                authors: "Srivastava, P.",
-                description: "Examining how algorithmic curation modifies scholarly inquiry and historical archiving.",
-                link: "https://doi.org/example/ha2024",
-                customFields: [{ key: "Publisher", value: "Academic Press" }],
-                order: 2
-            },
-            {
-                id: "item-3",
-                category: "academic",
-                listType: "presentations",
-                year: "2026",
-                title: "Keynote: Future Horizons in Scholarly Publishing",
-                authors: "Annual Academic Colloquium, Oxford",
-                description: "Invited speaker addressing open-access models and peer review integrity in the digital era.",
-                link: "",
-                customFields: [{ key: "Location", value: "Oxford, UK" }],
-                order: 1
-            },
-            {
-                id: "item-4",
-                category: "academic",
-                listType: "seminars",
-                year: "2025",
-                title: "Advanced Seminar on Textual Analysis & Corpus Linguistics",
-                authors: "Department of Literature & Philosophy",
-                description: "Graduate-level seminar focusing on Python-based corpus analysis and statistical metrics in literature.",
-                link: "",
-                customFields: [{ key: "Term", value: "Spring 2025" }, { key: "Credits", value: "4.0" }],
-                order: 1
-            },
-            {
-                id: "item-5",
-                category: "academic",
-                listType: "background",
-                year: "2022-Present",
-                title: "Ph.D. in Comparative Literature & Digital Media",
-                authors: "Prestigious University",
-                description: "Dissertation focusing on algorithmic poetics and modern textual networks.",
-                link: "",
-                customFields: [{ key: "Advisor", value: "Dr. Eleanor Vance" }],
-                order: 1
-            },
-            {
-                id: "item-6",
-                category: "academic",
-                listType: "skills",
-                year: "Proficient",
-                title: "Computational & Research Methodologies",
-                authors: "Python, R, LaTeX, Git, Markdown, Statistical Modeling",
-                description: "Advanced competency in research tooling, data visualization, and reproducible scholarly writing.",
-                link: "",
-                customFields: [],
-                order: 1
-            },
-            {
-                id: "item-7",
-                category: "academic",
-                listType: "extracurriculars",
-                year: "2023-Present",
-                title: "Editor-in-Chief, Graduate Scholarly Review",
-                authors: "University Literary Society",
-                description: "Directing review boards, editing peer submissions, and managing editorial schedules.",
-                link: "",
-                customFields: [],
-                order: 1
-            },
-            {
-                id: "item-8",
-                category: "academic",
-                listType: "socials",
-                year: "Active",
-                title: "Google Scholar Profile",
-                authors: "Citations & Metrics",
-                description: "Track peer citations and scholarly impact.",
-                link: "https://scholar.google.com",
-                customFields: [{ key: "Platform", value: "Google Scholar" }],
-                order: 1
-            },
-            {
-                id: "item-9",
-                category: "academic",
-                listType: "references",
-                year: "Available",
-                title: "Dr. Eleanor Vance",
-                authors: "Professor of Comparative Literature",
-                description: "Department Chair, Prestigious University. Email: e.vance@university.edu",
-                link: "",
-                customFields: [{ key: "Relation", value: "Dissertation Advisor" }],
-                order: 1
-            },
-            {
-                id: "item-10",
-                category: "creative",
-                listType: "creative-works",
-                year: "2025",
-                title: "Echoes in the Marble Corridor",
-                authors: "Short Story Collection",
-                description: "A narrative exploration of memory, architecture, and solitude across ancient and futuristic metropolises.",
-                link: "https://example.com/echoes",
-                customFields: [{ key: "Genre", value: "Speculative Fiction" }, { key: "Word Count", value: "8,500" }],
-                order: 1
-            },
-            {
-                id: "item-11",
-                category: "creative",
-                listType: "creative-works",
-                year: "2024",
-                title: "The Cartography of Silence",
-                authors: "Poetry Sequence",
-                description: "Winner of the University Poetry Prize. Meditations on geographic dislocation and acoustic ecology.",
-                link: "",
-                customFields: [{ key: "Award", value: "Poetry Prize 2024" }],
-                order: 2
-            }
-        ];
+        const DEFAULT_PORTFOLIO_DATA = [];
 
         let portfolioData = [];
         let currentDashboardFilter = 'all';
@@ -593,21 +447,21 @@
 
         // Default profile fallback state
 let profileData = {
-    name: "Dr. Prakhar Srivastava",
-    subtitle: "Scholar & Creative Writer",
-    degree: "Ph.D., English",
-    bio: "Bridging rigorous interdisciplinary research, academic publications, and modern pedagogy for higher education.\n\nExploring intersections of literature, culture, film studies, and digital humanities.\n\nPushing the frontiers of creative exercises across mediums.",
+    name: "",
+    subtitle: "",
+    degree: "",
+    bio: "",
     card1: {
-        title: "Academics & Research",
-        icon: "fa-graduation-cap",
-        bullet: "Peer-reviewed publications, conference presentations, specialization in digital tools, and credentials including background education, skills, and references.",
-        linkText: "View Academic Record"
+        title: "",
+        icon: "",
+        bullet: "",
+        linkText: ""
     },
     card2: {
-        title: "Creative Portfolio",
-        icon: "fa-feather-pointed",
-        bullet: "Curated demonstrations of extracurricular interests, spanning public-facing writing, web-development, and more.",
-        linkText: "Explore Creative Works"
+        title: "",
+        icon: "",
+        bullet: "",
+        linkText: ""
     }
 };
 
@@ -712,22 +566,42 @@ function renderProfileUI() {
         `;
     }
 
-    // 3. Card 1
-    const card1Container = document.querySelector('#view-home .grid > div:nth-child(1)');
-    if (card1Container) {
-        card1Container.querySelector('h2').innerText = profileData.card1.title;
-        card1Container.querySelector('ul li').innerText = profileData.card1.bullet;
-        card1Container.querySelector('.flex.items-center.font-semibold').innerHTML = `${escapeHtml(profileData.card1.linkText)} <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>`;
-        card1Container.querySelector('.w-14.h-14 i').className = `fa-solid ${profileData.card1.icon}`;
+    // 3. Card 1 (Academics)
+    const c1Title = document.getElementById('card-1-title');
+    const c1Bullet = document.getElementById('card-1-bullet');
+    const c1Link = document.getElementById('card-1-link');
+    const c1Icon = document.getElementById('card-1-icon');
+    if (c1Title) c1Title.innerText = profileData.card1.title;
+    if (c1Bullet) c1Bullet.innerHTML = `<li>${escapeHtml(profileData.card1.bullet)}</li>`;
+    if (c1Link) c1Link.innerHTML = `${escapeHtml(profileData.card1.linkText)} <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>`;
+    if (c1Icon) c1Icon.className = `fa-solid ${profileData.card1.icon}`;
+
+    // 4. Card 2 (Creative)
+    const c2Title = document.getElementById('card-2-title');
+    const c2Bullet = document.getElementById('card-2-bullet');
+    const c2Link = document.getElementById('card-2-link');
+    const c2Icon = document.getElementById('card-2-icon');
+    if (c2Title) c2Title.innerText = profileData.card2.title;
+    if (c2Bullet) c2Bullet.innerHTML = `<li>${escapeHtml(profileData.card2.bullet)}</li>`;
+    if (c2Link) c2Link.innerHTML = `${escapeHtml(profileData.card2.linkText)} <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>`;
+    if (c2Icon) c2Icon.className = `fa-solid ${profileData.card2.icon}`;
+
+    // 5. Update Profile Image Alt Text dynamically
+    document.querySelectorAll('#profile-avatar-img').forEach(img => {
+        img.alt = profileData.name;
+    });
+
+    // 6. Update Browser Tab Title dynamically
+    const pageTitle = document.getElementById('page-title');
+    if (pageTitle) {
+        pageTitle.innerText = `${profileData.name} | CV & Portfolio`;
     }
 
-    // 4. Card 2
-    const card2Container = document.querySelector('#view-home .grid > div:nth-child(2)');
-    if (card2Container) {
-        card2Container.querySelector('h2').innerText = profileData.card2.title;
-        card2Container.querySelector('ul li').innerText = profileData.card2.bullet;
-        card2Container.querySelector('.flex.items-center.font-semibold').innerHTML = `${escapeHtml(profileData.card2.linkText)} <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>`;
-        card2Container.querySelector('.w-14.h-14 i').className = `fa-solid ${profileData.card2.icon}`;
+    // 7. Update Footer Copyright dynamically
+    const footerCopy = document.getElementById('footer-copyright');
+    if (footerCopy) {
+        const currentYear = new Date().getFullYear();
+        footerCopy.innerHTML = `${escapeHtml(profileData.name)} &copy; ${currentYear}. All rights reserved.`;
     }
 }
         
@@ -1244,20 +1118,10 @@ async function handleSaveProfile(event) {
                 return;
             }
 
-            // Define ordered grouping structure matching the frontend sections
-            const groups = [
-                { key: 'work', label: 'Work Experience', category: 'academic' },
-                { key: 'publications', label: 'Publications', category: 'academic' },
-                { key: 'presentations', label: 'Presentations & Conferences', category: 'academic' },
-                { key: 'seminars', label: 'Seminars, Courses & More', category: 'academic' },
-                { key: 'background', label: 'Background & Education', category: 'academic' },
-                { key: 'skills', label: 'Skills & Expertise', category: 'academic' },
-                { key: 'extracurriculars', label: 'Extracurriculars', category: 'academic' },
-                { key: 'socials', label: 'Socials & Links', category: 'academic' },
-                { key: 'references', label: 'References', category: 'academic' },
-                { key: 'creative-works', label: 'Creative Portfolio Works', category: 'creative' }
-            ];
-
+            // Dynamically generate groups from your live portfolioListsConfig
+            const groups = [...portfolioListsConfig];
+            groups.sort((a, b) => (a.order || 0) - (b.order || 0));
+            
             let htmlOutput = '';
 
             groups.forEach(group => {
