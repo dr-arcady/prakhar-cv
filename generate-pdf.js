@@ -14,20 +14,17 @@ async function generatePDF() {
     console.log('Reading portfolio data...');
     const dataPath = path.resolve(__dirname, 'portfolio-data.json');
     
-    // Force Node.js to bypass file system cache and read fresh disk content
     fs.unwatchFile(dataPath);
     
     let rawData;
     try {
         const fileContent = fs.readFileSync(dataPath, 'utf8');
-        // Check if the file accidentally contains an HTML error response instead of JSON
         if (fileContent.trim().startsWith('<') || fileContent.trim().startsWith('A server')) {
             throw new Error("File content is an HTML error response or invalid text, not JSON.");
         }
         rawData = JSON.parse(fileContent);
     } catch (err) {
         console.error('Error parsing portfolio-data.json:', err.message);
-        // Fallback default structure so the build doesn't crash with exit code 1
         rawData = {
             profile: { name: "Dr. Prakhar Srivastava", subtitle: "Scholar & Creative Writer", degree: "Ph.D., English" },
             items: [],
@@ -38,29 +35,17 @@ async function generatePDF() {
     const portfolioData = Array.isArray(rawData) ? rawData : (rawData.items || []);
     console.log(`Loaded ${portfolioData.length} total items from portfolio-data.json for PDF generation.`);
     
-    // Dynamically pull profile info from portfolio-data.json with fallback defaults
     const profile = rawData.profile || {
         name: "Dr. Prakhar Srivastava",
         subtitle: "Scholar & Creative Writer",
         degree: "Ph.D., English"
     };
 
-    // Use existing list definitions or fall back to defaults dynamically
-    const defaultAcademicLists = [
-        { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
-        { key: 'publications', title: 'Publications', region: 'main', order: 2 },
-        { key: 'presentations', title: 'Presentations & Conferences', region: 'main', order: 3 },
-        { key: 'seminars', title: 'Seminars, Courses & More', region: 'main', order: 4 },
-        { key: 'background', title: 'Education & Background', region: 'sidebar', order: 1 },
-        { key: 'skills', title: 'Skills & Expertise', region: 'sidebar', order: 2 },
-        { key: 'extracurriculars', title: 'Extracurriculars', region: 'sidebar', order: 3 },
-        { key: 'references', title: 'References', region: 'sidebar', order: 4 }
-    ];
-    const defaultCreativeLists = [
-        { key: 'creative-works', title: 'Creative Portfolio Works', region: 'main', order: 1 }
-    ];
+    // Helper functions declared early so they are available immediately
+    const filterList = (listType) => portfolioData.filter(i => i.listType === listType).sort((a, b) => (a.order || 0) - (b.order || 0));
+    const socialsList = filterList('socials');
 
-// Read the unified master lists configuration directly from portfolio-data.json
+    // Read the unified master lists configuration directly from portfolio-data.json
     const allListsConfig = rawData.lists || [
         { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
         { key: 'publications', title: 'Publications', region: 'main', order: 2 },
@@ -73,26 +58,64 @@ async function generatePDF() {
         { key: 'references', title: 'References', region: 'sidebar', order: 4 }
     ];
 
-    // Sort strictly by the master order defined in the configuration
     allListsConfig.sort((a, b) => (a.order || 0) - (b.order || 0));
 
     const mainLists = allListsConfig.filter(l => l.region !== 'sidebar');
     const sidebarLists = allListsConfig.filter(l => l.region === 'sidebar');
 
-    const mainHTML = mainLists.map(l => {
-        const items = filterList(l.key);
-        if (items.length === 0) return '';
+    let qrCodeBase64 = '';
+    const qrImagePath = path.resolve(__dirname, 'CV Vercel QR hovercode.png');
+    if (fs.existsSync(qrImagePath)) {
+        const qrImageBuffer = fs.readFileSync(qrImagePath);
+        qrCodeBase64 = `data:image/png;base64,${qrImageBuffer.toString('base64')}`;
+    }
+
+    const renderMainItems = (items) => items.map(item => {
+        let titleHtml = parseMarkdown(item.title || '');
+        let authorsHtml = item.authors ? parseMarkdown(item.authors) : '';
+        let descHtml = item.description ? parseMarkdown(item.description) : '';
+        let customLinkHtml = '';
+
+        if (item.link) {
+            const target = item.linkTarget || 'custom';
+            const labelText = item.linkText || 'View Work';
+            if (target === 'title') {
+                titleHtml = `<a href="${item.link}" style="color: #0f172a; text-decoration: underline;">${parseMarkdown(item.title || '')} &#8599;</a>`;
+            } else if (target === 'authors' && item.authors) {
+                authorsHtml = `<a href="${item.link}" style="color: #1e3a8a; text-decoration: underline; font-weight: 600;">${parseMarkdown(item.authors)} &#8599;</a>`;
+            } else if (target === 'description' && item.description) {
+                descHtml = `<a href="${item.link}" style="color: #1e3a8a; text-decoration: underline;">${parseMarkdown(item.description)} &#8599;</a>`;
+            } else {
+                customLinkHtml = `
+                    <div style="margin-top: 4px;">
+                        <a href="${item.link}" style="font-size: 10px; color: #1e3a8a; text-decoration: none; font-weight: 600;">${parseMarkdown(labelText)} &#8599;</a>
+                    </div>
+                `;
+            }
+        }
+
         return `
-            <div class="section-group">
-                <div class="section-heading">${l.title}</div>
-                ${renderMainItems(items)}
+            <div style="margin-bottom: 15px; border-left: 2px solid #334155; padding-left: 12px; page-break-inside: avoid; break-inside: avoid;">
+                <div style="font-family: 'Playfair Display', Georgia, serif; font-weight: bold; font-size: 13px; color: #0f172a; margin-bottom: 3px;">
+                    ${titleHtml} 
+                    <span style="float: right; font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; font-size: 10px; color: #475569; background: #f1f5f9; padding: 2px 6px; border-radius: 3px; font-weight: 500;">${item.year || ''}</span>
+                </div>
+                ${authorsHtml ? `<div style="font-size: 11px; color: #334155; font-weight: 500; margin-bottom: 3px; font-style: italic;">${authorsHtml}</div>` : ''}
+                ${descHtml ? `<div style="font-size: 11px; color: #475569; line-height: 1.45; margin-bottom: 4px;">${descHtml}</div>` : ''}
+                ${item.customFields && item.customFields.length > 0 ? `
+                    <div style="font-size: 10px; color: #475569; margin-top: 4px;">
+                        ${item.customFields.map(cf => {
+                            const keyTrim = cf.key ? cf.key.trim() : '';
+                            const valTrim = cf.value || '';
+                            return `<span>${keyTrim ? `<strong>${keyTrim}:</strong> ` : ''}${valTrim}</span>`;
+                        }).join(' | ')}
+                    </div>
+                ` : ''}
+                ${customLinkHtml}
             </div>
         `;
     }).join('');
 
-    const sidebarHTML = sidebarLists.map(l => renderSidebarSection(l)).join('');
-    
-    // Render Sidebar Sections matched to main area layout (vertical accent line, section-heading, no outer boxes)
     const renderSidebarSection = (listConfig) => {
         const items = filterList(listConfig.key);
         if (items.length === 0 && listConfig.key !== 'socials') return '';
@@ -149,6 +172,19 @@ async function generatePDF() {
             </div>
         `;
     };
+
+    const mainHTML = mainLists.map(l => {
+        const items = filterList(l.key);
+        if (items.length === 0) return '';
+        return `
+            <div class="section-group">
+                <div class="section-heading">${l.title}</div>
+                ${renderMainItems(items)}
+            </div>
+        `;
+    }).join('');
+
+    const sidebarHTML = sidebarLists.map(l => renderSidebarSection(l)).join('');
 
     const htmlTemplate = `
     <!DOCTYPE html>
