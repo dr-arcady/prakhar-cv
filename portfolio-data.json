@@ -68,17 +68,17 @@
       "order": 7
     },
     {
-      "key": "references",
-      "title": "References",
-      "category": "academic",
-      "region": "sidebar",
-      "order": 8
-    },
-    {
       "key": "seminars",
       "title": "Seminars, Courses & More",
       "category": "academic",
       "region": "main",
+      "order": 8
+    },
+    {
+      "key": "references",
+      "title": "References",
+      "category": "academic",
+      "region": "sidebar",
       "order": 9
     }
   ],
