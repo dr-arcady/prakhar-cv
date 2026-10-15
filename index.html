@@ -1193,10 +1193,11 @@ async function handleSaveProfile(event) {
             const indicator = document.createElement('div');
             indicator.id = 'pdf-build-indicator';
             indicator.className = 'fixed bottom-4 right-4 bg-stone-900 text-white px-4 py-3 rounded-xl text-xs shadow-xl z-50 flex items-center space-x-3 border border-stone-700';
-            indicator.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-gold-500 text-sm"></i><span>Compiling CV PDF on-demand... Please wait.</span>`;
+            indicator.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-gold-500 text-sm"></i><span>Triggering PDF build on GitHub... Please wait.</span>`;
             document.body.appendChild(indicator);
 
             try {
+                // If on Vercel, call a serverless function that securely talks to GitHub
                 const response = await fetch('/api/build-pdf', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' }
@@ -1204,10 +1205,10 @@ async function handleSaveProfile(event) {
                 const result = await response.json();
 
                 if (response.ok && result.success) {
-                    indicator.innerHTML = `<i class="fa-solid fa-check text-green-400 text-sm"></i><span>CV PDF built successfully!</span>`;
-                    setTimeout(() => indicator.remove(), 4000);
+                    indicator.innerHTML = `<i class="fa-solid fa-check text-green-400 text-sm"></i><span>GitHub is building your PDF! It will be ready in 1-2 minutes.</span>`;
+                    setTimeout(() => indicator.remove(), 5000);
                 } else {
-                    throw new Error(result.error || 'Failed to generate PDF');
+                    throw new Error(result.error || 'Failed to trigger workflow');
                 }
             } catch (err) {
                 console.error(err);
