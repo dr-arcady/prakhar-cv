@@ -45,19 +45,8 @@ async function generatePDF() {
     const filterList = (listType) => portfolioData.filter(i => i.listType === listType).sort((a, b) => (a.order || 0) - (b.order || 0));
     const socialsList = filterList('socials');
 
-    // Read the unified master lists configuration directly from portfolio-data.json
-    const allListsConfig = rawData.lists || [
-        { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
-        { key: 'publications', title: 'Publications', region: 'main', order: 2 },
-        { key: 'creative-works', title: 'Creative Portfolio Works', region: 'main', order: 3 },
-        { key: 'presentations', title: 'Presentations & Conferences', region: 'main', order: 4 },
-        { key: 'seminars', title: 'Seminars, Courses & More', region: 'main', order: 5 },
-        { key: 'background', title: 'Education & Background', region: 'sidebar', order: 1 },
-        { key: 'skills', title: 'Skills & Expertise', region: 'sidebar', order: 2 },
-        { key: 'extracurriculars', title: 'Extracurriculars', region: 'sidebar', order: 3 },
-        { key: 'references', title: 'References', region: 'sidebar', order: 4 }
-    ];
-
+    // Read the unified master lists configuration directly from portfolio-data.json and sort by order
+    const allListsConfig = rawData.lists && Array.isArray(rawData.lists) ? rawData.lists : [];
     allListsConfig.sort((a, b) => (a.order || 0) - (b.order || 0));
 
     const mainLists = allListsConfig.filter(l => l.region !== 'sidebar');
