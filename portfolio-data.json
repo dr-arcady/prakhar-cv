@@ -681,6 +681,20 @@
         }
       ],
       "order": 2
+    },
+    {
+      "id": "item-1792046423816",
+      "category": "academic",
+      "listType": "socials",
+      "title": "Phone",
+      "authors": "",
+      "year": "",
+      "description": "7742 766 925",
+      "link": "tel:+917742766925",
+      "linkTarget": "custom",
+      "linkText": "View Work / Document",
+      "customFields": [],
+      "order": 5
     }
   ]
 }
