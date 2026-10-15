@@ -511,7 +511,7 @@
           "value": "8.55 GPA | 81.23%"
         }
       ],
-      "order": 3
+      "order": 4
     },
     {
       "id": "item-1791817515200",
@@ -694,7 +694,7 @@
       "linkTarget": "custom",
       "linkText": "View Work / Document",
       "customFields": [],
-      "order": 4
+      "order": 3
     }
   ]
 }
