@@ -90,25 +90,16 @@ async function generatePDF() {
         `;
     }).join('');
     
-    // Render Sidebar Sections with smooth multi-stop gradient fading on first and last blocks
-    const renderSidebarSection = (listConfig, isFirst, isLast) => {
+    // Render Sidebar Sections matched to main area layout (vertical accent line, section-heading, no outer boxes)
+    const renderSidebarSection = (listConfig) => {
         const items = filterList(listConfig.key);
         if (items.length === 0 && listConfig.key !== 'socials') return '';
 
-        let backgroundStyle = 'background-color: #f8fafc;';
-        if (isFirst) {
-            // Ultra-smooth top fade-in from white to gray starting right at the top header
-            backgroundStyle = 'background: linear-gradient(to bottom, #ffffff 0%, #fcfdfd 20%, #fafbfc 45%, #f6f8fb 75%, #f8fafc 100%);';
-        } else if (isLast) {
-            // Ultra-smooth bottom fade-out from gray to white concluding with ~0.5cm (approx 20px) extra padding
-            backgroundStyle = 'background: linear-gradient(to bottom, #f8fafc 0%, #f6f8fb 25%, #fafbfc 55%, #fcfdfd 80%, #ffffff 100%); padding-bottom: 20px;';
-        }
-
         if (listConfig.key === 'socials') {
             return `
-                <div class="section-group" style="padding: 0 8px; ${backgroundStyle}">
+                <div class="section-group">
                     <div class="section-heading">${listConfig.title}</div>
-                    <div style="font-size: 11px; margin-bottom: 24px;">
+                    <div style="font-size: 11px;">
                         ${socialsList.map(item => {
                             let href = item.link || '#';
                             if (item.title.toLowerCase() === 'email' && !href.startsWith('mailto:')) href = 'mailto:' + item.description;
@@ -132,7 +123,7 @@ async function generatePDF() {
                     ${item.year ? `<span style="display: block; font-family: 'Inter', sans-serif; font-weight: normal; color: #64748b; font-size: 10px; margin-top: 2px;">${item.year}</span>` : ''}
                 </div>
                 ${item.authors ? `<div style="font-size: 11px; color: #334155; margin-top: 2px; font-weight: 500;">${parseMarkdown(item.authors)}</div>` : ''}
-                ${item.description ? `<div style="font-size: 11px; color: #64748b; margin-top: 2px; line-height: 1.35;">${parseMarkdown(item.description)}</div>` : ''}
+                ${item.description ? `<div style="font-size: 11px; color: #475569; margin-top: 2px; line-height: 1.35;">${parseMarkdown(item.description)}</div>` : ''}
                 ${item.customFields && item.customFields.length > 0 ? `
                     <div style="font-size: 10px; color: #475569; margin-top: 3px; border-top: 1px dashed #cbd5e1; padding-top: 3px;">
                         ${item.customFields.map(cf => {
@@ -146,9 +137,9 @@ async function generatePDF() {
         `;
 
         return `
-            <div class="section-group" style="padding: 0 8px; ${backgroundStyle}">
+            <div class="section-group">
                 <div class="section-heading">${listConfig.title}</div>
-                <div style="font-size: 11px; margin-bottom: 24px;">
+                <div style="font-size: 11px;">
                     ${items.map(item => renderItemHtml(item)).join('')}
                 </div>
             </div>
@@ -172,7 +163,7 @@ async function generatePDF() {
         `;
     }).join('');
 
-    const sidebarHTML = sidebarLists.map((l, index) => renderSidebarSection(l, index === 0, index === sidebarLists.length - 1)).join('');
+    const sidebarHTML = sidebarLists.map(l => renderSidebarSection(l)).join('');
 
     const htmlTemplate = `
     <!DOCTYPE html>
@@ -238,7 +229,7 @@ async function generatePDF() {
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
             <tr>
-                <td style="width: 30%; background-color: transparent; padding-top: 0; height: 1px;">
+                <td style="width: 30%; background-color: #f8fafc; padding: 15px 12px; height: 1px;">
                     ${sidebarHTML}
                 </td>
                 <td style="width: 70%; padding-left: 20px; height: 1px;">
