@@ -61,10 +61,17 @@ async function generatePDF() {
     ];
 
     const rawLists = rawData.lists || {};
-    const allListsConfig = [
-        ...(rawLists.academic || defaultAcademicLists),
-        ...(rawLists.creative || defaultCreativeLists)
-    ];
+    const academicLists = rawLists.academic || defaultAcademicLists;
+    const creativeLists = rawLists.creative || defaultCreativeLists;
+
+    // Combine and explicitly sort all sections by their defined 'order' property to prevent misplacement
+    const allListsConfig = [...academicLists, ...creativeLists].sort((a, b) => {
+        // Keep sidebar and main cleanly separated or sorted by order
+        if (a.region !== b.region) {
+            return a.region === 'main' ? -1 : 1;
+        }
+        return (a.order || 0) - (b.order || 0);
+    });
   
     let qrCodeBase64 = '';
     const qrImagePath = path.resolve(__dirname, 'CV Vercel QR hovercode.png');
