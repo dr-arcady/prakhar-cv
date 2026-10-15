@@ -112,37 +112,38 @@
                 <div class="max-w-3xl relative z-10 min-h-[220px]" id="hero-text-container"></div>
                 
             </div>
-        </div>
 
-           <!-- Two Showcase Cards Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            <!-- Academics Card -->
-            <div onclick="switchView('academic')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]" id="card-academic-container">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-slate-800/5 rounded-bl-full group-hover:scale-110 transition-transform"></div>
-                <div>
-                    <div class="w-14 h-14 rounded-2xl bg-slate-800 text-white flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-slate-900 transition-colors">
-                        <i id="card-1-icon" class="fa-solid fa-graduation-cap"></i>
+            <!-- Two Showcase Cards Grid (Now correctly wrapped inside view-home) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                <!-- Academics Card -->
+                <div onclick="switchView('academic')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]" id="card-academic-container">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-slate-800/5 rounded-bl-full group-hover:scale-110 transition-transform"></div>
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-slate-800 text-white flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-slate-900 transition-colors">
+                            <i id="card-1-icon" class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h2 id="card-1-title" class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-slate-800 transition-colors"></h2>
+                        <ul id="card-1-bullet" class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed"></ul>
                     </div>
-                    <h2 id="card-1-title" class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-slate-800 transition-colors"></h2>
-                    <ul id="card-1-bullet" class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed"></ul>
+                    <div id="card-1-link" class="flex items-center font-semibold text-sm text-slate-800 group-hover:translate-x-1 transition-transform"></div>
                 </div>
-                <div id="card-1-link" class="flex items-center font-semibold text-sm text-slate-800 group-hover:translate-x-1 transition-transform"></div>
-            </div>
 
-            <!-- Creative Portfolio Card -->
-            <div onclick="switchView('creative')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]" id="card-creative-container">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-gold-500/10 rounded-bl-full group-hover:scale-110 transition-transform"></div>
-                <div>
-                    <div class="w-14 h-14 rounded-2xl bg-gold-500 text-stone-950 flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-gold-600 transition-colors">
-                        <i id="card-2-icon" class="fa-solid fa-feather-pointed"></i>
+                <!-- Creative Portfolio Card -->
+                <div onclick="switchView('creative')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]" id="card-creative-container">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gold-500/10 rounded-bl-full group-hover:scale-110 transition-transform"></div>
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-gold-500 text-stone-950 flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-gold-600 transition-colors">
+                            <i id="card-2-icon" class="fa-solid fa-feather-pointed"></i>
+                        </div>
+                        <h2 id="card-2-title" class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-gold-600 transition-colors"></h2>
+                        <ul id="card-2-bullet" class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed"></ul>
                     </div>
-                    <h2 id="card-2-title" class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-gold-600 transition-colors"></h2>
-                    <ul id="card-2-bullet" class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed"></ul>
+                    <div id="card-2-link" class="flex items-center font-semibold text-sm text-gold-600 group-hover:translate-x-1 transition-transform"></div>
                 </div>
-                <div id="card-2-link" class="flex items-center font-semibold text-sm text-gold-600 group-hover:translate-x-1 transition-transform"></div>
             </div>
         </div>
-
+        <!-- End of view-home -->
+        
         <!-- 2. ACADEMIC & RESEARCH VIEW -->
         <div id="view-academic" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-stone-200 pb-8 mb-8 gap-4">
