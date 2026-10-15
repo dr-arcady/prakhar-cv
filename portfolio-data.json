@@ -54,16 +54,16 @@
       "order": 5
     },
     {
-      "key": "creative-works",
-      "title": "Creative Portfolio Works",
-      "category": "creative",
+      "key": "presentations",
+      "title": "Presentations & Conferences",
+      "category": "academic",
       "region": "main",
       "order": 6
     },
     {
-      "key": "presentations",
-      "title": "Presentations & Conferences",
-      "category": "academic",
+      "key": "creative-works",
+      "title": "Creative Portfolio Works",
+      "category": "creative",
       "region": "main",
       "order": 7
     },
