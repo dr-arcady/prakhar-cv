@@ -21,7 +21,6 @@ async function generatePDF() {
         degree: "Ph.D., English"
     };
 
-    // Unified configuration matching index.html layout & custom list ordering (Socials removed from sidebar)
     const allListsConfig = [
         { key: 'work', title: 'Work Experience', region: 'main', order: 1 },
         { key: 'publications', title: 'Publications', region: 'main', order: 2 },
@@ -44,12 +43,7 @@ async function generatePDF() {
     const filterList = (listType) => portfolioData.filter(i => i.listType === listType).sort((a, b) => (a.order || 0) - (b.order || 0));
 
     const socialsList = filterList('socials');
-    const emailItem = socialsList.find(i => i.title.toLowerCase() === 'email');
-    const phoneItem = socialsList.find(i => i.title.toLowerCase() === 'phone');
-    const contactEmail = emailItem ? (emailItem.description || emailItem.link || '') : '';
-    const contactPhone = phoneItem ? (phoneItem.description || phoneItem.link || '') : '';
 
-    // Render items for Main Area
     const renderMainItems = (items) => items.map(item => {
         let titleHtml = parseMarkdown(item.title || '');
         let authorsHtml = item.authors ? parseMarkdown(item.authors) : '';
@@ -96,7 +90,7 @@ async function generatePDF() {
         `;
     }).join('');
     
-    // Render items for Sidebar
+    // Render Sidebar Sections with item-level splitting and [contd.] support
     const renderSidebarSection = (listConfig) => {
         const items = filterList(listConfig.key);
         if (items.length === 0 && listConfig.key !== 'socials') return '';
@@ -122,34 +116,35 @@ async function generatePDF() {
             `;
         }
 
+        const renderItemHtml = (item) => `
+            <div style="margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid;">
+                <div style="font-weight: bold; color: #0f172a;">
+                    ${parseMarkdown(item.title || '')} <span style="float: right; font-weight: normal; color: #64748b; font-size: 10px;">${item.year || ''}</span>
+                </div>
+                ${item.authors ? `<div style="color: #334155; margin-top: 2px; font-weight: 500;">${parseMarkdown(item.authors)}</div>` : ''}
+                ${item.description ? `<div style="color: #64748b; margin-top: 2px; line-height: 1.35;">${parseMarkdown(item.description)}</div>` : ''}
+                ${item.customFields && item.customFields.length > 0 ? `
+                    <div style="font-size: 10px; color: #475569; margin-top: 3px; border-top: 1px dashed #cbd5e1; padding-top: 3px;">
+                        ${item.customFields.map(cf => {
+                            const keyTrim = cf.key ? cf.key.trim() : '';
+                            const valTrim = cf.value || '';
+                            return `<span>${keyTrim ? `<strong>${keyTrim}:</strong> ` : ''}${valTrim}</span>`;
+                        }).join(' | ')}
+                    </div>
+                ` : ''}
+            </div>
+        `;
+
         return `
             <div class="sidebar-section">
                 <div class="sidebar-heading">${listConfig.title}</div>
                 <div style="padding: 10px; font-size: 11px;">
-                    ${items.map(item => `
-                        <div style="margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid;">
-                            <div style="font-weight: bold; color: #0f172a;">
-                                ${parseMarkdown(item.title || '')} <span style="float: right; font-weight: normal; color: #64748b; font-size: 10px;">${item.year || ''}</span>
-                            </div>
-                            ${item.authors ? `<div style="color: #334155; margin-top: 2px; font-weight: 500;">${parseMarkdown(item.authors)}</div>` : ''}
-                            ${item.description ? `<div style="color: #64748b; margin-top: 2px; line-height: 1.35;">${parseMarkdown(item.description)}</div>` : ''}
-                            ${item.customFields && item.customFields.length > 0 ? `
-                                <div style="font-size: 10px; color: #475569; margin-top: 3px; border-top: 1px dashed #cbd5e1; padding-top: 3px;">
-                                    ${item.customFields.map(cf => {
-                                        const keyTrim = cf.key ? cf.key.trim() : '';
-                                        const valTrim = cf.value || '';
-                                        return `<span>${keyTrim ? `<strong>${keyTrim}:</strong> ` : ''}${valTrim}</span>`;
-                                    }).join(' | ')}
-                                </div>
-                            ` : ''}
-                        </div>
-                    `).join('')}
+                    ${items.map(item => renderItemHtml(item)).join('')}
                 </div>
             </div>
         `;
     };
 
-    // Build and sort all lists globally by their order property
     const allLists = [...allListsConfig];
     allLists.sort((a, b) => (a.order || 0) - (b.order || 0));
 
@@ -187,18 +182,18 @@ async function generatePDF() {
                 font-size: 12px; font-weight: bold; color: #ffffff; background-color: #0f172a;
                 padding: 6px 10px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.8px;
             }
-            .sidebar-section { background: #ffffff; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; overflow: hidden; page-break-inside: avoid; break-inside: avoid; }
+            .sidebar-section { background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0; margin-bottom: 16px; overflow: hidden; }
             .sidebar-heading { background: #0f172a; color: #ffffff; font-size: 10px; text-transform: uppercase; padding: 6px 10px; font-weight: bold; letter-spacing: 0.5px; font-family: 'Playfair Display', Georgia, serif; }
             .cv-footer { margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 10px; page-break-inside: avoid; }
         </style>
     </head>
     <body style="padding: 20px;">
-        <div style="margin-bottom: 35px;">
+        <div style="margin-bottom: 25px;">
             <div style="margin-bottom: 12px;">
                 <h1 style="font-size: 24px; font-weight: bold; color: #0f172a; line-height: 1.2;">${parseMarkdown(profile.name)}</h1>
                 <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;|&nbsp; ${parseMarkdown(profile.subtitle)}</p>
             </div>
-            <div style="background-color: #ffffff; border-top: 2px solid #334155; border-bottom: 2px solid #334155; padding: 10px 12px; font-size: 9.5px; color: #334155;">
+            <div style="background-color: #ffffff; border-top: 2px solid #334155; border-bottom: 2px solid #334155; padding: 8px 12px; font-size: 9.5px; color: #334155;">
                 ${(() => {
                     const items = socialsList;
                     const total = items.length;
@@ -219,7 +214,7 @@ async function generatePDF() {
                             justifyContent = 'space-between';
                         }
 
-                        const rowStyle = `display: flex; justify-content: ${justifyContent}; align-items: center; width: 100%;` + (rowIndex === 0 ? '' : ' margin-top: 6px;');
+                        const rowStyle = `display: flex; justify-content: ${justifyContent}; align-items: center; width: 100%;` + (rowIndex === 0 ? '' : ' margin-top: 5px;');
                         
                         const itemsHtml = rowItems.map(item => {
                             const val = item.description || item.link || '';
@@ -231,6 +226,7 @@ async function generatePDF() {
                     }).join('');
                 })()}
             </div>
+        </div>
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
             <tr>
