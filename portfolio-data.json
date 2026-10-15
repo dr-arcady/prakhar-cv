@@ -17,66 +17,71 @@
       "linkText": "Explore Creative Works"
     }
   },
-  "lists": {
-    "academic": [
-      {
-        "key": "work",
-        "title": "Work Experience",
-        "region": "main",
-        "order": 1
-      },
-      {
-        "key": "background",
-        "title": "Education & Background",
-        "region": "sidebar",
-        "order": 1
-      },
-      {
-        "key": "publications",
-        "title": "Writing & Publications",
-        "region": "main",
-        "order": 2
-      },
-      {
-        "key": "skills",
-        "title": "Skills & Expertise",
-        "region": "sidebar",
-        "order": 2
-      },
-      {
-        "key": "presentations",
-        "title": "Presentations & Conferences",
-        "region": "main",
-        "order": 3
-      },
-      {
-        "key": "extracurriculars",
-        "title": "Extracurriculars",
-        "region": "sidebar",
-        "order": 3
-      },
-      {
-        "key": "seminars",
-        "title": "Seminars, Courses & More",
-        "region": "main",
-        "order": 4
-      },
-      {
-        "key": "references",
-        "title": "References",
-        "region": "sidebar",
-        "order": 4
-      }
-    ],
-    "creative": [
-      {
-        "key": "creative-works",
-        "title": "Creative Portfolio Works",
-        "region": "main",
-        "order": 1
-      }
-    ]
-  },
+  "lists": [
+    {
+      "key": "work",
+      "title": "Work Experience",
+      "category": "academic",
+      "region": "main",
+      "order": 1
+    },
+    {
+      "key": "publications",
+      "title": "Writing & Publications",
+      "category": "academic",
+      "region": "main",
+      "order": 2
+    },
+    {
+      "key": "creative-works",
+      "title": "Creative Portfolio Works",
+      "category": "creative",
+      "region": "main",
+      "order": 3
+    },
+    {
+      "key": "presentations",
+      "title": "Presentations & Conferences",
+      "category": "academic",
+      "region": "main",
+      "order": 4
+    },
+    {
+      "key": "seminars",
+      "title": "Seminars, Courses & More",
+      "category": "academic",
+      "region": "main",
+      "order": 5
+    },
+    {
+      "key": "background",
+      "title": "Education & Background",
+      "category": "academic",
+      "region": "sidebar",
+      "order": 1
+    },
+    {
+      "key": "skills",
+      "title": "Skills & Expertise",
+      "category": "academic",
+      "region": "sidebar",
+      "order": 2
+    },
+    {
+      "key": "extracurriculars",
+      "title": "Extracurriculars",
+      "category": "academic",
+      "region": "sidebar",
+      "order": 3
+    },
+    {
+      "key": "references",
+      "title": "References",
+      "category": "academic",
+      "region": "sidebar",
+      "order": 4
+    }
+  ],
   "items": [
     {
       "id": "item-1",
