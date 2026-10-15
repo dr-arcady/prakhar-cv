@@ -494,7 +494,7 @@
           "value": "7.75 GPA | 77.5%"
         }
       ],
-      "order": 3
+      "order": 2
     },
     {
       "id": "item-1791817449942",
@@ -511,7 +511,7 @@
           "value": "8.55 GPA | 81.23%"
         }
       ],
-      "order": 4
+      "order": 3
     },
     {
       "id": "item-1791817515200",
@@ -528,7 +528,7 @@
           "value": "66.6%"
         }
       ],
-      "order": 5
+      "order": 4
     },
     {
       "id": "item-1791817547009",
@@ -545,7 +545,7 @@
           "value": "8.80 GPA"
         }
       ],
-      "order": 6
+      "order": 5
     },
     {
       "id": "item-1791820535797",
@@ -683,10 +683,10 @@
       "order": 2
     },
     {
-      "id": "item-1792056997402",
+      "id": "item-1792057299082",
       "category": "academic",
       "listType": "background",
-      "title": "NET (Lecturership), English",
+      "title": "NET (English)",
       "authors": "UGC/NTA",
       "year": "2019",
       "description": "",
@@ -694,7 +694,7 @@
       "linkTarget": "custom",
       "linkText": "View Work / Document",
       "customFields": [],
-      "order": 2
+      "order": 6
     }
   ]
 }
