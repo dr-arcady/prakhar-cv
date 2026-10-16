@@ -26,6 +26,13 @@
       "order": 1
     },
     {
+      "key": "socials",
+      "title": "Socials & Links",
+      "category": "academic",
+      "region": "sidebar",
+      "order": 7
+    },
+    {
       "key": "background",
       "title": "Education & Background",
       "category": "academic",
