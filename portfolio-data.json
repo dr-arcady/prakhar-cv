@@ -5,18 +5,18 @@
     "degree": "Ph.D., English",
     "bio": "Bridging rigorous interdisciplinary research and modern pedagogy at the intersections of literature, culture, film studies, and digital humanities.\n\nPushing the frontiers of creative exercises across mediums.",
     "cardOrder": [
-      "card1",
-      "card2"
+      "card2",
+      "card1"
     ],
     "card1": {
       "title": "Academics & Research",
-      "icon": "fa-landmark",
+      "icon": "fa-building-columns",
       "bullet": "Record of publications, presentations, specializations, and credentials including education, skills, and references.",
       "linkText": "View Academic Record"
     },
     "card2": {
       "title": "Creative Portfolio",
-      "icon": "fa-layer-group",
+      "icon": "fa-feather-pointed",
       "bullet": "Curated demonstrations of extracurricular interests, spanning public-facing writing, web-development, and more.",
       "linkText": "Explore Creative Works"
     }
