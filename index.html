@@ -608,8 +608,11 @@ function renderProfileUI() {
     // 8. Update PDF Download Link dynamically
     const pdfLink = document.getElementById('pdf-download-link');
     if (pdfLink && profileData.name) {
-        const pdfFileName = `${profileData.name} - CV.pdf`;
-        pdfLink.href = `https://raw.githubusercontent.com/dr-arcady/prakhar-cv/main/${encodeURIComponent(pdfFileName)}`;
+        const pdfLink = document.getElementById('pdf-download-link');
+        if (pdfLink && profileData.name) {
+            const pdfFileName = `${profileData.name} - CV.pdf`;
+            pdfLink.href = `./${encodeURIComponent(pdfFileName)}`;
+        }
     }
 }
         
@@ -787,7 +790,7 @@ async function handleSaveProfile(event) {
                 if (viewName === 'home') {
                     const pdfFileName = `${profileData.name || 'CV'} - CV.pdf`;
                     headerContainer.innerHTML = `
-                        <a href="${encodeURIComponent(pdfFileName)}" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-stone-600 hover:text-stone-900 transition-colors">
+                        <a href="./${encodeURIComponent(pdfFileName)}" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-stone-600 hover:text-stone-900 transition-colors">
                             <i class="fa-solid fa-file-pdf mr-1"></i> Save PDF
                         </a>
                     `;
