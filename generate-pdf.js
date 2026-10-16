@@ -273,7 +273,9 @@ async function generatePDF() {
     const page = await browser.newPage();
     await page.setContent(htmlTemplate, { waitUntil: 'domcontentloaded' });
 
-    const pdfPath = path.resolve(__dirname, 'Prakhar Srivastava - CV.pdf');
+    // Dynamically pull the name from profile data to match what the frontend expects
+    const dynamicPdfName = `${profile.name || "Prakhar Srivastava"} - CV.pdf`;
+    const pdfPath = path.resolve(__dirname, dynamicPdfName);
     console.log(`Generating PDF to ${pdfPath}...`);
     await page.pdf({ path: pdfPath, format: 'A4', printBackground: true, margin: { top: '12mm', bottom: '12mm', left: '12mm', right: '12mm' } });
 
