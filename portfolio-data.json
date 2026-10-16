@@ -16,7 +16,7 @@
     },
     "card2": {
       "title": "Creative Portfolio",
-      "icon": "fa-solid fa-lightbulb",
+      "icon": "fa-solid fa-layer-group",
       "bullet": "Curated demonstrations of extracurricular interests, spanning public-facing writing, web-development, and more.",
       "linkText": "Explore Creative Works"
     }
