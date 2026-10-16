@@ -1154,7 +1154,7 @@ async function handleSaveProfile(event) {
                     <div class="mb-6 bg-stone-100/70 rounded-2xl p-4 border border-stone-200">
                         <div class="flex items-center justify-between mb-3 pb-2 border-b border-stone-200">
                             <h4 class="font-serif font-bold text-sm text-stone-900 tracking-wide uppercase flex items-center">
-                                <span class="w-2 h-2 rounded-full bg-navy-900 mr-2"></span>${group.label}
+                                <span class="w-2 h-2 rounded-full bg-navy-900 mr-2"></span>${escapeHtml(group.title || group.label)}
                             </h4>
                             <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-stone-200 text-stone-600">${groupItems.length} items</span>
                         </div>
