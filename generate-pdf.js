@@ -219,7 +219,7 @@ async function generatePDF() {
             </div>
             <div style="background-color: #ffffff; border-top: 2px solid #334155; border-bottom: 2px solid #334155; padding: 8px 12px; font-size: 9.5px; color: #334155;">
                 ${(() => {
-                    const items = socialsList;
+                    const items = [...socialsList].sort((a, b) => (a.order || 0) - (b.order || 0));
                     const total = items.length;
                     if (total === 0) return '';
 
