@@ -709,6 +709,20 @@
         }
       ],
       "order": 2
+    },
+    {
+      "id": "item-1792142237633",
+      "category": "academic",
+      "listType": "socials",
+      "title": "Google Scholar",
+      "authors": "",
+      "year": "",
+      "description": "",
+      "link": "https://scholar.google.com/citations?view_op=list_works&hl=en&user=TFocYo0AAAAJ",
+      "linkTarget": "title",
+      "linkText": "",
+      "customFields": [],
+      "order": 5
     }
   ]
 }
