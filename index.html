@@ -584,7 +584,16 @@ function renderProfileUI() {
                     <div class="absolute top-0 right-0 w-32 h-32 ${cfg.decBg} rounded-bl-full group-hover:scale-110 transition-transform"></div>
                     <div>
                         <div class="w-14 h-14 rounded-2xl ${cfg.iconBoxBg} flex items-center justify-center text-xl mb-6 shadow-md transition-colors">
-                            <i class="${escapeHtml(data.icon && !data.icon.includes('fa-') ? 'fa-solid ' + data.icon : (data.icon || 'fa-solid fa-graduation-cap'))}"></i>
+                            <i class="${escapeHtml((() => {
+                                let ic = data.icon || 'fa-solid fa-graduation-cap';
+                                if (!ic.includes('fa-solid') && !ic.includes('fa-brands') && !ic.includes('fa-regular')) {
+                                    ic = 'fa-solid ' + (ic.startsWith('fa-') ? ic : 'fa-' + ic);
+                                } else if (ic.includes('fa-solid') && !ic.includes('fa-', ic.indexOf('fa-solid') + 8)) {
+                                    // Fixes missing fa- on the icon name itself if only style was present
+                                    ic = ic.replace(/fa-solid\s+([a-z0-9-]+)/, 'fa-solid fa-$1');
+                                }
+                                return ic;
+                            })())}"></i>
                         </div>
                         <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 ${cfg.titleHover} transition-colors">${escapeHtml(data.title || '')}</h2>
                         <div class="text-stone-600 text-sm space-y-2 mb-6 leading-relaxed prose prose-sm max-w-none">${safeParseMarkdown(data.bullet || '')}</div>
