@@ -186,11 +186,10 @@ async function generatePDF() {
             h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; margin: 0; }
             table { width: 100%; border-collapse: collapse; }
             td { vertical-align: top; }
+            
             .section-group { 
-                margin-top: 24px; 
-                margin-bottom: 20px; 
-                page-break-inside: avoid; 
-                break-inside: avoid; 
+                margin-top: 28px; 
+                margin-bottom: 24px; 
             }
             .section-group:first-of-type { 
                 margin-top: 0; 
@@ -208,6 +207,7 @@ async function generatePDF() {
                 page-break-after: avoid;
                 break-after: avoid;
             }
+            
             .cv-footer { margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 10px; page-break-inside: avoid; }
         </style>
     </head>
