@@ -144,7 +144,7 @@
       "year": "2017",
       "title": "Representation of Nature in Gulzar’s Poetry",
       "authors": "Srivastava, P.",
-      "description": "Presented an eco-critical analysis of the aesthetic and cultural aspects of select poems of Gulzar through their English translations.",
+      "description": "Presented an eco-critical analysis of the aesthetic and cultural aspects of select poems of Gulzar through their English translations by Pavan K. Varma.",
       "link": "",
       "customFields": [
         {
@@ -156,7 +156,9 @@
           "value": "Amity University Rajasthan"
         }
       ],
-      "order": 5
+      "order": 5,
+      "linkTarget": "custom",
+      "linkText": ""
     },
     {
       "id": "item-4",
