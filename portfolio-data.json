@@ -182,7 +182,7 @@
       "year": "2021-2026",
       "title": "Ph.D. in English",
       "authors": "Central University of Rajasthan",
-      "description": "An interdisciplinary study of formalist narratology, game studies, and cybertext. Including certification in Pedagogy for Higher Education with Practice Based Teaching Assessment.",
+      "description": "An interdisciplinary study of formalist narratology, game studies, and ergodicity. Including certification in Pedagogy for Higher Education with Practice Based Teaching Assessment.",
       "link": "",
       "customFields": [
         {
@@ -190,7 +190,9 @@
           "value": "Dr. Ved Prakash"
         }
       ],
-      "order": 1
+      "order": 1,
+      "linkTarget": "custom",
+      "linkText": ""
     },
     {
       "id": "item-6",
