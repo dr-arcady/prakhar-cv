@@ -518,6 +518,7 @@ function renderProfileUI() {
         ).join('');
         
         const socials = portfolioData.filter(i => i.listType === 'socials');
+        socials.sort((a, b) => (a.order || 0) - (b.order || 0));
         const socialsHTML = socials.map(item => {
             const titleLower = item.title.toLowerCase();
             const linkLower = (item.link || '').toLowerCase();
