@@ -608,13 +608,15 @@
       "id": "item-1791824222461",
       "category": "academic",
       "listType": "skills",
-      "title": "Digital Tools",
+      "title": "Digital Resources",
       "authors": "Web design, data management, visual art, digital audio workstations",
       "year": "Beginner",
       "description": "Rudimentary understanding of a variety of tools supported by public resources on the internet.",
       "link": "",
       "customFields": [],
-      "order": 3
+      "order": 3,
+      "linkTarget": "custom",
+      "linkText": ""
     },
     {
       "id": "item-1791824492476",
