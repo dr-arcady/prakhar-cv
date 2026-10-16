@@ -444,6 +444,11 @@
 
         window.onload = function() {
             loadData();
+            history.replaceState({ view: 'home' }, '', window.location.pathname + window.location.search);
+            window.addEventListener('popstate', function(event) {
+                const view = event.state && event.state.view ? event.state.view : 'home';
+                switchView(view, false);
+            });
         };
 
         // Default profile fallback state
@@ -775,7 +780,7 @@ async function handleSaveProfile(event) {
             });
         }
 
-        function switchView(viewName) {
+        function switchView(viewName, pushHistory = true) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
             const target = document.getElementById('view-' + viewName);
             if (target) {
@@ -783,25 +788,25 @@ async function handleSaveProfile(event) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
             
+            if (pushHistory) {
+                if (viewName === 'home') {
+                    history.pushState({ view: 'home' }, '', window.location.pathname + window.location.search);
+                } else {
+                    history.pushState({ view: viewName }, '', `#${viewName}`);
+                }
+            }
+            
             // Re-render views to ensure dynamic lists populate when switching tabs
             renderViews();
         
             const headerContainer = document.getElementById('header-action-container');
             if (headerContainer) {
-                if (viewName === 'home') {
-                    const pdfFileName = `${profileData.name || 'CV'} - CV.pdf`;
-                    headerContainer.innerHTML = `
-                        <a href="./${encodeURIComponent(pdfFileName)}" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-stone-600 hover:text-stone-900 transition-colors">
-                            <i class="fa-solid fa-file-pdf mr-1"></i> Save PDF
-                        </a>
-                    `;
-                } else {
-                    headerContainer.innerHTML = `
-                        <button onclick="switchView('home')" class="text-xs font-semibold text-stone-600 hover:text-stone-900 transition-colors">
-                            <i class="fa-solid fa-house mr-1"></i> Home
-                        </button>
-                    `;
-                }
+                const pdfFileName = `${profileData.name || 'CV'} - CV.pdf`;
+                headerContainer.innerHTML = `
+                    <a href="./${encodeURIComponent(pdfFileName)}" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-stone-600 hover:text-stone-900 transition-colors">
+                        <i class="fa-solid fa-file-pdf mr-1"></i> Save PDF
+                    </a>
+                `;
             }
         }
 
