@@ -584,7 +584,7 @@ function renderProfileUI() {
                     <div class="absolute top-0 right-0 w-32 h-32 ${cfg.decBg} rounded-bl-full group-hover:scale-110 transition-transform"></div>
                     <div>
                         <div class="w-14 h-14 rounded-2xl ${cfg.iconBoxBg} flex items-center justify-center text-xl mb-6 shadow-md transition-colors">
-                            <i class="${escapeHtml(data.icon || 'fa-solid fa-graduation-cap')}"></i>
+                            <i class="${escapeHtml(data.icon && !data.icon.includes('fa-') ? 'fa-solid ' + data.icon : (data.icon || 'fa-solid fa-graduation-cap'))}"></i>
                         </div>
                         <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 ${cfg.titleHover} transition-colors">${escapeHtml(data.title || '')}</h2>
                         <div class="text-stone-600 text-sm space-y-2 mb-6 leading-relaxed prose prose-sm max-w-none">${safeParseMarkdown(data.bullet || '')}</div>
@@ -683,30 +683,30 @@ async function handleSaveProfile(event) {
                     <div>
                         <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Icon</label>
                         <select id="prof-${cardKey}-icon" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm bg-white">
-                            <option value="fa-graduation-cap" ${data.icon === 'fa-graduation-cap' ? 'selected' : ''}>🎓 Graduation Cap (fa-graduation-cap)</option>
-                            <option value="fa-book-open" ${data.icon === 'fa-book-open' ? 'selected' : ''}>📖 Open Book (fa-book-open)</option>
-                            <option value="fa-book" ${data.icon === 'fa-book' ? 'selected' : ''}>📖 Book / Curation (fa-book)</option>
-                            <option value="fa-book-bookmark" ${data.icon === 'fa-book-bookmark' ? 'selected' : ''}>🔖 Book Bookmark / Anthology (fa-book-bookmark)</option>
-                            <option value="fa-feather-pointed" ${data.icon === 'fa-feather-pointed' ? 'selected' : ''}>🪶 Feather / Creative Writing (fa-feather-pointed)</option>
-                            <option value="fa-pen-nib" ${data.icon === 'fa-pen-nib' ? 'selected' : ''}>✒️ Pen Nib / Editorial (fa-pen-nib)</option>
-                            <option value="fa-building-columns" ${data.icon === 'fa-building-columns' ? 'selected' : ''}>🏛️ Institution / University (fa-building-columns)</option>
-                            <option value="fa-landmark" ${data.icon === 'fa-landmark' ? 'selected' : ''}>🏛️ Landmark / Heritage (fa-landmark)</option>
-                            <option value="fa-briefcase" ${data.icon === 'fa-briefcase' ? 'selected' : ''}>💼 Briefcase / Career (fa-briefcase)</option>
-                            <option value="fa-user-tie" ${data.icon === 'fa-user-tie' ? 'selected' : ''}>👔 Professional / Scholar (fa-user-tie)</option>
-                            <option value="fa-scroll" ${data.icon === 'fa-scroll' ? 'selected' : ''}>📜 Scroll / Historical Records (fa-scroll)</option>
-                            <option value="fa-file-lines" ${data.icon === 'fa-file-lines' ? 'selected' : ''}>📄 Documents / Research (fa-file-lines)</option>
-                            <option value="fa-laptop-code" ${data.icon === 'fa-laptop-code' ? 'selected' : ''}>💻 Tech / Research Script (fa-laptop-code)</option>
-                            <option value="fa-id-card" ${data.icon === 'fa-id-card' ? 'selected' : ''}>🪪 Identity / CV Card (fa-id-card)</option>
-                            <option value="fa-award" ${data.icon === 'fa-award' ? 'selected' : ''}>🏅 Award / Distinction (fa-award)</option>
-                            <option value="fa-brain" ${data.icon === 'fa-brain' ? 'selected' : ''}>🧠 Philosophy / Cognition (fa-brain)</option>
-                            <option value="fa-palette" ${data.icon === 'fa-palette' ? 'selected' : ''}>🎨 Palette / Design (fa-palette)</option>
-                            <option value="fa-gamepad" ${data.icon === 'fa-gamepad' ? 'selected' : ''}>🎮 Games / Interactive (fa-gamepad)</option>
-                            <option value="fa-layer-group" ${data.icon === 'fa-layer-group' ? 'selected' : ''}>🥞 Portfolio / Collections (fa-layer-group)</option>
-                            <option value="fa-wand-magic-sparkles" ${data.icon === 'fa-wand-magic-sparkles' ? 'selected' : ''}>✨ Magic / Creative Works (fa-wand-magic-sparkles)</option>
-                            <option value="fa-headphones" ${data.icon === 'fa-headphones' ? 'selected' : ''}>🎧 Audio / Narration (fa-headphones)</option>
-                            <option value="fa-masks-theater" ${data.icon === 'fa-masks-theater' ? 'selected' : ''}>🎭 Theater / Dramatic Arts (fa-masks-theater)</option>
-                            <option value="fa-lightbulb" ${data.icon === 'fa-lightbulb' ? 'selected' : ''}>💡 Ideas / Conceptual (fa-lightbulb)</option>
-                            <option value="fa-compass" ${data.icon === 'fa-compass' ? 'selected' : ''}>🧭 Exploration (fa-compass)</option>
+                            <option value="fa-solid fa-graduation-cap" ${data.icon?.includes('fa-graduation-cap') ? 'selected' : ''}>🎓 Graduation Cap (fa-graduation-cap)</option>
+                            <option value="fa-solid fa-book-open" ${data.icon?.includes('fa-book-open') ? 'selected' : ''}>📖 Open Book (fa-book-open)</option>
+                            <option value="fa-solid fa-book" ${data.icon?.includes('fa-book') && !data.icon?.includes('fa-book-open') && !data.icon?.includes('fa-book-bookmark') ? 'selected' : ''}>📖 Book / Curation (fa-book)</option>
+                            <option value="fa-solid fa-book-bookmark" ${data.icon?.includes('fa-book-bookmark') ? 'selected' : ''}>🔖 Book Bookmark / Anthology (fa-book-bookmark)</option>
+                            <option value="fa-solid fa-feather-pointed" ${data.icon?.includes('fa-feather-pointed') ? 'selected' : ''}>🪶 Feather / Creative Writing (fa-feather-pointed)</option>
+                            <option value="fa-solid fa-pen-nib" ${data.icon?.includes('fa-pen-nib') ? 'selected' : ''}>✒️ Pen Nib / Editorial (fa-pen-nib)</option>
+                            <option value="fa-solid fa-building-columns" ${data.icon?.includes('fa-building-columns') ? 'selected' : ''}>🏛️ Institution / University (fa-building-columns)</option>
+                            <option value="fa-solid fa-landmark" ${data.icon?.includes('fa-landmark') ? 'selected' : ''}>🏛️ Landmark / Heritage (fa-landmark)</option>
+                            <option value="fa-solid fa-briefcase" ${data.icon?.includes('fa-briefcase') ? 'selected' : ''}>💼 Briefcase / Career (fa-briefcase)</option>
+                            <option value="fa-solid fa-user-tie" ${data.icon?.includes('fa-user-tie') ? 'selected' : ''}>👔 Professional / Scholar (fa-user-tie)</option>
+                            <option value="fa-solid fa-scroll" ${data.icon?.includes('fa-scroll') ? 'selected' : ''}>📜 Scroll / Historical Records (fa-scroll)</option>
+                            <option value="fa-solid fa-file-lines" ${data.icon?.includes('fa-file-lines') ? 'selected' : ''}>📄 Documents / Research (fa-file-lines)</option>
+                            <option value="fa-solid fa-laptop-code" ${data.icon?.includes('fa-laptop-code') ? 'selected' : ''}>💻 Tech / Research Script (fa-laptop-code)</option>
+                            <option value="fa-solid fa-id-card" ${data.icon?.includes('fa-id-card') ? 'selected' : ''}>🪪 Identity / CV Card (fa-id-card)</option>
+                            <option value="fa-solid fa-award" ${data.icon?.includes('fa-award') ? 'selected' : ''}>🏅 Award / Distinction (fa-award)</option>
+                            <option value="fa-solid fa-brain" ${data.icon?.includes('fa-brain') ? 'selected' : ''}>🧠 Philosophy / Cognition (fa-brain)</option>
+                            <option value="fa-solid fa-palette" ${data.icon?.includes('fa-palette') ? 'selected' : ''}>🎨 Palette / Design (fa-palette)</option>
+                            <option value="fa-solid fa-gamepad" ${data.icon?.includes('fa-gamepad') ? 'selected' : ''}>🎮 Games / Interactive (fa-gamepad)</option>
+                            <option value="fa-solid fa-layer-group" ${data.icon?.includes('fa-layer-group') ? 'selected' : ''}>🥞 Portfolio / Collections (fa-layer-group)</option>
+                            <option value="fa-solid fa-wand-magic-sparkles" ${data.icon?.includes('fa-wand-magic-sparkles') ? 'selected' : ''}>✨ Magic / Creative Works (fa-wand-magic-sparkles)</option>
+                            <option value="fa-solid fa-headphones" ${data.icon?.includes('fa-headphones') ? 'selected' : ''}>🎧 Audio / Narration (fa-headphones)</option>
+                            <option value="fa-solid fa-masks-theater" ${data.icon?.includes('fa-masks-theater') ? 'selected' : ''}>🎭 Theater / Dramatic Arts (fa-masks-theater)</option>
+                            <option value="fa-solid fa-lightbulb" ${data.icon?.includes('fa-lightbulb') ? 'selected' : ''}>💡 Ideas / Conceptual (fa-lightbulb)</option>
+                            <option value="fa-solid fa-compass" ${data.icon?.includes('fa-compass') ? 'selected' : ''}>🧭 Exploration (fa-compass)</option>
                         </select>
                     </div>
                 </div>
