@@ -1424,11 +1424,6 @@ async function handleSaveProfile(event) {
                 lists.push({ key: 'socials', title: 'Socials & Links' });
             }
 
-            // Explicitly ensure 'socials' is added as an academic option if missing
-            if (cat === 'academic' && !lists.some(l => l.key === 'socials')) {
-                lists.push({ key: 'socials', title: 'Socials & Links' });
-            }
-
             // Fallback default options if config is empty
             if (lists.length === 0) {
                 if (cat === 'academic') {
