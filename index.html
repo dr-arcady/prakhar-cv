@@ -116,7 +116,7 @@
             <!-- Two Showcase Cards Grid (Now correctly wrapped inside view-home) -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
                 <!-- Academics Card -->
-                <div onclick="switchView('academic')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]" id="card-academic-container">
+                <div onclick="switchView('record')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]" id="card-record-container">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-slate-800/5 rounded-bl-full group-hover:scale-110 transition-transform"></div>
                     <div>
                         <div class="w-14 h-14 rounded-2xl bg-slate-800 text-white flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-slate-900 transition-colors">
@@ -129,7 +129,7 @@
                 </div>
 
                 <!-- Creative Portfolio Card -->
-                <div onclick="switchView('creative')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]" id="card-creative-container">
+                <div onclick="switchView('portfolio')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]" id="card-portfolio-container">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-gold-500/10 rounded-bl-full group-hover:scale-110 transition-transform"></div>
                     <div>
                         <div class="w-14 h-14 rounded-2xl bg-gold-500 text-stone-950 flex items-center justify-center text-xl mb-6 shadow-md group-hover:bg-gold-600 transition-colors">
@@ -145,7 +145,7 @@
         <!-- End of view-home -->
         
         <!-- 2. ACADEMIC & RESEARCH VIEW -->
-        <div id="view-academic" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div id="view-record" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-stone-200 pb-8 mb-8 gap-4">
                 <div>
                     <span class="text-xs uppercase tracking-widest text-navy-900 font-bold block mb-1">Scholarship & Credentials</span>
@@ -176,7 +176,7 @@
         <!-- End of view-academic -->
             
         <!-- 3. CREATIVE PORTFOLIO VIEW -->
-        <div id="view-creative" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div id="view-portfolio" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="border-b border-stone-200 pb-8 mb-10">
                 <span class="text-xs uppercase tracking-widest text-gold-600 font-bold block mb-1">Literary & Artistic Works</span>
                 <h1 class="font-serif text-3xl sm:text-4xl font-bold text-stone-900">Creative Portfolio</h1>
@@ -506,7 +506,14 @@ async function loadData() {
     pruneEmptyFields();
     renderProfileUI();
     renderViews();
-    switchView('home');
+    
+    // Check initial URL hash for direct navigation/bookmarking support
+    const initialHash = window.location.hash.replace('#', '');
+    if (initialHash === 'record' || initialHash === 'portfolio') {
+        switchView(initialHash, false);
+    } else {
+        switchView('home', false);
+    }
 }
         
 // Render dynamic profile elements across the site
