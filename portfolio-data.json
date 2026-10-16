@@ -10,13 +10,13 @@
     ],
     "card1": {
       "title": "Academics & Research",
-      "icon": "fa-solid fa-pen-nib",
+      "icon": "fa-solid fa-building-columns",
       "bullet": "Record of publications, presentations, specializations, and credentials including education, skills, and references.",
       "linkText": "View Academic Record"
     },
     "card2": {
       "title": "Creative Portfolio",
-      "icon": "fa-solid fa-compass",
+      "icon": "fa-solid fa-lightbulb",
       "bullet": "Curated demonstrations of extracurricular interests, spanning public-facing writing, web-development, and more.",
       "linkText": "Explore Creative Works"
     }
