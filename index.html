@@ -113,8 +113,8 @@
                 
             </div>
 
-            <!-- Two Showcase Cards Grid (Now correctly wrapped inside view-home) -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            <!-- Two Showcase Cards Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16" id="homepage-cards-grid"></div>
                 <!-- Academics Card -->
                 <div onclick="switchView('record')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]" id="card-record-container">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-slate-800/5 rounded-bl-full group-hover:scale-110 transition-transform"></div>
@@ -457,6 +457,7 @@ let profileData = {
     subtitle: "",
     degree: "",
     bio: "",
+    cardOrder: ['card1', 'card2'],
     card1: {
         title: "",
         icon: "",
@@ -580,25 +581,48 @@ function renderProfileUI() {
         `;
     }
 
-    // 3. Card 1 (Record)
-    const c1Title = document.getElementById('card-1-title');
-    const c1Bullet = document.getElementById('card-1-bullet');
-    const c1Link = document.getElementById('card-1-link');
-    const c1Icon = document.getElementById('card-1-icon');
-    if (c1Title) c1Title.innerText = profileData.card1.title;
-    if (c1Bullet) c1Bullet.innerHTML = safeParseMarkdown(profileData.card1.bullet);
-    if (c1Link) c1Link.innerHTML = `${escapeHtml(profileData.card1.linkText)} <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>`;
-    if (c1Icon) c1Icon.className = `fa-solid ${profileData.card1.icon}`;
+    // Render Homepage Showcase Cards based on cardOrder
+    const cardsGrid = document.getElementById('homepage-cards-grid');
+    if (cardsGrid) {
+        const order = profileData.cardOrder || ['card1', 'card2'];
+        const cardConfigs = {
+            card1: {
+                view: 'record',
+                decBg: 'bg-slate-800/5',
+                iconBoxBg: 'bg-slate-800 text-white group-hover:bg-slate-900',
+                titleHover: 'group-hover:text-slate-800',
+                linkTextClass: 'text-slate-800'
+            },
+            card2: {
+                view: 'portfolio',
+                decBg: 'bg-gold-500/10',
+                iconBoxBg: 'bg-gold-500 text-stone-950 group-hover:bg-gold-600',
+                titleHover: 'group-hover:text-gold-600',
+                linkTextClass: 'text-gold-600'
+            }
+        };
 
-    // 4. Card 2 (Portfolio)
-    const c2Title = document.getElementById('card-2-title');
-    const c2Bullet = document.getElementById('card-2-bullet');
-    const c2Link = document.getElementById('card-2-link');
-    const c2Icon = document.getElementById('card-2-icon');
-    if (c2Title) c2Title.innerText = profileData.card2.title;
-    if (c2Bullet) c2Bullet.innerHTML = safeParseMarkdown(profileData.card2.bullet);
-    if (c2Link) c2Link.innerHTML = `${escapeHtml(profileData.card2.linkText)} <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>`;
-    if (c2Icon) c2Icon.className = `fa-solid ${profileData.card2.icon}`;
+        cardsGrid.innerHTML = order.map(cardKey => {
+            const data = profileData[cardKey] || {};
+            const cfg = cardConfigs[cardKey];
+            return `
+                <div onclick="switchView('${cfg.view}')" class="group cursor-pointer bg-white rounded-3xl p-8 border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-[225px]">
+                    <div class="absolute top-0 right-0 w-32 h-32 ${cfg.decBg} rounded-bl-full group-hover:scale-110 transition-transform"></div>
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl ${cfg.iconBoxBg} flex items-center justify-center text-xl mb-6 shadow-md transition-colors">
+                            <i class="${escapeHtml(data.icon || 'fa-solid fa-graduation-cap')}"></i>
+                        </div>
+                        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 ${cfg.titleHover} transition-colors">${escapeHtml(data.title || '')}</h2>
+                        <div class="text-stone-600 text-sm space-y-2 mb-6 leading-relaxed prose prose-sm max-w-none">${safeParseMarkdown(data.bullet || '')}</div>
+                    </div>
+                    <div class="flex items-center font-semibold text-sm ${cfg.linkTextClass} group-hover:translate-x-1 transition-transform">
+                        ${escapeHtml(data.linkText || 'Explore')} <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
     // 5. Update Profile Image Alt Text dynamically
     document.querySelectorAll('#profile-avatar-img').forEach(img => {
         img.alt = profileData.name;
@@ -635,47 +659,127 @@ function openProfileModal() {
     document.getElementById('prof-degree').value = profileData.degree || '';
     document.getElementById('prof-bio').value = profileData.bio || '';
 
-    document.getElementById('prof-c1-title').value = profileData.card1.title || '';
-    document.getElementById('prof-c1-icon').value = profileData.card1.icon || 'fa-graduation-cap';
-    document.getElementById('prof-c1-bullet').value = profileData.card1.bullet || '';
-    document.getElementById('prof-c1-linkText').value = profileData.card1.linkText || '';
-
-    document.getElementById('prof-c2-title').value = profileData.card2.title || '';
-    document.getElementById('prof-c2-icon').value = profileData.card2.icon || 'fa-feather-pointed';
-    document.getElementById('prof-c2-bullet').value = profileData.card2.bullet || '';
-    document.getElementById('prof-c2-linkText').value = profileData.card2.linkText || '';
-
+    renderProfileModalCards();
     openModal('modal-profile');
 }
 
 // Handle saving profile configuration
 async function handleSaveProfile(event) {
     event.preventDefault();
+    captureProfileModalInputValues();
 
-    profileData = {
-        name: document.getElementById('prof-name').value.trim(),
-        subtitle: document.getElementById('prof-subtitle').value.trim(),
-        degree: document.getElementById('prof-degree').value.trim(),
-        bio: document.getElementById('prof-bio').value.trim(),
-        card1: {
-            title: document.getElementById('prof-c1-title').value.trim(),
-            icon: document.getElementById('prof-c1-icon').value,
-            bullet: document.getElementById('prof-c1-bullet').value.trim(),
-            linkText: document.getElementById('prof-c1-linkText').value.trim()
-        },
-        card2: {
-            title: document.getElementById('prof-c2-title').value.trim(),
-            icon: document.getElementById('prof-c2-icon').value,
-            bullet: document.getElementById('prof-c2-bullet').value.trim(),
-            linkText: document.getElementById('prof-c2-linkText').value.trim()
-        }
-    };
+    profileData.name = document.getElementById('prof-name').value.trim();
+    profileData.subtitle = document.getElementById('prof-subtitle').value.trim();
+    profileData.degree = document.getElementById('prof-degree').value.trim();
+    profileData.bio = document.getElementById('prof-bio').value.trim();
 
     renderProfileUI();
     saveData();
     closeModal('modal-profile');
 }
 
+    function renderProfileModalCards() {
+    const container = document.getElementById('profile-cards-config-container');
+    if (!container) return;
+
+    const order = profileData.cardOrder || ['card1', 'card2'];
+    
+    container.innerHTML = order.map((cardKey) => {
+        const data = profileData[cardKey] || {};
+        const titleLabel = cardKey === 'card1' ? 'Record Card' : 'Portfolio Card';
+        const colorClass = cardKey === 'card1' ? 'text-slate-800' : 'text-gold-600';
+        const squareColor = cardKey === 'card1' ? 'text-slate-800' : 'text-gold-500';
+
+        return `
+            <div class="border-b border-stone-200 pb-4 space-y-3 card-config-block" data-card-key="${cardKey}">
+                <div class="flex items-center justify-between">
+                    <h4 class="text-xs font-bold uppercase tracking-wider ${colorClass} flex items-center">
+                        <i class="fa-solid fa-square mr-2 ${squareColor}"></i> ${titleLabel}
+                    </h4>
+                    <div class="flex items-center space-x-1">
+                        <button type="button" onclick="moveCardOrder('${cardKey}', -1)" class="text-stone-400 hover:text-stone-700 text-xs px-2 py-1 rounded bg-stone-100 flex items-center" title="Move Up"><i class="fa-solid fa-chevron-up mr-1"></i> Move Up</button>
+                        <button type="button" onclick="moveCardOrder('${cardKey}', 1)" class="text-stone-400 hover:text-stone-700 text-xs px-2 py-1 rounded bg-stone-100 flex items-center" title="Move Down"><i class="fa-solid fa-chevron-down mr-1"></i> Move Down</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Title</label>
+                        <input type="text" id="prof-${cardKey}-title" value="${escapeHtml(data.title || '')}" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Icon</label>
+                        <select id="prof-${cardKey}-icon" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm bg-white">
+                            <option value="fa-graduation-cap" ${data.icon === 'fa-graduation-cap' ? 'selected' : ''}>🎓 Graduation Cap (fa-graduation-cap)</option>
+                            <option value="fa-book-open" ${data.icon === 'fa-book-open' ? 'selected' : ''}>📖 Open Book (fa-book-open)</option>
+                            <option value="fa-book" ${data.icon === 'fa-book' ? 'selected' : ''}>📖 Book / Curation (fa-book)</option>
+                            <option value="fa-book-bookmark" ${data.icon === 'fa-book-bookmark' ? 'selected' : ''}>🔖 Book Bookmark / Anthology (fa-book-bookmark)</option>
+                            <option value="fa-feather-pointed" ${data.icon === 'fa-feather-pointed' ? 'selected' : ''}>🪶 Feather / Creative Writing (fa-feather-pointed)</option>
+                            <option value="fa-pen-nib" ${data.icon === 'fa-pen-nib' ? 'selected' : ''}>✒️ Pen Nib / Editorial (fa-pen-nib)</option>
+                            <option value="fa-building-columns" ${data.icon === 'fa-building-columns' ? 'selected' : ''}>🏛️ Institution / University (fa-building-columns)</option>
+                            <option value="fa-landmark" ${data.icon === 'fa-landmark' ? 'selected' : ''}>🏛️ Landmark / Heritage (fa-landmark)</option>
+                            <option value="fa-briefcase" ${data.icon === 'fa-briefcase' ? 'selected' : ''}>💼 Briefcase / Career (fa-briefcase)</option>
+                            <option value="fa-user-tie" ${data.icon === 'fa-user-tie' ? 'selected' : ''}>👔 Professional / Scholar (fa-user-tie)</option>
+                            <option value="fa-scroll" ${data.icon === 'fa-scroll' ? 'selected' : ''}>📜 Scroll / Historical Records (fa-scroll)</option>
+                            <option value="fa-file-lines" ${data.icon === 'fa-file-lines' ? 'selected' : ''}>📄 Documents / Research (fa-file-lines)</option>
+                            <option value="fa-laptop-code" ${data.icon === 'fa-laptop-code' ? 'selected' : ''}>💻 Tech / Research Script (fa-laptop-code)</option>
+                            <option value="fa-id-card" ${data.icon === 'fa-id-card' ? 'selected' : ''}>🪪 Identity / CV Card (fa-id-card)</option>
+                            <option value="fa-award" ${data.icon === 'fa-award' ? 'selected' : ''}>🏅 Award / Distinction (fa-award)</option>
+                            <option value="fa-brain" ${data.icon === 'fa-brain' ? 'selected' : ''}>🧠 Philosophy / Cognition (fa-brain)</option>
+                            <option value="fa-palette" ${data.icon === 'fa-palette' ? 'selected' : ''}>🎨 Palette / Design (fa-palette)</option>
+                            <option value="fa-gamepad" ${data.icon === 'fa-gamepad' ? 'selected' : ''}>🎮 Games / Interactive (fa-gamepad)</option>
+                            <option value="fa-layer-group" ${data.icon === 'fa-layer-group' ? 'selected' : ''}>🥞 Portfolio / Collections (fa-layer-group)</option>
+                            <option value="fa-wand-magic-sparkles" ${data.icon === 'fa-wand-magic-sparkles' ? 'selected' : ''}>✨ Magic / Creative Works (fa-wand-magic-sparkles)</option>
+                            <option value="fa-headphones" ${data.icon === 'fa-headphones' ? 'selected' : ''}>🎧 Audio / Narration (fa-headphones)</option>
+                            <option value="fa-masks-theater" ${data.icon === 'fa-masks-theater' ? 'selected' : ''}>🎭 Theater / Dramatic Arts (fa-masks-theater)</option>
+                            <option value="fa-lightbulb" ${data.icon === 'fa-lightbulb' ? 'selected' : ''}>💡 Ideas / Conceptual (fa-lightbulb)</option>
+                            <option value="fa-compass" ${data.icon === 'fa-compass' ? 'selected' : ''}>🧭 Exploration (fa-compass)</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Bullet Description</label>
+                    <input type="text" id="prof-${cardKey}-bullet" value="${escapeHtml(data.bullet || '')}" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Link Button Text</label>
+                    <input type="text" id="prof-${cardKey}-linkText" value="${escapeHtml(data.linkText || '')}" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm">
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function captureProfileModalInputValues() {
+    const order = profileData.cardOrder || ['card1', 'card2'];
+    order.forEach(cardKey => {
+        const titleEl = document.getElementById(`prof-${cardKey}-title`);
+        const iconEl = document.getElementById(`prof-${cardKey}-icon`);
+        const bulletEl = document.getElementById(`prof-${cardKey}-bullet`);
+        const linkEl = document.getElementById(`prof-${cardKey}-linkText`);
+
+        if (!profileData[cardKey]) profileData[cardKey] = {};
+        if (titleEl) profileData[cardKey].title = titleEl.value.trim();
+        if (iconEl) profileData[cardKey].icon = iconEl.value;
+        if (bulletEl) profileData[cardKey].bullet = bulletEl.value.trim();
+        if (linkEl) profileData[cardKey].linkText = linkEl.value.trim();
+    });
+}
+
+function moveCardOrder(cardKey, direction) {
+    captureProfileModalInputValues();
+    let order = profileData.cardOrder || ['card1', 'card2'];
+    const idx = order.indexOf(cardKey);
+    const targetIdx = idx + direction;
+
+    if (targetIdx >= 0 && targetIdx < order.length) {
+        const temp = order[idx];
+        order[idx] = order[targetIdx];
+        order[targetIdx] = temp;
+        profileData.cardOrder = order;
+        renderProfileModalCards();
+    }
+}
+        
     // Update saveData() payload to write full payload object
     async function saveData() {
         pruneEmptyFields();
@@ -1673,104 +1777,8 @@ async function handleSaveProfile(event) {
                     </div>
                 </div>
 
-                <!-- Showcase Card 1 -->
-                <div class="border-b border-stone-200 pb-4 space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center">
-                        <i class="fa-solid fa-square mr-2 text-slate-800"></i> Card 1 (Academic / Primary Card)
-                    </h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Title</label>
-                            <input type="text" id="prof-c1-title" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Icon</label>
-                            <select id="prof-c1-icon" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm bg-white">
-                                <option value="fa-graduation-cap">🎓 Graduation Cap (fa-graduation-cap)</option>
-                                <option value="fa-book-open">📖 Open Book (fa-book-open)</option>
-                                <option value="fa-book-bookmark">🔖 Book Bookmark / Anthology (fa-book-bookmark)</option>
-                                <option value="fa-feather-pointed">🪶 Feather / Creative Writing (fa-feather-pointed)</option>
-                                <option value="fa-pen-nib">✒️ Pen Nib / Editorial (fa-pen-nib)</option>
-                                <option value="fa-building-columns">🏛️ Institution / University (fa-building-columns)</option>
-                                <option value="fa-landmark">🏛️ Landmark / Heritage (fa-landmark)</option>
-                                <option value="fa-briefcase">💼 Briefcase / Career (fa-briefcase)</option>
-                                <option value="fa-user-tie">👔 Professional / Scholar (fa-user-tie)</option>
-                                <option value="fa-scroll">📜 Scroll / Historical Records (fa-scroll)</option>
-                                <option value="fa-file-lines">📄 Documents / Research (fa-file-lines)</option>
-                                <option value="fa-laptop-code">💻 Tech / Research Script (fa-laptop-code)</option>
-                                <option value="fa-id-card">🪪 Identity / CV Card (fa-id-card)</option>
-                                <option value="fa-award">🏅 Award / Distinction (fa-award)</option>
-                                <option value="fa-brain">🧠 Philosophy / Cognition (fa-brain)</option>
-                                <option value="fa-palette">🎨 Palette / Design (fa-palette)</option>
-                                <option value="fa-gamepad">🎮 Games / Interactive (fa-gamepad)</option>
-                                <option value="fa-layer-group">🥞 Portfolio / Collections (fa-layer-group)</option>
-                                <option value="fa-wand-magic-sparkles">✨ Magic / Creative Works (fa-wand-magic-sparkles)</option>
-                                <option value="fa-headphones">🎧 Audio / Narration (fa-headphones)</option>
-                                <option value="fa-masks-theater">🎭 Theater / Dramatic Arts (fa-masks-theater)</option>
-                                <option value="fa-lightbulb">💡 Ideas / Conceptual (fa-lightbulb)</option>
-                                <option value="fa-compass">🧭 Exploration (fa-compass)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Bullet Description</label>
-                        <input type="text" id="prof-c1-bullet" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Link Button Text</label>
-                        <input type="text" id="prof-c1-linkText" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm">
-                    </div>
-                </div>
-
-                <!-- Showcase Card 2 -->
-                <div class="space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-gold-600 flex items-center">
-                        <i class="fa-solid fa-square mr-2 text-gold-500"></i> Card 2 (Creative / Portfolio Card)
-                    </h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Title</label>
-                            <input type="text" id="prof-c2-title" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Icon</label>
-                            <select id="prof-c2-icon" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm bg-white">
-                                <option value="fa-graduation-cap">🎓 Graduation Cap (fa-graduation-cap)</option>
-                                <option value="fa-book-open">📖 Open Book (fa-book-open)</option>
-                                <option value="fa-book-bookmark">🔖 Book Bookmark / Anthology (fa-book-bookmark)</option>
-                                <option value="fa-feather-pointed">🪶 Feather / Creative Writing (fa-feather-pointed)</option>
-                                <option value="fa-pen-nib">✒️ Pen Nib / Editorial (fa-pen-nib)</option>
-                                <option value="fa-building-columns">🏛️ Institution / University (fa-building-columns)</option>
-                                <option value="fa-landmark">🏛️ Landmark / Heritage (fa-landmark)</option>
-                                <option value="fa-briefcase">💼 Briefcase / Career (fa-briefcase)</option>
-                                <option value="fa-user-tie">👔 Professional / Scholar (fa-user-tie)</option>
-                                <option value="fa-scroll">📜 Scroll / Historical Records (fa-scroll)</option>
-                                <option value="fa-file-lines">📄 Documents / Research (fa-file-lines)</option>
-                                <option value="fa-laptop-code">💻 Tech / Research Script (fa-laptop-code)</option>
-                                <option value="fa-id-card">🪪 Identity / CV Card (fa-id-card)</option>
-                                <option value="fa-award">🏅 Award / Distinction (fa-award)</option>
-                                <option value="fa-brain">🧠 Philosophy / Cognition (fa-brain)</option>
-                                <option value="fa-palette">🎨 Palette / Design (fa-palette)</option>
-                                <option value="fa-gamepad">🎮 Games / Interactive (fa-gamepad)</option>
-                                <option value="fa-layer-group">🥞 Portfolio / Collections (fa-layer-group)</option>
-                                <option value="fa-wand-magic-sparkles">✨ Magic / Creative Works (fa-wand-magic-sparkles)</option>
-                                <option value="fa-headphones">🎧 Audio / Narration (fa-headphones)</option>
-                                <option value="fa-masks-theater">🎭 Theater / Dramatic Arts (fa-masks-theater)</option>
-                                <option value="fa-lightbulb">💡 Ideas / Conceptual (fa-lightbulb)</option>
-                                <option value="fa-compass">🧭 Exploration (fa-compass)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Bullet Description</label>
-                        <input type="text" id="prof-c2-bullet" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-1">Link Button Text</label>
-                        <input type="text" id="prof-c2-linkText" class="w-full px-3 py-2 rounded-xl border border-stone-300 text-sm">
-                    </div>
-                </div>
-
+                <!-- Reorderable Showcase Cards Container -->
+                <div id="profile-cards-config-container" class="space-y-5"></div>
                 <div class="pt-4 border-t border-stone-200 flex items-center justify-end space-x-3">
                     <button type="button" onclick="closeModal('modal-profile')" class="px-4 py-2 rounded-xl border border-stone-300 text-stone-700 text-xs font-semibold">Cancel</button>
                     <button type="submit" class="px-5 py-2 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-semibold">Save Profile Settings</button>
