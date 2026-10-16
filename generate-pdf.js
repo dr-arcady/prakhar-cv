@@ -45,6 +45,10 @@ async function generatePDF() {
     const filterList = (listType) => portfolioData.filter(i => i.listType === listType).sort((a, b) => (a.order || 0) - (b.order || 0));
     const socialsList = filterList('socials');
 
+    // Split socials: first 4 stay in the header, any remaining go to the sidebar overflow
+    const headerSocials = socialsList.slice(0, 4);
+    const sidebarSocials = socialsList.slice(4);
+
     // Read the unified master lists configuration directly from portfolio-data.json and sort by order
     const allListsConfig = rawData.lists && Array.isArray(rawData.lists) ? rawData.lists : [];
     allListsConfig.sort((a, b) => (a.order || 0) - (b.order || 0));
@@ -110,11 +114,15 @@ async function generatePDF() {
         if (items.length === 0 && listConfig.key !== 'socials') return '';
 
         if (listConfig.key === 'socials') {
+            // If there are 4 or fewer total socials, remove the heading and sidebar section entirely
+            if (socialsList.length <= 4) {
+                return '';
+            }
             return `
                 <div class="section-group">
                     <div class="section-heading">${listConfig.title}</div>
                     <div style="font-size: 11px;">
-                        ${socialsList.map(item => {
+                        ${sidebarSocials.map(item => {
                             let href = item.link || '#';
                             if (item.title.toLowerCase() === 'email' && !href.startsWith('mailto:')) href = 'mailto:' + item.description;
                             if (item.title.toLowerCase() === 'phone' && !href.startsWith('tel:')) href = 'tel:' + item.description;
@@ -173,7 +181,7 @@ async function generatePDF() {
         `;
     }).join('');
 
-    const sidebarHTML = sidebarLists.map(l => renderSidebarSection(l)).join('');
+    const sidebarHTML = sidebarLists.map(l => renderSidebarSection(l)).filter(Boolean).join('');
 
     const htmlTemplate = `
     <!DOCTYPE html>
@@ -217,12 +225,11 @@ async function generatePDF() {
                 <h1 style="font-size: 32px; font-weight: bold; color: #0f172a; line-height: 1.2;">${parseMarkdown(profile.name)}</h1>
                 <p style="font-size: 10px; text-transform: uppercase; color: #475569; letter-spacing: 1.2px; margin-top: 4px; font-weight: 600;">${parseMarkdown(profile.degree)} &nbsp;|&nbsp; ${parseMarkdown(profile.subtitle)}</p>
             </div>
+            ${headerSocials.length > 0 ? `
             <div style="background-color: #ffffff; border-top: 2px solid #334155; border-bottom: 2px solid #334155; padding: 8px 12px; font-size: 9.5px; color: #334155;">
                 ${(() => {
-                    const items = [...socialsList].sort((a, b) => (a.order || 0) - (b.order || 0));
+                    const items = headerSocials;
                     const total = items.length;
-                    if (total === 0) return '';
-
                     const maxPerLine = 4;
                     let rows = [];
                     for (let i = 0; i < total; i += maxPerLine) {
@@ -250,6 +257,7 @@ async function generatePDF() {
                     }).join('');
                 })()}
             </div>
+            ` : ''}
         </div>
         
         <table style="width: 100%; border-collapse: collapse; margin-top: 25px;">
