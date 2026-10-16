@@ -123,7 +123,7 @@
                             <i id="card-1-icon" class="fa-solid fa-graduation-cap"></i>
                         </div>
                         <h2 id="card-1-title" class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-slate-800 transition-colors"></h2>
-                        <ul id="card-1-bullet" class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed"></ul>
+                        <div id="card-1-bullet" class="text-stone-600 text-sm space-y-2 mb-6 leading-relaxed prose prose-sm max-w-none"></div>
                     </div>
                     <div id="card-1-link" class="flex items-center font-semibold text-sm text-slate-800 group-hover:translate-x-1 transition-transform"></div>
                 </div>
@@ -136,7 +136,7 @@
                             <i id="card-2-icon" class="fa-solid fa-feather-pointed"></i>
                         </div>
                         <h2 id="card-2-title" class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-3 group-hover:text-gold-600 transition-colors"></h2>
-                        <ul id="card-2-bullet" class="text-stone-600 text-sm space-y-2 mb-6 list-disc pl-4 leading-relaxed"></ul>
+                        <div id="card-2-bullet" class="text-stone-600 text-sm space-y-2 mb-6 leading-relaxed prose prose-sm max-w-none"></div>
                     </div>
                     <div id="card-2-link" class="flex items-center font-semibold text-sm text-gold-600 group-hover:translate-x-1 transition-transform"></div>
                 </div>
@@ -580,26 +580,25 @@ function renderProfileUI() {
         `;
     }
 
-    // 3. Card 1 (Academics)
+    // 3. Card 1 (Record)
     const c1Title = document.getElementById('card-1-title');
     const c1Bullet = document.getElementById('card-1-bullet');
     const c1Link = document.getElementById('card-1-link');
     const c1Icon = document.getElementById('card-1-icon');
     if (c1Title) c1Title.innerText = profileData.card1.title;
-    if (c1Bullet) c1Bullet.innerHTML = `<li>${escapeHtml(profileData.card1.bullet)}</li>`;
+    if (c1Bullet) c1Bullet.innerHTML = safeParseMarkdown(profileData.card1.bullet);
     if (c1Link) c1Link.innerHTML = `${escapeHtml(profileData.card1.linkText)} <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>`;
     if (c1Icon) c1Icon.className = `fa-solid ${profileData.card1.icon}`;
 
-    // 4. Card 2 (Creative)
+    // 4. Card 2 (Portfolio)
     const c2Title = document.getElementById('card-2-title');
     const c2Bullet = document.getElementById('card-2-bullet');
     const c2Link = document.getElementById('card-2-link');
     const c2Icon = document.getElementById('card-2-icon');
     if (c2Title) c2Title.innerText = profileData.card2.title;
-    if (c2Bullet) c2Bullet.innerHTML = `<li>${escapeHtml(profileData.card2.bullet)}</li>`;
+    if (c2Bullet) c2Bullet.innerHTML = safeParseMarkdown(profileData.card2.bullet);
     if (c2Link) c2Link.innerHTML = `${escapeHtml(profileData.card2.linkText)} <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>`;
     if (c2Icon) c2Icon.className = `fa-solid ${profileData.card2.icon}`;
-
     // 5. Update Profile Image Alt Text dynamically
     document.querySelectorAll('#profile-avatar-img').forEach(img => {
         img.alt = profileData.name;
