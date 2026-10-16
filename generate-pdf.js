@@ -186,12 +186,27 @@ async function generatePDF() {
             h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; margin: 0; }
             table { width: 100%; border-collapse: collapse; }
             td { vertical-align: top; }
-            .section-group { margin-top: 28px; margin-bottom: 24px; }
-            .section-group:first-of-type { margin-top: 0; }
+            .section-group { 
+                margin-top: 24px; 
+                margin-bottom: 20px; 
+                page-break-inside: avoid; 
+                break-inside: avoid; 
+            }
+            .section-group:first-of-type { 
+                margin-top: 0; 
+            }
             .section-heading {
                 font-family: 'Playfair Display', Georgia, serif;
-                font-size: 12px; font-weight: bold; color: #ffffff; background-color: #0f172a;
-                padding: 6px 10px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.8px;
+                font-size: 12px; 
+                font-weight: bold; 
+                color: #ffffff; 
+                background-color: #0f172a;
+                padding: 6px 10px; 
+                margin-bottom: 14px; 
+                text-transform: uppercase; 
+                letter-spacing: 0.8px;
+                page-break-after: avoid;
+                break-after: avoid;
             }
             .cv-footer { margin-top: 30px; border-top: 1px solid #cbd5e1; padding-top: 10px; page-break-inside: avoid; }
         </style>
